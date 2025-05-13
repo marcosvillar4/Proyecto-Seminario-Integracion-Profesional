@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "383765322093",
+    "project_id": "breakbuddy-app",
+    "storage_bucket": "breakbuddy-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383765322093:android:8c505fc945f1b42fae2264",
+        "android_client_info": {
+          "package_name": "tpo.seminario.breakbuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxP5BFw_oke3q9_m_9zqIbwdXzYKPytiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
