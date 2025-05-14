@@ -3,7 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="tpo.seminario.breakbuddy.ui.welcome.WelcomeFragment"
+        android:label="Bienvenido"
+        tools:layout="@layout/fragment_welcome"
+        >
+        <action
+            android:id="@+id/action_welcomeFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"
