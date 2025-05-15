@@ -7,17 +7,28 @@
     android:padding="24dp"
     android:background="@android:color/white">
 
-    <!-- Título -->
-    <TextView
-        android:id="@+id/registerTitle"
-        android:layout_width="wrap_content"
+    <!-- Contenedor para centrar verticalmente -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/centeredContent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Crear cuenta"
-        android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/registerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crear cuenta"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Nombre -->
     <com.google.android.material.textfield.TextInputLayout
@@ -145,5 +156,5 @@
         app:layout_constraintTop_toBottomOf="@id/btnRegister"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
