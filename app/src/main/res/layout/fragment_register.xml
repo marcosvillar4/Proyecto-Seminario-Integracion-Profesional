@@ -33,7 +33,7 @@
             android:id="@+id/inputName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre completo"
+            android:hint="Nombre de usuario"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 

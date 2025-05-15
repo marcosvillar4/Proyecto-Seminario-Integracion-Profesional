@@ -78,7 +78,6 @@ class RegisterFragment : Fragment() {
         }
     }
 
-
     fun checkPasswordRequirements(password: String) {
         val colorOK = resources.getColor(android.R.color.holo_green_dark, null)
         val colorNO = resources.getColor(android.R.color.darker_gray, null)
@@ -128,7 +127,6 @@ class RegisterFragment : Fragment() {
             }
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
