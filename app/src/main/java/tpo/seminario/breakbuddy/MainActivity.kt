@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.welcomeFragment) {
+            if (destination.id == R.id.welcomeFragment || destination.id == R.id.loginFragment || destination.id == R.id.registerFragment) {
                 // Oculta action bar y menú inferior en pantalla de bienvenida
                 supportActionBar?.hide()
                 navView.visibility = android.view.View.GONE
@@ -43,5 +43,9 @@ class MainActivity : AppCompatActivity() {
                 navView.visibility = android.view.View.VISIBLE
             }
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

@@ -1,14 +1,9 @@
 package tpo.seminario.breakbuddy.ui.welcome
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -35,9 +30,14 @@ class WelcomeFragment : Fragment() {
             binding.textWelcome.text = it
         }
 
-        //Redireccion del boton comenzar a otra pagina
-        binding.btnStart.setOnClickListener {
-            findNavController().navigate(R.id.action_welcomeFragment_to_navigation_home)
+        //Redireccion del boton iniciar sesion
+        binding.btnLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
+        }
+
+        //Redireccion del link registrarse
+        binding.textRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
         }
 
         return root
