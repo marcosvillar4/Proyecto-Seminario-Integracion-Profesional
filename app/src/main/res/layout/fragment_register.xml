@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="¿Ya tenés cuenta? Iniciá sesión"
-        android:textColor="@color/green_700"
+        android:textColor="@color/contrast"
         android:textSize="14sp"
         android:textStyle="italic"
         android:clickable="true"

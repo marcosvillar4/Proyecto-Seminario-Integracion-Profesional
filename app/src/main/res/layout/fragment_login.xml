@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿No tenés cuenta? Registrate"
-        android:textColor="@color/green_700"
+        android:textColor="@color/contrast"
         android:textSize="14sp"
         android:clickable="true"
         android:focusable="true"
