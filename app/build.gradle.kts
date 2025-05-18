@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -42,28 +44,28 @@ dependencies {
 
     // Import the Firebase BoM
 
-    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+    implementation(platform(libs.firebase.bom))
 
 
     // TODO: Add the dependencies for Firebase products you want to use
 
+    // Añade la dependencia de Firebase Authentication
+    // Cuando uses la BoM, no necesitas especificar la versión de Authentication
+    implementation(libs.firebase.auth)
+
+    // Si quieres usar Kotlin extensions (recomendado para Kotlin)
+    implementation(libs.firebase.auth.ktx)
+
     // When using the BoM, don't specify versions in Firebase dependencies
 
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.firebase.analytics)
 
 
     // Add the dependencies for any other desired Firebase products
 
 
-    // Importa la plataforma de Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:33.13.0")) // Revisa la última versión estable en la doc de Firebase si quieres la más reciente
 
-    // Añade la dependencia de Firebase Authentication
-    // Cuando uses la BoM, no necesitas especificar la versión de Authentication
-    implementation("com.google.firebase:firebase-auth")
 
-    // Si quieres usar Kotlin extensions (recomendado para Kotlin)
-    implementation("com.google.firebase:firebase-auth-ktx")
 
     // https://firebase.google.com/docs/android/setup#available-libraries
 

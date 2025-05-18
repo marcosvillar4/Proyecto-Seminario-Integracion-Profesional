@@ -17,6 +17,15 @@
         <action
             android:id="@+id/action_welcomeFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+
+        <action
+            android:id="@+id/action_welcomeFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" /> <!-- Opcional: limpia la pila de navegación para que el usuario no pueda volver a la bienvenida -->
+
+        <!-- AGREGADO NUEVO -->
+
     </fragment>
 
     <fragment
@@ -45,7 +54,14 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/navigation_dashboard" />
+
+        <!-- AGREGADO NUEVO -->
+
     </fragment>
+
     <fragment
         android:id="@+id/registerFragment"
         android:name="tpo.seminario.breakbuddy.ui.register.RegisterFragment"
@@ -53,5 +69,13 @@
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_dashboardFragment"
+            app:destination="@id/navigation_dashboard" />
+
+        <!-- AGREGADO TODO ESTO DE DASHBOARD FRAGMENT -->
+
     </fragment>
+
+
 </navigation>

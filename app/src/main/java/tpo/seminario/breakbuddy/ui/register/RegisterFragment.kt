@@ -12,11 +12,21 @@ import tpo.seminario.breakbuddy.databinding.FragmentRegisterBinding
 import android.graphics.Paint
 import android.text.TextWatcher
 import android.text.Editable
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import android.util.Log
+
+
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+
+    private lateinit var auth: FirebaseAuth // Declara una variable para mantener la instancia
+    private val TAG = "RegisterFragment" //REVISAR ESTO BIEN
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +34,7 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        auth = Firebase.auth // Inicializa la instancia de Auth
         return binding.root
     }
 
@@ -68,6 +79,37 @@ class RegisterFragment : Fragment() {
                     Toast.makeText(requireContext(), "Creando cuenta...", Toast.LENGTH_SHORT).show()
                     // lógica real de Firebase
                     // findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment)
+
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(requireActivity()) { task ->
+                            if (task.isSuccessful) {
+                                // Registro exitoso!
+
+                                Log.d(TAG,"createUserWithEmail:success") // O define un TAG para logging
+                                val user = auth.currentUser // Obtiene el usuario recién creado
+
+                                // Opcional: Puedes actualizar el perfil del usuario con el nombre
+                                val profileUpdates = com.google.firebase.auth.UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name)
+                                    .build()
+
+                                user?.updateProfile(profileUpdates)
+                                    ?.addOnCompleteListener { profileTask ->
+                                        if (profileTask.isSuccessful) {
+                                            Log.d(TAG, "User profile updated.")
+                                        }
+                                    }
+
+                                // Ahora puedes navegar al siguiente Fragment (ej: dashboard)
+                                findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment)
+
+                            } else {
+                                // Si falla, muestra un mensaje al usuario
+                                Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                                val errorMessage = task.exception?.message ?: "Error al crear la cuenta."
+                                Toast.makeText(requireContext(), "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                 }
             }
         }
