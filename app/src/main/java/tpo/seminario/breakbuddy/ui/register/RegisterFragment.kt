@@ -66,6 +66,7 @@ class RegisterFragment : Fragment() {
             val name = binding.inputName.text.toString().trim()
             val email = binding.inputEmail.text.toString().trim()
             val password = binding.inputPassword.text.toString().trim()
+            val repeatPassword = binding.inputRepeatPassword.text.toString().trim()
 
             when {
                 name.isEmpty() || email.isEmpty() || password.isEmpty() -> {
@@ -75,11 +76,14 @@ class RegisterFragment : Fragment() {
                 password.length < 8 || !password.any { it.isUpperCase() } || !password.any { it.isDigit() } -> {
                     Toast.makeText(requireContext(), "La contraseña no cumple con los requisitos", Toast.LENGTH_SHORT).show()
                 }
+                password != repeatPassword ->{
+                    binding.repeatPasswordLayout.error = "Las contraseñas no coinciden"
+                }
                 else -> {
+                    binding.repeatPasswordLayout.error = null;
                     Toast.makeText(requireContext(), "Creando cuenta...", Toast.LENGTH_SHORT).show()
-                    // lógica real de Firebase
-                    // findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment)
 
+                    //Firebase
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(requireActivity()) { task ->
                             if (task.isSuccessful) {
