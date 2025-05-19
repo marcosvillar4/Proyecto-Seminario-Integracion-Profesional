@@ -61,6 +61,21 @@ class RegisterFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        binding.inputRepeatPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val password = binding.inputPassword.text.toString()
+                val repeat = s.toString()
+
+                if (repeat == password) {
+                    binding.repeatPasswordLayout.error = null
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         // Botón de registrarse
         binding.btnRegister.setOnClickListener {
             val name = binding.inputName.text.toString().trim()
