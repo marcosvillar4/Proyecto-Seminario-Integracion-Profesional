@@ -73,13 +73,12 @@
             android:id="@+id/action_registerFragment_to_dashboardFragment"
             app:destination="@id/navigation_dashboard" />
 
-        <!-- AGREGADO TODO ESTO DE DASHBOARD FRAGMENT -->
 
     </fragment>
 
     <fragment
         android:id="@+id/accountSettingsFragment"
-        android:name="tpo.seminario.breakbuddy.ui.logout.AccountSettingsFragment"
+        android:name="tpo.seminario.breakbuddy.ui.settings.AccountSettingsFragment"
         android:label="Configuración de cuenta"
         tools:layout="@layout/fragment_account_settings">
 
@@ -87,7 +86,16 @@
             android:id="@+id/action_accountSettingsFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             />
+
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="tpo.seminario.breakbuddy.ui.settings.ChangePasswordFragment"
+        android:label="Cambiar contraseña"
+        tools:layout="@layout/fragment_change_password" />
 
 </navigation>

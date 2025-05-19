@@ -1,4 +1,4 @@
-package tpo.seminario.breakbuddy.ui.logout
+package tpo.seminario.breakbuddy.ui.settings
 
 import android.os.Bundle
 import tpo.seminario.breakbuddy.R
@@ -24,11 +24,18 @@ class AccountSettingsFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
+        //Cambiar contra
+        binding.cardChangePassword.setOnClickListener {
+            findNavController().navigate(R.id.action_accountSettingsFragment_to_changePasswordFragment)
+        }
+
+        //Cerrar sesion
         binding.btnLogout.setOnClickListener {
             //Firebase
 
             findNavController().navigate(R.id.action_accountSettingsFragment_to_loginFragment)
         }
+
     }
 
     override fun onDestroyView() {
