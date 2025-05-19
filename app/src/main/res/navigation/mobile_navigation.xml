@@ -77,5 +77,17 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/accountSettingsFragment"
+        android:name="tpo.seminario.breakbuddy.ui.logout.AccountSettingsFragment"
+        android:label="Configuración de cuenta"
+        tools:layout="@layout/fragment_account_settings">
+
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            />
+    </fragment>
+
 
 </navigation>
