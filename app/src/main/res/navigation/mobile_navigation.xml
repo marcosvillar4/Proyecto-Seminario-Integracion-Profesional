@@ -22,9 +22,7 @@
             android:id="@+id/action_welcomeFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard"
             app:popUpTo="@id/welcomeFragment"
-            app:popUpToInclusive="true" /> <!-- Opcional: limpia la pila de navegación para que el usuario no pueda volver a la bienvenida -->
-
-        <!-- AGREGADO NUEVO -->
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -75,6 +73,12 @@
             android:id="@+id/action_registerFragment_to_dashboardFragment"
             app:destination="@id/navigation_dashboard" />
 
+        <action
+            android:id="@+id/action_registerFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+
 
     </fragment>
 
@@ -101,7 +105,7 @@
         android:label="Cambiar contraseña"
         tools:layout="@layout/fragment_change_password" />
 
-    <!-- Olvide contra -->
+    <!-- Olvide contraseña -->
 
     <fragment
         android:id="@+id/passwordResetFragment"

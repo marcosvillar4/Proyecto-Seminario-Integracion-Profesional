@@ -11,6 +11,10 @@ import android.graphics.Paint
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class ChangePasswordFragment : Fragment() {
 
@@ -47,9 +51,21 @@ class ChangePasswordFragment : Fragment() {
             })
 
         binding.btnConfirmPasswordChange.setOnClickListener {
+
+            // 0) Obtiene la instancia de Auth y el usuario
+            val auth = FirebaseAuth.getInstance()
+            val user = auth.currentUser
+            if (user == null) {
+                Toast.makeText(requireContext(),
+                    "No hay usuario logueado",
+                    Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val currentPassword = binding.inputCurrentPassword.text.toString().trim()
             val newPassword = binding.inputNewPassword.text.toString().trim()
             val repeatPassword = binding.inputRepeatPassword.text.toString().trim()
+
 
             if (currentPassword.isEmpty() || newPassword.isEmpty() || repeatPassword.isEmpty()) {
                 Toast.makeText(requireContext(), "Completá todos los campos", Toast.LENGTH_SHORT).show()
@@ -82,11 +98,38 @@ class ChangePasswordFragment : Fragment() {
             Toast.makeText(requireContext(), "Cambiando contraseña...", Toast.LENGTH_SHORT).show()
 
 
-            // Firebase para cambiar contraseña
+            // 1) Crea las credenciales con el email y la contraseña actual
+            val credential = EmailAuthProvider
+                .getCredential(user.email!!, currentPassword)
+
+            // 2) Re‐autentica al usuario
+            user.reauthenticate(credential)
+                .addOnSuccessListener {
+                    // 3) Una vez re‐autenticado, actualiza la contraseña
+                    user.updatePassword(newPassword)
+                        .addOnSuccessListener {
+                            Toast.makeText(requireContext(),
+                                "Contraseña cambiada con éxito",
+                                Toast.LENGTH_LONG).show()
+                            // 4) Navega o cierra este fragment
+                            findNavController().popBackStack()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(requireContext(),
+                                "Error al actualizar contraseña: ${e.message}",
+                                Toast.LENGTH_LONG).show()
+                        }
+                }
+                .addOnFailureListener { e ->
+                    // Falla la re‐autenticación
+                    Toast.makeText(requireContext(),
+                        "Contraseña actual incorrecta",
+                        Toast.LENGTH_LONG).show()
+                }
         }
     }
 
-    //VISUAL >> Animacion requerimientos
+    //VISUAL >> Animación requerimientos
     private fun checkPasswordRequirements(password: String) {
         val colorOK = ContextCompat.getColor(requireContext(), android.R.color.holo_green_dark)
         val colorNO = ContextCompat.getColor(requireContext(), android.R.color.darker_gray)

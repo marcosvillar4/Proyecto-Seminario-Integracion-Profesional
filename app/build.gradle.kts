@@ -41,29 +41,20 @@ android {
 
 dependencies {
 
-    // Import the Firebase BoM
-
     implementation(platform(libs.firebase.bom))
 
-
-    // TODO: Add the dependencies for Firebase products you want to use
-
     // Añade la dependencia de Firebase Authentication
-    // Cuando uses la BoM, no necesitas especificar la versión de Authentication
     implementation(libs.firebase.auth)
 
-    // Si quieres usar Kotlin extensions (recomendado para Kotlin)
     implementation(libs.firebase.auth.ktx)
 
-    // When using the BoM, don't specify versions in Firebase dependencies
+    // Dependencias de otros productos de Firebase
 
     implementation(libs.firebase.analytics)
 
-
-    // Add the dependencies for any other desired Firebase products
-
     implementation (libs.firebase.messaging)
 
+    implementation (libs.firebase.firestore.ktx.v2440)
 
 
     // https://firebase.google.com/docs/android/setup#available-libraries

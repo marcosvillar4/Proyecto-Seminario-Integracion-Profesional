@@ -36,12 +36,12 @@ class WelcomeFragment : Fragment() {
             binding.textWelcome.text = it
         }
 
-        //Redireccion del boton iniciar sesion
+        //Redireccion del botón iniciar sesión
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
         }
 
-        //Redireccion del link registrarse
+        //Redirección del link registrarse
         binding.textRegister.setOnClickListener {
             findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
         }
@@ -61,14 +61,13 @@ class WelcomeFragment : Fragment() {
         if (currentUser != null) {
             // Si el usuario NO es nulo, significa que ya está logueado.
             // Navega directamente al dashboard.
-            // ¡Necesitas definir la acción de navegación en tu nav_graph.xml!
+            // Hace falta efinir la acción de navegación en nav_graph.xml???????
             findNavController().navigate(R.id.action_welcomeFragment_to_navigation_dashboard)
         } else {
             // Si el usuario es nulo, significa que no hay nadie logueado.
-            // Quédate en este fragmento (WelcomeFragment) y configura los listeners de los botones
+            // Configurar los listeners de los botones y ver WelcomeFragment?
             setupButtonClickListeners() // Creamos una función aparte para esto
         }
-        // *** FIN DE LA LÓGICA DE VERIFICACIÓN ***
 
         // Si no hay usuario logueado, los listeners ya se configuran en setupButtonClickListeners()
         // Si sí hay usuario logueado, la navegación ocurrirá ANTES de llegar a este punto en una ejecución normal,

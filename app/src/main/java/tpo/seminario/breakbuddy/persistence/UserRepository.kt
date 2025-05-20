@@ -15,7 +15,8 @@ data class UserProfile(
     val email: String = "",
     val photoUrl: String = "",
     val createdAt: Date? = null,
-    val lastLogin: Date? = null
+    val lastLogin: Date? = null,
+    val fcmToken: String? = null
 )
 
 class UserTokenRepository {
@@ -53,7 +54,8 @@ class UserRepository {
             "photoUrl" to (user.photoUrl?.toString() ?: ""),
             // Timestamps del servidor para evitar desincronización de reloj
             "createdAt" to FieldValue.serverTimestamp(),
-            "lastLogin" to FieldValue.serverTimestamp()
+            "lastLogin" to FieldValue.serverTimestamp(),
+            "fcmToken"  to ""
         )
 
         usersCollection.document(userId)
@@ -113,7 +115,8 @@ class UserRepository {
                         email = data["email"] as? String ?: "",
                         photoUrl = data["photoUrl"] as? String ?: "",
                         createdAt = doc.getTimestamp("createdAt")?.toDate(),
-                        lastLogin = doc.getTimestamp("lastLogin")?.toDate()
+                        lastLogin = doc.getTimestamp("lastLogin")?.toDate(),
+                        fcmToken = data["fcmToken"] as? String    // <-- mapeo de fcmToken
                     )
                     onSuccess(profile)
                 } else {
