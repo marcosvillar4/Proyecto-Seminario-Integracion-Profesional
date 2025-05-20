@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import tpo.seminario.breakbuddy.databinding.FragmentAccountSettingsBinding
 
 class AccountSettingsFragment : Fragment(){
@@ -24,14 +25,15 @@ class AccountSettingsFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
-        //Cambiar contra
+        //Cambiar contraseña
         binding.cardChangePassword.setOnClickListener {
             findNavController().navigate(R.id.action_accountSettingsFragment_to_changePasswordFragment)
         }
 
-        //Cerrar sesion
+        //Cerrar sesión
         binding.btnLogout.setOnClickListener {
-            //Firebase
+            // 1) Cierra la sesión en Firebase Auth
+            FirebaseAuth.getInstance().signOut()
 
             findNavController().navigate(R.id.action_accountSettingsFragment_to_loginFragment)
         }

@@ -18,15 +18,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        /* YA AGREGADO EN BreakBuddyApp
         // === Configuración offline ===
-        // No hace falta .setPersistenceEnabled(true)??????? — ya está activo por defecto en Android.
+        // No hace falta .setPersistenceEnabled(true)??????? — puede que ya esté activo por defecto en Android.
         // Se puede ajustar el tamaño de la caché local:
         val settings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
-        // límite de caché local (por defecto 100 MB):
-        // .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
-        .build()
+            // límite de caché local (por defecto 100 MB):
+            // .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
+            .build()
 
         /*
         * Todavía hace falta diseñar y escribir el código en la parte de app (en Fragments, Activities, ViewModels, etc.)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseFirestore.getInstance().firestoreSettings = settings
         // =============================
 
-
+        */
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

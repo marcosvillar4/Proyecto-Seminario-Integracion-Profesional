@@ -51,23 +51,28 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener(requireActivity()) { task ->
                         if (task.isSuccessful) {
                             val user = auth.currentUser!!
-                            // 2) Asegura/actualiza el documento Firestore
-                            userRepo.ensureUserDocumentExists(
-                                user,
-                                onSuccess = {
-                                    // 3) Solo tras actualizar, navega
-                                    findNavController().navigate(
-                                        R.id.action_loginFragment_to_dashboardFragment
-                                    )
-                                },
-                                onFailure = { e ->
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Error actualizando perfil: ${e.message}",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                            )
+                            if (user.isEmailVerified) {
+                                // Solo si el email está verificado
+                                userRepo.ensureUserDocumentExists(
+                                    user,
+                                    onSuccess = {
+                                        findNavController().navigate(
+                                            R.id.action_loginFragment_to_dashboardFragment
+                                        )
+                                    },
+                                    onFailure = { e ->
+                                        Toast.makeText(requireContext(),
+                                            "Error actualizando perfil: ${e.message}",
+                                            Toast.LENGTH_LONG).show()
+                                    }
+                                )
+                            } else {
+                                // Si no verificó, cierra sesión y avisa
+                                FirebaseAuth.getInstance().signOut()
+                                Toast.makeText(requireContext(),
+                                    "Por favor, verificá tu email antes de iniciar sesión.",
+                                    Toast.LENGTH_LONG).show()
+                            }
                         } else {
                             // Si falla, muestra un mensaje al usuario
                             Log.w(TAG, "signInWithEmail:failure", task.exception)

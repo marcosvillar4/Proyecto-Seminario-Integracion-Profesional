@@ -54,7 +54,7 @@ class RegisterFragment : Fragment() {
             binding.requirementDigit.visibility = visibility
         }
 
-        //Escuchar cambios en el texto de la contrasenia
+        //Escuchar cambios en el texto de la contraseña
         binding.inputPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -120,10 +120,22 @@ class RegisterFragment : Fragment() {
                                             user,
                                             name,
                                             onSuccess = {
-                                                // 4) Solo tras crear el doc, navega
-                                                findNavController().navigate(
-                                                    R.id.action_registerFragment_to_dashboardFragment
-                                                )
+                                                // 4) Envía email de verificación
+                                                user.sendEmailVerification()
+                                                    .addOnSuccessListener {
+                                                        Toast.makeText(requireContext(),
+                                                            "Se envió un email de verificación a ${user.email}. Revisá tu bandeja de entrada.",
+                                                            Toast.LENGTH_LONG).show()
+                                                        // Cierra sesión para forzar verificación
+                                                        Firebase.auth.signOut()
+                                                        // Vuelve a la pantalla de bienvenida
+                                                        findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                    }
+                                                    .addOnFailureListener { e ->
+                                                        Toast.makeText(requireContext(),
+                                                            "Error enviando verificación: ${e.message}",
+                                                            Toast.LENGTH_LONG).show()
+                                                    }
                                             },
                                             onFailure = { e ->
                                                 Toast.makeText(
