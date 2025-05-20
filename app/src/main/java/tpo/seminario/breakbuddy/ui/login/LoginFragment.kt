@@ -13,7 +13,7 @@ import tpo.seminario.breakbuddy.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
+import tpo.seminario.breakbuddy.persistence.UserRepository
 
 
 class LoginFragment : Fragment() {
@@ -23,6 +23,8 @@ class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth // Declara una variable para mantener la instancia
     private val TAG = "LoginFragment" //REVISAR ESTO BIEN
+
+    private val userRepo = UserRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,13 +50,24 @@ class LoginFragment : Fragment() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(requireActivity()) { task ->
                         if (task.isSuccessful) {
-                            // Inicio de sesión exitoso!
-                            Log.d(TAG, "signInWithEmail:success") // O define un TAG para logging
-                            val user = auth.currentUser // Obtiene el usuario logueado
-
-                            // Navega al siguiente Fragment (ej: dashboard)
-                            findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
-
+                            val user = auth.currentUser!!
+                            // 2) Asegura/actualiza el documento Firestore
+                            userRepo.ensureUserDocumentExists(
+                                user,
+                                onSuccess = {
+                                    // 3) Solo tras actualizar, navega
+                                    findNavController().navigate(
+                                        R.id.action_loginFragment_to_dashboardFragment
+                                    )
+                                },
+                                onFailure = { e ->
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Error actualizando perfil: ${e.message}",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            )
                         } else {
                             // Si falla, muestra un mensaje al usuario
                             Log.w(TAG, "signInWithEmail:failure", task.exception)

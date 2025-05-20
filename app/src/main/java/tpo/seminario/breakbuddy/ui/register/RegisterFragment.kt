@@ -16,6 +16,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.util.Log
+import com.google.firebase.auth.UserProfileChangeRequest
+import tpo.seminario.breakbuddy.persistence.*
+
 
 
 
@@ -27,6 +30,8 @@ class RegisterFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth // Declara una variable para mantener la instancia
     private val TAG = "RegisterFragment" //REVISAR ESTO BIEN
+
+    private val userRepo = UserRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,26 +107,33 @@ class RegisterFragment : Fragment() {
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(requireActivity()) { task ->
                             if (task.isSuccessful) {
-                                // Registro exitoso!
-
-                                Log.d(TAG,"createUserWithEmail:success") // O define un TAG para logging
-                                val user = auth.currentUser // Obtiene el usuario recién creado
-
-                                // Opcional: Puedes actualizar el perfil del usuario con el nombre
-                                val profileUpdates = com.google.firebase.auth.UserProfileChangeRequest.Builder()
+                                val user = auth.currentUser!!
+                                // 2) Actualiza displayName en Auth (opcional)
+                                val profileUpdates = UserProfileChangeRequest.Builder()
                                     .setDisplayName(name)
                                     .build()
 
-                                user?.updateProfile(profileUpdates)
-                                    ?.addOnCompleteListener { profileTask ->
-                                        if (profileTask.isSuccessful) {
-                                            Log.d(TAG, "User profile updated.")
-                                        }
+                                user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener {
+                                        // 3) Crea el documento Firestore
+                                        userRepo.createUserDocument(
+                                            user,
+                                            name,
+                                            onSuccess = {
+                                                // 4) Solo tras crear el doc, navega
+                                                findNavController().navigate(
+                                                    R.id.action_registerFragment_to_dashboardFragment
+                                                )
+                                            },
+                                            onFailure = { e ->
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Error creando perfil: ${e.message}",
+                                                    Toast.LENGTH_LONG
+                                                ).show()
+                                            }
+                                        )
                                     }
-
-                                // Ahora puedes navegar al siguiente Fragment (ej: dashboard)
-                                findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment)
-
                             } else {
                                 // Si falla, muestra un mensaje al usuario
                                 Log.w(TAG, "createUserWithEmail:failure", task.exception)
