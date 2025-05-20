@@ -16,7 +16,8 @@ data class UserProfile(
     val photoUrl: String = "",
     val createdAt: Date? = null,
     val lastLogin: Date? = null,
-    val fcmToken: String? = null
+    val fcmToken: String? = null,
+    val hobbiesCompletados: Boolean = false
 )
 
 class UserTokenRepository {
@@ -55,7 +56,8 @@ class UserRepository {
             // Timestamps del servidor para evitar desincronización de reloj
             "createdAt" to FieldValue.serverTimestamp(),
             "lastLogin" to FieldValue.serverTimestamp(),
-            "fcmToken"  to ""
+            "fcmToken"  to "",
+            "hobbiesCompletados" to false // ← inicializamos en false para luego activarlo al rellenar los hobbies
         )
 
         usersCollection.document(userId)
@@ -116,7 +118,8 @@ class UserRepository {
                         photoUrl = data["photoUrl"] as? String ?: "",
                         createdAt = doc.getTimestamp("createdAt")?.toDate(),
                         lastLogin = doc.getTimestamp("lastLogin")?.toDate(),
-                        fcmToken = data["fcmToken"] as? String    // <-- mapeo de fcmToken
+                        fcmToken = data["fcmToken"] as? String,    // <-- mapeo de fcmToken
+                        hobbiesCompletados = data["hobbiesCompletados"] as? Boolean ?: false
                     )
                     onSuccess(profile)
                 } else {

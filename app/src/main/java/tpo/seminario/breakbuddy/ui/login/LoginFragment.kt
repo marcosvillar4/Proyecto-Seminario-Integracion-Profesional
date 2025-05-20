@@ -47,39 +47,59 @@ class LoginFragment : Fragment() {
 
                 // Firebase
 
+                // 1) Login con Firebase Auth
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(requireActivity()) { task ->
                         if (task.isSuccessful) {
                             val user = auth.currentUser!!
-                            if (user.isEmailVerified) {
-                                // Solo si el email está verificado
-                                userRepo.ensureUserDocumentExists(
-                                    user,
-                                    onSuccess = {
-                                        findNavController().navigate(
-                                            R.id.action_loginFragment_to_dashboardFragment
-                                        )
-                                    },
-                                    onFailure = { e ->
-                                        Toast.makeText(requireContext(),
-                                            "Error actualizando perfil: ${e.message}",
-                                            Toast.LENGTH_LONG).show()
-                                    }
-                                )
-                            } else {
-                                // Si no verificó, cierra sesión y avisa
+                            // 2) Verifica email confirmado
+                            if (!user.isEmailVerified) {
                                 FirebaseAuth.getInstance().signOut()
                                 Toast.makeText(requireContext(),
                                     "Por favor, verificá tu email antes de iniciar sesión.",
                                     Toast.LENGTH_LONG).show()
+                                return@addOnCompleteListener
                             }
+
+                            // 3) Asegura/actualiza lastLogin en Firestore
+                            userRepo.ensureUserDocumentExists(
+                                user,
+                                onSuccess = {
+                                    // 4) Ahora lee TODO el perfil, incluyendo hobbiesComplete
+                                    userRepo.getUserProfile(
+                                        user.uid,
+                                        onSuccess = { profile ->
+                                            if (!profile.hobbiesCompletados) {
+                                                // 5a) Si es primer login, va a HobbiesFragment
+                                                findNavController().navigate(
+                                                    R.id.action_loginFragment_to_hobbiesFragment
+                                                )
+                                            } else {
+                                                // 5b) Si ya completó hobbies, va a Dashboard
+                                                findNavController().navigate(
+                                                    R.id.action_loginFragment_to_dashboardFragment
+                                                )
+                                            }
+                                        },
+                                        onFailure = { e ->
+                                            Toast.makeText(requireContext(),
+                                                "Error cargando perfil: ${e.message}",
+                                                Toast.LENGTH_LONG).show()
+                                        }
+                                    )
+                                },
+                                onFailure = { e ->
+                                    Toast.makeText(requireContext(),
+                                        "Error actualizando perfil: ${e.message}",
+                                        Toast.LENGTH_LONG).show()
+                                }
+                            )
                         } else {
-                            // Si falla, muestra un mensaje al usuario
+                            // Error en login
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
                             val errorMessage = task.exception?.message ?: "Error al iniciar sesión."
                             Toast.makeText(requireContext(), "Error: $errorMessage", Toast.LENGTH_SHORT).show()
                         }
-                    }
             }
         }
 
