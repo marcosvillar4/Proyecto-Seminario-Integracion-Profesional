@@ -120,10 +120,8 @@ class RegisterFragment : Fragment() {
                                             user,
                                             name,
                                             onSuccess = {
-                                                // 4) Solo tras crear el doc, navega
-                                                findNavController().navigate(
-                                                    R.id.action_registerFragment_to_dashboardFragment
-                                                )
+                                                // 4) Solo tras crear el doc, navega hacia la parte de hobbies
+                                                findNavController().navigate(R.id.action_registerFragment_to_hobbiesFragment)
                                             },
                                             onFailure = { e ->
                                                 Toast.makeText(
