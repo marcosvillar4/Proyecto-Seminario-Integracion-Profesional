@@ -81,6 +81,10 @@ class LoginFragment : Fragment() {
         binding.textGoRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+
+        binding.textGoChangePassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_passwordResetFragment)
+        }
         return binding.root
     }
 

@@ -58,7 +58,9 @@
             android:id="@+id/action_loginFragment_to_dashboardFragment"
             app:destination="@id/navigation_dashboard" />
 
-        <!-- AGREGADO NUEVO -->
+        <action
+            android:id="@+id/action_loginFragment_to_passwordResetFragment"
+            app:destination="@id/passwordResetFragment" />
 
     </fragment>
 
@@ -90,6 +92,7 @@
         <action
             android:id="@+id/action_accountSettingsFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+
     </fragment>
 
     <fragment
@@ -97,5 +100,14 @@
         android:name="tpo.seminario.breakbuddy.ui.settings.ChangePasswordFragment"
         android:label="Cambiar contraseña"
         tools:layout="@layout/fragment_change_password" />
+
+    <!-- Olvide contra -->
+
+    <fragment
+        android:id="@+id/passwordResetFragment"
+        android:name="tpo.seminario.breakbuddy.ui.changePassword.PasswordResetFragment"
+        android:label="Recuperar Contraseña"
+        tools:layout="@layout/fragment_password_reset"
+        />
 
 </navigation>
