@@ -46,8 +46,8 @@ class HobbiesFragment : Fragment() {
         for(hobby in hobbiesList){
             val checkBox = CheckBox(requireContext()).apply{
                 text = hobby
-                //Tamano fuente
-                textSize = 10f
+                //Tamaño fuente
+                textSize = 16f
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 buttonTintList = ContextCompat.getColorStateList(requireContext(), R.color.green_500)
             }
