@@ -124,7 +124,7 @@
         android:label="Hobbies">
 
         <action
-            android:id="@+id/action_hobbiesFragment_to_homeFragment"
+            android:id="@+id/action_hobbiesFragment_to_dashboardFragment"
             app:destination="@+id/navigation_home"
             app:popUpTo="@id/hobbiesFragment"
             app:popUpToInclusive="true"

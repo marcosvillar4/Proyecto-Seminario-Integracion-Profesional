@@ -36,7 +36,7 @@ class HobbiesFragment : Fragment() {
 
         btnGuardar.setOnClickListener {
             guardarHobbiesSeleccionados()
-            findNavController().navigate(R.id.action_hobbiesFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_hobbiesFragment_to_dashboardFragment)
         }
 
         return view
@@ -44,9 +44,13 @@ class HobbiesFragment : Fragment() {
 
     private fun agegarCheckBoxes(){
         for(hobby in hobbiesList){
-            val checkBox = CheckBox(requireContext())
-            checkBox.text = hobby
-            checkBox.setTextColor(ContextCompat.getColor(requireContext(), R.color.exito))
+            val checkBox = CheckBox(requireContext()).apply{
+                text = hobby
+                //Tamano fuente
+                textSize = 10f
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                buttonTintList = ContextCompat.getColorStateList(requireContext(), R.color.green_500)
+            }
             hobbiesContainer.addView(checkBox)
             checkBoxes.add(checkBox)
         }
