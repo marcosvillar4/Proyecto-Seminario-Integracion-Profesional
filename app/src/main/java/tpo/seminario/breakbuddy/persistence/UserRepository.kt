@@ -17,7 +17,8 @@ data class UserProfile(
     val createdAt: Date? = null,
     val lastLogin: Date? = null,
     val fcmToken: String? = null,
-    val hobbiesCompletados: Boolean = false
+    val hobbiesCompletados: Boolean = false,
+    val hobbies: List<String> = emptyList()
 )
 
 class UserTokenRepository {
@@ -57,8 +58,9 @@ class UserRepository {
             "createdAt" to FieldValue.serverTimestamp(),
             "lastLogin" to FieldValue.serverTimestamp(),
             "fcmToken"  to "",
-            "hobbiesCompletados" to false // ← inicializamos en false para luego activarlo al rellenar los hobbies
-        )
+            "hobbiesCompletados" to false, // ← inicializamos en false para luego activarlo al rellenar los hobbies
+            "hobbies" to emptyList<String>()
+            )
 
         usersCollection.document(userId)
             .set(userData)
@@ -119,7 +121,8 @@ class UserRepository {
                         createdAt = doc.getTimestamp("createdAt")?.toDate(),
                         lastLogin = doc.getTimestamp("lastLogin")?.toDate(),
                         fcmToken = data["fcmToken"] as? String,    // <-- mapeo de fcmToken
-                        hobbiesCompletados = data["hobbiesCompletados"] as? Boolean ?: false
+                        hobbiesCompletados = data["hobbiesCompletados"] as? Boolean ?: false,
+                        hobbies = data["hobbies"] as? List<String> ?: emptyList()
                     )
                     onSuccess(profile)
                 } else {
@@ -130,5 +133,24 @@ class UserRepository {
                 Log.w(TAG, "Error obteniendo perfil del usuario $userId.", e)
                 onFailure(e)
             }
+    }
+
+    /**
+     * Guarda la lista de hobbies y marca hobbiesCompletados = true.
+     */
+    fun saveHobbies(
+        userId: String,
+        hobbies: List<String>,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val data = mapOf(
+            "hobbies" to hobbies,
+            "hobbiesCompletados" to true
+        )
+        usersCollection.document(userId)
+            .set(data, SetOptions.merge())
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { e -> onFailure(e) }
     }
 }
