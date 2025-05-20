@@ -55,9 +55,11 @@ class LoginFragment : Fragment() {
                             // 2) Verifica email confirmado
                             if (!user.isEmailVerified) {
                                 FirebaseAuth.getInstance().signOut()
-                                Toast.makeText(requireContext(),
+                                Toast.makeText(
+                                    requireContext(),
                                     "Por favor, verificá tu email antes de iniciar sesión.",
-                                    Toast.LENGTH_LONG).show()
+                                    Toast.LENGTH_LONG
+                                ).show()
                                 return@addOnCompleteListener
                             }
 
@@ -82,24 +84,33 @@ class LoginFragment : Fragment() {
                                             }
                                         },
                                         onFailure = { e ->
-                                            Toast.makeText(requireContext(),
+                                            Toast.makeText(
+                                                requireContext(),
                                                 "Error cargando perfil: ${e.message}",
-                                                Toast.LENGTH_LONG).show()
+                                                Toast.LENGTH_LONG
+                                            ).show()
                                         }
                                     )
                                 },
                                 onFailure = { e ->
-                                    Toast.makeText(requireContext(),
+                                    Toast.makeText(
+                                        requireContext(),
                                         "Error actualizando perfil: ${e.message}",
-                                        Toast.LENGTH_LONG).show()
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 }
                             )
                         } else {
                             // Error en login
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
                             val errorMessage = task.exception?.message ?: "Error al iniciar sesión."
-                            Toast.makeText(requireContext(), "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Error: $errorMessage",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
+                    }
             }
         }
 
