@@ -121,7 +121,14 @@
     <fragment
         android:id="@+id/hobbiesFragment"
         android:name="tpo.seminario.breakbuddy.ui.register.HobbiesFragment"
-        android:label="Hobbies"
-        />
+        android:label="Hobbies">
+
+        <action
+            android:id="@+id/action_hobbiesFragment_to_homeFragment"
+            app:destination="@+id/navigation_home"
+            app:popUpTo="@id/hobbiesFragment"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
 
 </navigation>

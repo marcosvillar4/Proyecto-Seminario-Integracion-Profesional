@@ -7,8 +7,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
 import tpo.seminario.breakbuddy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -57,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.welcomeFragment || destination.id == R.id.loginFragment || destination.id == R.id.registerFragment) {
+            if (destination.id == R.id.welcomeFragment || destination.id == R.id.loginFragment || destination.id == R.id.registerFragment || destination.id == R.id.hobbiesFragment) {
                 // Oculta action bar y menú inferior en pantalla de bienvenida
                 supportActionBar?.hide()
                 navView.visibility = android.view.View.GONE

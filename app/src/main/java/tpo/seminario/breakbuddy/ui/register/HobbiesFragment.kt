@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import tpo.seminario.breakbuddy.R
 
 class HobbiesFragment : Fragment() {
@@ -34,6 +36,7 @@ class HobbiesFragment : Fragment() {
 
         btnGuardar.setOnClickListener {
             guardarHobbiesSeleccionados()
+            findNavController().navigate(R.id.action_hobbiesFragment_to_homeFragment)
         }
 
         return view
@@ -43,6 +46,7 @@ class HobbiesFragment : Fragment() {
         for(hobby in hobbiesList){
             val checkBox = CheckBox(requireContext())
             checkBox.text = hobby
+            checkBox.setTextColor(ContextCompat.getColor(requireContext(), R.color.exito))
             hobbiesContainer.addView(checkBox)
             checkBoxes.add(checkBox)
         }
