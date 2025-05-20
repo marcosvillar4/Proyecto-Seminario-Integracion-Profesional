@@ -60,6 +60,9 @@
             android:id="@+id/action_loginFragment_to_passwordResetFragment"
             app:destination="@id/passwordResetFragment" />
 
+        <action
+            android:id="@+id/action_loginFragment_to_hobbiesFragment"
+            app:destination="@id/hobbiesFragment"/>
     </fragment>
 
     <fragment
@@ -112,6 +115,13 @@
         android:name="tpo.seminario.breakbuddy.ui.changePassword.PasswordResetFragment"
         android:label="Recuperar Contraseña"
         tools:layout="@layout/fragment_password_reset"
+        />
+
+    <!-- Hobbies -->
+    <fragment
+        android:id="@+id/hobbiesFragment"
+        android:name="tpo.seminario.breakbuddy.ui.register.HobbiesFragment"
+        android:label="Hobbies"
         />
 
 </navigation>
