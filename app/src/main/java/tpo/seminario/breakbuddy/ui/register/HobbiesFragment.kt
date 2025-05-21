@@ -66,7 +66,7 @@ class HobbiesFragment : Fragment() {
             .filter { it.isChecked }
             .map { it.text.toString() }
 
-        // 2) Obtén el UID del usuario actual
+        // 2) Obtiene el UID del usuario actual
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid.isNullOrEmpty()) {
             Toast.makeText(requireContext(),
