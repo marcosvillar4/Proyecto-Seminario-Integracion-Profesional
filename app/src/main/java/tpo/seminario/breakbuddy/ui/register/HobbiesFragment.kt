@@ -54,6 +54,12 @@ class HobbiesFragment : Fragment() {
                 textSize = 16f
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 buttonTintList = ContextCompat.getColorStateList(requireContext(), R.color.green_500)
+
+                setOnCheckedChangeListener { buttonView, isChecked ->
+                    val seleccionados = checkBoxes.count { it.isChecked }
+                    if(isChecked && seleccionados > 6)
+                        buttonView.isChecked = false
+                }
             }
             hobbiesContainer.addView(checkBox)
             checkBoxes.add(checkBox)
