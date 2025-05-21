@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import tpo.seminario.breakbuddy.databinding.FragmentLoginBinding
 import tpo.seminario.breakbuddy.R
@@ -71,15 +72,21 @@ class LoginFragment : Fragment() {
                                     userRepo.getUserProfile(
                                         user.uid,
                                         onSuccess = { profile ->
+                                            val baseOptions = NavOptions.Builder()
+                                                .setPopUpTo(R.id.mobile_navigation, true)
+                                                .build()
+
                                             if (!profile.hobbiesCompletados) {
-                                                // 5a) Si es primer login, va a HobbiesFragment
                                                 findNavController().navigate(
-                                                    R.id.action_loginFragment_to_hobbiesFragment
+                                                    R.id.action_loginFragment_to_hobbiesFragment,
+                                                    null,
+                                                    baseOptions
                                                 )
                                             } else {
-                                                // 5b) Si ya completó hobbies, va a Dashboard
                                                 findNavController().navigate(
-                                                    R.id.action_loginFragment_to_dashboardFragment
+                                                    R.id.action_loginFragment_to_dashboardFragment,
+                                                    null,
+                                                    baseOptions
                                                 )
                                             }
                                         },
