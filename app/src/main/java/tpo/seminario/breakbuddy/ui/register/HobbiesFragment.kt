@@ -24,7 +24,7 @@ class HobbiesFragment : Fragment() {
     //Lista de hobbies (MODIFICABLE)
     private val hobbiesList = listOf(
         "Leer", "Hacer ejercicio", "Cocinar", "Escuchar música",
-        "Pintar", "Pintar", "Jardinería", "Videojuegos", "Meditar", "Bailar", "Ver películas"
+        "Pintar", "Jardinería", "Videojuegos", "Meditar", "Bailar", "Ver películas"
     )
 
     private val checkBoxes = mutableListOf<CheckBox>()
@@ -57,7 +57,7 @@ class HobbiesFragment : Fragment() {
 
                 setOnCheckedChangeListener { buttonView, isChecked ->
                     val seleccionados = checkBoxes.count { it.isChecked }
-                    if(isChecked && seleccionados > 6)
+                    if(isChecked && seleccionados > 5)
                         buttonView.isChecked = false
                 }
             }
