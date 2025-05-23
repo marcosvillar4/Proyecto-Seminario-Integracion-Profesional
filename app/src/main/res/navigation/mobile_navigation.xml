@@ -101,6 +101,10 @@
             android:id="@+id/action_accountSettingsFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
 
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_editHobbiesFragment"
+            app:destination="@id/editHobbiesFragment" />
+
     </fragment>
 
     <fragment
@@ -130,6 +134,19 @@
             app:popUpTo="@id/hobbiesFragment"
             app:popUpToInclusive="true"
             />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editHobbiesFragment"
+        android:name="tpo.seminario.breakbuddy.ui.settings.EditHobbiesFragment"
+        android:label="Editar Hobbies"
+        tools:layout="@layout/fragment_hobbies">
+
+        <action
+            android:id="@+id/action_editHobbiesFragment_to_accountSettingsFragment"
+            app:destination="@id/accountSettingsFragment"
+            app:popUpTo="@id/editHobbiesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

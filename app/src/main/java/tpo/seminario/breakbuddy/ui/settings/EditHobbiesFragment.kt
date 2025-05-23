@@ -1,4 +1,4 @@
-package tpo.seminario.breakbuddy.ui.register
+package tpo.seminario.breakbuddy.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,34 +10,27 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import tpo.seminario.breakbuddy.R
-import tpo.seminario.breakbuddy.persistence.UserRepository
 import tpo.seminario.breakbuddy.util.HobbiesList
+import androidx.navigation.fragment.findNavController
 
-
-
-class HobbiesFragment : Fragment() {
+class EditHobbiesFragment : Fragment() {
     private lateinit var hobbiesContainer: LinearLayout
     private lateinit var btnGuardar: Button
 
-    private val userRepo = UserRepository()
-
-    //Lista de hobbies
     private val hobbiesList = HobbiesList.DEFAULT
-
     private val checkBoxes = mutableListOf<CheckBox>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?{
+    ): View {
         val view = inflater.inflate(R.layout.fragment_hobbies, container, false)
         hobbiesContainer = view.findViewById(R.id.hobbiesContainer)
         btnGuardar = view.findViewById(R.id.btnGuardarHobbies)
 
-        agegarCheckBoxes()
+        agregarCheckBoxes()
+        cargarHobbiesGuardados() // marcarlos si ya los tenía
 
         btnGuardar.setOnClickListener {
             guardarHobbiesSeleccionados()
@@ -46,18 +39,17 @@ class HobbiesFragment : Fragment() {
         return view
     }
 
-    private fun agegarCheckBoxes(){
-        for(hobby in hobbiesList){
-            val checkBox = CheckBox(requireContext()).apply{
+    private fun agregarCheckBoxes() {
+        for (hobby in hobbiesList) {
+            val checkBox = CheckBox(requireContext()).apply {
                 text = hobby
-                //Tamaño fuente
                 textSize = 16f
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 buttonTintList = ContextCompat.getColorStateList(requireContext(), R.color.green_500)
 
                 setOnCheckedChangeListener { buttonView, isChecked ->
                     val seleccionados = checkBoxes.count { it.isChecked }
-                    if(isChecked && seleccionados > 5)
+                    if (isChecked && seleccionados > 5)
                         buttonView.isChecked = false
                 }
             }
@@ -66,40 +58,20 @@ class HobbiesFragment : Fragment() {
         }
     }
 
+    private fun cargarHobbiesGuardados() {
+        // FireBase
+    }
+
     private fun guardarHobbiesSeleccionados() {
-        // 1) Filtra los seleccionados
         val seleccionados = checkBoxes
             .filter { it.isChecked }
             .map { it.text.toString() }
 
-        // 2) Obtiene el UID del usuario actual
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        if (uid.isNullOrEmpty()) {
-            Toast.makeText(requireContext(),
-                "Error: no hay usuario autenticado",
-                Toast.LENGTH_SHORT).show()
-            return
-        }
+        //FireBase
 
-        // 3) Llama al repositorio para guardar
-        userRepo.saveHobbies(
-            userId = uid,
-            hobbies = seleccionados,
-            onSuccess = {
-                Toast.makeText(requireContext(),
-                    "Hobbies guardados correctamente",
-                    Toast.LENGTH_SHORT).show()
-                // 4) Navega al Dashboard
-                findNavController().navigate(
-                    R.id.action_hobbiesFragment_to_dashboardFragment
-                )
-            },
-            onFailure = { e ->
-                Toast.makeText(requireContext(),
-                    "Error guardando hobbies: ${e.message}",
-                    Toast.LENGTH_LONG).show()
-            }
-        )
+        Toast.makeText(requireContext(), "Hobbies actualizados", Toast.LENGTH_SHORT).show()
+
+
+        findNavController().navigate(R.id.action_editHobbiesFragment_to_accountSettingsFragment)
     }
-
 }

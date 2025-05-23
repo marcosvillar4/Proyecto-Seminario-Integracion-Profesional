@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import tpo.seminario.breakbuddy.databinding.FragmentAccountSettingsBinding
 
@@ -25,6 +26,22 @@ class AccountSettingsFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+
+        //Saludo fragmento settings
+        val user = FirebaseAuth.getInstance().currentUser
+        val nombre = user?.displayName ?: "usuario"
+        binding.textGreeting.text = "¡Hola, $nombre!"
+
+
+        Glide.with(this)
+            .load(R.drawable.ic_default_avatar) // Imagen por defecto
+            .into(binding.profileImageView)
+
+
+        // Cambiar hobbies
+        binding.cardEditHobbies.setOnClickListener {
+            findNavController().navigate(R.id.action_accountSettingsFragment_to_editHobbiesFragment)
+        }
 
         //Cambiar contraseña
         binding.cardChangePassword.setOnClickListener {
