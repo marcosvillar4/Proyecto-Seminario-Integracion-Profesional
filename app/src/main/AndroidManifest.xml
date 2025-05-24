@@ -17,6 +17,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7467173777372011~2329487113"/>
+        <meta-data
+            android:name="com.google.android.gms.auth.api.signin.DEFAULT_WEB_CLIENT_ID"
+            android:value="@string/default_web_client_id"/>
 
         <activity
             android:name=".MainActivity"

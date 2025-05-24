@@ -55,13 +55,16 @@ dependencies {
     implementation(libs.firebase.firestore.ktx.v2440)
     implementation(libs.firebase.firestore.ktx)
 
+    // Google Sign-In
+    implementation (libs.play.services.auth)
+
     // Jetpack Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation(libs.androidx.navigation.fragment.ktx.v277)
+    implementation(libs.androidx.navigation.ui.ktx.v277)
 
     // Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    kapt("com.github.bumptech.glide:compiler:4.16.0")
+    implementation(libs.glide)
+    kapt(libs.compiler)
 
     //AndroidX y Material
     implementation(libs.androidx.core.ktx)

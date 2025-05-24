@@ -3,6 +3,8 @@ package tpo.seminario.breakbuddy
 import android.app.Application
 import android.util.Log
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.BuildConfig
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
@@ -45,6 +47,13 @@ class BreakBuddyApp : Application() {
 
         FirebaseFirestore.getInstance().firestoreSettings = settings
 
+
+        // Configura Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id)) // de Firebase Console
+            .requestEmail()
+            .build()
+        GoogleSignIn.getClient(this, gso)
 
 
         // 3) Conectar al Emulator Suite solo en debug builds

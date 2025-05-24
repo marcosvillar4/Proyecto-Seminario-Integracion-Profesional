@@ -23,6 +23,11 @@
             app:destination="@id/navigation_dashboard"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_hobbiesFragment"
+            app:destination="@id/hobbiesFragment"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
