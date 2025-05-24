@@ -46,6 +46,8 @@ class HobbiesFragment : Fragment() {
         return view
     }
 
+
+
     private fun agegarCheckBoxes(){
         for(hobby in hobbiesList){
             val checkBox = CheckBox(requireContext()).apply{

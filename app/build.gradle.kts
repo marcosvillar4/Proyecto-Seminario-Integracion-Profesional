@@ -43,6 +43,9 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.play.services.ads)
+
     //Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)

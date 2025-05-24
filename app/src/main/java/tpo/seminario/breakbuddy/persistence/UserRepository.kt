@@ -153,4 +153,24 @@ class UserRepository {
             .addOnSuccessListener { onSuccess() }
             .addOnFailureListener { e -> onFailure(e) }
     }
+    /**
+    * Recupera solo el array de hobbies del usuario.
+    */
+    fun getUserHobbies(
+        userId: String,
+        onSuccess: (List<String>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        usersCollection.document(userId)
+            .get()
+            .addOnSuccessListener { doc ->
+                if (doc.exists()) {
+                    val data = doc.get("hobbies") as? List<String> ?: emptyList()
+                    onSuccess(data)
+                } else {
+                    onFailure(IllegalStateException("Usuario no encontrado"))
+                }
+            }
+            .addOnFailureListener(onFailure)
+    }
 }

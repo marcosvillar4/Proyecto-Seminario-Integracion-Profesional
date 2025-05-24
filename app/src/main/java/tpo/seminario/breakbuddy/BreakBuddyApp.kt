@@ -2,6 +2,7 @@ package tpo.seminario.breakbuddy
 
 import android.app.Application
 import android.util.Log
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.BuildConfig
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
@@ -14,6 +15,13 @@ import com.google.firebase.firestore.firestore
 class BreakBuddyApp : Application() {
     override fun onCreate() {
         super.onCreate()
+
+
+        // Inicializa el SDK de AdMob
+        MobileAds.initialize(this) { initializationStatus ->
+            // Opcional: loguear status
+            Log.d("BreakBuddyApp", "AdMob initialized: $initializationStatus")
+        }
 
         // 1) Inicializar Firebase
         FirebaseApp.initializeApp(this)
@@ -36,6 +44,8 @@ class BreakBuddyApp : Application() {
         */
 
         FirebaseFirestore.getInstance().firestoreSettings = settings
+
+
 
         // 3) Conectar al Emulator Suite solo en debug builds
         if (BuildConfig.DEBUG) {
