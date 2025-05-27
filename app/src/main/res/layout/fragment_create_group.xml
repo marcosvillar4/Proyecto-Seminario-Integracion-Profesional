@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/neutro_claro"
+    android:padding="16dp">
+
+    <!-- Título -->
+
+    <!-- Campo Nombre del Grupo -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:text="Crear Nuevo Grupo"
+        android:textColor="@color/neutro_oscuro"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/infoText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Se generará un código único que podrás compartir con otros usuarios para que se unan al grupo."
+        android:textColor="@color/green_500"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutHobby" />
+
+    <Button
+        android:id="@+id/btnCreateGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/green_200"
+        android:minHeight="48dp"
+        android:text="Crear Grupo"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutEmails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Emails de los miembros *"
+        app:boxStrokeColor="@color/green_500"
+        app:helperTextTextColor="@color/acento"
+        app:hintTextColor="@color/green_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutGroupName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputEmails"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textColor="@color/neutro_oscuro" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutHobby"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Hobby o interés común (opcional)"
+        app:boxStrokeColor="@color/green_500"
+        app:hintTextColor="@color/green_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutEmails">
+
+        <AutoCompleteTextView
+            android:id="@+id/inputHobby"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="none"
+            android:textColor="@color/neutro_oscuro"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/requiredFieldsText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="* Campos obligatorios"
+        android:textColor="@color/alerta"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCreateGroup" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutGroupName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Nombre del grupo *"
+        app:boxStrokeColor="@color/green_500"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
+        app:counterTextColor="@color/green_500"
+        app:hintTextColor="@color/green_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputGroupName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="textCapWords"
+            android:maxLength="50"
+            android:textColor="@color/neutro_oscuro" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo Emails -->
+
+    <!-- Campo Hobby - CAMBIADO A ExposedDropdownMenu -->
+
+    <!-- Información adicional -->
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminateTint="@color/green_200"
+        app:layout_constraintTop_toBottomOf="@id/infoText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        tools:visibility="visible" />
+
+    <!-- Botón Crear Grupo -->
+
+    <!-- Campos obligatorios -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

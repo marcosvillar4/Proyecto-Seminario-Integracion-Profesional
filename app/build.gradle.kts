@@ -64,6 +64,7 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+    implementation(libs.play.services.ads.api)
     kapt(libs.compiler)
 
     //AndroidX y Material

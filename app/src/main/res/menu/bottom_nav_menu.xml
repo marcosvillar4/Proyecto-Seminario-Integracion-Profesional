@@ -12,6 +12,11 @@
         android:title="@string/title_dashboard" />
 
     <item
+        android:id="@+id/navigation_group"
+        android:icon="@drawable/baseline_group_24"
+        android:title="Grupos" />
+
+    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/baseline_notifications_24"
         android:title="@string/title_notifications" />
@@ -20,4 +25,6 @@
         android:id="@+id/accountSettingsFragment"
         android:icon="@drawable/baseline_settings_24"
         android:title="Cuenta" />
+
+
 </menu>
