@@ -16,6 +16,8 @@ class GroupRepository {
         name: String,
         emails: List<String>,
         hobby: String?,
+        type: String,
+        orgId: String?,
         onSuccess: (String) -> Unit, // Ahora devuelve el código del grupo
         onFailure: (String) -> Unit   // Ahora devuelve mensaje específico
     ) {
@@ -27,41 +29,57 @@ class GroupRepository {
 
         val groupId = UUID.randomUUID().toString()
 
-        // Generar código más robusto
-        generateUniqueGroupCode { groupCode ->
-            if (groupCode == null) {
-                onFailure("Error generando código de grupo")
-                return@generateUniqueGroupCode
-            }
-
-            // Agregar el email del creador a la lista si no está
-            val allEmails = (emails + currentUser.email).filterNotNull().distinct()
-
-            val group = Group(
-                id = groupId,
-                name = name.trim(),
-                createdBy = currentUser.uid,
-                emails = allEmails,
-                hobby = hobby?.trim(),
-                code = groupCode
-            )
-
-            db.collection("groups").document(groupId)
-                .set(group)
-                .addOnSuccessListener {
-                    onSuccess(groupCode)
-                }
-                .addOnFailureListener { exception ->
-                    val errorMessage = when {
-                        exception.message?.contains("permission", ignoreCase = true) == true ->
-                            "No tienes permisos para crear grupos"
-                        exception.message?.contains("network", ignoreCase = true) == true ->
-                            "Error de conexión. Verifica tu internet"
-                        else -> "Error creando el grupo: ${exception.message}"
-                    }
-                    onFailure(errorMessage)
-                }
+        // 1) Si es de organización, comprueba primero unicidad
+        val checkOrg = if (type == "organization") {
+            db.collection("groups")
+                .whereEqualTo("type", "organization")
+                .whereEqualTo("orgId", orgId)
+                .get()
+        } else {
+            // mock un DocumentReference vacío para saltar esta comprobación
+            db.collection("groups")
+                .whereEqualTo("dummy", "__none__") // nunca habrá documentos con ese campo
+                .get() // devuelve Task<QuerySnapshot>
         }
+
+        checkOrg
+            .addOnSuccessListener { snap ->
+                if (type == "organization" && !snap.isEmpty) {
+                    return@addOnSuccessListener onFailure("Ya existe un grupo para esta organización")
+                }
+                // 2) Genera código único
+                generateUniqueGroupCode { code ->
+                    if (code == null) return@generateUniqueGroupCode onFailure("Error generando código")
+                    // 3) Crea el objeto
+                    val allEmails = (emails + currentUser.email).filterNotNull().distinct()
+                    val group = Group(
+                        id        = groupId,
+                        name      = name.trim(),
+                        createdBy = currentUser.uid,
+                        emails    = allEmails,
+                        hobby     = hobby?.trim(),
+                        code      = code,
+                        type      = type,
+                        orgId     = orgId
+                    )
+                    // 4) Guarda Firestore
+                    db.collection("groups")
+                        .document(groupId)
+                        .set(group)
+                        .addOnSuccessListener { onSuccess(code) }
+                        .addOnFailureListener { e ->
+                            val msg = when {
+                                e.message?.contains("permission", true) == true -> "No tienes permisos"
+                                e.message?.contains("network", true) == true    -> "Error de conexión"
+                                else                                             -> "Error: ${e.message}"
+                            }
+                            onFailure(msg)
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                onFailure("Error verificando organización: ${e.message}")
+            }
     }
 
     // AGREGAR esta nueva función para generar códigos únicos:

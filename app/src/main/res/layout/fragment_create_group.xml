@@ -137,6 +137,59 @@
             android:textColor="@color/neutro_oscuro" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <RadioGroup
+        android:id="@+id/radioType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/infoText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <RadioButton
+            android:id="@+id/rbPersonal"
+            style="@style/Widget.MaterialComponents.CompoundButton.RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Personal"
+            android:buttonTint="@color/contrast_selector"
+            android:textColor="@color/contrast_selector"/>
+
+        <RadioButton
+            android:id="@+id/rbOrganization"
+            style="@style/Widget.MaterialComponents.CompoundButton.RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Organización"
+            android:buttonTint="@color/contrast_selector"
+            android:textColor="@color/contrast_selector"/>
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutOrg"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Organización (opcional)"
+        app:boxStrokeColor="@color/green_500"
+        app:hintTextColor="@color/green_500"
+        app:layout_constraintTop_toBottomOf="@id/radioType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Ahora un TextInputEditText editable -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputOrg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:textColor="@color/neutro_oscuro"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- Campo Emails -->
 
     <!-- Campo Hobby - CAMBIADO A ExposedDropdownMenu -->
@@ -150,7 +203,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:indeterminateTint="@color/green_200"
-        app:layout_constraintTop_toBottomOf="@id/infoText"
+        app:layout_constraintTop_toBottomOf="@id/layoutOrg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"

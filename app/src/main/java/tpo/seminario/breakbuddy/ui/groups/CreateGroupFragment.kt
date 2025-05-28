@@ -11,6 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
@@ -18,15 +21,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.FirebaseFirestore
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentCreateGroupBinding
 import tpo.seminario.breakbuddy.util.HobbiesList
+import tpo.seminario.breakbuddy.util.Organization
+import tpo.seminario.breakbuddy.persistence.OrganizationRepository
+
 
 class CreateGroupFragment : Fragment() {
 
     private var _binding: FragmentCreateGroupBinding? = null
     private val binding get() = _binding!!
     private val viewModel: GroupsViewModel by viewModels()
+
+    private lateinit var radioType: RadioGroup
+    private lateinit var rbPersonal: RadioButton
+    private lateinit var rbOrganization: RadioButton
+    private lateinit var layoutOrg: TextInputLayout
+    private lateinit var inputOrg: AutoCompleteTextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +48,7 @@ class CreateGroupFragment : Fragment() {
         _binding = FragmentCreateGroupBinding.inflate(inflater, container, false)
         setupViews()
         observeViewModel()
+
         return binding.root
     }
 
@@ -53,6 +67,16 @@ class CreateGroupFragment : Fragment() {
 
         binding.btnCreateGroup.setOnClickListener {
             createGroup()
+        }
+
+        radioType = binding.radioType
+        rbPersonal = binding.rbPersonal
+        rbOrganization = binding.rbOrganization
+        layoutOrg = binding.layoutOrg
+
+        // Mostrar/ocultar selector de org
+        radioType.setOnCheckedChangeListener { _, checkedId ->
+            layoutOrg.visibility = if (checkedId == R.id.rbOrganization) View.VISIBLE else View.GONE
         }
     }
 
@@ -113,9 +137,65 @@ class CreateGroupFragment : Fragment() {
             return
         }
 
-        // Crear grupo
-        viewModel.createGroup(name, emails, hobby)
+
+        val type = if (rbOrganization.isChecked) "organization" else "personal"
+        val orgName = binding.inputOrg.text.toString().trim()
+
+        if (type == "organization" && orgName.isBlank()) {
+            showFieldError(layoutOrg, "Debes indicar un nombre de organización")
+            return
+        }
+
+        // Primero: si es org, chequeá existencia por nombre:
+        if (type == "organization") {
+            FirebaseFirestore.getInstance()
+                .collection("organizations")
+                .whereEqualTo("name", orgName)
+                .get()
+                .addOnSuccessListener { snap ->
+                    val orgId = if (snap.isEmpty) {
+                        // Si no existe, crear una nueva:
+                        createOrganization(orgName) { newId ->
+                            actuallyCreateGroup(name, emails, hobby, type, newId)
+                        }
+                        return@addOnSuccessListener
+                    } else {
+                        // Ya existe: tomá el ID del primero
+                        snap.documents.first().id
+                    }
+                    actuallyCreateGroup(name, emails, hobby, type, orgId)
+                }
+                .addOnFailureListener {
+                    showErrorToast("Error buscando organización")
+                }
+        } else {
+            // tipo personal
+            actuallyCreateGroup(name, emails, hobby, type, null)
+        }
     }
+
+
+
+private fun createOrganization(name: String, callback: (String)->Unit) {
+    val ref = FirebaseFirestore.getInstance()
+        .collection("organizations")
+        .document()
+    ref.set(mapOf("name" to name))
+        .addOnSuccessListener { callback(ref.id) }
+        .addOnFailureListener {
+            showErrorToast("No se pudo crear la organización")
+        }
+}
+
+private fun actuallyCreateGroup(
+    name: String,
+    emails: List<String>,
+    hobby: String?,
+    type: String,
+    orgId: String?
+) {
+    viewModel.createGroup(name, emails, hobby, type, orgId)
+}
 
     private fun validateInputs(name: String, emailsText: String): Boolean {
         var isValid = true

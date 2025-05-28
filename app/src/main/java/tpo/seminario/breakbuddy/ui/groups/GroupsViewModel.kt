@@ -21,7 +21,7 @@ class GroupsViewModel : ViewModel() {
     val uiState: LiveData<GroupCreationState> = _uiState
 
     // REEMPLAZAR la función createGroup con esta versión mejorada:
-    fun createGroup(name: String, emails: List<String>, hobby: String?) {
+    fun createGroup(name: String, emails: List<String>, hobby: String?, type: String, orgId: String?) {
         // Validar inputs antes de proceder
         if (!validateInputs(name, emails)) return
         _uiState.value = _uiState.value?.copy(isLoading = true, errorMessage = null)
@@ -33,6 +33,8 @@ class GroupsViewModel : ViewModel() {
             name = name,
             emails = emails,
             hobby = hobby,
+            type = type,
+            orgId = orgId,
             onSuccess = { groupCode ->
                 _uiState.value = GroupCreationState(
                     isLoading = false,
