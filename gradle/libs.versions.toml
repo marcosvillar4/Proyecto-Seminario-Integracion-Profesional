@@ -5,6 +5,7 @@ firebaseBom = "33.13.0"
 firebaseFirestoreKtxVersion = "24.4.0"
 firebaseMessaging = "24.1.1"
 glide = "4.16.0"
+googlePlayServicesAuth = "21.0.1"
 kotlin = "2.0.21"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -23,6 +24,8 @@ navigationUiKtxVersion = "2.7.7"
 playServicesAds = "24.3.0"
 playServicesAuth = "21.3.0"
 playServicesAdsApi = "24.3.0"
+playServicesAuthVersion = "20.5.0"
+media3CommonKtx = "1.7.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +53,9 @@ firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-fires
 play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 play-services-ads-api = { group = "com.google.android.gms", name = "play-services-ads-api", version.ref = "playServicesAdsApi" }
+play-services-auth-v2050 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
+androidx-media3-common-ktx = { group = "androidx.media3", name = "media3-common-ktx", version.ref = "media3CommonKtx" }
+play-services-auth-v2101 = { module = "com.google.android.gms:play-services-auth", version.ref = "googlePlayServicesAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

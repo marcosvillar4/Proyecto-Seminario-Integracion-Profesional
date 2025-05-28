@@ -23,9 +23,8 @@ class GroupsViewModel : ViewModel() {
     // REEMPLAZAR la función createGroup con esta versión mejorada:
     fun createGroup(name: String, emails: List<String>, hobby: String?) {
         // Validar inputs antes de proceder
-        if (!validateInputs(name, emails)) {
-            return
-        }
+        if (!validateInputs(name, emails)) return
+        _uiState.value = _uiState.value?.copy(isLoading = true, errorMessage = null)
 
         // Establecer estado de carga
         _uiState.value = _uiState.value?.copy(isLoading = true, errorMessage = null)
@@ -38,6 +37,7 @@ class GroupsViewModel : ViewModel() {
                 _uiState.value = GroupCreationState(
                     isLoading = false,
                     isSuccess = true,
+                    errorMessage = null,
                     groupCode = groupCode
                 )
             },
@@ -45,7 +45,8 @@ class GroupsViewModel : ViewModel() {
                 _uiState.value = GroupCreationState(
                     isLoading = false,
                     isSuccess = false,
-                    errorMessage = errorMessage
+                    errorMessage = errorMessage,
+                    groupCode = null
                 )
             }
         )

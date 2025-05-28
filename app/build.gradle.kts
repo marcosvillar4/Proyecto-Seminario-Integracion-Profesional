@@ -55,6 +55,11 @@ dependencies {
     implementation(libs.firebase.firestore.ktx.v2440)
     implementation(libs.firebase.firestore.ktx)
 
+
+
+
+    implementation (libs.play.services.auth.v2101)
+
     // Google Sign-In
     implementation (libs.play.services.auth)
 
@@ -65,6 +70,7 @@ dependencies {
     // Glide
     implementation(libs.glide)
     implementation(libs.play.services.ads.api)
+    implementation(libs.androidx.media3.common.ktx)
     kapt(libs.compiler)
 
     //AndroidX y Material

@@ -22,6 +22,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.activity.result.contract.ActivityResultContracts
 import android.app.Activity
+import androidx.media3.common.util.Log
 
 class WelcomeFragment : Fragment() {
 
@@ -135,6 +136,11 @@ class WelcomeFragment : Fragment() {
 
 
     private fun firebaseAuthWithGoogle(idToken: String) {
+        Log.d("WelcomeFragment", "¡Entré a firebaseAuthWithGoogle con token: $idToken")
+        Toast.makeText(requireContext(),
+            "firebaseAuthWithGoogle() invoked",
+            Toast.LENGTH_SHORT).show()
+
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->

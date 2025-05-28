@@ -1,5 +1,9 @@
 package tpo.seminario.breakbuddy.ui.groups
 
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Patterns
@@ -193,20 +197,28 @@ class CreateGroupFragment : Fragment() {
     }
 
     private fun showSuccessDialog(groupCode: String) {
-        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        // 1) Capturamos context y navController antes de mostrar el diálogo
+        val ctx = requireContext()
+        val nav = findNavController()
+        val clipboard = ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+        AlertDialog.Builder(ctx)
             .setTitle("¡Grupo Creado!")
-            .setMessage("Tu grupo ha sido creado exitosamente.\n\nCódigo del grupo: $groupCode\n\nComparte este código con otros para que se unan.")
+            .setMessage("Tu grupo ha sido creado exitosamente.\nCódigo: $groupCode")
             .setPositiveButton("Copiar Código") { _, _ ->
-                copyToClipboard(groupCode)
-                showSuccessToast("Código copiado al portapapeles")
-                navigateBack()
+                // 2) Usa las referencias capturadas
+                val clip = ClipData.newPlainText("Código de Grupo", groupCode)
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(ctx, "Código copiado al portapapeles", Toast.LENGTH_SHORT).show()
+                nav.popBackStack()
             }
             .setNegativeButton("Cerrar") { _, _ ->
-                navigateBack()
+                nav.popBackStack()
             }
             .setCancelable(false)
             .show()
     }
+
 
     private fun copyToClipboard(text: String) {
         val clipboard = requireContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE)
