@@ -120,6 +120,10 @@
             android:id="@+id/action_accountSettingsFragment_to_editHobbiesFragment"
             app:destination="@id/editHobbiesFragment" />
 
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+
     </fragment>
 
     <fragment
@@ -173,4 +177,11 @@
             android:id="@+id/action_navigation_groups_to_createGroupFragment"
             app:destination="@id/createGroupFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="tpo.seminario.breakbuddy.ui.settings.EditProfileFragment"
+        android:label="Editar perfil"
+        tools:layout="@layout/fragment_edit_profile" />
+
 </navigation>

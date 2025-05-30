@@ -37,6 +37,10 @@ class AccountSettingsFragment : Fragment(){
             .load(R.drawable.ic_default_avatar) // Imagen por defecto
             .into(binding.profileImageView)
 
+        //Editar perfil
+        binding.cardEditProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_accountSettingsFragment_to_editProfileFragment)
+        }
 
         // Cambiar hobbies
         binding.cardEditHobbies.setOnClickListener {
