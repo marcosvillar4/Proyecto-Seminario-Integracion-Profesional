@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Botones principales, Enlaces activos, elementos destacados-->
-    <color name="green_200">#01E144</color>
+    <color name="green_200">#358B79</color>
     <!--Fondos secundarios, navbars, hover de botones-->
-    <color name="green_500">#015C2D</color>
+    <color name="green_500">#145A58</color>
     <!--Elementos contrastantes, llamados a la accion especiales-->
     <color name="contrast">#0051FF</color>
     <!--Neutro claro y oscuro-->
-    <color name="neutro_claro">#F3FDF7</color>
-    <color name="neutro_oscuro">#202B26</color>
-    <!-- Blanco y negro-->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="neutro_claro">#FFFFFF</color>
+    <color name="neutro_intermedio">#F6F6F6</color>
+    <color name="neutro_oscuro">#145A58	</color>
     <!--Iconos destacados, badges, microinteracciones-->
-    <color name="acento">#00C2FF</color>
+    <color name="acento">#F6AC2C</color>
     <!--Estados correctos, mensajes positivos, validaciones-->
     <color name="exito">#00B894</color>
     <!--Alertas, mensajes informativos, recordatorios, de mas suave a mas fuerte-->
-    <color name="alerta">#FFC107</color>
-    <color name="error">#FF4B4B</color>
+    <color name="alerta">#F6AC2C</color>
+    <color name="error">#E14444</color>
+
+    <!--Informacion-->
+    <color name="info">#358B79</color>
 </resources>
