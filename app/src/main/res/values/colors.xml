@@ -13,6 +13,7 @@
     <!--Blanco y Negro-->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="gray_300">#BCBCBC</color>
     <!--Iconos destacados, badges, microinteracciones-->
     <color name="acento">#F6AC2C</color>
     <!--Estados correctos, mensajes positivos, validaciones-->
