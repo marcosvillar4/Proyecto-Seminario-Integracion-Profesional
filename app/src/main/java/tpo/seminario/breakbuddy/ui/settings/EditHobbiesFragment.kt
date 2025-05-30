@@ -95,12 +95,9 @@ class EditHobbiesFragment : Fragment() {
                 text = hobby
                 isCheckable = true
                 isClickable = true
-                chipBackgroundColor = ContextCompat.getColorStateList(
-                    requireContext(), R.color.chip_selector
-                )
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                chipBackgroundColor = ContextCompat.getColorStateList(requireContext(), R.color.chip_selector)
+                setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.chip_text_selector))
                 setPadding(32, 16, 32, 16)
-
                 setOnCheckedChangeListener { _, _ ->
                     val seleccionados = chipList.count { it.isChecked }
                     if (seleccionados > 5) {
@@ -109,8 +106,16 @@ class EditHobbiesFragment : Fragment() {
                     }
                 }
             }
+            val layoutParams = ViewGroup.MarginLayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.setMargins(0, 0, 12, 0)
+            chip.layoutParams = layoutParams
+
             hobbiesContainer.addView(chip)
             chipList.add(chip)
+
         }
     }
 }
