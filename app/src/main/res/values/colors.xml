@@ -10,6 +10,9 @@
     <color name="neutro_claro">#FFFFFF</color>
     <color name="neutro_intermedio">#F6F6F6</color>
     <color name="neutro_oscuro">#145A58	</color>
+    <!--Blanco y Negro-->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <!--Iconos destacados, badges, microinteracciones-->
     <color name="acento">#F6AC2C</color>
     <!--Estados correctos, mensajes positivos, validaciones-->
@@ -18,6 +21,5 @@
     <color name="alerta">#F6AC2C</color>
     <color name="error">#E14444</color>
 
-    <!--Informacion-->
     <color name="info">#358B79</color>
 </resources>
