@@ -17,9 +17,19 @@
         android:title="Grupos" />
 
     <item
+        android:id="@+id/navigation_wheel"
+        android:icon="@drawable/ic_wheel_nav"
+        android:title="@string/title_wheel"/>
+
+
+    <!-- COMENTADO POR LÍMITE DE 5 ITEMS EN BOTTOM NAV -->
+
+    <!-- <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/baseline_notifications_24"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_notifications" /> -->
+
+     <!-- COMENTADO POR LÍMITE DE 5 ITEMS EN BOTTOM NAV -->
 
     <item
         android:id="@+id/accountSettingsFragment"

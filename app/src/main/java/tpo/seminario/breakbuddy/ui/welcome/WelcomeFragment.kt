@@ -22,7 +22,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.activity.result.contract.ActivityResultContracts
 import android.app.Activity
+import androidx.annotation.OptIn
 import androidx.media3.common.util.Log
+import androidx.media3.common.util.UnstableApi
 
 class WelcomeFragment : Fragment() {
 
@@ -135,6 +137,7 @@ class WelcomeFragment : Fragment() {
     }
 
 
+    @OptIn(UnstableApi::class)
     private fun firebaseAuthWithGoogle(idToken: String) {
         Log.d("WelcomeFragment", "¡Entré a firebaseAuthWithGoogle con token: $idToken")
         Toast.makeText(requireContext(),
@@ -150,23 +153,40 @@ class WelcomeFragment : Fragment() {
                     userRepo.ensureUserDocumentExists(user,
                         onSuccess = {
                             // 2) Recupera el perfil completo
-                            userRepo.getUserProfile(user.uid,
-                                onSuccess = { profile ->
-                                    // 3) ¿completó hobbies?
-                                    if (!profile.hobbiesCompletados) {
-                                        findNavController().navigate(
-                                            R.id.action_welcomeFragment_to_hobbiesFragment
-                                        )
-                                    } else {
-                                        findNavController().navigate(
-                                            R.id.action_welcomeFragment_to_navigation_dashboard
-                                        )
-                                    }
+                            userRepo.createUserDocument(
+                                user,
+                                onSuccess = {
+                                    // 2) Ahora que tenemos un documento Firestore, podemos recuperar su perfil completo:
+                                    userRepo.getUserProfile(
+                                        user.uid,
+                                        onSuccess = { profile ->
+                                            if (!profile.hobbiesCompletados) {
+                                                // Si no completó hobbies, llevamos a HobbiesFragment
+                                                findNavController().navigate(
+                                                    R.id.action_welcomeFragment_to_hobbiesFragment
+                                                )
+                                            } else {
+                                                // Si ya completó hobbies, vamos al dashboard
+                                                findNavController().navigate(
+                                                    R.id.action_welcomeFragment_to_navigation_dashboard
+                                                )
+                                            }
+                                        },
+                                        onFailure = { e ->
+                                            Toast.makeText(
+                                                requireContext(),
+                                                "Error cargando perfil: ${e.message}",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                        }
+                                    )
                                 },
                                 onFailure = { e ->
-                                    Toast.makeText(requireContext(),
-                                        "Error cargando perfil: ${e.message}",
-                                        Toast.LENGTH_LONG).show()
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Error creando/actualizando perfil: ${e.message}",
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 }
                             )
                         },

@@ -27,6 +27,7 @@ import tpo.seminario.breakbuddy.databinding.FragmentCreateGroupBinding
 import tpo.seminario.breakbuddy.util.HobbiesList
 import tpo.seminario.breakbuddy.util.Organization
 import tpo.seminario.breakbuddy.persistence.OrganizationRepository
+import tpo.seminario.breakbuddy.persistence.UserRepository
 
 
 class CreateGroupFragment : Fragment() {
@@ -40,6 +41,7 @@ class CreateGroupFragment : Fragment() {
     private lateinit var rbOrganization: RadioButton
     private lateinit var layoutOrg: TextInputLayout
     private lateinit var inputOrg: AutoCompleteTextView
+    private val userRepo = UserRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -115,7 +117,7 @@ class CreateGroupFragment : Fragment() {
         val emailsText = binding.inputEmails.text.toString().trim()
         val hobbyText = binding.inputHobby.text.toString().trim()
 
-        // Validar que el hobby seleccionado esté en la lista (si no está vacío)
+        // 1) Validar hobby si no está vacío…
         val hobby = if (hobbyText.isBlank()) {
             null
         } else if (HobbiesList.DEFAULT.contains(hobbyText)) {
@@ -125,54 +127,72 @@ class CreateGroupFragment : Fragment() {
             return
         }
 
-        // Validar entradas
+        // 2) Validar inputs básicos
         if (!validateInputs(name, emailsText)) {
             return
         }
 
-        // Procesar emails
-        val emails = processEmails(emailsText)
-        if (emails.isEmpty()) {
+        // 3) Procesar lista separada de emails (split, trim, filter, distinct, patrones)
+        val allEmails = processEmails(emailsText)
+        if (allEmails.isEmpty()) {
             showFieldError(binding.layoutEmails, "Debe ingresar al menos un email válido")
             return
         }
 
-
+        // 4) Determinar tipo (personal u organization) y orgName si aplica
         val type = if (rbOrganization.isChecked) "organization" else "personal"
         val orgName = binding.inputOrg.text.toString().trim()
-
         if (type == "organization" && orgName.isBlank()) {
             showFieldError(layoutOrg, "Debes indicar un nombre de organización")
             return
         }
 
-        // Primero: si es org, chequeá existencia por nombre:
-        if (type == "organization") {
-            FirebaseFirestore.getInstance()
-                .collection("organizations")
-                .whereEqualTo("name", orgName)
-                .get()
-                .addOnSuccessListener { snap ->
-                    val orgId = if (snap.isEmpty) {
-                        // Si no existe, crear una nueva:
-                        createOrganization(orgName) { newId ->
-                            actuallyCreateGroup(name, emails, hobby, type, newId)
+        // 5) ANTES DE CREAR, VERIFICAR QUE CADA EMAIL EXISTA EN FIRESTORE
+        //    → Si alguno NO existe, mostrar error y NO llamar a actuallyCreateGroup.
+        userRepo.validateEmailsExist(
+            emails = allEmails,
+            onComplete = { existents, notExistents ->
+                if (notExistents.isNotEmpty()) {
+                    // Hay correos inválidos/no registrados:
+                    val missing = notExistents.joinToString(separator = ", ")
+                    showErrorToast("Los siguientes emails NO están registrados: $missing")
+                    return@validateEmailsExist
+                }
+                // Si llegamos acá, TODOS los emails existen.
+                // 6) Si es tipo “organization”, reviso en Firestore “organizations/{name}”
+                if (type == "organization") {
+                    FirebaseFirestore.getInstance()
+                        .collection("organizations")
+                        .whereEqualTo("name", orgName)
+                        .get()
+                        .addOnSuccessListener { snap ->
+                            val orgId: String
+                            if (snap.isEmpty) {
+                                // 6a) Si no existe la org, la creamos, y continuamos con su ID:
+                                createOrganization(orgName) { newOrgId ->
+                                    actuallyCreateGroup(name, allEmails, hobby, type, newOrgId)
+                                }
+                                return@addOnSuccessListener
+                            } else {
+                                // 6b) Si existe, tomo el primer ID
+                                orgId = snap.documents.first().id
+                            }
+                            actuallyCreateGroup(name, allEmails, hobby, type, orgId)
                         }
-                        return@addOnSuccessListener
-                    } else {
-                        // Ya existe: tomá el ID del primero
-                        snap.documents.first().id
-                    }
-                    actuallyCreateGroup(name, emails, hobby, type, orgId)
+                        .addOnFailureListener { e ->
+                            showErrorToast("Error buscando organización: ${e.message}")
+                        }
+                } else {
+                    // 7) Si es tipo “personal”, simplemente sigo adelante
+                    actuallyCreateGroup(name, allEmails, hobby, type, null)
                 }
-                .addOnFailureListener {
-                    showErrorToast("Error buscando organización")
-                }
-        } else {
-            // tipo personal
-            actuallyCreateGroup(name, emails, hobby, type, null)
-        }
+            },
+            onError = { exception ->
+                showErrorToast("Error validando emails: ${exception.message}")
+            }
+        )
     }
+
 
 
 

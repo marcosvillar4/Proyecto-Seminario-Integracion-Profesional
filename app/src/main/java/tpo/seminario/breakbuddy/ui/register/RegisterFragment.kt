@@ -118,7 +118,6 @@ class RegisterFragment : Fragment() {
                                         // 3) Crea el documento Firestore
                                         userRepo.createUserDocument(
                                             user,
-                                            name,
                                             onSuccess = {
                                                 // 4) Envía email de verificación
                                                 user.sendEmailVerification()

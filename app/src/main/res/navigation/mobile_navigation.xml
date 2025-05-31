@@ -28,6 +28,11 @@
             app:destination="@id/hobbiesFragment"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id= "@+id/action_welcomeFragment_to_wheelFragment"
+            app:destination="@id/navigation_wheel"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -78,6 +83,11 @@
         <action
             android:id="@+id/action_loginFragment_to_hobbiesFragment"
             app:destination="@id/hobbiesFragment"/>
+        <action
+            android:id="@+id/action_loginFragment_to_wheelFragment"
+            app:destination="@id/navigation_wheel"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -123,6 +133,11 @@
         <action
             android:id="@+id/action_accountSettingsFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_wheelFragment"
+            app:destination="@id/navigation_wheel"/>
+
+
 
     </fragment>
 
@@ -183,5 +198,24 @@
         android:name="tpo.seminario.breakbuddy.ui.settings.EditProfileFragment"
         android:label="Editar perfil"
         tools:layout="@layout/fragment_edit_profile" />
+
+
+    <fragment
+        android:id="@+id/navigation_wheel"
+        android:name="tpo.seminario.breakbuddy.ui.wheel.WheelFragment"
+        android:label="@string/title_wheel"
+        tools:layout="@layout/fragment_wheel" >
+        <action
+            android:id="@+id/action_wheelFragment_to_accountSettingsFragment"
+            app:destination="@id/accountSettingsFragment" />
+        <action
+            android:id="@+id/action_wheelFragment_to_hobbiesFragment"
+            app:destination="@id/hobbiesFragment" />
+        <action
+            android:id="@+id/action_wheelFragment_to_dashboardFragment"
+            app:destination="@id/navigation_dashboard" />
+
+
+    </fragment>
 
 </navigation>

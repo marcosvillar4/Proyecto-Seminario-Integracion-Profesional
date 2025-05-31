@@ -6,6 +6,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.QuerySnapshot
 import java.util.Date
 
 // Modelo de datos de usuario
@@ -18,7 +19,8 @@ data class UserProfile(
     val lastLogin: Date? = null,
     val fcmToken: String? = null,
     val hobbiesCompletados: Boolean = false,
-    val hobbies: List<String> = emptyList()
+    val hobbies: List<String> = emptyList(),
+    val description: String? = null
 )
 
 class UserTokenRepository {
@@ -43,33 +45,41 @@ class UserRepository {
      */
     fun createUserDocument(
         user: FirebaseUser,
-        displayName: String,
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     ) {
         val userId = user.uid
         val userEmail = user.email ?: ""
+        val userName = user.displayName ?: ""
+        val userPhoto = user.photoUrl?.toString() ?: ""
 
-        val userData = hashMapOf(
-            "displayName" to displayName,
+        // Preparamos un mapa con los campos que queremos guardar/actualizar:
+        val userData = hashMapOf<String, Any>(
+            "displayName" to userName,
             "email" to userEmail,
-            "photoUrl" to (user.photoUrl?.toString() ?: ""),
-            // Timestamps del servidor para evitar desincronización de reloj
+            "photoUrl" to userPhoto,
+            // Si el documento no existía, queremos guardar createdAt:
             "createdAt" to FieldValue.serverTimestamp(),
+            // Siempre actualizamos lastLogin:
             "lastLogin" to FieldValue.serverTimestamp(),
-            "fcmToken"  to "",
-            "hobbiesCompletados" to false, // ← inicializamos en false para luego activarlo al rellenar los hobbies
-            "hobbies" to emptyList<String>()
-            )
+            "fcmToken" to "", // Inicializamos fcmToken como null
+            // Si quieres inicializar hobbiesCompletados = false:
+            "hobbiesCompletados" to false,
+            // Si deseas mantener campos vacíos por defecto:
+            "hobbies" to emptyList<String>(),
+            "description" to "",
 
+        )
+
+        // Hacemos un set con SetOptions.merge() para no sobrescribir
         usersCollection.document(userId)
-            .set(userData)
+            .set(userData, SetOptions.merge())
             .addOnSuccessListener {
-                Log.d(TAG, "Documento del usuario $userId creado con éxito.")
+                Log.d(TAG, "Documento del usuario $userId creado/actualizado con éxito.")
                 onSuccess()
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error al crear documento del usuario $userId.", e)
+                Log.w(TAG, "Error creando/actualizando documento del usuario $userId.", e)
                 onFailure(e)
             }
     }
@@ -122,7 +132,8 @@ class UserRepository {
                         lastLogin = doc.getTimestamp("lastLogin")?.toDate(),
                         fcmToken = data["fcmToken"] as? String,    // <-- mapeo de fcmToken
                         hobbiesCompletados = data["hobbiesCompletados"] as? Boolean ?: false,
-                        hobbies = data["hobbies"] as? List<String> ?: emptyList()
+                        hobbies = data["hobbies"] as? List<String> ?: emptyList(),
+                        description = data["description"] as? String ?: ""
                     )
                     onSuccess(profile)
                 } else {
@@ -172,5 +183,76 @@ class UserRepository {
                 }
             }
             .addOnFailureListener(onFailure)
+    }
+
+    fun updateUserProfile(
+        userId: String,
+        newName: String,
+        newDescription: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val data = hashMapOf<String, Any>(
+            "displayName" to newName,
+            "description" to newDescription
+        )
+        usersCollection.document(userId)
+            .set(data, SetOptions.merge())   // merge para no borrar los demás campos
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { e -> onFailure(e) }
+    }
+
+    fun validateEmailsExist(
+        emails: List<String>,
+        onComplete: (existents: List<String>, notExistents: List<String>) -> Unit,
+        onError: (Exception) -> Unit
+    ) {
+        if (emails.isEmpty()) {
+            // Si la lista está vacía, devolvemos listas vacías inmediatamente
+            onComplete(emptyList(), emptyList())
+            return
+        }
+
+        // Firestore limit: dondeIn máximo 10 valores. Si emails.size > 10, hay que particionar.
+        val partitions: List<List<String>> = if (emails.size <= 10) {
+            listOf(emails)
+        } else {
+            // Dividir en grupos de 10
+            emails.chunked(10)
+        }
+
+        val existentsMutable = mutableSetOf<String>()   // para recolectar emails encontrados
+        val notExistentsMutable = mutableSetOf<String>()// para recolectar emails no encontrados
+
+        // Llenamos inicialmente notExistentsMutable = todos los emails; luego eliminamos los que encontremos:
+        notExistentsMutable.addAll(emails)
+
+        // Contador de “peticiones pendientes” para saber cuándo finalizamos todas las sub-queries
+        var pendingQueries = partitions.size
+
+        for (batch in partitions) {
+            usersCollection
+                .whereIn("email", batch)
+                .get()
+                .addOnSuccessListener { snapshot: QuerySnapshot ->
+                    // 1) Por cada documento => extraer el campo email
+                    for (doc in snapshot.documents) {
+                        val foundEmail = doc.getString("email")
+                        if (foundEmail != null) {
+                            existentsMutable.add(foundEmail)
+                            notExistentsMutable.remove(foundEmail)
+                        }
+                    }
+                    pendingQueries -= 1
+                    if (pendingQueries == 0) {
+                        // Todas las sub-queries han finalizado => devolvemos resultado
+                        onComplete(existentsMutable.toList(), notExistentsMutable.toList())
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    // Si alguna falla, podemos abortar todo
+                    onError(exception)
+                }
+        }
     }
 }

@@ -57,6 +57,14 @@ dependencies {
 
 
 
+    implementation ("com.github.mmoamenn:LuckyWheel_Android:0.3.0")
+
+
+
+    implementation ("com.google.android.material:material:1.12.0") // Use the latest version
+    // ... other dependencies
+
+
 
     implementation (libs.play.services.auth.v2101)
 

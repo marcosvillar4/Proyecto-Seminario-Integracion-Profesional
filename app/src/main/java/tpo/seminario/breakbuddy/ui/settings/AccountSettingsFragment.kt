@@ -5,16 +5,25 @@ import tpo.seminario.breakbuddy.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import tpo.seminario.breakbuddy.databinding.FragmentAccountSettingsBinding
+import tpo.seminario.breakbuddy.persistence.UserProfile
+import tpo.seminario.breakbuddy.persistence.UserRepository
 
 class AccountSettingsFragment : Fragment(){
     private var _binding: FragmentAccountSettingsBinding? = null;
     private val binding get() = _binding!!
+
+    // 1) Instancia de FirebaseAuth
+    private val auth = FirebaseAuth.getInstance()
+
+    // 2) Instancia del repositorio de usuarios
+    private val userRepo = UserRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,10 +36,6 @@ class AccountSettingsFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
-        //Saludo fragmento settings
-        val user = FirebaseAuth.getInstance().currentUser
-        val nombre = user?.displayName ?: "usuario"
-        binding.textGreeting.text = "¡Hola, $nombre!"
 
 
         Glide.with(this)
@@ -70,8 +75,46 @@ class AccountSettingsFragment : Fragment(){
             )
 
     }
+        fetchAndShowUserName()
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        // Cada vez que el fragmento vuelve a aparecer (por ejemplo tras EditProfile), recargamos el nombre
+        fetchAndShowUserName()
+    }
+
+    private fun fetchAndShowUserName() {
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            binding.textGreeting.text = "¡Hola, usuario!"
+            return
+        }
+
+        // Leer del documento Firestore → users/{userId}
+        userRepo.getUserProfile(
+            currentUser.uid,
+            onSuccess = { profile: UserProfile ->
+                // Cuando tengamos el profile, mostramos el displayName
+                val nombre = if (profile.displayName.isNotBlank()) {
+                    profile.displayName
+                } else {
+                    "usuario"
+                }
+                binding.textGreeting.text = "¡Hola, $nombre!"
+            },
+            onFailure = { exception ->
+                // Si falla, igual mostramos algo
+                binding.textGreeting.text = "¡Hola, usuario!"
+                Toast.makeText(
+                    requireContext(),
+                    "Error cargando nombre: ${exception.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        )
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
