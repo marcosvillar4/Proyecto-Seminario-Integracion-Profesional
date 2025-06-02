@@ -36,7 +36,10 @@ class TestMBIFragment : Fragment() {
     private lateinit var txtPregunta: TextView
     private lateinit var opciones: RadioGroup
     private lateinit var btnSiguiente: Button
-    private lateinit var txtResultado: TextView
+    private lateinit var txtAgotamiento: TextView
+    private lateinit var txtDespersonalizacion: TextView
+    private lateinit var txtRealizacion: TextView
+    private lateinit var txtImpacto: TextView
     private lateinit var cardResultado: MaterialCardView
 
     override fun onCreateView(
@@ -51,7 +54,10 @@ class TestMBIFragment : Fragment() {
         txtPregunta = view.findViewById(R.id.txtPregunta)
         opciones = view.findViewById(R.id.radioGroupOpciones)
         btnSiguiente = view.findViewById(R.id.btnSiguiente)
-        txtResultado = view.findViewById(R.id.txtResultado)
+        txtAgotamiento = view.findViewById(R.id.txtAgotamiento)
+        txtDespersonalizacion = view.findViewById(R.id.txtDespersonalizacion)
+        txtRealizacion = view.findViewById(R.id.txtRealizacion)
+        txtImpacto = view.findViewById(R.id.txtImpacto)
         cardResultado = view.findViewById(R.id.cardResultado)
 
         mostrarPregunta()
@@ -86,30 +92,18 @@ class TestMBIFragment : Fragment() {
         val realizacion = respuestas.slice(4..5).sum()
         val impacto = respuestas[6]
 
-
         val nivelAgotamiento = categorizar(agotamiento, listOf(4, 8))
         val nivelDespersonalizacion = categorizar(despersonalizacion, listOf(3, 6))
         val nivelRealizacion = categorizarInvertido(realizacion, listOf(3, 6))
 
-        val resumen = """
-            Nivel de agotamiento emocional: $nivelAgotamiento
-            Nivel de despersonalización: $nivelDespersonalizacion
-            Nivel de realización personal: $nivelRealizacion
-            Impacto en vida personal: $impacto/6
-        """.trimIndent()
+        txtAgotamiento.text = "Agotamiento emocional: $nivelAgotamiento"
+        txtDespersonalizacion.text = "Despersonalización: $nivelDespersonalizacion"
+        txtRealizacion.text = "Realización personal: $nivelRealizacion"
+        txtImpacto.text = "Impacto en vida personal: $impacto/6"
 
-        txtResultado.text = resumen
-
-        val color = when (nivelAgotamiento) {
-            "Bajo" -> R.color.teal_200
-            "Moderado" -> R.color.orange_500
-            "Alto" -> R.color.red_500
-            else -> android.R.color.white
-        }
-
-        cardResultado.setCardBackgroundColor(requireContext().getColor(color))
         cardResultado.visibility = View.VISIBLE
     }
+
 
     private fun categorizar(valor: Int, cortes: List<Int>): String {
         return when {

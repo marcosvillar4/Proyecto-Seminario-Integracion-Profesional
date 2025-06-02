@@ -15,7 +15,6 @@
         android:contentDescription="Logo de la app"
         android:layout_marginBottom="24dp" />
 
-
     <TextView
         android:id="@+id/txtPregunta"
         android:layout_width="match_parent"
@@ -34,32 +33,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nunca"
-            android:buttonTint="@color/radio_selector_exito"
-            />
+            android:buttonTint="@color/radio_selector_exito" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pocas veces"
-            android:buttonTint="@color/radio_selector_exito"
-            />
+            android:buttonTint="@color/radio_selector_exito" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="A veces"
-            android:buttonTint="@color/radio_selector_exito"
-            />
+            android:buttonTint="@color/radio_selector_exito" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Frecuentemente"
-            android:buttonTint="@color/radio_selector_exito"
-            />
+            android:buttonTint="@color/radio_selector_exito" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Siempre"
-            android:buttonTint="@color/radio_selector_exito"
-            />
+            android:buttonTint="@color/radio_selector_exito" />
     </RadioGroup>
 
     <com.google.android.material.card.MaterialCardView
@@ -69,7 +63,8 @@
         android:layout_margin="24dp"
         android:visibility="gone"
         app:cardCornerRadius="16dp"
-        app:cardElevation="8dp">
+        app:cardElevation="8dp"
+        android:backgroundTint="@color/neutro_claro">
 
         <LinearLayout
             android:orientation="vertical"
@@ -78,13 +73,45 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/txtResultado"
-                android:layout_width="match_parent"
+                android:id="@+id/txtTituloResultado"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="🧾 Resultado del Test MBI"
                 android:textSize="18sp"
-                android:lineSpacingExtra="8dp"
+                android:textStyle="bold"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"/>
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/txtAgotamiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/txtDespersonalizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/txtRealizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/txtImpacto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -95,5 +122,5 @@
         android:text="Siguiente"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/green_500"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white" />
 </LinearLayout>
