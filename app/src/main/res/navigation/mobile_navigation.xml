@@ -58,9 +58,23 @@
         android:name="tpo.seminario.breakbuddy.ui.groups.GroupsFragment"
         android:label="@string/title_groups"
         tools:layout="@layout/fragment_groups" >
-            <action
-                android:id="@+id/action_navigation_groups_to_createGroupFragment"
-                app:destination="@id/createGroupFragment" />
+
+        <action
+            android:id="@+id/action_navigation_groups_to_createGroupFragment"
+            app:destination="@id/createGroupFragment" />
+
+        <!-- AGREGAR ESTA ACCIÓN CON EL ID EXACTO -->
+        <action
+            android:id="@+id/action_groupsFragment_to_groupsListFragment"
+            app:destination="@id/groupsListFragment" />
+
+        <action
+            android:id="@+id/action_navigation_groups_to_groupDetailsFragment"
+            app:destination="@id/groupDetailsFragment">
+            <argument
+                android:name="groupId"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
@@ -237,5 +251,34 @@
         android:name="tpo.seminario.breakbuddy.ui.challenge.ChallengeFragment"
         android:label="Desafío"
         tools:layout="@layout/fragment_challenge" />
+
+    <fragment
+        android:id="@+id/groupsListFragment"
+        android:name="tpo.seminario.breakbuddy.ui.groups.GroupsListFragment"
+        android:label="Mis Grupos">
+
+        <action
+            android:id="@+id/action_groupsList_to_createGroup"
+            app:destination="@id/createGroupFragment" />
+
+        <action
+            android:id="@+id/action_groupsList_to_groupDetails"
+            app:destination="@id/groupDetailsFragment">
+            <argument
+                android:name="groupId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <!-- Fragment de detalles del grupo -->
+    <fragment
+        android:id="@+id/groupDetailsFragment"
+        android:name="tpo.seminario.breakbuddy.ui.groups.GroupDetailsFragment"
+        android:label="Detalles del Grupo"
+        tools:layout="@layout/fragment_group_details">
+        <argument
+            android:name="groupId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

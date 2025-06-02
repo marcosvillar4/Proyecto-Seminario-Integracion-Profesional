@@ -28,6 +28,7 @@ import tpo.seminario.breakbuddy.util.HobbiesList
 import tpo.seminario.breakbuddy.util.Organization
 import tpo.seminario.breakbuddy.persistence.OrganizationRepository
 import tpo.seminario.breakbuddy.persistence.UserRepository
+import tpo.seminario.breakbuddy.util.groups.GroupCreationState
 
 
 class CreateGroupFragment : Fragment() {

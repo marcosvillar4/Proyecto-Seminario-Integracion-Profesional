@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <!-- Avatar del miembro -->
+    <ImageView
+        android:id="@+id/imageMemberAvatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/circle_background_green"
+        android:contentDescription="Avatar del miembro"
+        android:padding="8dp"
+        android:src="@drawable/ic_persona"
+        app:tint="@color/white" />
+
+    <!-- Información del miembro -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Nombre del miembro -->
+        <TextView
+            android:id="@+id/textMemberName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/neutro_oscuro"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Juan Pérez" />
+
+        <!-- Email del miembro -->
+        <TextView
+            android:id="@+id/textMemberEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/gray_300"
+            android:textSize="14sp"
+            tools:text="juan.perez@email.com" />
+
+    </LinearLayout>
+
+    <!-- Chip de administrador -->
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipOwner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="Admin"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:chipBackgroundColor="@color/acento"
+        app:chipCornerRadius="12dp"
+        app:chipMinHeight="24dp"
+        tools:visibility="visible" />
+
+</LinearLayout>

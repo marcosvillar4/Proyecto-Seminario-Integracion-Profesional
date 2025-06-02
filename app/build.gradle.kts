@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     id("com.google.gms.google-services")
+    id ("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -79,6 +80,8 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.play.services.ads.api)
     implementation(libs.androidx.media3.common.ktx)
+    implementation(libs.room)
+    implementation(libs.swiperefreshlayout)
     kapt(libs.compiler)
 
     //AndroidX y Material

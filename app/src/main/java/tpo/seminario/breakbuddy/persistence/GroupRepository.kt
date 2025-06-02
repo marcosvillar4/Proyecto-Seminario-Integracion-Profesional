@@ -3,7 +3,7 @@ package tpo.seminario.breakbuddy.persistence
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import tpo.seminario.breakbuddy.util.Group
+import tpo.seminario.breakbuddy.util.groups.Group
 import java.util.UUID
 import kotlin.random.Random
 

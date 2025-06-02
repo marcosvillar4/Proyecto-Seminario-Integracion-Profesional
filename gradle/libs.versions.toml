@@ -27,6 +27,8 @@ playServicesAuth = "21.3.0"
 playServicesAdsApi = "24.3.0"
 playServicesAuthVersion = "20.5.0"
 media3CommonKtx = "1.7.1"
+roomRuntimeAndroid = "2.7.1"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -58,6 +60,10 @@ play-services-ads-api = { group = "com.google.android.gms", name = "play-service
 play-services-auth-v2050 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
 androidx-media3-common-ktx = { group = "androidx.media3", name = "media3-common-ktx", version.ref = "media3CommonKtx" }
 play-services-auth-v2101 = { module = "com.google.android.gms:play-services-auth", version.ref = "googlePlayServicesAuth" }
+room = { group = "androidx.room", name = "room-runtime", version = "2.6.1" }
+swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version = "1.1.0" }
+androidx-room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomRuntimeAndroid" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
