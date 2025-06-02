@@ -7,23 +7,18 @@
     android:padding="24dp"
     tools:context=".ui.wheel.WheelFragment">
 
-    <!-- 1) La ruleta (LuckyWheel) -->
+    <!-- 1) La ruleta (LuckyWheel)A -->
     <com.bluehomestudio.luckywheel.LuckyWheel
         android:id="@+id/lwv"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btnSpin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:background_color="@color/green_200"
-        app:image_padding="16dp" />
+        app:image_padding="32dp" />
     <!-- Fondo de la rueda -->
-
-
-    <!-- Padding para iconos/textos dentro de cada sección -->
-
-    <!-- No requerimos arrow_image explícita (usa default) -->
 
     <!-- 2) Botón “Girar” -->
     <Button
@@ -42,8 +37,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/btnSpin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
