@@ -109,6 +109,7 @@ class CreateGroupFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
+            if (state == null) return@observe   // Si acaso, ignoramos null
             updateUI(state)
         }
     }

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import tpo.seminario.breakbuddy.persistence.GroupRepository
 import tpo.seminario.breakbuddy.util.groups.GroupCreationState
 import tpo.seminario.breakbuddy.util.groups.GroupsListState
 import tpo.seminario.breakbuddy.util.groups.MembershipStatus
@@ -20,12 +21,94 @@ class GroupsViewModel : ViewModel() {
     private val _uiState = MutableLiveData<GroupCreationState>()
     val uiState: LiveData<GroupCreationState> = _uiState
 
+    init {
+        // Asignamos un estado inicial no nulo
+        _uiState.value = GroupCreationState(
+            isLoading = false,
+            isSuccess = false,
+            errorMessage = null,
+            groupCode = null
+        )
+    }
+
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
+    private val repo = GroupRepository()
 
     // Función existente para crear grupos...
+
+    // REEMPLAZAR la función createGroup con esta versión mejorada:
     fun createGroup(name: String, emails: List<String>, hobby: String?, type: String, orgId: String?) {
-        // Tu implementación existente aquí
+        // Validar inputs antes de proceder
+        if (!validateInputs(name, emails)) return
+
+
+        // Establecer estado de carga
+        // Opción A: Forzar a partir del estado actual, pero si es null, creamos uno nuevo
+        _uiState.value = _uiState.value?.copy(isLoading = true, errorMessage = null)
+            ?: GroupCreationState(isLoading = true, isSuccess = false, errorMessage = null, groupCode = null)
+
+
+        repo.createGroup(
+            name = name,
+            emails = emails,
+            hobby = hobby,
+            type = type,
+            orgId = orgId,
+            onSuccess = { groupCode ->
+                _uiState.value = GroupCreationState(
+                    isLoading = false,
+                    isSuccess = true,
+                    errorMessage = null,
+                    groupCode = groupCode
+                )
+            },
+            onFailure = { errorMessage ->
+                _uiState.value = GroupCreationState(
+                    isLoading = false,
+                    isSuccess = false,
+                    errorMessage = errorMessage,
+                    groupCode = null
+                )
+            }
+        )
+    }
+
+    // AGREGAR esta nueva función de validación:
+    private fun validateInputs(name: String, emails: List<String>): Boolean {
+        when {
+            name.isBlank() -> {
+                _uiState.value = _uiState.value?.copy(
+                    errorMessage = "El nombre del grupo es obligatorio"
+                )
+                return false
+            }
+            name.length < 3 -> {
+                _uiState.value = _uiState.value?.copy(
+                    errorMessage = "El nombre debe tener al menos 3 caracteres"
+                )
+                return false
+            }
+            name.length > 50 -> {
+                _uiState.value = _uiState.value?.copy(
+                    errorMessage = "El nombre no puede exceder 50 caracteres"
+                )
+                return false
+            }
+            emails.isEmpty() -> {
+                _uiState.value = _uiState.value?.copy(
+                    errorMessage = "Debe agregar al menos un email"
+                )
+                return false
+            }
+            emails.size > 20 -> {
+                _uiState.value = _uiState.value?.copy(
+                    errorMessage = "No se pueden agregar más de 20 miembros"
+                )
+                return false
+            }
+        }
+        return true
     }
 
     // NUEVAS FUNCIONES PARA LISTAR GRUPOS:
