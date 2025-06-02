@@ -1,6 +1,7 @@
 package tpo.seminario.breakbuddy.ui.challenge
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,12 @@ import androidx.navigation.fragment.findNavController
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentChallengeBinding
 import tpo.seminario.breakbuddy.util.DesafioGamificado
-import android.os.CountDownTimer
 
 class ChallengeFragment : Fragment() {
 
     private var _binding: FragmentChallengeBinding? = null
     private val binding get() = _binding!!
+
     private val desafios = mapOf(
         "Descanso 5’" to DesafioGamificado(
             nombre = "Descanso 5’",
@@ -61,7 +62,6 @@ class ChallengeFragment : Fragment() {
         )
     )
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,14 +83,20 @@ class ChallengeFragment : Fragment() {
 
         if (desafio.requiereTemporizador) {
             binding.tvTemporizador.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
+            binding.progressBar.max = desafio.duracionSegundos
+            binding.progressBar.progress = 0
 
             object : CountDownTimer(desafio.duracionSegundos * 1000L, 1000L) {
                 override fun onTick(millisUntilFinished: Long) {
-                    val minutos = (millisUntilFinished / 1000) / 60
-                    val segundos = (millisUntilFinished / 1000) % 60
+                    val segundosRestantes = (millisUntilFinished / 1000).toInt()
+                    val segundosPasados = desafio.duracionSegundos - segundosRestantes
+                    binding.progressBar.progress = segundosPasados
+
+                    val minutos = segundosRestantes / 60
+                    val segundos = segundosRestantes % 60
                     val tiempoRestante = String.format("%02d:%02d", minutos, segundos)
 
-                    // Animación rápida (efecto parpadeo leve)
                     binding.tvTemporizador.animate().scaleX(1.1f).scaleY(1.1f).setDuration(100).withEndAction {
                         binding.tvTemporizador.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
                     }.start()
@@ -101,12 +107,14 @@ class ChallengeFragment : Fragment() {
                 override fun onFinish() {
                     binding.tvTemporizador.text = "¡Tiempo cumplido!"
                     binding.btnCompletar.isEnabled = true
+                    binding.progressBar.progress = binding.progressBar.max
                 }
             }.start()
 
             binding.btnCompletar.isEnabled = false
         } else {
             binding.tvTemporizador.visibility = View.GONE
+            binding.progressBar.visibility = View.GONE
             binding.btnCompletar.isEnabled = true
         }
 
@@ -115,7 +123,6 @@ class ChallengeFragment : Fragment() {
             findNavController().navigateUp()
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
