@@ -17,6 +17,7 @@
         android:layout_marginTop="28dp"
         android:gravity="center"
         android:text="Crear Nuevo Grupo"
+        style="@style/TextAppearance.App.TitleMedium"
         android:textColor="@color/neutro_oscuro"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -31,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Se generará un código único que podrás compartir con otros usuarios para que se unan al grupo."
+        style="@style/TextAppearance.App.Auxiliary"
         android:textColor="@color/green_500"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +48,7 @@
         android:backgroundTint="@color/green_200"
         android:minHeight="48dp"
         android:text="Crear Grupo"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:inputType="textEmailAddress"
+            style="@style/TextAppearance.App.SubtitleMedium"
             android:maxLines="1"
             android:textColor="@color/neutro_oscuro" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,6 +98,7 @@
             android:id="@+id/inputHobby"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            style="@style/TextAppearance.App.SubtitleMedium"
             android:inputType="none"
             android:textColor="@color/neutro_oscuro"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -105,6 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="* Campos obligatorios"
+        style="@style/TextAppearance.App.Auxiliary"
         android:textColor="@color/alerta"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,6 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:inputType="textCapWords"
+            style="@style/TextAppearance.App.SubtitleMedium"
             android:maxLength="50"
             android:textColor="@color/neutro_oscuro" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -148,18 +155,19 @@
 
         <RadioButton
             android:id="@+id/rbPersonal"
-            style="@style/Widget.MaterialComponents.CompoundButton.RadioButton"
+            style="@style/TextAppearance.App.Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
             android:text="Personal"
+
             android:buttonTint="@color/contrast_selector"
             android:textColor="@color/contrast_selector"/>
 
         <RadioButton
             android:id="@+id/rbOrganization"
-            style="@style/Widget.MaterialComponents.CompoundButton.RadioButton"
+            style="@style/TextAppearance.App.Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

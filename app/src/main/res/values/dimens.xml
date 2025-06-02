@@ -2,4 +2,18 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Títulos grandes -->
+    <dimen name="text_size_title_large">24sp</dimen>
+    <dimen name="text_size_title_medium">22sp</dimen>
+
+    <!-- Subtítulos o labels -->
+    <dimen name="text_size_subtitle_large">18sp</dimen>
+    <dimen name="text_size_subtitle_medium">16sp</dimen>
+
+    <!-- Texto de cuerpo -->
+    <dimen name="text_size_body">14sp</dimen>
+
+    <!-- Texto auxiliar / notas -->
+    <dimen name="text_size_auxiliary">12sp</dimen>
 </resources>

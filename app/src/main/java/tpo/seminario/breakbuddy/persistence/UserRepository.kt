@@ -40,6 +40,61 @@ class UserRepository {
     private val usersCollection = db.collection("users")
     private val TAG = "UserRepository"
 
+
+    /**
+     *  Asegura que exista el documento de usuario.
+     *  Si no existe, lo crea con los valores básicos. Si ya existe, solo actualiza lastLogin.
+     */
+    fun ensureUserDocumentExistsOrCreate(
+        user: FirebaseUser,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = user.uid
+        usersCollection.document(userId)
+            .get()
+            .addOnSuccessListener { doc ->
+                if (doc.exists()) {
+                    // El documento ya existía, solo actualizamos lastLogin
+                    val updateData = mapOf("lastLogin" to FieldValue.serverTimestamp())
+                    usersCollection.document(userId)
+                        .set(updateData, SetOptions.merge())
+                        .addOnSuccessListener {
+                            onSuccess()
+                        }
+                        .addOnFailureListener { e ->
+                            onFailure(e)
+                        }
+                } else {
+                    // No existía: lo creamos completamente desde cero
+                    val userEmail = user.email ?: ""
+                    val userData = hashMapOf(
+                        "displayName" to (user.displayName ?: ""),
+                        "email" to userEmail,
+                        "photoUrl" to (user.photoUrl?.toString() ?: ""),
+                        "createdAt" to FieldValue.serverTimestamp(),
+                        "lastLogin" to FieldValue.serverTimestamp(),
+                        "fcmToken"  to "",
+                        "hobbiesCompletados" to false,
+                        "hobbies" to emptyList<String>(),
+                        "orgID" to null
+                    )
+                    usersCollection.document(userId)
+                        .set(userData)
+                        .addOnSuccessListener {
+                            onSuccess()
+                        }
+                        .addOnFailureListener { e ->
+                            onFailure(e)
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                onFailure(e)
+                Log.w(TAG, "Error obteniendo documento del usuario $userId.", e)
+            }
+    }
+
     /**
      * Crea un nuevo documento para un usuario recién registrado.
      */

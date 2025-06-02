@@ -22,6 +22,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="Pregunta"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:layout_marginBottom="24dp" />
 
     <RadioGroup
@@ -33,26 +34,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nunca"
+            style="@style/TextAppearance.App.Body"
             android:buttonTint="@color/radio_selector_exito" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pocas veces"
+            style="@style/TextAppearance.App.Body"
             android:buttonTint="@color/radio_selector_exito" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="A veces"
+            style="@style/TextAppearance.App.Body"
             android:buttonTint="@color/radio_selector_exito" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Frecuentemente"
+            style="@style/TextAppearance.App.Body"
             android:buttonTint="@color/radio_selector_exito" />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Siempre"
+            style="@style/TextAppearance.App.Body"
             android:buttonTint="@color/radio_selector_exito" />
     </RadioGroup>
 
@@ -120,6 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Siguiente"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/green_500"
         android:textColor="@android:color/white" />
