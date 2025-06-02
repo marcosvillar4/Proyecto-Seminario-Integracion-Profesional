@@ -14,10 +14,20 @@ class TestMBIFragment : Fragment() {
 
     private val preguntas = listOf(
         "Me siento emocionalmente agotado por mi trabajo.",
-        "Siento que trato a algunos pacientes/clientes como si fueran objetos.",
         "Siento que trabajar todo el día con personas me cansa.",
-        "Tengo la sensación de que afecta negativamente mi vida personal.",
-        "Siento que he logrado muchas cosas valiosas en mi trabajo."
+        "Siento que estoy al límite de lo que puedo dar emocionalmente.",
+        "Me siento quemado/a por mi trabajo.",
+
+        "Siento que trato a algunas personas como si fueran objetos.",
+        "He notado que me he vuelto más insensible con la gente desde que hago este trabajo.",
+        "Me preocupa que este trabajo me esté volviendo menos empático/a.",
+
+        "Siento que he logrado muchas cosas valiosas en mi trabajo.",
+        "Tengo la sensación de que soy una persona eficaz en mi puesto.",
+        "Creo que influyo positivamente en la vida de otras personas con mi trabajo.",
+
+        "Tengo la sensación de que mi trabajo interfiere con mi vida personal.",
+        "Me cuesta descansar adecuadamente por culpa del estrés laboral."
     )
 
     private var indiceActual = 0
