@@ -16,6 +16,8 @@ import com.google.android.gms.ads.LoadAdError
 import tpo.seminario.breakbuddy.databinding.FragmentHomeBinding
 import tpo.seminario.breakbuddy.R
 import com.google.android.gms.ads.AdRequest
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 
 class HomeFragment : Fragment() {
 
@@ -34,17 +36,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return binding.root
     }
 
     // 2) Carga el banner en onViewCreated
@@ -66,6 +59,11 @@ class HomeFragment : Fragment() {
                     adView.loadAd(AdRequest.Builder().build())
                 }, retryDelayMs)
             }
+        }
+
+        val btnTestMBI = view.findViewById<Button>(R.id.btnRealizarTestMBI)
+        btnTestMBI.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_testMBIFragment)
         }
 
         // Primera carga

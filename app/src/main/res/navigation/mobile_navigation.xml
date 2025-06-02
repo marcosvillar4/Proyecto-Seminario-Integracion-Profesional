@@ -40,7 +40,12 @@
         android:id="@+id/navigation_home"
         android:name="tpo.seminario.breakbuddy.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_testMBIFragment"
+            app:destination="@id/testMBIFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -217,5 +222,11 @@
 
 
     </fragment>
+
+    <fragment
+        android:id="@+id/testMBIFragment"
+        android:name="tpo.seminario.breakbuddy.ui.test.TestMBIFragment"
+        android:label="Test MBI"
+        tools:layout="@layout/fragment_test_mbi" />
 
 </navigation>

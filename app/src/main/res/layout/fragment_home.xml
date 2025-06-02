@@ -7,19 +7,57 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTestMBI"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginHorizontal="24dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/adViewBanner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/titleTestMBI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Qué es el Test MBI?"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/descTestMBI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Es una herramienta validada que mide tu nivel actual de burnout en 3 dimensiones: agotamiento, despersonalización y realización personal."
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnRealizarTestMBI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Realizar TEST MBI"
+                android:backgroundTint="@color/green_500"
+                android:textColor="@android:color/white"
+                app:cornerRadius="8dp"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <!-- 2) Guideline para el banner -->
     <androidx.constraintlayout.widget.Guideline
