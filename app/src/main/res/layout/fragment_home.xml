@@ -51,7 +51,7 @@
                 android:id="@+id/btnRealizarTestMBI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Realizar TEST MBI"
+                android:text="Realizar TEST"
                 android:backgroundTint="@color/green_500"
                 android:textColor="@android:color/white"
                 style="@style/TextAppearance.App.SubtitleMedium"
