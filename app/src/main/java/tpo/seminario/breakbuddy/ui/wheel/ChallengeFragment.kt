@@ -16,12 +16,13 @@ class ChallengeFragment : Fragment() {
 
     private var _binding: FragmentChallengeBinding? = null
     private val binding get() = _binding!!
+    private var temporizador: CountDownTimer? = null
 
     private val desafios = mapOf(
         "Descanso 5’" to DesafioGamificado(
             nombre = "Descanso 5’",
             instruccion = "Poné el celular a un lado y relajate 5 minutos.",
-            recompensa = "+10 puntos",
+            recompensa = 10,
             iconoResId = R.drawable.ic_timer,
             requiereTemporizador = true,
             duracionSegundos = 300
@@ -29,19 +30,19 @@ class ChallengeFragment : Fragment() {
         "Hidratarte" to DesafioGamificado(
             nombre = "Hidratarte",
             instruccion = "Tomate un vaso de agua y recargá energías.",
-            recompensa = "+10 puntos",
+            recompensa = 10,
             iconoResId = R.drawable.ic_water
         ),
         "Estiramiento" to DesafioGamificado(
             nombre = "Estiramiento",
             instruccion = "Estirá cuello, espalda y piernas por 1 minuto.",
-            recompensa = "+10 puntos",
+            recompensa = 10,
             iconoResId = R.drawable.ic_stretch
         ),
         "Caminar" to DesafioGamificado(
             nombre = "Caminar",
             instruccion = "Caminá al menos 2 minutos por tu espacio.",
-            recompensa = "+10 puntos",
+            recompensa = 10,
             iconoResId = R.drawable.ic_walk,
             requiereTemporizador = true,
             duracionSegundos = 120
@@ -49,7 +50,7 @@ class ChallengeFragment : Fragment() {
         "Meditación" to DesafioGamificado(
             nombre = "Meditación",
             instruccion = "Respirá profundo durante 3 minutos.",
-            recompensa = "+10 puntos",
+            recompensa = 10,
             iconoResId = R.drawable.ic_meditate,
             requiereTemporizador = true,
             duracionSegundos = 180
@@ -57,7 +58,7 @@ class ChallengeFragment : Fragment() {
         "Respirar" to DesafioGamificado(
             nombre = "Respirar",
             instruccion = "Hacé 5 respiraciones profundas y conscientes.",
-            recompensa = "+10 puntos",
+            recompensa = 10,
             iconoResId = R.drawable.ic_breath
         )
     )
@@ -74,6 +75,7 @@ class ChallengeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val respin = arguments?.getBoolean("respin", false) ?: false
         val nombre = arguments?.getString("nombre") ?: return
         val desafio = desafios[nombre] ?: return
 
@@ -81,13 +83,22 @@ class ChallengeFragment : Fragment() {
         binding.tvInstruccion.text = desafio.instruccion
         binding.imgDesafio.setImageResource(desafio.iconoResId)
 
+        if (respin) {
+            binding.tvInstruccion.text = "${desafio.instruccion}\n\n⚠️ Este desafío fue obtenido con Re-spin y otorga la mitad de puntos."
+            binding.btnCompletar.setBackgroundTintList(
+                resources.getColorStateList(R.color.alerta, null)
+            )
+            binding.btnCompletar.text = "Aceptar (Re-spin)"
+        }
+
         if (desafio.requiereTemporizador) {
             binding.tvTemporizador.visibility = View.VISIBLE
             binding.progressBar.visibility = View.VISIBLE
             binding.progressBar.max = desafio.duracionSegundos
             binding.progressBar.progress = 0
 
-            object : CountDownTimer(desafio.duracionSegundos * 1000L, 1000L) {
+            temporizador?.cancel() // cancelación previa
+            temporizador = object : CountDownTimer(desafio.duracionSegundos * 1000L, 1000L) {
                 override fun onTick(millisUntilFinished: Long) {
                     val segundosRestantes = (millisUntilFinished / 1000).toInt()
                     val segundosPasados = desafio.duracionSegundos - segundosRestantes
@@ -109,7 +120,7 @@ class ChallengeFragment : Fragment() {
                     binding.btnCompletar.isEnabled = true
                     binding.progressBar.progress = binding.progressBar.max
                 }
-            }.start()
+            }.also { it.start() }
 
             binding.btnCompletar.isEnabled = false
         } else {
@@ -119,13 +130,15 @@ class ChallengeFragment : Fragment() {
         }
 
         binding.btnCompletar.setOnClickListener {
-            Toast.makeText(requireContext(), "¡Ganaste ${desafio.recompensa}!", Toast.LENGTH_LONG).show()
+            val puntos = if (respin) desafio.recompensa / 2 else desafio.recompensa
+            Toast.makeText(requireContext(), "¡Ganaste $puntos puntos!", Toast.LENGTH_LONG).show()
             findNavController().navigateUp()
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        temporizador?.cancel()
         _binding = null
     }
 }
