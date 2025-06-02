@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentWheelBinding
 import com.bluehomestudio.luckywheel.WheelItem
@@ -87,10 +89,30 @@ class WheelFragment : Fragment() {
         binding.lwv.setLuckyWheelReachTheTarget {
             if (lastTargetIndex in wheelItems.indices) {
                 val n = wheelItems.size
-                // Calculamos el índice real bajo la flecha:
                 val actualIndex = (lastTargetIndex - 1 + n) % n
                 val chosenText = wheelItems[actualIndex].text
                 binding.tvStatus.text = "¡Desafío: $chosenText!"
+                // Descripciones del desafío
+                val instrucciones = mapOf(
+                    "Descanso 5’" to "Poné el celular a un lado y relajate 5 minutos.",
+                    "Hidratarte" to "Andá a buscar agua y tomate un vaso.",
+                    "Estiramiento" to "Estirá cuello, espalda y piernas.",
+                    "Caminar" to "Caminá 2 minutos por tu espacio.",
+                    "Meditación" to "Respirá profundo durante 3 minutos.",
+                    "Respirar" to "Hacé 5 respiraciones profundas."
+                )
+                val detalle = instrucciones[chosenText] ?: "Realizá el desafío."
+                val recompensa = "+10 puntos"
+
+                // Navegamos al ChallengeFragment
+                val bundle = Bundle().apply {
+                    putString("nombre", chosenText)
+                    putString("instruccion", detalle)
+                    putString("recompensa", recompensa)
+                }
+
+                findNavController().navigate(R.id.challengeFragment, bundle)
+
             }
         }
 
@@ -106,6 +128,16 @@ class WheelFragment : Fragment() {
             //   Importante: solo llamamos a rotateWheelTo. No usar setTarget().
             binding.lwv.rotateWheelTo(lastTargetIndex)
         }
+
+        // Boton de aceptar para iniciar desafio
+        binding.btnAceptar.setOnClickListener {
+            // Ocultamos botón luego de completar
+            binding.btnAceptar.visibility = View.GONE
+
+            val puntosGanados = 10
+            Toast.makeText(requireContext(), "¡Ganaste $puntosGanados puntos!", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun onDestroyView() {

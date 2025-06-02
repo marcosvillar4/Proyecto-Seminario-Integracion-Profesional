@@ -219,6 +219,9 @@
         <action
             android:id="@+id/action_wheelFragment_to_dashboardFragment"
             app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_wheelFragment_to_challengeFragment"
+            app:destination="@id/challengeFragment" />
 
 
     </fragment>
@@ -228,5 +231,11 @@
         android:name="tpo.seminario.breakbuddy.ui.test.TestMBIFragment"
         android:label="Test MBI"
         tools:layout="@layout/fragment_test_mbi" />
+
+    <fragment
+        android:id="@+id/challengeFragment"
+        android:name="tpo.seminario.breakbuddy.ui.challenge.ChallengeFragment"
+        android:label="Desafío"
+        tools:layout="@layout/fragment_challenge" />
 
 </navigation>
