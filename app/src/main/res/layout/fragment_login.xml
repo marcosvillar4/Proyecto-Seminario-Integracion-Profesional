@@ -36,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Iniciar sesión"
+            style="@style/TextAppearance.App.SubtitleMedium"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/logo"
@@ -57,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
+                style="@style/TextAppearance.App.SubtitleMedium"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña"
+                style="@style/TextAppearance.App.SubtitleMedium"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,6 +91,7 @@
             android:backgroundTint="@color/green_500"
             android:textColor="@android:color/white"
             app:cornerRadius="16dp"
+            style="@style/TextAppearance.App.SubtitleMedium"
             app:layout_constraintTop_toBottomOf="@id/passwordLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -100,6 +104,8 @@
             android:clickable="true"
             android:focusable="true"
             android:text="¿No tenés cuenta? Registrate"
+            android:textAlignment="center"
+            style="@style/TextAppearance.App.Auxiliary"
             android:textColor="@color/contrast"
             android:textSize="14sp"
             android:textStyle="italic"
@@ -116,6 +122,8 @@
             android:clickable="true"
             android:focusable="true"
             android:text="Olvidé mi contraseña"
+            android:textAlignment="center"
+            style="@style/TextAppearance.App.Auxiliary"
             android:textColor="@color/contrast"
             android:textSize="14sp"
             android:textStyle="italic"

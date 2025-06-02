@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Seleccioná hasta 5 hobbies"
+            style="@style/TextAppearance.App.Body"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
@@ -39,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:alignItems="flex_start"
+            style="@style/TextAppearance.App.Auxiliary"
             app:flexWrap="wrap"
             app:justifyContent="flex_start"
             android:layout_marginBottom="16dp"/>
@@ -48,6 +50,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Guardar hobbies"
+            style="@style/TextAppearance.App.SubtitleMedium"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/green_500"
+            android:padding="12dp"
+            app:cornerRadius="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="55dp"/>
     </LinearLayout>

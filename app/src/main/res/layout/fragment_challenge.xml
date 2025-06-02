@@ -38,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¡Desafío!"
+                style="@style/TextAppearance.App.TitleMedium"
                 android:textSize="24sp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
@@ -48,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Instrucción detallada"
+                style="@style/TextAppearance.App.SubtitleMedium"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:layout_marginTop="8dp"
@@ -83,6 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¡Lo logré!"
+                style="@style/TextAppearance.App.SubtitleMedium"
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/exito"
                 android:textColor="@android:color/white" />

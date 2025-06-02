@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¿Qué es el Test MBI?"
+                style="@style/TextAppearance.App.SubtitleMedium"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Es una herramienta validada que mide tu nivel actual de burnout en 3 dimensiones: agotamiento, despersonalización y realización personal."
                 android:textSize="14sp"
+                style="@style/TextAppearance.App.Body"
                 android:textColor="@android:color/darker_gray"
                 android:layout_marginBottom="16dp" />
 
@@ -52,6 +54,7 @@
                 android:text="Realizar TEST MBI"
                 android:backgroundTint="@color/green_500"
                 android:textColor="@android:color/white"
+                style="@style/TextAppearance.App.SubtitleMedium"
                 app:cornerRadius="8dp"
                 android:layout_gravity="center_horizontal" />
         </LinearLayout>

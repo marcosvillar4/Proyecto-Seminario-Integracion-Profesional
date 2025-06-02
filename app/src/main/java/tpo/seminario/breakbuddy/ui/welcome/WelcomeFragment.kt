@@ -139,7 +139,7 @@ class WelcomeFragment : Fragment() {
 
     @OptIn(UnstableApi::class)
     private fun firebaseAuthWithGoogle(idToken: String) {
-        Log.d("WelcomeFragment", "¡Entré a firebaseAuthWithGoogle con token: $idToken")
+        Log.d("WelcomeFragment", "Entré a firebaseAuthWithGoogle con token: $idToken")
         Toast.makeText(requireContext(),
             "firebaseAuthWithGoogle() invoked",
             Toast.LENGTH_SHORT).show()
@@ -149,51 +149,43 @@ class WelcomeFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser!!
-                    // 1) Asegura o crea su doc en Firestore
-                    userRepo.ensureUserDocumentExists(user,
+                    val displayName = user.displayName ?: ""
+
+                    // 1) Asegura (o crea si no existe) en Firestore, sin sobreescribir campos
+                    userRepo.ensureUserDocumentExistsOrCreate(
+                        user,
                         onSuccess = {
                             // 2) Recupera el perfil completo
-                            userRepo.createUserDocument(
-                                user,
-                                onSuccess = {
-                                    // 2) Ahora que tenemos un documento Firestore, podemos recuperar su perfil completo:
-                                    userRepo.getUserProfile(
-                                        user.uid,
-                                        onSuccess = { profile ->
-                                            if (!profile.hobbiesCompletados) {
-                                                // Si no completó hobbies, llevamos a HobbiesFragment
-                                                findNavController().navigate(
-                                                    R.id.action_welcomeFragment_to_hobbiesFragment
-                                                )
-                                            } else {
-                                                // Si ya completó hobbies, vamos al dashboard
-                                                findNavController().navigate(
-                                                    R.id.action_welcomeFragment_to_navigation_dashboard
-                                                )
-                                            }
-                                        },
-                                        onFailure = { e ->
-                                            Toast.makeText(
-                                                requireContext(),
-                                                "Error cargando perfil: ${e.message}",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-                                        }
-                                    )
+                            userRepo.getUserProfile(
+                                user.uid,
+                                onSuccess = { profile ->
+                                    if (!profile.hobbiesCompletados) {
+                                        // Si no completó hobbies, vamos a HobbiesFragment
+                                        findNavController().navigate(
+                                            R.id.action_welcomeFragment_to_hobbiesFragment
+                                        )
+                                    } else {
+                                        // Si ya completó hobbies, vamos al dashboard
+                                        findNavController().navigate(
+                                            R.id.action_welcomeFragment_to_navigation_dashboard
+                                        )
+                                    }
                                 },
                                 onFailure = { e ->
                                     Toast.makeText(
                                         requireContext(),
-                                        "Error creando/actualizando perfil: ${e.message}",
+                                        "Error cargando perfil: ${e.message}",
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
                             )
                         },
                         onFailure = { e ->
-                            Toast.makeText(requireContext(),
-                                "Error creando perfil: ${e.message}",
-                                Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Error creando/actualizando perfil: ${e.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     )
                 } else {
@@ -203,6 +195,7 @@ class WelcomeFragment : Fragment() {
                 }
             }
     }
+
 
     override fun onDestroyView(){
         super.onDestroyView()
