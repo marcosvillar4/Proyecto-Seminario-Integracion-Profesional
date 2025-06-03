@@ -310,4 +310,53 @@ class UserRepository {
                 }
         }
     }
+    /**
+     * Devuelve un Map<email, uid> y la lista de emails no encontrados.
+     */
+    fun fetchUidsForEmails(
+        emails: List<String>,
+        onComplete: (Map<String,String>, List<String>) -> Unit,
+        onError: (Exception) -> Unit
+    ) {
+        if (emails.isEmpty()) {
+            onComplete(emptyMap(), emptyList())
+            return
+        }
+
+        val chunks = emails.chunked(10)
+        val result = mutableMapOf<String,String>()
+        val notFound = mutableListOf<String>()
+        var done = 0
+
+        chunks.forEach { chunk ->
+            db.collection("users")
+                .whereIn("email", chunk)
+                .get()
+                .addOnSuccessListener { snap ->
+                    // Recolectar UIDs encontrados:
+                    snap.documents.forEach { doc ->
+                        val emailFound = doc.getString("email") ?: ""
+                        val uidFound   = doc.id
+                        if (emailFound.isNotEmpty()) {
+                            result[emailFound] = uidFound
+                        }
+                    }
+                    // Detectar correos del chunk que no aparecieron en `result`:
+                    chunk.forEach { em ->
+                        if (!result.containsKey(em)) {
+                            notFound.add(em)
+                        }
+                    }
+                    done++
+                    if (done == chunks.size) {
+                        onComplete(result, notFound)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    onError(e)
+                }
+        }
+    }
+
+
 }

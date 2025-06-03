@@ -4,12 +4,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import tpo.seminario.breakbuddy.util.groups.Group
+import tpo.seminario.breakbuddy.util.groups.MembershipStatus
 import java.util.UUID
 import kotlin.random.Random
 
 class GroupRepository {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
+
+    private val userRepo = UserRepository()
 
     // REEMPLAZAR la función createGroup con esta versión mejorada:
     fun createGroup(
@@ -18,69 +21,123 @@ class GroupRepository {
         hobby: String?,
         type: String,
         orgId: String?,
-        onSuccess: (String) -> Unit, // Ahora devuelve el código del grupo
-        onFailure: (String) -> Unit   // Ahora devuelve mensaje específico
+        organizationName: String?,
+        onSuccess: (String) -> Unit,
+        onFailure: (String) -> Unit
     ) {
         val currentUser = auth.currentUser
         if (currentUser == null) {
             onFailure("Usuario no autenticado")
             return
         }
-
+        val ownerUid = currentUser.uid
         val groupId = UUID.randomUUID().toString()
 
-        // 1) Si es de organización, comprueba primero unicidad
-        val checkOrg = if (type == "organization") {
-            db.collection("groups")
-                .whereEqualTo("type", "organization")
-                .whereEqualTo("orgId", orgId)
-                .get()
-        } else {
-            // mock un DocumentReference vacío para saltar esta comprobación
-            db.collection("groups")
-                .whereEqualTo("dummy", "__none__") // nunca habrá documentos con ese campo
-                .get() // devuelve Task<QuerySnapshot>
-        }
+        // ── 1) Convertir emails en UIDs ────────────────────────────────────────────────────────────────
 
-        checkOrg
-            .addOnSuccessListener { snap ->
-                if (type == "organization" && !snap.isEmpty) {
-                    return@addOnSuccessListener onFailure("Ya existe un grupo para esta organización")
+        userRepo.fetchUidsForEmails(
+            emails = emails,
+            onComplete = { emailToUidMap, missingEmails ->
+                if (missingEmails.isNotEmpty()) {
+                    // Abortamos si hay emails que no existen en /users
+                    onFailure("Los siguientes correos no están registrados: ${missingEmails.joinToString(", ")}")
+                    return@fetchUidsForEmails
                 }
-                // 2) Genera código único
-                generateUniqueGroupCode { code ->
-                    if (code == null) return@generateUniqueGroupCode onFailure("Error generando código")
-                    // 3) Crea el objeto
-                    val allEmails = (emails + currentUser.email).filterNotNull().distinct()
-                    val group = Group(
-                        id        = groupId,
-                        name      = name.trim(),
-                        createdBy = currentUser.uid,
-                        emails    = allEmails,
-                        hobby     = hobby?.trim(),
-                        code      = code,
-                        type      = type,
-                        orgId     = orgId
-                    )
-                    // 4) Guarda Firestore
+
+                // Si llegamos acá, TODOS los emails tienen UID. Construimos la lista de memberIds:
+                val memberIdsFromEmails: List<String> = emails.map { email ->
+                    // el map contiene siempre ese email porque validamos que no haya ninguno faltante
+                    emailToUidMap[email]!!
+                }
+
+                // Asegurarnos de que el owner también esté en memberIds:
+                val allMemberIds = (memberIdsFromEmails + ownerUid).distinct()
+                val memberCount = allMemberIds.size
+
+                // ── 2) Verificar unicidad de "organization" si aplica ───────────────────────────────────────
+                val checkOrgTask = if (type == "organization") {
                     db.collection("groups")
-                        .document(groupId)
-                        .set(group)
-                        .addOnSuccessListener { onSuccess(code) }
-                        .addOnFailureListener { e ->
-                            val msg = when {
-                                e.message?.contains("permission", true) == true -> "No tienes permisos"
-                                e.message?.contains("network", true) == true    -> "Error de conexión"
-                                else                                             -> "Error: ${e.message}"
-                            }
-                            onFailure(msg)
-                        }
+                        .whereEqualTo("type", "organization")
+                        .whereEqualTo("orgId", orgId)
+                        .get()
+                } else {
+                    // Niñera: consulta que nunca devuelve documentos
+                    db.collection("groups")
+                        .whereEqualTo("dummy", "__none__")
+                        .get()
                 }
+
+                checkOrgTask.addOnSuccessListener { snap ->
+                    if (type == "organization" && !snap.isEmpty) {
+                        onFailure("Ya existe un grupo para esta organización")
+                        return@addOnSuccessListener
+                    }
+
+                    // ── 3) Generar código único ───────────────────────────────────────────────────────────
+                    generateUniqueGroupCode { code ->
+                        if (code == null) {
+                            onFailure("Error generando código único")
+                            return@generateUniqueGroupCode
+                        }
+
+                        // ── 4) Preparar timestamps ─────────────────────────────────────────────────────────
+                        val nowMillis = System.currentTimeMillis()
+
+                        val ownerEmail = currentUser.email ?: ""
+                        val allEmailsWithOwner = (emails + ownerEmail).distinct()
+
+                        // ── 5) Construir el objeto Group completo ─────────────────────────────────────────────
+                        val newGroup = Group(
+                            id               = groupId,
+                            name             = name.trim(),
+                            code             = code,
+                            type             = type,
+                            hobby            = hobby?.trim(),
+                            organizationName = organizationName,     // Lo recibimos desde el fragmento
+                            organizationId   = orgId,                // ID de /organizations/{orgId}
+                            ownerId          = ownerUid,
+                            memberIds        = allMemberIds,
+                            memberCount      = memberCount,
+                            createdAt        = nowMillis,
+                            updatedAt        = nowMillis,
+                            isOwner          = true,                 // El creador siempre es dueño
+                            membershipStatus = MembershipStatus.MEMBER,
+                            createdBy        = ownerUid,
+                            emails           = allEmailsWithOwner,               // Lista original de correos, con el dueño incluido
+                            orgId            = orgId                 // redundante con organizationId, pero lo dejamos igual
+                        )
+
+                        // ── 6) Guardar en Firestore ───────────────────────────────────────────────────────────
+                        db.collection("groups")
+                            .document(groupId)
+                            .set(newGroup)
+                            .addOnSuccessListener {
+                                onSuccess(code)  // devolvemos el código del grupo
+                            }
+                            .addOnFailureListener { e ->
+                                val msg = when {
+                                    e.message?.contains("permission", true) == true ->
+                                        "No tienes permisos para crear este grupo"
+                                    e.message?.contains("network", true) == true   ->
+                                        "Error de conexión. Verifica tu internet"
+                                    else ->
+                                        "Error creando el grupo: ${e.message}"
+                                }
+                                onFailure(msg)
+                            }
+                    }
+                }
+                    .addOnFailureListener { e ->
+                        onFailure("Error verificando organización: ${e.message}")
+                    }
+            },
+            onError = { e ->
+                onFailure("Error obteniendo UIDs de emails: ${e.message}")
             }
-            .addOnFailureListener { e ->
-                onFailure("Error verificando organización: ${e.message}")
-            }
+        )
     }
+
+
 
     // AGREGAR esta nueva función para generar códigos únicos:
     private fun generateUniqueGroupCode(callback: (String?) -> Unit) {

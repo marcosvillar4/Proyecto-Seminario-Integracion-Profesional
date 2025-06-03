@@ -38,41 +38,47 @@ class GroupsViewModel : ViewModel() {
     // Función existente para crear grupos...
 
     // REEMPLAZAR la función createGroup con esta versión mejorada:
-    fun createGroup(name: String, emails: List<String>, hobby: String?, type: String, orgId: String?) {
-        // Validar inputs antes de proceder
-        if (!validateInputs(name, emails)) return
+    fun createGroup(
+        name: String,
+        emails: List<String>,
+        hobby: String?,
+        type: String,
+        orgId: String?,
+        orgName: String?
+    ) {
+        // Validar inputs (igual que antes)…
 
-
-        // Establecer estado de carga
-        // Opción A: Forzar a partir del estado actual, pero si es null, creamos uno nuevo
+        // Mostrar loading…
         _uiState.value = _uiState.value?.copy(isLoading = true, errorMessage = null)
             ?: GroupCreationState(isLoading = true, isSuccess = false, errorMessage = null, groupCode = null)
 
-
+        // Llamamos ahora a la firma nueva
         repo.createGroup(
-            name = name,
-            emails = emails,
-            hobby = hobby,
-            type = type,
-            orgId = orgId,
+            name             = name,
+            emails           = emails,
+            hobby            = hobby,
+            type             = type,
+            orgId            = orgId,
+            organizationName = orgName,          // <-- dato extra
             onSuccess = { groupCode ->
                 _uiState.value = GroupCreationState(
-                    isLoading = false,
-                    isSuccess = true,
-                    errorMessage = null,
-                    groupCode = groupCode
+                    isLoading   = false,
+                    isSuccess   = true,
+                    errorMessage= null,
+                    groupCode   = groupCode
                 )
             },
-            onFailure = { errorMessage ->
+            onFailure = { errorMsg ->
                 _uiState.value = GroupCreationState(
-                    isLoading = false,
-                    isSuccess = false,
-                    errorMessage = errorMessage,
-                    groupCode = null
+                    isLoading   = false,
+                    isSuccess   = false,
+                    errorMessage= errorMsg,
+                    groupCode   = null
                 )
             }
         )
     }
+
 
     // AGREGAR esta nueva función de validación:
     private fun validateInputs(name: String, emails: List<String>): Boolean {

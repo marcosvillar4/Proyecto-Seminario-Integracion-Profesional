@@ -115,11 +115,11 @@ class CreateGroupFragment : Fragment() {
     }
 
     private fun createGroup() {
-        val name = binding.inputGroupName.text.toString().trim()
+        val name       = binding.inputGroupName.text.toString().trim()
         val emailsText = binding.inputEmails.text.toString().trim()
-        val hobbyText = binding.inputHobby.text.toString().trim()
+        val hobbyText  = binding.inputHobby.text.toString().trim()
 
-        // 1) Validar hobby si no está vacío…
+        // 1) Validar hobby… (igual que antes)
         val hobby = if (hobbyText.isBlank()) {
             null
         } else if (HobbiesList.DEFAULT.contains(hobbyText)) {
@@ -129,68 +129,64 @@ class CreateGroupFragment : Fragment() {
             return
         }
 
-        // 2) Validar inputs básicos
-        if (!validateInputs(name, emailsText)) {
-            return
-        }
+        // 2) Validar inputs básicos (nombre y que haya algún texto en emailsText)
+        if (!validateInputs(name, emailsText)) return
 
-        // 3) Procesar lista separada de emails (split, trim, filter, distinct, patrones)
+        // 3) Procesar lista de correos
         val allEmails = processEmails(emailsText)
         if (allEmails.isEmpty()) {
             showFieldError(binding.layoutEmails, "Debe ingresar al menos un email válido")
             return
         }
 
-        // 4) Determinar tipo (personal u organization) y orgName si aplica
-        val type = if (rbOrganization.isChecked) "organization" else "personal"
+        // 4) Determinar tipo y capturar orgName
+        val type    = if (binding.rbOrganization.isChecked) "organization" else "personal"
         val orgName = binding.inputOrg.text.toString().trim()
+
         if (type == "organization" && orgName.isBlank()) {
-            showFieldError(layoutOrg, "Debes indicar un nombre de organización")
+            showFieldError(binding.layoutOrg, "Debes indicar un nombre de organización")
             return
         }
 
-        // 5) ANTES DE CREAR, VERIFICAR QUE CADA EMAIL EXISTA EN FIRESTORE
-        //    → Si alguno NO existe, mostrar error y NO llamar a actuallyCreateGroup.
+        // 5) Verificar que TODOS los correos existen en /users
         userRepo.validateEmailsExist(
-            emails = allEmails,
+            emails   = allEmails,
             onComplete = { existents, notExistents ->
                 if (notExistents.isNotEmpty()) {
-                    // Hay correos inválidos/no registrados:
-                    val missing = notExistents.joinToString(separator = ", ")
-                    showErrorToast("Los siguientes emails NO están registrados: $missing")
+                    showErrorToast("Los siguientes emails NO están registrados: ${notExistents.joinToString(", ")}")
                     return@validateEmailsExist
                 }
-                // Si llegamos acá, TODOS los emails existen.
-                // 6) Si es tipo “organization”, reviso en Firestore “organizations/{name}”
+                // Si todos existen, ahora buscamos o creamos org (si aplica)
                 if (type == "organization") {
                     FirebaseFirestore.getInstance()
                         .collection("organizations")
                         .whereEqualTo("name", orgName)
                         .get()
                         .addOnSuccessListener { snap ->
-                            val orgId: String
-                            if (snap.isEmpty) {
-                                // 6a) Si no existe la org, la creamos, y continuamos con su ID:
+                            val orgIdFound: String = if (snap.isEmpty) {
+                                // No existe: creamos
                                 createOrganization(orgName) { newOrgId ->
-                                    actuallyCreateGroup(name, allEmails, hobby, type, newOrgId)
+                                    // 5.a) Llamamos a actuallyCreateGroup con newOrgId y orgName
+                                    actuallyCreateGroup(name, allEmails, hobby, type, newOrgId, orgName)
                                 }
                                 return@addOnSuccessListener
                             } else {
-                                // 6b) Si existe, tomo el primer ID
-                                orgId = snap.documents.first().id
+                                // Existe: tomamos el primer ID
+                                snap.documents.first().id
                             }
-                            actuallyCreateGroup(name, allEmails, hobby, type, orgId)
+                            // 5.b) Llamamos a actuallyCreateGroup con orgIdFound y orgName
+                            actuallyCreateGroup(name, allEmails, hobby, type, orgIdFound, orgName)
                         }
                         .addOnFailureListener { e ->
                             showErrorToast("Error buscando organización: ${e.message}")
                         }
                 } else {
-                    // 7) Si es tipo “personal”, simplemente sigo adelante
-                    actuallyCreateGroup(name, allEmails, hobby, type, null)
+                    // 5.c) Tipo "personal": no hay orgId ni orgName
+                    actuallyCreateGroup(name, allEmails, hobby, type, null, null)
                 }
             },
-            onError = { exception ->
-                showErrorToast("Error validando emails: ${exception.message}")
+            onError = { e ->
+                showErrorToast("Error validando emails: ${e.message}")
             }
         )
     }
@@ -209,15 +205,17 @@ private fun createOrganization(name: String, callback: (String)->Unit) {
         }
 }
 
-private fun actuallyCreateGroup(
-    name: String,
-    emails: List<String>,
-    hobby: String?,
-    type: String,
-    orgId: String?
-) {
-    viewModel.createGroup(name, emails, hobby, type, orgId)
-}
+    private fun actuallyCreateGroup(
+        name: String,
+        emails: List<String>,
+        hobby: String?,
+        type: String,
+        orgId: String?,
+        orgName: String?
+    ) {
+        viewModel.createGroup(name, emails, hobby, type, orgId, orgName)
+    }
+
 
     private fun validateInputs(name: String, emailsText: String): Boolean {
         var isValid = true
