@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardGroup"
@@ -10,7 +10,8 @@
     android:focusable="true"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
-    app:rippleColor="?attr/colorPrimary">
+    app:cardUseCompatPadding="true"
+    app:rippleColor="#DDDDDD"> <!-- color de ripple genérico -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Header -->
+        <!-- ====== HEADER: nombre y número de miembros ====== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,22 +32,25 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
+                <!-- Nombre del grupo -->
                 <TextView
                     android:id="@+id/textGroupName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:textColor="#212121"
                     tools:text="Mi Grupo Genial" />
 
+                <!-- Cantidad de miembros -->
                 <TextView
                     android:id="@+id/textMemberCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:layout_marginTop="4dp"
                     android:textSize="14sp"
+                    android:textColor="#666666"
                     tools:text="5 miembros" />
-
             </LinearLayout>
 
             <!-- Indicador de propietario -->
@@ -57,58 +61,64 @@
                 android:layout_marginEnd="4dp"
                 android:src="@drawable/ic_crown"
                 android:visibility="gone"
-                app:tint="@color/gold" />
+                app:tint="#FFD700" />
 
             <TextView
                 android:id="@+id/textOwnerLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:text="Propietario"
-                android:textColor="@color/gold"
+                android:textColor="#FFD700"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:visibility="gone" />
-
         </LinearLayout>
 
-        <!-- Código del grupo -->
+        <!-- ====== Código del grupo ====== -->
         <TextView
             android:id="@+id/textGroupCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/code_background"
-            android:clickable="true"
-            android:focusable="true"
+            android:background="#EEEEEE"
             android:padding="6dp"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="Código: ABC123" />
+            android:textColor="#00796B"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="Código: ABC123" />
 
-        <!-- Tipo de grupo y organización -->
+        <!-- ====== Tipo y Organización ====== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <com.google.android.material.chip.Chip
+            <!-- “Chip” de tipo de grupo (Personal / Organización) -->
+            <TextView
                 android:id="@+id/chipGroupType"
-                style="@style/Widget.MaterialComponents.Chip.Action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:textSize="12sp"
-                tools:text="Personal" />
+                android:background="#B3E5FC"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:textSize="12sp"
+            android:textColor="#01579B"
+            android:text="Personal"
+            android:textStyle="bold" />
 
+            <!-- Organización (icon + texto), inicialmente ocultos -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:visibility="gone">
 
                 <ImageView
@@ -117,28 +127,27 @@
                     android:layout_height="16dp"
                     android:layout_marginEnd="4dp"
                     android:src="@drawable/ic_business"
-                    app:tint="?attr/colorOnSurfaceVariant" />
+                    app:tint="#666666" />
 
                 <TextView
                     android:id="@+id/textOrganization"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textColor="?attr/colorOnSurfaceVariant"
                     android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     tools:text="Mi Empresa S.A." />
-
             </LinearLayout>
-
         </LinearLayout>
 
-        <!-- Hobby -->
+        <!-- ====== Hobby (icon + texto), inicialmente oculto ====== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:visibility="gone">
 
             <ImageView
@@ -147,43 +156,43 @@
                 android:layout_height="16dp"
                 android:layout_marginEnd="4dp"
                 android:src="@drawable/ic_hobby"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:tint="#666666" />
 
             <TextView
                 android:id="@+id/textHobby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="14sp"
+                android:textColor="#666666"
                 tools:text="Fútbol" />
-
         </LinearLayout>
 
-        <!-- Estado pendiente -->
+        <!-- ====== Estado pendiente (inicialmente oculto) ====== -->
         <TextView
             android:id="@+id/textPendingStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/pending_background"
+            android:background="#FFF3E0"
             android:padding="6dp"
-            android:textColor="@color/orange_700"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            tools:text="Solicitud pendiente" />
+        android:text="Solicitud pendiente"
+        android:textColor="#E65100"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="Solicitud pendiente" />
 
-        <!-- Fecha de creación -->
+        <!-- ====== Fecha de creación ====== -->
         <TextView
             android:id="@+id/textCreatedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="12sp"
+            android:textColor="#666666"
             tools:text="Creado: 15/03/2024" />
 
-        <!-- Botones de acción -->
+        <!-- ====== Botones de acción: Unirse / Salir ====== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,29 +200,41 @@
             android:gravity="end"
             android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnJoin"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:backgroundTint="#FFFFFF"
+                android:drawableLeft="@drawable/ic_person_add"
+                android:drawablePadding="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:text="Unirse"
-                android:visibility="gone"
-                app:icon="@drawable/ic_person_add" />
+                android:textAllCaps="false"
+                android:textColor="#00796B"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnLeave"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:drawableLeft="@drawable/ic_exit_to_app"
+                android:drawableTint="#D32F2F"
+                android:drawablePadding="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:text="Salir"
-                android:textColor="@color/error"
-                android:visibility="gone"
-                app:icon="@drawable/ic_exit_to_app"
-                app:iconTint="@color/error" />
-
+                android:textAllCaps="false"
+                android:textColor="#D32F2F"
+                android:textSize="14sp"
+                android:visibility="gone" />
         </LinearLayout>
-
     </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

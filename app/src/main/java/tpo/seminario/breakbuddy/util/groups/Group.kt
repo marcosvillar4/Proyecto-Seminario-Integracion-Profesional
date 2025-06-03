@@ -4,7 +4,7 @@ data class Group(
     val id: String = "",
     val name: String = "",
     val code: String = "",
-    val type: String = "", // "personal" o "organization"
+    val type: String = "",                // "personal" o "organization"
     val hobby: String? = null,
     val organizationName: String? = null,
     val organizationId: String? = null,
@@ -15,7 +15,7 @@ data class Group(
     val updatedAt: Long = 0,
     val isOwner: Boolean = false,
     val membershipStatus: MembershipStatus = MembershipStatus.NOT_MEMBER,
-    val createdBy: String,
-    val emails: List<String>,
-    val orgId: String?
+    val createdBy: String = "",                  // <--- añadimos default
+    val emails: List<String> = emptyList(),      // <--- añadimos default
+    val orgId: String? = null                    // <--- añadimos default
 )

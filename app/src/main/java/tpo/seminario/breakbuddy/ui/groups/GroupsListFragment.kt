@@ -42,6 +42,12 @@ class GroupsListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Solo recarga de Firestore, no toca filtros ni lista vacía:
+        viewModel.loadUserGroups()
+    }
+
     private fun setupViews() {
         // Botón para crear nuevo grupo
         binding.fabCreateGroup.setOnClickListener {
@@ -56,7 +62,7 @@ class GroupsListFragment : Fragment() {
 
         // Pull to refresh
         binding.swipeRefreshLayout.setOnRefreshListener {
-            loadGroups()
+            viewModel.loadUserGroups()
         }
 
         // Configurar búsqueda
@@ -149,7 +155,7 @@ class GroupsListFragment : Fragment() {
         }
 
         // Actualizar lista
-        groupsAdapter.submitList(state.groups)
+        groupsAdapter.updateGroups(state.groups)
 
         // Manejar errores
         state.errorMessage?.let { error ->
