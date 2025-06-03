@@ -1,21 +1,22 @@
 package tpo.seminario.breakbuddy.util.groups
 
+import com.google.firebase.firestore.FieldValue
+
 data class Group(
     val id: String = "",
     val name: String = "",
     val code: String = "",
-    val type: String = "",                // "personal" o "organization"
+    val type: String = "", // "personal" o "organization"
     val hobby: String? = null,
     val organizationName: String? = null,
     val organizationId: String? = null,
-    val ownerId: String = "",
     val memberIds: List<String> = emptyList(),
     val memberCount: Int = 0,
-    val createdAt: Long = 0,
-    val updatedAt: Long = 0,
+    val createdAt: com.google.firebase.Timestamp? = null,
+    val updatedAt: com.google.firebase.Timestamp? = null,
     val isOwner: Boolean = false,
     val membershipStatus: MembershipStatus = MembershipStatus.NOT_MEMBER,
-    val createdBy: String = "",                  // <--- añadimos default
-    val emails: List<String> = emptyList(),      // <--- añadimos default
-    val orgId: String? = null                    // <--- añadimos default
+    val ownerUid: String = "",   // ÚNICO campo que indica el UID del dueño
+    val emails: List<String> = emptyList(),
+    val orgId: String? = null
 )

@@ -356,7 +356,19 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
+                <!-- Botón “Agregar miembro” (visible solo si soy el propietario) -->
+                <Button
+                    android:id="@+id/buttonAddMember"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/green_500"
+                    android:text="Agregar miembro"
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
+
             </LinearLayout>
+
 
         </LinearLayout>
 

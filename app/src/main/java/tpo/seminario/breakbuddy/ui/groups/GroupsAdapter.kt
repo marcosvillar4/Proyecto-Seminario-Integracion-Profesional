@@ -186,9 +186,11 @@ class GroupsAdapter(
             }
         }
 
-        private fun formatDate(timestamp: Long): String {
-            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            return sdf.format(Date(timestamp))
+        private fun formatDate(ts: com.google.firebase.Timestamp?): String {
+            if (ts == null) return ""
+            val date = ts.toDate() // convierte a java.util.Date
+            val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            return formatter.format(date)
         }
 
         private fun copyToClipboard(context: Context, text: String, message: String) {

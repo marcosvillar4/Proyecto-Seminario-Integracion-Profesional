@@ -87,33 +87,30 @@ class GroupRepository {
                         val allEmailsWithOwner = (emails + ownerEmail).distinct()
 
                         // ── 5) Construir el objeto Group completo ─────────────────────────────────────────────
-                        val newGroup = Group(
-                            id               = groupId,
-                            name             = name.trim(),
-                            code             = code,
-                            type             = type,
-                            hobby            = hobby?.trim(),
-                            organizationName = organizationName,     // Lo recibimos desde el fragmento
-                            organizationId   = orgId,                // ID de /organizations/{orgId}
-                            ownerId          = ownerUid,
-                            memberIds        = allMemberIds,
-                            memberCount      = memberCount,
-                            createdAt        = nowMillis,
-                            updatedAt        = nowMillis,
-                            isOwner          = true,                 // El creador siempre es dueño
-                            membershipStatus = MembershipStatus.MEMBER,
-                            createdBy        = ownerUid,
-                            emails           = allEmailsWithOwner,               // Lista original de correos, con el dueño incluido
-                            orgId            = orgId                 // redundante con organizationId, pero lo dejamos igual
+                        val newGroupData = hashMapOf(
+                            "id"               to groupId,
+                            "name"             to name.trim(),
+                            "code"             to code,
+                            "type"             to type,
+                            "hobby"            to (hobby?.trim()),
+                            "organizationName" to organizationName,
+                            "organizationId"   to orgId,
+                            "memberIds"        to allMemberIds,
+                            "memberCount"      to memberCount,
+                            "createdAt"        to FieldValue.serverTimestamp(),
+                            "updatedAt"        to FieldValue.serverTimestamp(),
+                            "isOwner"          to true,
+                            "membershipStatus" to MembershipStatus.MEMBER.name, // o si lo guardas como String/enum
+                            "ownerUid"         to ownerUid,
+                            "emails"           to allEmailsWithOwner,
+                            "orgId"            to orgId
                         )
 
-                        // ── 6) Guardar en Firestore ───────────────────────────────────────────────────────────
+                        // Y se guarda con:
                         db.collection("groups")
                             .document(groupId)
-                            .set(newGroup)
-                            .addOnSuccessListener {
-                                onSuccess(code)  // devolvemos el código del grupo
-                            }
+                            .set(newGroupData)
+                            .addOnSuccessListener { onSuccess(code) }
                             .addOnFailureListener { e ->
                                 val msg = when {
                                     e.message?.contains("permission", true) == true ->
@@ -230,4 +227,141 @@ class GroupRepository {
                 onFailure(errorMessage)
             }
     }
+
+
+    /**
+     * Agrega un nuevo miembro al grupo identificado por groupId, buscando primero su UID a través del email.
+     */
+    fun addMemberByEmail(
+        groupId: String,
+        email: String,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        // 1) Buscar en /users el doc con campo "email" == email
+        db.collection("users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { snap ->
+                if (snap.isEmpty) {
+                    // No existe ningún usuario con ese email
+                    onFailure("El email \"$email\" no está registrado.")
+                    return@addOnSuccessListener
+                }
+                // Tomamos el primer documento (debería haber solo uno)
+                val userDoc = snap.documents.first()
+                val uid = userDoc.id
+
+                // 2) Actualizamos el documento del grupo
+                val groupRef = db.collection("groups").document(groupId)
+                // Hacemos las dos actualizaciones en paralelo: emails y memberIds
+                groupRef.update(
+                    mapOf(
+                        "emails" to FieldValue.arrayUnion(email),
+                        "memberIds" to FieldValue.arrayUnion(uid)
+                    )
+                )
+                    .addOnSuccessListener {
+                        onSuccess()
+                    }
+                    .addOnFailureListener { e ->
+                        val msg = when {
+                            e.message?.contains("permission", true) == true ->
+                                "No tienes permisos para modificar este grupo."
+                            e.message?.contains("network", true) == true ->
+                                "Error de conexión al intentar agregar miembro."
+                            else ->
+                                "Error agregando miembro: ${e.message}"
+                        }
+                        onFailure(msg)
+                    }
+            }
+            .addOnFailureListener { e ->
+                onFailure("Error buscando usuario: ${e.message}")
+            }
+    }
+    /**
+     * Quita un miembro (memberUidToRemove) de un grupo.
+     * - Remueve su UID de "memberIds" y su email de "emails".
+     * - Ajusta "memberCount".
+     * - Si queda en 0, borra el documento.
+     * - Si el miembro eliminado era el dueño (ownerUid), reasigna "ownerUid" a otro miembro.
+     */
+    fun removeMemberFromGroup(
+        groupId: String,
+        memberUidToRemove: String,
+        memberEmailToRemove: String,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        val groupRef = db.collection("groups").document(groupId)
+
+        db.runTransaction { transaction ->
+            // 1) Leemos el documento
+            val snapshot = transaction.get(groupRef)
+            if (!snapshot.exists()) {
+                throw Exception("El grupo no existe.")
+            }
+
+            // 2) Extraemos listas actuales de memberIds y emails
+            val currentMemberIds = (snapshot.get("memberIds") as? List<String>) ?: emptyList()
+            val currentEmails    = (snapshot.get("emails")    as? List<String>) ?: emptyList()
+
+            // 3) Obtenemos el ownerUid
+            val currentOwnerUid  = snapshot.getString("ownerUid")
+                ?: throw Exception("Falta el campo ownerUid en el grupo.")
+
+            // 4) Verificamos que ese UID efectivamente permanezca en memberIds
+            if (!currentMemberIds.contains(memberUidToRemove)) {
+                throw Exception("El usuario no es miembro de este grupo.")
+            }
+
+            // 5) Generamos las nuevas listas quitando a este miembro
+            val newMemberIds = currentMemberIds.filter { it != memberUidToRemove }
+            val newEmailsMutable = currentEmails.toMutableList()
+            val indexToRemove = currentMemberIds.indexOf(memberUidToRemove)
+            if (indexToRemove in newEmailsMutable.indices) {
+                newEmailsMutable.removeAt(indexToRemove)
+            }
+            val newEmails = newEmailsMutable.toList()
+
+            // 6) Contamos cuántos miembros quedarían
+            val newCount = newMemberIds.size
+
+            // 7) Si después de quitar quedan 0 miembros, borramos el documento
+            if (newCount == 0) {
+                transaction.delete(groupRef)
+                return@runTransaction null
+            }
+
+            // 8) Si aún quedan >0, y se eliminó al dueño, reasignamos un nuevo owner
+            var newOwner = currentOwnerUid
+            if (memberUidToRemove == currentOwnerUid) {
+                // Como aquí newMemberIds no está vacío (newCount>0), sí podemos hacer first()
+                newOwner = newMemberIds.first()
+            }
+
+            // 9) Armamos el mapa de actualizaciones (sin borrar, simplemente actualizamos campos)
+            val updates = mapOf(
+                "memberIds"   to newMemberIds,
+                "emails"      to newEmails,
+                "memberCount" to newCount,
+                "ownerUid"    to newOwner,
+                "updatedAt"   to FieldValue.serverTimestamp()
+            )
+            transaction.update(groupRef, updates)
+
+            return@runTransaction null
+        }
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { e ->
+                onFailure(e.message ?: "Error al eliminar miembro")
+            }
+    }
+
+
+
 }
+

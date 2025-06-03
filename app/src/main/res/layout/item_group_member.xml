@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootMemberItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -62,5 +63,17 @@
         app:chipCornerRadius="12dp"
         app:chipMinHeight="24dp"
         tools:visibility="visible" />
+
+    <!-- Botón de eliminar (solo visible para el owner) -->
+    <ImageButton
+        android:id="@+id/btnRemove"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Eliminar miembro"
+        android:padding="4dp"
+        android:src="@drawable/ic_delete"
+        app:tint="@color/error" />
 
 </LinearLayout>
