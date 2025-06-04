@@ -11,7 +11,13 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!-- Titulo ActionBar -->
+        <item name="actionBarStyle">@style/Widget.BreakBuddy.ActionBar</item>
+    </style>
+
+    <!-- Estilo ActionBar -->
+    <style name="Widget.BreakBuddy.ActionBar" parent="Widget.MaterialComponents.ActionBar.Solid">
+        <item name="titleTextStyle">@style/TextAppearance.App.TitleLarge</item>
     </style>
 
 </resources>

@@ -51,5 +51,4 @@
         <item name="android:textSize">@dimen/text_size_auxiliary</item>
     </style>
 
-
 </resources>
