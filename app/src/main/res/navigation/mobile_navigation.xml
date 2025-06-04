@@ -75,6 +75,9 @@
                 android:name="groupId"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_navigation_group_to_joinGroupFragment"
+            app:destination="@id/joinGroupFragment" />
     </fragment>
 
     <fragment
@@ -268,13 +271,6 @@
                 android:name="groupId"
                 app:argType="string" />
         </action>
-        <action
-            android:id="@+id/action_groupsList_to_chatFragment"
-            app:destination="@id/chatFragment">
-            <argument
-                android:name="groupId"
-                app:argType="string" />
-        </action>
     </fragment>
 
     <!-- Fragment de detalles del grupo -->
@@ -286,23 +282,6 @@
         <argument
             android:name="groupId"
             app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/chatFragment"
-        android:name="tpo.seminario.breakbuddy.ui.chat.ChatFragment"
-        android:label="Chat"
-        tools:layout="@layout/fragment_chat">
-        <argument
-            android:name="groupId"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_chatFragment_to_groupDetailsFragment"
-            app:destination="@id/groupDetailsFragment">
-            <argument
-                android:name="groupId"
-                app:argType="string" />
-        </action>
     </fragment>
 
 </navigation>

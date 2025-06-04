@@ -12,15 +12,33 @@
           "package_name": "tpo.seminario.breakbuddy"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "383765322093-050dqlqjk5rm73t6tprii2k0avi1avia.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tpo.seminario.breakbuddy",
+            "certificate_hash": "d4a6f9f27c023be01076cf805ff64d105131bdad"
+          }
+        },
+        {
+          "client_id": "383765322093-a44vuhkr86scl433me8benu9q23ducgn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AGREGAR DESPUÉS"
+          "current_key": "AIzaSyCxP5BFw_oke3q9_m_9zqIbwdXzYKPytiI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383765322093-a44vuhkr86scl433me8benu9q23ducgn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

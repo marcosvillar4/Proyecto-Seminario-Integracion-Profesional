@@ -1,5 +1,8 @@
 package tpo.seminario.breakbuddy.ui.groups
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import android.widget.Toast
 import tpo.seminario.breakbuddy.util.groups.Group
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -218,6 +221,7 @@ class GroupsViewModel : ViewModel() {
             .addOnSuccessListener {
                 // Recargar grupos para reflejar cambios
                 loadUserGroups()
+
             }
             .addOnFailureListener { exception ->
                 _groupsUiState.value = GroupsListState(
@@ -265,6 +269,38 @@ class GroupsViewModel : ViewModel() {
                     groups = groups,
                     isLoading = false
                 )
+            }
+            .addOnFailureListener { exception ->
+                _groupsUiState.value = GroupsListState(
+                    groups = emptyList(),
+                    isLoading = false,
+                    errorMessage = "Error en la búsqueda: ${exception.message}"
+                )
+            }
+    }
+
+    fun searchGroupsByCode(query: String) {
+
+        val currentUseremail = auth.currentUser?.email  // Sacamos mail de usuario
+
+        if (query.length < 3) return
+
+        _groupsUiState.value = _groupsUiState.value?.copy(isLoading = true)
+            ?: GroupsListState(isLoading = true)
+
+        firestore.collection("groups")      // Agarramos todos los id que coincidan con el codigo
+            .orderBy("code")
+            .startAt(query)
+            .endAt(query + "\uf8ff")
+            .limit(50)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents){
+                    if (currentUseremail != null) {
+                        addMemberToGroup(document.id, currentUseremail)     // Agregamos el miembro a todos los grupos con el codigo correcto
+                    }
+                }
+
             }
             .addOnFailureListener { exception ->
                 _groupsUiState.value = GroupsListState(
