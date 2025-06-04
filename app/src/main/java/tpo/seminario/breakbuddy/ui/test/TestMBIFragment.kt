@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import tpo.seminario.breakbuddy.R
 
@@ -42,6 +44,8 @@ class TestMBIFragment : Fragment() {
     private lateinit var txtImpacto: TextView
     private lateinit var cardResultado: MaterialCardView
 
+    private val viewModel: TestMBIViewModel by viewModels()  // ← Nuevo ViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +55,9 @@ class TestMBIFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Vincular vistas
         txtPregunta = view.findViewById(R.id.txtPregunta)
         opciones = view.findViewById(R.id.radioGroupOpciones)
         btnSiguiente = view.findViewById(R.id.btnSiguiente)
@@ -60,20 +67,28 @@ class TestMBIFragment : Fragment() {
         txtImpacto = view.findViewById(R.id.txtImpacto)
         cardResultado = view.findViewById(R.id.cardResultado)
 
+        // Mostrar la primera pregunta
         mostrarPregunta()
 
+        // Observamos LiveData de guardado
+        observeSaveState()
+
+        // Evento botón Siguiente
         btnSiguiente.setOnClickListener {
             val seleccion = opciones.checkedRadioButtonId
             if (seleccion != -1) {
-                val puntaje = opciones.indexOfChild(view.findViewById(seleccion))
-                respuestas.add(puntaje)
+                // Calculamos índice del RadioButton seleccionado
+                val indexSeleccion = opciones.indexOfChild(view.findViewById(seleccion))
+                respuestas.add(indexSeleccion)
                 opciones.clearCheck()
                 indiceActual++
                 if (indiceActual < preguntas.size) {
                     mostrarPregunta()
                 } else {
-                    mostrarResultado()
+                    mostrarResultado()  // Cuando terminan todas las preguntas
                 }
+            } else {
+                Toast.makeText(requireContext(), "Selecciona una opción antes de continuar", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -82,28 +97,73 @@ class TestMBIFragment : Fragment() {
         txtPregunta.text = preguntas[indiceActual]
     }
 
+    /**
+     * Se llama cuando ya se contestaron todas las preguntas.
+     * Calcula puntajes, muestra en pantalla y luego guarda en Firestore.
+     */
     private fun mostrarResultado() {
+        // Ocultamos preguntas / opciones / botón
         txtPregunta.visibility = View.GONE
         opciones.visibility = View.GONE
         btnSiguiente.visibility = View.GONE
 
-        val agotamiento = respuestas.slice(0..1).sum()
-        val despersonalizacion = respuestas.slice(2..3).sum()
-        val realizacion = respuestas.slice(4..5).sum()
-        val impacto = respuestas[6]
+        // Calcular puntajes
+        val agotamiento       = respuestas.slice(0..1).sum()
+        val despersonalizacion= respuestas.slice(2..3).sum()
+        val realizacion       = respuestas.slice(4..5).sum()
+        val impacto           = respuestas[6]
 
-        val nivelAgotamiento = categorizar(agotamiento, listOf(4, 8))
-        val nivelDespersonalizacion = categorizar(despersonalizacion, listOf(3, 6))
-        val nivelRealizacion = categorizarInvertido(realizacion, listOf(3, 6))
+        // Calcular niveles (etiquetas)
+        val nivelAgotamiento       = categorizar(agotamiento, listOf(4, 8))
+        val nivelDespersonalizacion= categorizar(despersonalizacion, listOf(3, 6))
+        val nivelRealizacion       = categorizarInvertido(realizacion, listOf(3, 6))
+        val nivelImpacto           = "$impacto/6"  // puedes adaptar si necesitas otra forma
 
-        txtAgotamiento.text = "Agotamiento emocional: $nivelAgotamiento"
+        // Mostrar en los TextView del layout
+        txtAgotamiento.text        = "Agotamiento emocional: $nivelAgotamiento"
         txtDespersonalizacion.text = "Despersonalización: $nivelDespersonalizacion"
-        txtRealizacion.text = "Realización personal: $nivelRealizacion"
-        txtImpacto.text = "Impacto en vida personal: $impacto/6"
+        txtRealizacion.text        = "Realización personal: $nivelRealizacion"
+        txtImpacto.text            = "Impacto en vida personal: $nivelImpacto"
 
         cardResultado.visibility = View.VISIBLE
+
+        // 1) Crear un objeto TestResult
+        val resultadoAGuardar = TestResult(
+            // id se genera en el repositorio
+            timestamp = System.currentTimeMillis(),
+            agotamiento = agotamiento,
+            despersonalizacion = despersonalizacion,
+            realizacion = realizacion,
+            impacto = impacto,
+            nivelAgotamiento = nivelAgotamiento,
+            nivelDespersonalizacion = nivelDespersonalizacion,
+            nivelRealizacion = nivelRealizacion,
+            nivelImpacto = nivelImpacto
+        )
+
+        // 2) Llamar al ViewModel para guardarlo en Firestore
+        viewModel.saveResult(resultadoAGuardar)
     }
 
+    /**
+     * Observa los LiveData saveSuccess / saveError del ViewModel.
+     * Muestra Toasts según corresponda.
+     */
+    private fun observeSaveState() {
+        viewModel.saveSuccess.observe(viewLifecycleOwner) { testId ->
+            testId?.let {
+                Toast.makeText(requireContext(), "Resultado guardado (ID: $it)", Toast.LENGTH_LONG).show()
+                // Opcional: aquí podrías navegar a otra pantalla o dejar todo inactivo
+                viewModel.clearSaveStates()
+            }
+        }
+        viewModel.saveError.observe(viewLifecycleOwner) { errorMsg ->
+            errorMsg?.let {
+                Toast.makeText(requireContext(), "Error guardando resultado: $it", Toast.LENGTH_LONG).show()
+                viewModel.clearSaveStates()
+            }
+        }
+    }
 
     private fun categorizar(valor: Int, cortes: List<Int>): String {
         return when {

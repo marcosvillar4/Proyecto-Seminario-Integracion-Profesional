@@ -57,6 +57,13 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
 
 
+    // --- AndroidX Lifecycle (ViewModel + LiveData) ---
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+
+
+
 
     implementation ("com.github.mmoamenn:LuckyWheel_Android:0.3.0")
 
