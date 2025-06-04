@@ -93,7 +93,14 @@ class GroupsListFragment : Fragment() {
             onLeaveClick = { group ->
                 // Mostrar confirmación para salir del grupo
                 showLeaveGroupDialog(group)
+            },
+            onChatClick = { group ->
+                // Navegar al ChatFragment, pasando group.id
+                val action = GroupsListFragmentDirections
+                    .actionGroupsListToChatFragment(group.id) // si quieres pasar nombre
+                findNavController().navigate(action)
             }
+
         )
 
         binding.recyclerViewGroups.apply {

@@ -24,7 +24,8 @@ import java.util.Locale
 class GroupsAdapter(
     private val onGroupClick: (Group) -> Unit,
     private val onJoinClick: (Group) -> Unit,
-    private val onLeaveClick: (Group) -> Unit
+    private val onLeaveClick: (Group) -> Unit,
+    private val onChatClick: (Group) -> Unit
 ) : ListAdapter<Group, GroupsAdapter.GroupViewHolder>(GroupDiffCallback()) {
 
     private var allGroups: List<Group> = emptyList()
@@ -177,6 +178,11 @@ class GroupsAdapter(
 
                 btnLeave.setOnClickListener {
                     onLeaveClick(group)
+                }
+
+                // NUEVO: Listener para abrir el chat
+                btnChat.setOnClickListener {
+                    onChatClick(group)
                 }
 
                 // Hacer el código copiable
