@@ -61,7 +61,9 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.welcomeFragment || destination.id == R.id.loginFragment
-                || destination.id == R.id.registerFragment || destination.id == R.id.hobbiesFragment || destination.id == R.id.challengeFragment) {
+                || destination.id == R.id.registerFragment || destination.id == R.id.hobbiesFragment
+                || destination.id == R.id.challengeFragment || destination.id == R.id.passwordResetFragment
+                || destination.id == R.id.testMBIFragment) {
                 // Oculta action bar y menú inferior en pantalla de bienvenida
                 supportActionBar?.hide()
                 navView.visibility = android.view.View.GONE
