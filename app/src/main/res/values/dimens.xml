@@ -16,4 +16,8 @@
 
     <!-- Texto auxiliar / notas -->
     <dimen name="text_size_auxiliary">12sp</dimen>
+
+    <dimen name="luckywheel_padding">32dp</dimen>
+    <dimen name="luckywheel_text_size">12sp</dimen>
+
 </resources>

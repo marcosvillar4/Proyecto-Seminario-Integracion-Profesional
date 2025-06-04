@@ -60,6 +60,8 @@ dependencies {
 
     implementation ("com.github.mmoamenn:LuckyWheel_Android:0.3.0")
 
+    implementation ("com.github.caneryilmaz52:LuckyWheelView:1.1.3")
+
 
 
     implementation ("com.google.android.material:material:1.12.0") // Use the latest version
