@@ -117,10 +117,6 @@ class GroupDetailsFragment : Fragment() {
                 copyGroupCodeToClipboard(grp.code)
             }
         }
-
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
     }
 
     private fun observeGroupDetails() {

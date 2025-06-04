@@ -8,23 +8,6 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.groups.GroupDetailsFragment">
 
-    <!-- Toolbar -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/green_500"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="Detalles del Grupo"
-            app:titleTextColor="@color/white" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <!-- Contenido principal -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
