@@ -89,17 +89,10 @@ class JoinGroupFragment : Fragment() {
             showErrorToast("ID esta vacio")
         } else {
             val currentUser = auth.currentUser
-
             if (currentUser != null) {
-                //viewModel.searchPublicGroupsByCode(id)
-                //Toast.makeText(context, currentUser.email.toString(), Toast.LENGTH_LONG).show()
-                //viewModel.addMemberToGroup(id,currentUser.email.toString())
-                viewModel.joinGroup("D0QLPD")
-
+                viewModel.searchGroupsByCode(id)
+                Toast.makeText(context, "Unido al grupo con exito", Toast.LENGTH_LONG).show()
             }
-
-
-
         }
 
     }

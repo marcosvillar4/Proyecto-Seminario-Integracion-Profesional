@@ -279,6 +279,38 @@ class GroupsViewModel : ViewModel() {
             }
     }
 
+    fun searchGroupsByCode(query: String) {
+
+        val currentUseremail = auth.currentUser?.email  // Sacamos mail de usuario
+
+        if (query.length < 3) return
+
+        _groupsUiState.value = _groupsUiState.value?.copy(isLoading = true)
+            ?: GroupsListState(isLoading = true)
+
+        firestore.collection("groups")      // Agarramos todos los id que coincidan con el codigo
+            .orderBy("code")
+            .startAt(query)
+            .endAt(query + "\uf8ff")
+            .limit(50)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents){
+                    if (currentUseremail != null) {
+                        addMemberToGroup(document.id, currentUseremail)     // Agregamos el miembro a todos los grupos con el codigo correcto
+                    }
+                }
+
+            }
+            .addOnFailureListener { exception ->
+                _groupsUiState.value = GroupsListState(
+                    groups = emptyList(),
+                    isLoading = false,
+                    errorMessage = "Error en la búsqueda: ${exception.message}"
+                )
+            }
+    }
+
 
     /**
      * Llamar cuando el usuario intente agregar al grupo `groupId` un miembro con `email`.
