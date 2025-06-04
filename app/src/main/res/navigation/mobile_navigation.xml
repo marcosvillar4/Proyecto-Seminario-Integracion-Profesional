@@ -75,6 +75,9 @@
                 android:name="groupId"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_navigation_group_to_joinGroupFragment"
+            app:destination="@id/joinGroupFragment" />
     </fragment>
 
     <fragment
@@ -280,5 +283,10 @@
             android:name="groupId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/joinGroupFragment"
+        android:name="tpo.seminario.breakbuddy.ui.groups.JoinGroupFragment"
+        android:label="fragment_join_group"
+        tools:layout="@layout/fragment_join_group" />
 
 </navigation>
