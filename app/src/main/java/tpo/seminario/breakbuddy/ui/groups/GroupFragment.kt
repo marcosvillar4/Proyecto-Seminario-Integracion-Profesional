@@ -27,6 +27,11 @@ class GroupsFragment : Fragment() {
             findNavController().navigate(R.id.action_groupsFragment_to_groupsListFragment)
         }
 
+        val btnJoinGroup = view.findViewById<Button>(R.id.btnJoinGroup)
+        btnJoinGroup.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_group_to_joinGroupFragment)
+        }
+
         return view
     }
 }

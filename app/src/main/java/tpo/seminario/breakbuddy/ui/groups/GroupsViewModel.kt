@@ -1,5 +1,8 @@
 package tpo.seminario.breakbuddy.ui.groups
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import android.widget.Toast
 import tpo.seminario.breakbuddy.util.groups.Group
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -218,6 +221,7 @@ class GroupsViewModel : ViewModel() {
             .addOnSuccessListener {
                 // Recargar grupos para reflejar cambios
                 loadUserGroups()
+
             }
             .addOnFailureListener { exception ->
                 _groupsUiState.value = GroupsListState(
