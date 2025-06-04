@@ -13,7 +13,7 @@
         android:id="@+id/guideline_50"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.25"
+        app:layout_constraintGuide_percent="0.15"
         android:orientation="horizontal" />
 
     <!-- Rueda: top pegado a la Guideline, bottom al botón -->
