@@ -310,7 +310,7 @@
     <fragment
         android:id="@+id/joinGroupFragment"
         android:name="tpo.seminario.breakbuddy.ui.groups.JoinGroupFragment"
-        android:label="fragment_join_group"
+        android:label="Unirse a Grupo"
         tools:layout="@layout/fragment_join_group" />
 
 </navigation>

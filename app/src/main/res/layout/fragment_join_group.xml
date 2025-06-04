@@ -23,16 +23,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ID"
-            tools:text="Codigo de Grupo" />
+            tools:text="Código de Grupo"
+            style="@style/TextAppearance.App.SubtitleMedium"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnUnirse"
-        android:layout_width="0dp"
+        android:layout_width="220dp"
         android:layout_height="48dp"
-        android:layout_marginStart="126dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="20dp"
         android:text="UNIRSE A GRUPO"
+        style="@style/TextAppearance.App.SubtitleMedium"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:gravity= "center"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutCodigoGrupo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:background="@drawable/bg_message_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/neutro_oscuro"
             android:textSize="16sp"
+            style="@style/TextAppearance.App.SubtitleMedium"
             tools:text="¡Hola a todos!"/>
 
         <!-- Timestamp pequeño -->
@@ -45,6 +47,7 @@
             android:layout_marginTop="4dp"
             android:textColor="@color/gray_300"
             android:textSize="10sp"
+            style="@style/TextAppearance.App.SubtitleMedium"
             tools:text="12:34" />
 
     </LinearLayout>

@@ -38,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
+                    style="@style/TextAppearance.App.SubtitleMedium"
                     android:textStyle="bold"
                     android:textColor="#212121"
                     tools:text="Mi Grupo Genial" />
@@ -50,6 +51,7 @@
                     android:layout_marginTop="4dp"
                     android:textSize="14sp"
                     android:textColor="#666666"
+                    style="@style/TextAppearance.App.SubtitleMedium"
                     tools:text="5 miembros" />
             </LinearLayout>
 
@@ -84,6 +86,7 @@
             android:background="#EEEEEE"
             android:padding="6dp"
             android:textColor="#00796B"
+            style="@style/TextAppearance.App.SubtitleMedium"
         android:textSize="12sp"
         android:textStyle="bold"
         tools:text="Código: ABC123" />
@@ -109,6 +112,7 @@
             android:textSize="12sp"
             android:textColor="#01579B"
             android:text="Personal"
+                style="@style/TextAppearance.App.Auxiliary"
             android:textStyle="bold" />
 
             <!-- Organización (icon + texto), inicialmente ocultos -->
@@ -190,6 +194,7 @@
             android:layout_marginTop="8dp"
             android:textSize="12sp"
             android:textColor="#666666"
+            style="@style/TextAppearance.App.Auxiliary"
             tools:text="Creado: 15/03/2024" />
 
         <!-- ====== Botones de acción: Unirse / Salir ====== -->

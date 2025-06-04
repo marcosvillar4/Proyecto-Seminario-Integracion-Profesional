@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@drawable/search_background"
+            style="@style/TextAppearance.App.SubtitleMedium"
             app:queryHint="Buscar grupos..." />
 
         <!-- Filtros -->

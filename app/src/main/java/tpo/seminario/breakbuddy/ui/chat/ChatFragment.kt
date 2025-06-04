@@ -51,15 +51,7 @@ class ChatFragment : Fragment() {
 
 
 
-        // 2) Configurar Toolbar (opcional)
-        val toolbar: Toolbar = binding.toolbarChat
-        toolbar.title = "Chat del grupo"
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
-        // 3) Configurar RecyclerView
+        // 2) Configurar RecyclerView
         chatAdapter = ChatAdapter(currentUserUid = auth.currentUser?.uid ?: "")
         binding.recyclerViewChat.apply {
             layoutManager = LinearLayoutManager(requireContext()).apply {
@@ -78,13 +70,13 @@ class ChatFragment : Fragment() {
             binding.buttonSend.isEnabled = it.toString().trim().isNotEmpty()
         }
 
-        // 6) Comenzar a escuchar nuevos mensajes
+        // 3) Comenzar a escuchar nuevos mensajes
         attachMessagesListener()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // 7) Remover listener real-time al salir
+        // 4) Remover listener real-time al salir
         messagesListener?.remove()
         _binding = null
     }

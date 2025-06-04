@@ -16,13 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarChat"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/green_500"
-            android:title="Chat del grupo"
-            android:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- RecyclerView ocupa todo el espacio entre la AppBar y el panel de input -->
@@ -67,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
+            style="@style/TextAppearance.App.SubtitleMedium"
             android:minLines="1"
             android:maxLines="5"
             android:gravity="top"/>
