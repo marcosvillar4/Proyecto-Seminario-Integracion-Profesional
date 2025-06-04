@@ -73,7 +73,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Eliminar miembro"
         android:padding="4dp"
-        android:src="@drawable/ic_delete"
+        android:src="@drawable/ic_remove_person"
         app:tint="@color/error" />
 
 </LinearLayout>
