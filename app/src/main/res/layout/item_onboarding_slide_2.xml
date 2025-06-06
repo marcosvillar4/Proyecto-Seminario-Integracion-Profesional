@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tomá el control de tu bienestar"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
@@ -25,7 +26,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pausas activas personalizadas según tu nivel de agotamiento"
+        android:text="Pausas activas a disposición, junto con desafíos personalizados según tus intereses"
+        style="@style/TextAppearance.App.Auxiliary"
         android:textColor="@android:color/white"
         android:textAlignment="center"
         android:gravity="center"

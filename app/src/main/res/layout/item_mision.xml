@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Título de Misión"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/black" />
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Descripción breve de la misión"
+        style="@style/TextAppearance.App.Body"
         android:textSize="14sp"
         android:textColor="@color/black"
         android:layout_marginTop="4dp" />
@@ -31,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Completar"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/green_500"
         android:textColor="@android:color/white" />
