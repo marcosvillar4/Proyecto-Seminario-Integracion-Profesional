@@ -20,8 +20,8 @@
             app:destination="@id/registerFragment" />
 
         <action
-            android:id="@+id/action_welcomeFragment_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard"
+            android:id="@+id/action_welcomeFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
         <action
@@ -52,13 +52,6 @@
             app:destination="@id/missionsFragment" />
 
     </fragment>
-
-    <!--Dashboard-->
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="tpo.seminario.breakbuddy.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
 
     <!--Grupos principal-->
     <fragment
@@ -103,9 +96,10 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+
         <action
-            android:id="@+id/action_loginFragment_to_dashboardFragment"
-            app:destination="@id/navigation_dashboard" />
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/navigation_home" />
 
         <action
             android:id="@+id/action_loginFragment_to_passwordResetFragment"
@@ -130,8 +124,8 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_registerFragment_to_dashboardFragment"
-            app:destination="@id/navigation_dashboard" />
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/navigation_home" />
 
         <action
             android:id="@+id/action_registerFragment_to_welcomeFragment"
@@ -192,11 +186,12 @@
         android:label="Hobbies">
 
         <action
-            android:id="@+id/action_hobbiesFragment_to_dashboardFragment"
-            app:destination="@id/navigation_dashboard"
+            android:id="@+id/action_hobbiesFragment_to_homeFragment"
+            app:destination="@id/navigation_home"
             app:popUpTo="@id/hobbiesFragment"
             app:popUpToInclusive="true"
             />
+
     </fragment>
 
     <!--Editar hobbies-->
@@ -244,8 +239,8 @@
             android:id="@+id/action_wheelFragment_to_hobbiesFragment"
             app:destination="@id/hobbiesFragment" />
         <action
-            android:id="@+id/action_wheelFragment_to_dashboardFragment"
-            app:destination="@id/navigation_dashboard" />
+            android:id="@+id/action_wheelFragment_to_homeFragment"
+            app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_wheelFragment_to_challengeFragment"
             app:destination="@id/challengeFragment" />

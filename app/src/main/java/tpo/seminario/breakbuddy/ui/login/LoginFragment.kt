@@ -84,7 +84,7 @@ class LoginFragment : Fragment() {
                                                 )
                                             } else {
                                                 findNavController().navigate(
-                                                    R.id.action_loginFragment_to_dashboardFragment,
+                                                    R.id.action_loginFragment_to_homeFragment,
                                                     null,
                                                     baseOptions
                                                 )

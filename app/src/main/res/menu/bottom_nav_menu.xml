@@ -6,10 +6,7 @@
         android:icon="@drawable/baseline_home_24"
         android:title="@string/title_home" />
 
-    <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/baseline_dashboard_24"
-        android:title="@string/title_dashboard" />
+
 
     <item
         android:id="@+id/navigation_group"
@@ -21,15 +18,10 @@
         android:icon="@drawable/ic_wheel_nav"
         android:title="@string/title_wheel"/>
 
-
-    <!-- COMENTADO POR LÍMITE DE 5 ITEMS EN BOTTOM NAV -->
-
-    <!-- <item
+    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/baseline_notifications_24"
-        android:title="@string/title_notifications" /> -->
-
-     <!-- COMENTADO POR LÍMITE DE 5 ITEMS EN BOTTOM NAV -->
+        android:title="@string/title_notifications" />
 
     <item
         android:id="@+id/accountSettingsFragment"

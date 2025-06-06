@@ -66,7 +66,7 @@ class WelcomeFragment : Fragment() {
         val currentUser = auth.currentUser
 
         if (currentUser != null) {
-            findNavController().navigate(R.id.action_welcomeFragment_to_navigation_dashboard)
+            findNavController().navigate(R.id.action_welcomeFragment_to_navigation_home)
         } else {
             setupButtonClickListeners()
         }
@@ -139,7 +139,7 @@ class WelcomeFragment : Fragment() {
                                     if (!profile.hobbiesCompletados) {
                                         findNavController().navigate(R.id.action_welcomeFragment_to_hobbiesFragment)
                                     } else {
-                                        findNavController().navigate(R.id.action_welcomeFragment_to_navigation_dashboard)
+                                        findNavController().navigate(R.id.action_welcomeFragment_to_navigation_home)
                                     }
                                 },
                                 onFailure = { e ->
