@@ -65,6 +65,10 @@ class HomeFragment : Fragment() {
         btnTestMBI.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_testMBIFragment)
         }
+        binding.btnIrAMisiones.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_missionsFragment)
+        }
+
 
         // Primera carga
         adView.loadAd(AdRequest.Builder().build())

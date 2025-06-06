@@ -51,4 +51,14 @@
         <item name="android:textSize">@dimen/text_size_auxiliary</item>
     </style>
 
+    <style name="MissionDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/scale_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/scale_fade_out</item>
+    </style>
+
+    <style name="MissionDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowAnimationStyle">@style/MissionDialogAnimation</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

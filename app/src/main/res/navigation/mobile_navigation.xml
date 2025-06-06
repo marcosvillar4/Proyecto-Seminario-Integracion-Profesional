@@ -5,6 +5,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/welcomeFragment">
 
+    <!--Welcome-->
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="tpo.seminario.breakbuddy.ui.welcome.WelcomeFragment"
@@ -36,6 +37,7 @@
 
     </fragment>
 
+    <!--Home-->
     <fragment
         android:id="@+id/navigation_home"
         android:name="tpo.seminario.breakbuddy.ui.home.HomeFragment"
@@ -45,14 +47,20 @@
             android:id="@+id/action_homeFragment_to_testMBIFragment"
             app:destination="@id/testMBIFragment" />
 
+        <action
+            android:id="@+id/action_homeFragment_to_missionsFragment"
+            app:destination="@id/missionsFragment" />
+
     </fragment>
 
+    <!--Dashboard-->
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="tpo.seminario.breakbuddy.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
+    <!--Grupos principal-->
     <fragment
         android:id="@+id/navigation_group"
         android:name="tpo.seminario.breakbuddy.ui.groups.GroupsFragment"
@@ -63,7 +71,6 @@
             android:id="@+id/action_navigation_groups_to_createGroupFragment"
             app:destination="@id/createGroupFragment" />
 
-        <!-- AGREGAR ESTA ACCIÓN CON EL ID EXACTO -->
         <action
             android:id="@+id/action_groupsFragment_to_groupsListFragment"
             app:destination="@id/groupsListFragment" />
@@ -80,12 +87,14 @@
             app:destination="@id/joinGroupFragment" />
     </fragment>
 
+    <!--Notificaciones-->
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="tpo.seminario.breakbuddy.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
+    <!--Iniciar sesion-->
     <fragment
         android:id="@+id/loginFragment"
         android:name="tpo.seminario.breakbuddy.ui.login.LoginFragment"
@@ -112,6 +121,7 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+    <!--Registrarse-->
     <fragment
         android:id="@+id/registerFragment"
         android:name="tpo.seminario.breakbuddy.ui.register.RegisterFragment"
@@ -128,10 +138,9 @@
             app:destination="@id/welcomeFragment"
             app:popUpTo="@id/registerFragment"
             app:popUpToInclusive="true" />
-
-
     </fragment>
 
+    <!--Configuracion-->
     <fragment
         android:id="@+id/accountSettingsFragment"
         android:name="tpo.seminario.breakbuddy.ui.settings.AccountSettingsFragment"
@@ -158,11 +167,9 @@
         <action
             android:id="@+id/action_accountSettingsFragment_to_wheelFragment"
             app:destination="@id/navigation_wheel"/>
-
-
-
     </fragment>
 
+    <!--Cambiar contraseña -->
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="tpo.seminario.breakbuddy.ui.settings.ChangePasswordFragment"
@@ -192,6 +199,7 @@
             />
     </fragment>
 
+    <!--Editar hobbies-->
     <fragment
         android:id="@+id/editHobbiesFragment"
         android:name="tpo.seminario.breakbuddy.ui.settings.EditHobbiesFragment"
@@ -205,6 +213,7 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+    <!--Crear grupo-->
     <fragment
         android:id="@+id/createGroupFragment"
         android:name="tpo.seminario.breakbuddy.ui.groups.CreateGroupFragment"
@@ -215,13 +224,14 @@
             app:destination="@id/createGroupFragment" />
     </fragment>
 
+    <!--Editar perfil-->
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="tpo.seminario.breakbuddy.ui.settings.EditProfileFragment"
         android:label="Editar perfil"
         tools:layout="@layout/fragment_edit_profile" />
 
-
+    <!-- Ruleta -->
     <fragment
         android:id="@+id/navigation_wheel"
         android:name="tpo.seminario.breakbuddy.ui.wheel.WheelFragment"
@@ -243,18 +253,21 @@
 
     </fragment>
 
+    <!--Test MBI-->
     <fragment
         android:id="@+id/testMBIFragment"
         android:name="tpo.seminario.breakbuddy.ui.test.TestMBIFragment"
         android:label="Test MBI"
         tools:layout="@layout/fragment_test_mbi" />
 
+    <!-- Challenge ruleta -->
     <fragment
         android:id="@+id/challengeFragment"
         android:name="tpo.seminario.breakbuddy.ui.challenge.ChallengeFragment"
         android:label="Desafío"
         tools:layout="@layout/fragment_challenge" />
 
+    <!--Lista grupos-->
     <fragment
         android:id="@+id/groupsListFragment"
         android:name="tpo.seminario.breakbuddy.ui.groups.GroupsListFragment"
@@ -291,6 +304,7 @@
             app:argType="string" />
     </fragment>
 
+    <!-- Chat del grupo -->
     <fragment
         android:id="@+id/chatFragment"
         android:name="tpo.seminario.breakbuddy.ui.chat.ChatFragment"
@@ -307,10 +321,20 @@
                 app:argType="string" />
         </action>
     </fragment>
+
+    <!--Unirse a grupo-->
     <fragment
         android:id="@+id/joinGroupFragment"
         android:name="tpo.seminario.breakbuddy.ui.groups.JoinGroupFragment"
         android:label="Unirse a Grupo"
         tools:layout="@layout/fragment_join_group" />
+
+    <!--Misiones-->
+    <fragment
+        android:id="@+id/missionsFragment"
+        android:name="tpo.seminario.breakbuddy.ui.missions.MissionsFragment"
+        android:label="Misiones"
+        tools:layout="@layout/fragment_missions" />
+
 
 </navigation>

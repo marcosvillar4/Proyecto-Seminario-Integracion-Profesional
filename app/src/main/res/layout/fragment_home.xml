@@ -8,6 +8,61 @@
     tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardMisiones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginHorizontal="24dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cardTestMBI"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/titleMisiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Micro-misiones diarias"
+                style="@style/TextAppearance.App.SubtitleMedium"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/descMisiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Elegí entre desafíos breves y conscientes para cortar el día con propósito."
+                android:textSize="14sp"
+                style="@style/TextAppearance.App.Body"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnIrAMisiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ver misiones"
+                android:backgroundTint="@color/green_500"
+                android:textColor="@android:color/white"
+                style="@style/TextAppearance.App.SubtitleMedium"
+                app:cornerRadius="8dp"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardTestMBI"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,7 +117,8 @@
     </com.google.android.material.card.MaterialCardView>
 
 
-    <!-- 2) Guideline para el banner -->
+
+    <!-- Guideline para el banner -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottom"
         android:layout_width="wrap_content"
