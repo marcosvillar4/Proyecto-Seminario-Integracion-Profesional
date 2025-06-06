@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:background="@drawable/ic_wellbeing"
+        android:contentDescription="Tomá el control de tu bienestar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tomá el control de tu bienestar"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:paddingTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pausas activas personalizadas según tu nivel de agotamiento"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:paddingTop="8dp" />
+</LinearLayout>
