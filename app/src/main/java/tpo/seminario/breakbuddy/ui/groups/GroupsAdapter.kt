@@ -96,6 +96,19 @@ class GroupsAdapter(
                 textMemberCount.text = "${group.memberCount} miembros"
                 textGroupCode.text = "Código: ${group.code}"
 
+                // Chat: sólo para grupos personales
+                if (group.type == "personal") {
+                    btnChat.visibility = View.VISIBLE
+                    btnChat.setOnClickListener {
+                        onChatClick(group)
+                    }
+                } else {
+                    // tipo "organization": ocultar o deshabilitar
+                    btnChat.visibility = View.GONE
+                    // opcional: quitar listener
+                    btnChat.setOnClickListener(null)
+                }
+
                 // Hobby (opcional)
                 if (group.hobby != null) {
                     textHobby.text = group.hobby

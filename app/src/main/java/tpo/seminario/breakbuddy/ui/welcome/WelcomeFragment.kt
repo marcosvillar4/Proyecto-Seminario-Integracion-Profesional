@@ -122,6 +122,7 @@ class WelcomeFragment : Fragment() {
     }
 
 
+    @androidx.annotation.OptIn(UnstableApi::class)
     @OptIn(UnstableApi::class)
     private fun firebaseAuthWithGoogle(idToken: String) {
         Log.d("WelcomeFragment", "Entré a firebaseAuthWithGoogle con token: $idToken")
@@ -130,24 +131,29 @@ class WelcomeFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser!!
+                    // Antes: userRepo.ensureUserDocumentExistsOrCreate(...)
                     userRepo.ensureUserDocumentExistsOrCreate(
                         user,
                         onSuccess = {
-                            userRepo.getUserProfile(
+                            // Acá antes llamamabamos a userRepo.getUser(...)
+                            // Ahora: asegurar perfil ligero y leerlo:
+                            userRepo.ensureUserProfileExists(user.uid)
+                            userRepo.getUserProfileLight(
                                 user.uid,
-                                onSuccess = { profile ->
-                                    if (!profile.hobbiesCompletados) {
+                                onSuccess = { profileLight ->
+                                    if (!profileLight.hobbiesCompletados) {
                                         findNavController().navigate(R.id.action_welcomeFragment_to_hobbiesFragment)
                                     } else {
+                                        // Ajusta destino: tal vez navigation_home o similar
                                         findNavController().navigate(R.id.action_welcomeFragment_to_navigation_home)
                                     }
                                 },
                                 onFailure = { e ->
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Error cargando perfil: ${e.message}",
-                                        Toast.LENGTH_LONG
-                                    ).show()
+                                    // Si no existe o error leyendo perfil ligero,
+                                    // podemos forzar a completar hobbies:
+                                    Log.w("WelcomeFragment", "Error leyendo perfil ligero: ${e.message}")
+                                    // Como fallback, navegamos a Hobbies:
+                                    findNavController().navigate(R.id.action_welcomeFragment_to_hobbiesFragment)
                                 }
                             )
                         },
@@ -168,6 +174,7 @@ class WelcomeFragment : Fragment() {
                 }
             }
     }
+
 
     class OnboardingAdapter(private val layouts: List<Int>) :
         RecyclerView.Adapter<OnboardingAdapter.OnboardingViewHolder>() {

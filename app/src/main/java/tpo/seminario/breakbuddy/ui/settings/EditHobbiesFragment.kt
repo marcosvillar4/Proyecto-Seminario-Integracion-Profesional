@@ -52,7 +52,7 @@ class EditHobbiesFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return view
 
         // Precargar hobbies seleccionados
-        userRepo.getUserHobbies(uid,
+        userRepo.getUserHobbiesProfile(uid,
             onSuccess = { savedList ->
                 chipList.forEach { chip ->
                     chip.isChecked = savedList.contains(chip.text.toString())
@@ -69,8 +69,8 @@ class EditHobbiesFragment : Fragment() {
                 .filter { it.isChecked }
                 .map { it.text.toString() }
 
-            userRepo.saveHobbies(
-                userId = uid,
+            userRepo.saveUserHobbiesProfile(
+                uid = uid,
                 hobbies = seleccionados,
                 onSuccess = {
                     Toast.makeText(requireContext(),

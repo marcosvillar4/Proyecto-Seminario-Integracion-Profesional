@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import tpo.seminario.breakbuddy.databinding.FragmentAccountSettingsBinding
-import tpo.seminario.breakbuddy.persistence.UserProfile
+import tpo.seminario.breakbuddy.persistence.User
 import tpo.seminario.breakbuddy.persistence.UserRepository
 
 class AccountSettingsFragment : Fragment(){
@@ -93,9 +93,9 @@ class AccountSettingsFragment : Fragment(){
         }
 
         // Leer del documento Firestore → users/{userId}
-        userRepo.getUserProfile(
+        userRepo.getUser(
             currentUser.uid,
-            onSuccess = { profile: UserProfile ->
+            onSuccess = { profile: User ->
                 // Cuando tengamos el profile, mostramos el displayName
                 val nombre = if (profile.displayName.isNotBlank()) {
                     profile.displayName

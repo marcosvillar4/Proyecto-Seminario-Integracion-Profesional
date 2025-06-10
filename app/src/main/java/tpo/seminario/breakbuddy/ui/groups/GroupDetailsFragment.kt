@@ -21,10 +21,8 @@ import tpo.seminario.breakbuddy.databinding.FragmentGroupDetailsBinding
 import tpo.seminario.breakbuddy.util.groups.Group
 import tpo.seminario.breakbuddy.util.groups.GroupMember
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import tpo.seminario.breakbuddy.util.groups.MembershipStatus
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 class GroupDetailsFragment : Fragment() {
 
@@ -34,7 +32,8 @@ class GroupDetailsFragment : Fragment() {
     private val args: GroupDetailsFragmentArgs by navArgs()
     private val viewModel: GroupsViewModel by viewModels()
     private val auth = FirebaseAuth.getInstance()
-    private lateinit var groupId: String
+    private lateinit var entityId: String
+    private lateinit var entityType: String
 
     private lateinit var membersAdapter: GroupMembersAdapter
     private var currentGroup: Group? = null
@@ -49,9 +48,9 @@ class GroupDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        groupId = args.groupId
-        if (groupId.isBlank()) {
+        entityId = args.entityId
+        entityType = args.entityType
+        if (entityId.isBlank() || entityType.isBlank()) {
             Toast.makeText(requireContext(), "ID de grupo inválido", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
             return
@@ -60,7 +59,7 @@ class GroupDetailsFragment : Fragment() {
         setupStaticUI()
         observeGroupDetails()
         observeOperationResults()
-        viewModel.loadGroupById(groupId)
+        viewModel.loadEntityById(entityId, entityType)
     }
 
     private fun setupStaticUI() {
@@ -72,8 +71,9 @@ class GroupDetailsFragment : Fragment() {
                     .setTitle("Eliminar miembro")
                     .setMessage("¿Deseas eliminar a ${member.email} del grupo?")
                     .setPositiveButton("Eliminar") { _, _ ->
-                        viewModel.removeMemberFromGroup(
-                            groupId             = groupId,
+                        viewModel.removeMemberFromEntity(
+                            entityId            = entityId,
+                            type                = entityType,
                             memberUidToRemove   = member.id,
                             memberEmailToRemove = member.email
                         )
@@ -90,7 +90,7 @@ class GroupDetailsFragment : Fragment() {
 
         binding.buttonJoinGroup.setOnClickListener {
             currentGroup?.let { grp ->
-                viewModel.joinGroup(grp.id)
+                viewModel.joinByCode(grp.id)
                 binding.buttonJoinGroup.isEnabled = false
             }
         }
@@ -99,8 +99,9 @@ class GroupDetailsFragment : Fragment() {
             val currentUid   = auth.currentUser?.uid ?: return@setOnClickListener
             val currentEmail = auth.currentUser?.email ?: ""
             currentGroup?.let { grp ->
-                viewModel.removeMemberFromGroup(
-                    groupId             = grp.id,
+                viewModel.removeMemberFromEntity(
+                    entityId            = grp.id,
+                    type                = grp.type,
                     memberUidToRemove   = currentUid,
                     memberEmailToRemove = currentEmail
                 )
@@ -149,7 +150,7 @@ class GroupDetailsFragment : Fragment() {
                 Toast.makeText(requireContext(), "Miembro eliminado", Toast.LENGTH_SHORT).show()
                 viewModel.clearRemoveMemberSuccess()
                 // Actualizo sólo este grupo
-                viewModel.loadGroupById(groupId)
+                viewModel.loadEntityById(entityId, entityType)
             }
         }
 
@@ -163,7 +164,7 @@ class GroupDetailsFragment : Fragment() {
             if (success == true) {
                 Toast.makeText(requireContext(), "Miembro agregado con éxito", Toast.LENGTH_SHORT).show()
                 viewModel.clearAddMemberSuccess()
-                viewModel.loadGroupById(groupId)
+                viewModel.loadEntityById(entityId, entityType)
             }
         }
     }
@@ -272,7 +273,7 @@ class GroupDetailsFragment : Fragment() {
             if (email.isBlank()) {
                 Toast.makeText(requireContext(), "Debes ingresar un email", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.addMemberToGroup(groupId, email)
+                viewModel.addMemberToEntity(entityId, entityType, email)
             }
             dialog.dismiss()
         }

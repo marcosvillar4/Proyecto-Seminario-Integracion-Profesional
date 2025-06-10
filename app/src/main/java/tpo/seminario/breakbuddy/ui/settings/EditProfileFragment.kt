@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import tpo.seminario.breakbuddy.databinding.FragmentEditProfileBinding
-import tpo.seminario.breakbuddy.persistence.UserProfile
+import tpo.seminario.breakbuddy.persistence.User
 import tpo.seminario.breakbuddy.persistence.UserRepository
 
 class EditProfileFragment : Fragment() {
@@ -44,9 +44,9 @@ class EditProfileFragment : Fragment() {
             return
         }
 
-        userRepo.getUserProfile(
+        userRepo.getUser(
             currentUser.uid,
-            onSuccess = { profile: UserProfile ->
+            onSuccess = { profile: User ->
                 // Cuando lleguen los datos, rellenamos los campos
                 binding.editTextName.setText(profile.displayName)
                 binding.editTextDescription.setText(profile.description ?: "")
@@ -69,7 +69,7 @@ class EditProfileFragment : Fragment() {
 
             Toast.makeText(requireContext(), "Cambios guardados", Toast.LENGTH_SHORT).show()
 
-            userRepo.updateUserProfile(
+            userRepo.updateUser(
                 userId = currentUser.uid,
                 newName = name,
                 newDescription = description,

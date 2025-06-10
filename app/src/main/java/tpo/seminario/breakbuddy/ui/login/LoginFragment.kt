@@ -68,15 +68,16 @@ class LoginFragment : Fragment() {
                             userRepo.ensureUserDocumentExists(
                                 user,
                                 onSuccess = {
-                                    // 4) Ahora lee TODO el perfil, incluyendo hobbiesComplete
-                                    userRepo.getUserProfile(
+                                    // Asegurar perfil ligero:
+                                    userRepo.ensureUserProfileExists(user.uid)
+                                    // Leer perfil ligero:
+                                    userRepo.getUserProfileLight(
                                         user.uid,
-                                        onSuccess = { profile ->
+                                        onSuccess = { profileLight ->
                                             val baseOptions = NavOptions.Builder()
                                                 .setPopUpTo(R.id.mobile_navigation, true)
                                                 .build()
-
-                                            if (!profile.hobbiesCompletados) {
+                                            if (!profileLight.hobbiesCompletados) {
                                                 findNavController().navigate(
                                                     R.id.action_loginFragment_to_hobbiesFragment,
                                                     null,
@@ -91,11 +92,13 @@ class LoginFragment : Fragment() {
                                             }
                                         },
                                         onFailure = { e ->
-                                            Toast.makeText(
-                                                requireContext(),
-                                                "Error cargando perfil: ${e.message}",
-                                                Toast.LENGTH_LONG
-                                            ).show()
+                                            Log.w("LoginFragment", "Error leyendo perfil ligero: ${e.message}")
+                                            // Fallback: forzar a Hobbies
+                                            findNavController().navigate(
+                                                R.id.action_loginFragment_to_hobbiesFragment,
+                                                null,
+                                                NavOptions.Builder().setPopUpTo(R.id.mobile_navigation, true).build()
+                                            )
                                         }
                                     )
                                 },

@@ -158,28 +158,7 @@ class CreateGroupFragment : Fragment() {
                 }
                 // Si todos existen, ahora buscamos o creamos org (si aplica)
                 if (type == "organization") {
-                    FirebaseFirestore.getInstance()
-                        .collection("organizations")
-                        .whereEqualTo("name", orgName)
-                        .get()
-                        .addOnSuccessListener { snap ->
-                            val orgIdFound: String = if (snap.isEmpty) {
-                                // No existe: creamos
-                                createOrganization(orgName) { newOrgId ->
-                                    // 5.a) Llamamos a actuallyCreateGroup con newOrgId y orgName
-                                    actuallyCreateGroup(name, allEmails, hobby, type, newOrgId, orgName)
-                                }
-                                return@addOnSuccessListener
-                            } else {
-                                // Existe: tomamos el primer ID
-                                snap.documents.first().id
-                            }
-                            // 5.b) Llamamos a actuallyCreateGroup con orgIdFound y orgName
-                            actuallyCreateGroup(name, allEmails, hobby, type, orgIdFound, orgName)
-                        }
-                        .addOnFailureListener { e ->
-                            showErrorToast("Error buscando organización: ${e.message}")
-                        }
+                    viewModel.createOrganization(orgName, allEmails, hobby)
                 } else {
                     // 5.c) Tipo "personal": no hay orgId ni orgName
                     actuallyCreateGroup(name, allEmails, hobby, type, null, null)
@@ -194,16 +173,7 @@ class CreateGroupFragment : Fragment() {
 
 
 
-private fun createOrganization(name: String, callback: (String)->Unit) {
-    val ref = FirebaseFirestore.getInstance()
-        .collection("organizations")
-        .document()
-    ref.set(mapOf("name" to name))
-        .addOnSuccessListener { callback(ref.id) }
-        .addOnFailureListener {
-            showErrorToast("No se pudo crear la organización")
-        }
-}
+
 
     private fun actuallyCreateGroup(
         name: String,
@@ -213,7 +183,14 @@ private fun createOrganization(name: String, callback: (String)->Unit) {
         orgId: String?,
         orgName: String?
     ) {
-        viewModel.createGroup(name, emails, hobby, type, orgId, orgName)
+        // Determinas tipo:
+        val type = if (binding.rbOrganization.isChecked) "organization" else "personal"
+// Para organización: no necesitas `emails`, or sí? En tu UI pides lista de emails para “grupo personal”. Para organización, típicamente solo se crea la org con el usuario actual, sin otros emails. Si quieres invitar otros miembros por email, podrías pasar esa lista a `createEntity` también. Pero generalmente:
+        if (type == "organization") {
+            viewModel.createEntity(name = orgName.toString(), emails = emails, hobby = null, type = "organization")
+        } else {
+            viewModel.createEntity(name = name, emails = emails, hobby = hobby, type = "personal")
+        }
     }
 
 

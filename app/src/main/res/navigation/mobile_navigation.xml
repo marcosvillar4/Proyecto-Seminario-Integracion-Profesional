@@ -276,7 +276,10 @@
             android:id="@+id/action_groupsList_to_groupDetails"
             app:destination="@id/groupDetailsFragment">
             <argument
-                android:name="groupId"
+                android:name="entityId"
+                app:argType="string" />
+            <argument
+                android:name="entityType"
                 app:argType="string" />
         </action>
         <action
@@ -295,8 +298,12 @@
         android:label="Detalles del Grupo"
         tools:layout="@layout/fragment_group_details">
         <argument
-            android:name="groupId"
+            android:name="entityId"
             app:argType="string" />
+        <argument
+            android:name="entityType"
+            app:argType="string" />  <!-- valores: "personal" u "organization" -->
+
     </fragment>
 
     <!-- Chat del grupo -->

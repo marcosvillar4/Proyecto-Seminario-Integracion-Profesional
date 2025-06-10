@@ -108,45 +108,80 @@ class RegisterFragment : Fragment() {
                         .addOnCompleteListener(requireActivity()) { task ->
                             if (task.isSuccessful) {
                                 val user = auth.currentUser!!
-                                // 2) Actualiza displayName en Auth (opcional)
+                                // 1) Actualizar displayName en Auth
                                 val profileUpdates = UserProfileChangeRequest.Builder()
                                     .setDisplayName(name)
                                     .build()
-
                                 user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener {
-                                        // 3) Crea el documento Firestore
+                                    .addOnCompleteListener { updateTask ->
+                                        // Incluso si falla displayName, continuamos
+                                        // 2) Crear documento en /users/{uid}
                                         userRepo.createUserDocument(
                                             user,
                                             onSuccess = {
-                                                // 4) Envía email de verificación
-                                                user.sendEmailVerification()
-                                                    .addOnSuccessListener {
-                                                        Toast.makeText(requireContext(),
-                                                            "Se envió un email de verificación a ${user.email}. Revisá tu bandeja de entrada.",
-                                                            Toast.LENGTH_LONG).show()
-                                                        // Cierra sesión para forzar verificación
-                                                        Firebase.auth.signOut()
-                                                        // Vuelve a la pantalla de bienvenida
-                                                        findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                // 3) Crear perfil ligero en /userProfiles/{uid}
+                                                userRepo.createUserProfile(
+                                                    user.uid,
+                                                    onSuccess = {
+                                                        // 4) Envía email de verificación
+                                                        user.sendEmailVerification()
+                                                            .addOnSuccessListener {
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Se envió un email de verificación a ${user.email}. Revisá tu bandeja de entrada.",
+                                                                    Toast.LENGTH_LONG
+                                                                ).show()
+                                                                // 5) Cierra sesión para forzar verificación antes de login
+                                                                Firebase.auth.signOut()
+                                                                // 6) Navega a pantalla de bienvenida o similar
+                                                                findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                            }
+                                                            .addOnFailureListener { e ->
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Error enviando verificación: ${e.message}",
+                                                                    Toast.LENGTH_LONG
+                                                                ).show()
+                                                                // Aún podemos cerrar sesión y volver
+                                                                Firebase.auth.signOut()
+                                                                findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                            }
+                                                    },
+                                                    onFailure = { eProfile ->
+                                                        // Si falla crear perfil ligero, registrar en logs y avisar usuario
+                                                        Log.w(TAG, "Error creando perfil ligero: ${eProfile.message}")
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            "Cuenta creada pero error interno al inicializar perfil. Intentá reiniciar la app.",
+                                                            Toast.LENGTH_LONG
+                                                        ).show()
+                                                        // Opcional: aun así enviamos verificación y cerramos sesión:
+                                                        user.sendEmailVerification()
+                                                            .addOnSuccessListener {
+                                                                Firebase.auth.signOut()
+                                                                findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                            }
+                                                            .addOnFailureListener {
+                                                                Firebase.auth.signOut()
+                                                                findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                            }
                                                     }
-                                                    .addOnFailureListener { e ->
-                                                        Toast.makeText(requireContext(),
-                                                            "Error enviando verificación: ${e.message}",
-                                                            Toast.LENGTH_LONG).show()
-                                                    }
+                                                )
                                             },
                                             onFailure = { e ->
+                                                // Si falla crear /users/{uid}
+                                                Log.w(TAG, "Error creando documento /users: ${e.message}")
                                                 Toast.makeText(
                                                     requireContext(),
-                                                    "Error creando perfil: ${e.message}",
+                                                    "Error interno al crear perfil. Intentá nuevamente.",
                                                     Toast.LENGTH_LONG
                                                 ).show()
+                                                // Podrías optar por borrar el usuario de Auth (auth.currentUser?.delete()) si quieres
                                             }
                                         )
                                     }
                             } else {
-                                // Si falla, muestra un mensaje al usuario
+                                // Si falla createUserWithEmailAndPassword
                                 Log.w(TAG, "createUserWithEmail:failure", task.exception)
                                 val errorMessage = task.exception?.message ?: "Error al crear la cuenta."
                                 Toast.makeText(requireContext(), "Error: $errorMessage", Toast.LENGTH_SHORT).show()

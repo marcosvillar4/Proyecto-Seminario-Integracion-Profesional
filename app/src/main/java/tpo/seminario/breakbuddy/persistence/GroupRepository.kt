@@ -13,6 +13,7 @@ class GroupRepository {
     private val auth = FirebaseAuth.getInstance()
 
     private val userRepo = UserRepository()
+    private val orgRepo = OrganizationRepository()
 
     // REEMPLAZAR la función createGroup con esta versión mejorada:
     fun createGroup(
@@ -30,6 +31,21 @@ class GroupRepository {
             onFailure("Usuario no autenticado")
             return
         }
+        if (type == "organization") {
+            // Crear organización en /organizations
+            orgRepo.createOrganization(
+                name = name,
+                emails = emails,
+                onSuccess = { code ->
+                    onSuccess(code)  // Devuelve el código de org creado
+                },
+                onFailure = { msg ->
+                    onFailure(msg)
+                }
+            )
+            return
+        }
+        // Si llegamos acá: type == "personal" o grupo manual. Creamos en /groups.
         val ownerUid = currentUser.uid
         val groupId = UUID.randomUUID().toString()
 
@@ -39,94 +55,47 @@ class GroupRepository {
             emails = emails,
             onComplete = { emailToUidMap, missingEmails ->
                 if (missingEmails.isNotEmpty()) {
-                    // Abortamos si hay emails que no existen en /users
                     onFailure("Los siguientes correos no están registrados: ${missingEmails.joinToString(", ")}")
                     return@fetchUidsForEmails
                 }
-
-                // Si llegamos acá, TODOS los emails tienen UID. Construimos la lista de memberIds:
-                val memberIdsFromEmails: List<String> = emails.map { email ->
-                    // el map contiene siempre ese email porque validamos que no haya ninguno faltante
-                    emailToUidMap[email]!!
-                }
-
-                // Asegurarnos de que el owner también esté en memberIds:
+                val memberIdsFromEmails = emails.map { emailToUidMap[it]!! }
                 val allMemberIds = (memberIdsFromEmails + ownerUid).distinct()
                 val memberCount = allMemberIds.size
-
-                // ── 2) Verificar unicidad de "organization" si aplica ───────────────────────────────────────
-                val checkOrgTask = if (type == "organization") {
-                    db.collection("groups")
-                        .whereEqualTo("type", "organization")
-                        .whereEqualTo("orgId", orgId)
-                        .get()
-                } else {
-                    // Niñera: consulta que nunca devuelve documentos
-                    db.collection("groups")
-                        .whereEqualTo("dummy", "__none__")
-                        .get()
-                }
-
-                checkOrgTask.addOnSuccessListener { snap ->
-                    if (type == "organization" && !snap.isEmpty) {
-                        onFailure("Ya existe un grupo para esta organización")
-                        return@addOnSuccessListener
+                // Generar código único de grupo personal:
+                generateUniqueGroupCode { code ->
+                    if (code == null) {
+                        onFailure("Error generando código único")
+                        return@generateUniqueGroupCode
                     }
-
-                    // ── 3) Generar código único ───────────────────────────────────────────────────────────
-                    generateUniqueGroupCode { code ->
-                        if (code == null) {
-                            onFailure("Error generando código único")
-                            return@generateUniqueGroupCode
+                    val ownerEmail = currentUser.email ?: ""
+                    val allEmailsWithOwner = (emails + ownerEmail).distinct()
+                    // Construir data:
+                    val newGroupData = hashMapOf(
+                        "name"             to name.trim(),
+                        "code"             to code,
+                        "type"             to type,  // "personal"
+                        "hobby"   to hobby?.trim(),
+                        "derivado"         to false,
+                        "organizationId"   to null,
+                        "memberIds"        to allMemberIds,
+                        "memberCount"      to memberCount,
+                        "createdAt"        to FieldValue.serverTimestamp(),
+                        "updatedAt"        to FieldValue.serverTimestamp(),
+                        "ownerUid"         to ownerUid,
+                        "emails"           to allEmailsWithOwner,
+                        // "memberHobbies" inicialmente vacío
+                        "memberHobbies"    to emptyMap<String, List<String>>()
+                    )
+                    db.collection("groups")
+                        .document(groupId)
+                        .set(newGroupData)
+                        .addOnSuccessListener {
+                            onSuccess(code)
                         }
-
-                        // ── 4) Preparar timestamps ─────────────────────────────────────────────────────────
-                        val nowMillis = System.currentTimeMillis()
-
-                        val ownerEmail = currentUser.email ?: ""
-                        val allEmailsWithOwner = (emails + ownerEmail).distinct()
-
-                        // ── 5) Construir el objeto Group completo ─────────────────────────────────────────────
-                        val newGroupData = hashMapOf(
-                            "id"               to groupId,
-                            "name"             to name.trim(),
-                            "code"             to code,
-                            "type"             to type,
-                            "hobby"            to (hobby?.trim()),
-                            "organizationName" to organizationName,
-                            "organizationId"   to orgId,
-                            "memberIds"        to allMemberIds,
-                            "memberCount"      to memberCount,
-                            "createdAt"        to FieldValue.serverTimestamp(),
-                            "updatedAt"        to FieldValue.serverTimestamp(),
-                            "isOwner"          to true,
-                            "membershipStatus" to MembershipStatus.MEMBER.name, // o si lo guardas como String/enum
-                            "ownerUid"         to ownerUid,
-                            "emails"           to allEmailsWithOwner,
-                            "orgId"            to orgId
-                        )
-
-                        // Y se guarda con:
-                        db.collection("groups")
-                            .document(groupId)
-                            .set(newGroupData)
-                            .addOnSuccessListener { onSuccess(code) }
-                            .addOnFailureListener { e ->
-                                val msg = when {
-                                    e.message?.contains("permission", true) == true ->
-                                        "No tienes permisos para crear este grupo"
-                                    e.message?.contains("network", true) == true   ->
-                                        "Error de conexión. Verifica tu internet"
-                                    else ->
-                                        "Error creando el grupo: ${e.message}"
-                                }
-                                onFailure(msg)
-                            }
-                    }
+                        .addOnFailureListener { e ->
+                            onFailure("Error creando el grupo: ${e.message}")
+                        }
                 }
-                    .addOnFailureListener { e ->
-                        onFailure("Error verificando organización: ${e.message}")
-                    }
             },
             onError = { e ->
                 onFailure("Error obteniendo UIDs de emails: ${e.message}")
@@ -172,62 +141,57 @@ class GroupRepository {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        val currentUser = auth.currentUser
-        if (currentUser == null) {
-            onFailure("Usuario no autenticado")
-            return
+        val currentUser = auth.currentUser ?: run {
+            onFailure("Usuario no autenticado"); return
         }
-
         if (code.isBlank()) {
-            onFailure("El código no puede estar vacío")
-            return
+            onFailure("El código no puede estar vacío"); return
         }
-
+        // 1) Buscar en grupos:
         db.collection("groups")
             .whereEqualTo("code", code.uppercase())
             .get()
-            .addOnSuccessListener { documents ->
-                when {
-                    documents.isEmpty -> {
-                        onFailure("Código de grupo inválido")
+            .addOnSuccessListener { docs ->
+                if (!docs.isEmpty) {
+                    // Unirse a grupo personal:
+                    val doc = docs.documents.first()
+                    val groupId = doc.id
+                    // Lógica de agregar memberIds y emails, similar a tu método actual:
+                    val uid = currentUser.uid
+                    val email = currentUser.email ?: ""
+                    // Verificar si ya es miembro:
+                    val existingEmails = doc.get("emails") as? List<String> ?: emptyList()
+                    if (existingEmails.contains(email)) {
+                        onFailure("Ya eres miembro de este grupo")
+                        return@addOnSuccessListener
                     }
-                    documents.size() > 1 -> {
-                        onFailure("Error: código duplicado encontrado")
-                    }
-                    else -> {
-                        val groupDoc = documents.documents.first()
-                        val group = groupDoc.toObject(Group::class.java)
-
-                        if (group?.emails?.contains(currentUser.email) == true) {
-                            onFailure("Ya eres miembro de este grupo")
-                            return@addOnSuccessListener
+                    db.collection("groups").document(groupId)
+                        .update(
+                            "memberIds", FieldValue.arrayUnion(uid),
+                            "emails", FieldValue.arrayUnion(email),
+                            "memberCount", FieldValue.increment(1),
+                            "updatedAt", FieldValue.serverTimestamp()
+                        )
+                        .addOnSuccessListener { onSuccess() }
+                        .addOnFailureListener { e ->
+                            onFailure("Error uniéndose al grupo: ${e.message}")
                         }
-
-                        // Agregar usuario al grupo
-                        db.collection("groups").document(groupDoc.id)
-                            .update("emails", FieldValue.arrayUnion(currentUser.email))
-                            .addOnSuccessListener { onSuccess() }
-                            .addOnFailureListener { exception ->
-                                val errorMessage = when {
-                                    exception.message?.contains("permission", ignoreCase = true) == true ->
-                                        "No tienes permisos para unirte a este grupo"
-                                    else -> "Error uniéndose al grupo: ${exception.message}"
-                                }
-                                onFailure(errorMessage)
-                            }
-                    }
+                } else {
+                    // No existe en grupos → buscar en organizaciones
+                    OrganizationRepository().joinOrganizationByCode(
+                        code = code.uppercase(),
+                        onSuccess = { onSuccess() },
+                        onFailure = { msgOrg ->
+                            // Si tampoco en orgs, devolvemos el error final
+                            onFailure(msgOrg)
+                        }
+                    )
                 }
             }
-            .addOnFailureListener { exception ->
-                val errorMessage = when {
-                    exception.message?.contains("network", ignoreCase = true) == true ->
-                        "Error de conexión. Verifica tu internet"
-                    else -> "Error buscando el grupo: ${exception.message}"
-                }
-                onFailure(errorMessage)
+            .addOnFailureListener { e ->
+                onFailure("Error buscando grupo: ${e.message}")
             }
     }
-
 
     /**
      * Agrega un nuevo miembro al grupo identificado por groupId, buscando primero su UID a través del email.

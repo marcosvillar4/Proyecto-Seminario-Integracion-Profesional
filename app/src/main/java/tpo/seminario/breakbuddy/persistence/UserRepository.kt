@@ -2,6 +2,7 @@ package tpo.seminario.breakbuddy.persistence
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -10,7 +11,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import java.util.Date
 
 // Modelo de datos de usuario
-data class UserProfile(
+data class User(
     val uid: String = "",
     val displayName: String = "",
     val email: String = "",
@@ -18,9 +19,16 @@ data class UserProfile(
     val createdAt: Date? = null,
     val lastLogin: Date? = null,
     val fcmToken: String? = null,
-    val hobbiesCompletados: Boolean = false,
-    val hobbies: List<String> = emptyList(),
     val description: String? = null
+)
+
+data class UserProfile(
+    @DocumentId
+    val uid: String = "",
+    val hobbies: List<String> = emptyList(),
+    val hobbiesCompletados: Boolean = false,
+    val orgIds: List<String> = emptyList(),
+    val personalGroupIds: List<String> = emptyList()
 )
 
 class UserTokenRepository {
@@ -38,7 +46,119 @@ class UserTokenRepository {
 class UserRepository {
     private val db = Firebase.firestore
     private val usersCollection = db.collection("users")
+    private val profilesCollection = db.collection("userProfiles")
     private val TAG = "UserRepository"
+
+
+    /**
+     * Lee el perfil ligero completo de /userProfiles/{uid}.
+     */
+    fun getUserProfileLight(
+        uid: String,
+        onSuccess: (UserProfile) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        profilesCollection.document(uid)
+            .get()
+            .addOnSuccessListener { doc ->
+                if (doc.exists()) {
+                    // Mapear a UserProfile
+                    try {
+                        val profile = doc.toObject(UserProfile::class.java)
+                        if (profile != null) {
+                            onSuccess(profile)
+                        } else {
+                            onFailure(IllegalStateException("Perfil ligero inválido"))
+                        }
+                    } catch (e: Exception) {
+                        onFailure(e)
+                    }
+                } else {
+                    onFailure(IllegalStateException("Perfil ligero no encontrado"))
+                }
+            }
+            .addOnFailureListener { e ->
+                onFailure(e)
+            }
+    }
+
+    // Asegurar existencia de perfil ligero:
+    fun ensureUserProfileExists(uid: String) {
+        profilesCollection.document(uid)
+            .get()
+            .addOnSuccessListener { doc ->
+                if (!doc.exists()) {
+                    createUserProfile(uid,
+                        onSuccess = { /* no-op */ },
+                        onFailure = { e ->
+                            Log.w(TAG, "Error creando perfil ligero en ensureUserProfileExists", e)
+                        }
+                    )
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error leyendo perfil ligero en ensureUserProfileExists", e)
+            }
+    }
+    // 1) Crear perfil ligero al registrarse
+    fun createUserProfile(
+        uid: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val profile = mapOf(
+            "hobbies" to emptyList<String>(),
+            "hobbiesCompletados" to false,
+            "orgIds" to emptyList<String>(),
+            "personalGroupIds" to emptyList<String>()
+        )
+        db.collection("userProfiles")
+            .document(uid)
+            .set(profile)
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener { e -> onFailure(e) }
+    }
+
+    // 2) Leer hobbies desde userProfiles
+    fun getUserHobbiesProfile(
+        uid: String,
+        onSuccess: (List<String>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        db.collection("userProfiles")
+            .document(uid)
+            .get()
+            .addOnSuccessListener { doc ->
+                if (doc.exists()) {
+                    @Suppress("UNCHECKED_CAST")
+                    val list = doc.get("hobbies") as? List<String> ?: emptyList()
+                    onSuccess(list)
+                } else {
+                    onFailure(IllegalStateException("Perfil ligero no encontrado"))
+                }
+            }
+            .addOnFailureListener(onFailure)
+    }
+
+    // 3) Guardar hobbies en userProfiles
+    fun saveUserHobbiesProfile(
+        uid: String,
+        hobbies: List<String>,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val data = mapOf(
+            "hobbies" to hobbies,
+            "hobbiesCompletados" to true
+        )
+        db.collection("userProfiles")
+            .document(uid)
+            .set(data, SetOptions.merge())
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener(onFailure)
+    }
+
+
 
 
     /**
@@ -60,6 +180,7 @@ class UserRepository {
                     usersCollection.document(userId)
                         .set(updateData, SetOptions.merge())
                         .addOnSuccessListener {
+                            ensureUserProfileExists(userId)
                             onSuccess()
                         }
                         .addOnFailureListener { e ->
@@ -75,13 +196,12 @@ class UserRepository {
                         "createdAt" to FieldValue.serverTimestamp(),
                         "lastLogin" to FieldValue.serverTimestamp(),
                         "fcmToken"  to "",
-                        "hobbiesCompletados" to false,
-                        "hobbies" to emptyList<String>(),
                         "orgID" to null
                     )
                     usersCollection.document(userId)
                         .set(userData)
                         .addOnSuccessListener {
+                            createUserProfile(userId, { /*no-op*/ }, { /*log*/ })
                             onSuccess()
                         }
                         .addOnFailureListener { e ->
@@ -119,9 +239,6 @@ class UserRepository {
             "lastLogin" to FieldValue.serverTimestamp(),
             "fcmToken" to "", // Inicializamos fcmToken como null
             // Si quieres inicializar hobbiesCompletados = false:
-            "hobbiesCompletados" to false,
-            // Si deseas mantener campos vacíos por defecto:
-            "hobbies" to emptyList<String>(),
             "description" to "",
 
         )
@@ -132,6 +249,13 @@ class UserRepository {
             .addOnSuccessListener {
                 Log.d(TAG, "Documento del usuario $userId creado/actualizado con éxito.")
                 onSuccess()
+                createUserProfile(userId,
+                    onSuccess = { onSuccess() },
+                    onFailure = { e ->
+                        Log.w(TAG, "No pude crear userProfile", e)
+                        onFailure(e)
+                    }
+                )
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error creando/actualizando documento del usuario $userId.", e)
@@ -168,9 +292,9 @@ class UserRepository {
     /**
      * Obtiene el perfil de usuario y lo mapea a UserProfile.
      */
-    fun getUserProfile(
+    fun getUser(
         userId: String,
-        onSuccess: (UserProfile) -> Unit,
+        onSuccess: (User) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
         usersCollection.document(userId)
@@ -178,7 +302,7 @@ class UserRepository {
             .addOnSuccessListener { doc ->
                 if (doc != null && doc.exists()) {
                     val data = doc.data ?: emptyMap<String, Any>()
-                    val profile = UserProfile(
+                    val profile = User(
                         uid = userId,
                         displayName = data["displayName"] as? String ?: "",
                         email = data["email"] as? String ?: "",
@@ -186,8 +310,6 @@ class UserRepository {
                         createdAt = doc.getTimestamp("createdAt")?.toDate(),
                         lastLogin = doc.getTimestamp("lastLogin")?.toDate(),
                         fcmToken = data["fcmToken"] as? String,    // <-- mapeo de fcmToken
-                        hobbiesCompletados = data["hobbiesCompletados"] as? Boolean ?: false,
-                        hobbies = data["hobbies"] as? List<String> ?: emptyList(),
                         description = data["description"] as? String ?: ""
                     )
                     onSuccess(profile)
@@ -201,46 +323,9 @@ class UserRepository {
             }
     }
 
-    /**
-     * Guarda la lista de hobbies y marca hobbiesCompletados = true.
-     */
-    fun saveHobbies(
-        userId: String,
-        hobbies: List<String>,
-        onSuccess: () -> Unit,
-        onFailure: (Exception) -> Unit
-    ) {
-        val data = mapOf(
-            "hobbies" to hobbies,
-            "hobbiesCompletados" to true
-        )
-        usersCollection.document(userId)
-            .set(data, SetOptions.merge())
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { e -> onFailure(e) }
-    }
-    /**
-    * Recupera solo el array de hobbies del usuario.
-    */
-    fun getUserHobbies(
-        userId: String,
-        onSuccess: (List<String>) -> Unit,
-        onFailure: (Exception) -> Unit
-    ) {
-        usersCollection.document(userId)
-            .get()
-            .addOnSuccessListener { doc ->
-                if (doc.exists()) {
-                    val data = doc.get("hobbies") as? List<String> ?: emptyList()
-                    onSuccess(data)
-                } else {
-                    onFailure(IllegalStateException("Usuario no encontrado"))
-                }
-            }
-            .addOnFailureListener(onFailure)
-    }
 
-    fun updateUserProfile(
+
+    fun updateUser(
         userId: String,
         newName: String,
         newDescription: String,

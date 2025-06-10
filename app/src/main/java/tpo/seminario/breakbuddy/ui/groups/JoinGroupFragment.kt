@@ -90,7 +90,7 @@ class JoinGroupFragment : Fragment() {
         } else {
             val currentUser = auth.currentUser
             if (currentUser != null) {
-                viewModel.searchGroupsByCode(id)
+                viewModel.joinByCode(id)
                 Toast.makeText(context, "Unido al grupo con exito", Toast.LENGTH_LONG).show()
             }
         }

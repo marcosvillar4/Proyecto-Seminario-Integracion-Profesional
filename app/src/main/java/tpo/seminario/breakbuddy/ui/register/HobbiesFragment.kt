@@ -85,8 +85,8 @@ class HobbiesFragment : Fragment() {
             return
         }
 
-        userRepo.saveHobbies(
-            userId = uid,
+        userRepo.saveUserHobbiesProfile(
+            uid = uid,
             hobbies = seleccionados,
             onSuccess = {
                 Toast.makeText(requireContext(),

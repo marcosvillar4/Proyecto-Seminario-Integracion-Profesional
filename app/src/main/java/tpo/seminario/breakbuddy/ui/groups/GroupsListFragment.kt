@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentGroupsListBinding
 import tpo.seminario.breakbuddy.util.groups.Group
@@ -45,7 +46,7 @@ class GroupsListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         // Solo recarga de Firestore, no toca filtros ni lista vacía:
-        viewModel.loadUserGroups()
+        viewModel.loadUserGroupsAndOrgs()
     }
 
     private fun setupViews() {
@@ -62,7 +63,7 @@ class GroupsListFragment : Fragment() {
 
         // Pull to refresh
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadUserGroups()
+            viewModel.loadUserGroupsAndOrgs()
         }
 
         // Configurar búsqueda
@@ -81,18 +82,32 @@ class GroupsListFragment : Fragment() {
     private fun setupRecyclerView() {
         groupsAdapter = GroupsAdapter(
             onGroupClick = { group ->
-                // Navegar a detalles del grupo
                 val action = GroupsListFragmentDirections
-                    .actionGroupsListToGroupDetails(group.id)
+                    .actionGroupsListToGroupDetails(entityId = group.id, entityType = group.type)
                 findNavController().navigate(action)
             },
             onJoinClick = { group ->
-                // Mostrar diálogo para unirse al grupo
-                showJoinGroupDialog(group)
+                // Confirmación
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Unirse")
+                    .setMessage("¿Deseas unirte a '${group.name}'?")
+                    .setPositiveButton("Unirse") { _,_ ->
+                        viewModel.joinByCode(group.code)
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
             },
             onLeaveClick = { group ->
-                // Mostrar confirmación para salir del grupo
-                showLeaveGroupDialog(group)
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Salir")
+                    .setMessage("¿Deseas salir de '${group.name}'?")
+                    .setPositiveButton("Salir") { _,_ ->
+                        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@setPositiveButton
+                        val email = FirebaseAuth.getInstance().currentUser?.email ?: ""
+                        viewModel.removeMemberFromEntity(group.id, group.type, uid, email)
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
             },
             onChatClick = { group ->
                 // Navegar al ChatFragment, pasando group.id
@@ -121,7 +136,7 @@ class GroupsListFragment : Fragment() {
     }
 
     private fun loadGroups() {
-        viewModel.loadUserGroups()
+        viewModel.loadUserGroupsAndOrgs()
     }
 
     private fun applyFilter(filter: GroupFilter) {
@@ -173,10 +188,11 @@ class GroupsListFragment : Fragment() {
 
     private fun showJoinGroupDialog(group: Group) {
         AlertDialog.Builder(requireContext())
-            .setTitle("Unirse al grupo")
-            .setMessage("¿Deseas unirte al grupo '${group.name}'?")
+            .setTitle(if (group.type=="organization") "Unirse a la organización" else "Unirse al grupo")
+            .setMessage("¿Deseas unirte a '${group.name}'?")
             .setPositiveButton("Unirse") { _, _ ->
-                viewModel.joinGroup(group.id)
+                // Usualmente joinByCode usa el código
+                viewModel.joinByCode(group.code)
             }
             .setNegativeButton("Cancelar", null)
             .show()
@@ -184,10 +200,24 @@ class GroupsListFragment : Fragment() {
 
     private fun showLeaveGroupDialog(group: Group) {
         AlertDialog.Builder(requireContext())
-            .setTitle("Salir del grupo")
-            .setMessage("¿Estás seguro de que deseas salir del grupo '${group.name}'?")
+            .setTitle(if (group.type == "organization") "Salir de la organización" else "Salir del grupo")
+            .setMessage("¿Estás seguro de que deseas " +
+                    if (group.type == "organization") "salir de '${group.name}'?"
+                    else "salir del grupo '${group.name}'?")
             .setPositiveButton("Salir") { _, _ ->
-                viewModel.leaveGroup(group.id)
+                val currentUser = FirebaseAuth.getInstance().currentUser
+                if (currentUser == null) {
+                    Toast.makeText(requireContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                val uid = currentUser.uid
+                val email = currentUser.email ?: ""
+                viewModel.removeMemberFromEntity(
+                    entityId = group.id,
+                    type = group.type,
+                    memberUidToRemove = uid,
+                    memberEmailToRemove = email
+                )
             }
             .setNegativeButton("Cancelar", null)
             .show()
