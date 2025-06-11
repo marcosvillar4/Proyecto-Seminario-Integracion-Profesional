@@ -69,9 +69,9 @@ class EditHobbiesFragment : Fragment() {
                 .filter { it.isChecked }
                 .map { it.text.toString() }
 
-            userRepo.saveUserHobbiesProfile(
-                uid = uid,
-                hobbies = seleccionados,
+            userRepo.saveUserHobbiesProfileWithSync(
+                uid        = uid,
+                newHobbies = seleccionados,
                 onSuccess = {
                     Toast.makeText(requireContext(),
                         "Hobbies actualizados", Toast.LENGTH_SHORT).show()
@@ -118,4 +118,5 @@ class EditHobbiesFragment : Fragment() {
 
         }
     }
+
 }

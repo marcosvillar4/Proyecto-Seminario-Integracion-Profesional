@@ -3,6 +3,7 @@ package tpo.seminario.breakbuddy.persistence
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import tpo.seminario.breakbuddy.util.groups.Group
 import tpo.seminario.breakbuddy.util.groups.MembershipStatus
 import java.util.UUID
@@ -90,7 +91,49 @@ class GroupRepository {
                         .document(groupId)
                         .set(newGroupData)
                         .addOnSuccessListener {
-                            onSuccess(code)
+                            // 5) Tras creación: hacer batch para:
+                            //    - Actualizar cada userProfiles/{uid}.groupIds arrayUnion groupId
+                            //    - Recoger hobbies de cada userProfiles/{uid} y actualizar memberHobbies
+                            val batch = db.batch()
+                            for (uid in allMemberIds) {
+                                val uRef = db.collection("userProfiles").document(uid)
+                                batch.set(uRef, mapOf(
+                                    "groupIds" to FieldValue.arrayUnion(groupId),
+                                    "updatedAt" to FieldValue.serverTimestamp()
+                                ), SetOptions.merge())
+                            }
+                            // Obtener hobbies actuales de cada usuario
+                            // Nota: no podemos en batch esperar gets, haremos Promise.all previo o secuencial:
+                            // Primero, leemos todos userProfiles
+                            db.runTransaction { tx ->
+                                // en transacción, leemos cada perfil y construimos memberHobbies map
+                                val memberHobbiesMap = mutableMapOf<String, List<String>>()
+                                for (uid in allMemberIds) {
+                                    val snap = tx.get(db.collection("userProfiles").document(uid))
+                                    val hobbies = (snap.get("hobbies") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                                    memberHobbiesMap[uid] = hobbies
+                                }
+                                // Actualizar en el grupo: memberHobbies y updatedAt
+                                val gRef = db.collection("groups").document(groupId)
+                                tx.update(gRef, mapOf(
+                                    "memberHobbies" to memberHobbiesMap,
+                                    "updatedAt" to FieldValue.serverTimestamp()
+                                ))
+                                // También los userProfiles anteriores se actualizaron via batch fuera de la transacción?
+                                // Aquí dentro solo actualizamos grupo. La actualización de userProfiles groupIds
+                                // la hacemos fuera del runTransaction con batch.commit().
+                                null
+                            }.addOnSuccessListener {
+                                // Commit del batch de userProfiles
+                                batch.commit().addOnSuccessListener {
+                                    onSuccess(code)
+                                }.addOnFailureListener { e ->
+                                    // aunque falle userProfiles, grupo ya existe; al menos retornamos success
+                                    onFailure("Grupo creado, pero fallo al actualizar perfiles: ${e.message}")
+                                }
+                            }.addOnFailureListener { e ->
+                                onFailure("Error sincronizando hobbies en grupo: ${e.message}")
+                            }
                         }
                         .addOnFailureListener { e ->
                             onFailure("Error creando el grupo: ${e.message}")
@@ -172,7 +215,37 @@ class GroupRepository {
                             "memberCount", FieldValue.increment(1),
                             "updatedAt", FieldValue.serverTimestamp()
                         )
-                        .addOnSuccessListener { onSuccess() }
+                        .addOnSuccessListener {
+                            // 2) Luego: actualizar userProfile y memberHobbies
+                            // Leemos hobbies del userProfile actual
+                            db.collection("userProfiles").document(uid).get()
+                                .addOnSuccessListener { upSnap ->
+                                    val hobbies = (upSnap.get("hobbies") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                                    // Batch para:
+                                    //  - arrayUnion groupId en userProfiles/{uid}.groupIds
+                                    //  - set memberHobbies[uid] = hobbies en groups/{groupId}
+                                    val batch = db.batch()
+                                    val uRef = db.collection("userProfiles").document(uid)
+                                    batch.set(uRef, mapOf(
+                                        "groupIds" to FieldValue.arrayUnion(groupId),
+                                        "updatedAt" to FieldValue.serverTimestamp()
+                                    ), SetOptions.merge())
+                                    val gRef = db.collection("groups").document(groupId)
+                                    // Se usa merge: actualizamos solo la entrada de memberHobbies
+                                    batch.set(gRef, mapOf(
+                                        "memberHobbies" to mapOf(uid to hobbies),
+                                        "updatedAt" to FieldValue.serverTimestamp()
+                                    ), SetOptions.merge())
+                                    batch.commit().addOnSuccessListener {
+                                        onSuccess()
+                                    }.addOnFailureListener { e ->
+                                        onFailure("Te uniste, pero fallo al actualizar perfiles: ${e.message}")
+                                    }
+                                }
+                                .addOnFailureListener { e ->
+                                    onFailure("Te uniste, pero no pude leer tus hobbies para sincronizar: ${e.message}")
+                                }
+                        }
                         .addOnFailureListener { e ->
                             onFailure("Error uniéndose al grupo: ${e.message}")
                         }
@@ -202,48 +275,72 @@ class GroupRepository {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        // 1) Buscar en /users el doc con campo "email" == email
+        // Formato email ya validado antes por el caller
         db.collection("users")
             .whereEqualTo("email", email)
             .get()
             .addOnSuccessListener { snap ->
                 if (snap.isEmpty) {
-                    // No existe ningún usuario con ese email
                     onFailure("El email \"$email\" no está registrado.")
                     return@addOnSuccessListener
                 }
-                // Tomamos el primer documento (debería haber solo uno)
-                val userDoc = snap.documents.first()
-                val uid = userDoc.id
-
-                // 2) Actualizamos el documento del grupo
-                val groupRef = db.collection("groups").document(groupId)
-                // Hacemos las dos actualizaciones en paralelo: emails y memberIds
-                groupRef.update(
-                    mapOf(
-                        "emails" to FieldValue.arrayUnion(email),
-                        "memberIds" to FieldValue.arrayUnion(uid)
-                    )
-                )
-                    .addOnSuccessListener {
-                        onSuccess()
+                val uid = snap.documents.first().id
+                // 1) Actualizar grupo: agregar member
+                val gRef = db.collection("groups").document(groupId)
+                gRef.get().addOnSuccessListener { groupSnap ->
+                    if (!groupSnap.exists()) {
+                        onFailure("El grupo no existe.")
+                        return@addOnSuccessListener
                     }
-                    .addOnFailureListener { e ->
-                        val msg = when {
-                            e.message?.contains("permission", true) == true ->
-                                "No tienes permisos para modificar este grupo."
-                            e.message?.contains("network", true) == true ->
-                                "Error de conexión al intentar agregar miembro."
-                            else ->
-                                "Error agregando miembro: ${e.message}"
-                        }
-                        onFailure(msg)
+                    val existingEmails = (groupSnap.get("emails") as? List<String>) ?: emptyList()
+                    if (existingEmails.contains(email)) {
+                        onFailure("Ese usuario ya es miembro.")
+                        return@addOnSuccessListener
                     }
+                    // Hacemos update membership
+                    gRef.update(
+                        "memberIds", FieldValue.arrayUnion(uid),
+                        "emails", FieldValue.arrayUnion(email),
+                        "memberCount", FieldValue.increment(1),
+                        "updatedAt", FieldValue.serverTimestamp()
+                    ).addOnSuccessListener {
+                        // 2) Leer hobbies del userProfile del nuevo miembro
+                        db.collection("userProfiles").document(uid).get()
+                            .addOnSuccessListener { upSnap ->
+                                val hobbies = (upSnap.get("hobbies") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                                // 3) Batch: actualizar userProfile y grupo
+                                val batch = db.batch()
+                                val uRef = db.collection("userProfiles").document(uid)
+                                batch.set(uRef, mapOf(
+                                    "groupIds" to FieldValue.arrayUnion(groupId),
+                                    "updatedAt" to FieldValue.serverTimestamp()
+                                ), SetOptions.merge())
+                                val gRef2 = db.collection("groups").document(groupId)
+                                batch.set(gRef2, mapOf(
+                                    "memberHobbies" to mapOf(uid to hobbies),
+                                    "updatedAt" to FieldValue.serverTimestamp()
+                                ), SetOptions.merge())
+                                batch.commit().addOnSuccessListener {
+                                    onSuccess()
+                                }.addOnFailureListener { e ->
+                                    onFailure("Miembro agregado, pero fallo sincronización: ${e.message}")
+                                }
+                            }
+                            .addOnFailureListener { e ->
+                                onFailure("Agregaste al miembro, pero no pude leer hobbies: ${e.message}")
+                            }
+                    }.addOnFailureListener { e ->
+                        onFailure("Error agregando miembro: ${e.message}")
+                    }
+                }.addOnFailureListener { e ->
+                    onFailure("Error leyendo grupo: ${e.message}")
+                }
             }
             .addOnFailureListener { e ->
                 onFailure("Error buscando usuario: ${e.message}")
             }
     }
+
     /**
      * Quita un miembro (memberUidToRemove) de un grupo.
      * - Remueve su UID de "memberIds" y su email de "emails".
@@ -259,71 +356,68 @@ class GroupRepository {
         onFailure: (String) -> Unit
     ) {
         val groupRef = db.collection("groups").document(groupId)
-
         db.runTransaction { transaction ->
-            // 1) Leemos el documento
-            val snapshot = transaction.get(groupRef)
-            if (!snapshot.exists()) {
-                throw Exception("El grupo no existe.")
-            }
-
-            // 2) Extraemos listas actuales de memberIds y emails
-            val currentMemberIds = (snapshot.get("memberIds") as? List<String>) ?: emptyList()
-            val currentEmails    = (snapshot.get("emails")    as? List<String>) ?: emptyList()
-
-            // 3) Obtenemos el ownerUid
-            val currentOwnerUid  = snapshot.getString("ownerUid")
-                ?: throw Exception("Falta el campo ownerUid en el grupo.")
-
-            // 4) Verificamos que ese UID efectivamente permanezca en memberIds
+            val snap = transaction.get(groupRef)
+            if (!snap.exists()) throw Exception("El grupo no existe.")
+            val currentMemberIds = (snap.get("memberIds") as? List<String>) ?: emptyList()
             if (!currentMemberIds.contains(memberUidToRemove)) {
                 throw Exception("El usuario no es miembro de este grupo.")
             }
-
-            // 5) Generamos las nuevas listas quitando a este miembro
+            // Nueva lista
             val newMemberIds = currentMemberIds.filter { it != memberUidToRemove }
+            val currentEmails = (snap.get("emails") as? List<String>) ?: emptyList()
             val newEmailsMutable = currentEmails.toMutableList()
-            val indexToRemove = currentMemberIds.indexOf(memberUidToRemove)
-            if (indexToRemove in newEmailsMutable.indices) {
-                newEmailsMutable.removeAt(indexToRemove)
-            }
-            val newEmails = newEmailsMutable.toList()
-
-            // 6) Contamos cuántos miembros quedarían
+            val idx = currentMemberIds.indexOf(memberUidToRemove)
+            if (idx in newEmailsMutable.indices) newEmailsMutable.removeAt(idx)
             val newCount = newMemberIds.size
-
-            // 7) Si después de quitar quedan 0 miembros, borramos el documento
             if (newCount == 0) {
+                // borrar grupo
                 transaction.delete(groupRef)
+                // En este caso, still remove groupId de userProfile más abajo
                 return@runTransaction null
             }
-
-            // 8) Si aún quedan >0, y se eliminó al dueño, reasignamos un nuevo owner
+            // Owner reasignación si aplica
+            val currentOwnerUid = snap.getString("ownerUid") ?: throw Exception("Falta ownerUid")
             var newOwner = currentOwnerUid
             if (memberUidToRemove == currentOwnerUid) {
-                // Como aquí newMemberIds no está vacío (newCount>0), sí podemos hacer first()
                 newOwner = newMemberIds.first()
             }
-
-            // 9) Armamos el mapa de actualizaciones (sin borrar, simplemente actualizamos campos)
-            val updates = mapOf(
-                "memberIds"   to newMemberIds,
-                "emails"      to newEmails,
+            // Actualizar fields
+            transaction.update(groupRef, mapOf(
+                "memberIds" to newMemberIds,
+                "emails" to newEmailsMutable,
                 "memberCount" to newCount,
-                "ownerUid"    to newOwner,
-                "updatedAt"   to FieldValue.serverTimestamp()
-            )
-            transaction.update(groupRef, updates)
-
+                "ownerUid" to newOwner,
+                "updatedAt" to FieldValue.serverTimestamp()
+            ))
             return@runTransaction null
+        }.addOnSuccessListener {
+            // Tras transacción exitosa en group doc, actualizar userProfile y group.memberHobbies
+            // 1) userProfile arrayRemove groupId
+            val uRef = db.collection("userProfiles").document(memberUidToRemove)
+            uRef.update("groupIds", FieldValue.arrayRemove(groupId), "updatedAt", FieldValue.serverTimestamp())
+                .addOnSuccessListener {
+                    // 2) group.memberHobbies remove key
+                    // Para eliminar la clave dentro de un map, usamos update con FieldValue.delete()
+                    db.collection("groups").document(groupId)
+                        .update("memberHobbies.${memberUidToRemove}", FieldValue.delete(),
+                            "updatedAt", FieldValue.serverTimestamp())
+                        .addOnSuccessListener {
+                            onSuccess()
+                        }
+                        .addOnFailureListener { e ->
+                            // El grupo quedó modificado en membership, pero no pudo borrar hobbies. Notificar.
+                            onFailure("Miembro eliminado, pero fallo al limpiar hobbies: ${e.message}")
+                        }
+                }
+                .addOnFailureListener { e ->
+                    onFailure("Miembro eliminado, pero fallo al actualizar perfil: ${e.message}")
+                }
+        }.addOnFailureListener { e ->
+            onFailure(e.message ?: "Error al eliminar miembro")
         }
-            .addOnSuccessListener {
-                onSuccess()
-            }
-            .addOnFailureListener { e ->
-                onFailure(e.message ?: "Error al eliminar miembro")
-            }
     }
+
 
 
 

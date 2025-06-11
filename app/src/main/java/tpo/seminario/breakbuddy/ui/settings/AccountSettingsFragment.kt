@@ -1,7 +1,7 @@
 package tpo.seminario.breakbuddy.ui.settings
 
 import android.os.Bundle
-import tpo.seminario.breakbuddy.R
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,110 +11,104 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestoreException
+import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentAccountSettingsBinding
 import tpo.seminario.breakbuddy.persistence.User
 import tpo.seminario.breakbuddy.persistence.UserRepository
 
-class AccountSettingsFragment : Fragment(){
-    private var _binding: FragmentAccountSettingsBinding? = null;
+class AccountSettingsFragment : Fragment() {
+    private var _binding: FragmentAccountSettingsBinding? = null
     private val binding get() = _binding!!
 
-    // 1) Instancia de FirebaseAuth
     private val auth = FirebaseAuth.getInstance()
-
-    // 2) Instancia del repositorio de usuarios
     private val userRepo = UserRepository()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View{
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentAccountSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        Log.d("AccountSettings", "ViewCreated: setting up UI and fetching user name")
 
         Glide.with(this)
-            .load(R.drawable.ic_default_avatar) // Imagen por defecto
+            .load(R.drawable.ic_default_avatar)
             .into(binding.profileImageView)
 
-        //Editar perfil
         binding.cardEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_accountSettingsFragment_to_editProfileFragment)
+            findNavController().navigate(
+                R.id.action_accountSettingsFragment_to_editProfileFragment
+            )
         }
 
-        // Cambiar hobbies
         binding.cardEditHobbies.setOnClickListener {
-            findNavController().navigate(R.id.action_accountSettingsFragment_to_editHobbiesFragment)
+            findNavController().navigate(
+                R.id.action_accountSettingsFragment_to_editHobbiesFragment
+            )
         }
 
-        //Cambiar contraseña
         binding.cardChangePassword.setOnClickListener {
-            findNavController().navigate(R.id.action_accountSettingsFragment_to_changePasswordFragment)
+            findNavController().navigate(
+                R.id.action_accountSettingsFragment_to_changePasswordFragment
+            )
         }
 
-        //Cerrar sesión
         binding.btnLogout.setOnClickListener {
-            // 1) Desloguear
-            FirebaseAuth.getInstance().signOut()
-
-            // 2) Navegar al login limpiando la pila
+            auth.signOut()
             val options = NavOptions.Builder()
-                // Se usa el id del nav graph root para vaciar todo
                 .setPopUpTo(R.id.mobile_navigation, true)
                 .build()
-
             findNavController().navigate(
                 R.id.action_accountSettingsFragment_to_loginFragment,
                 null,
                 options
             )
+        }
 
-    }
         fetchAndShowUserName()
     }
 
-
     override fun onResume() {
         super.onResume()
-        // Cada vez que el fragmento vuelve a aparecer (por ejemplo tras EditProfile), recargamos el nombre
+        Log.d("AccountSettings", "onResume: refreshing user name")
         fetchAndShowUserName()
     }
 
     private fun fetchAndShowUserName() {
         val currentUser = auth.currentUser
         if (currentUser == null) {
+            Log.w("AccountSettings", "No user logged in, showing default greeting")
             binding.textGreeting.text = "¡Hola, usuario!"
             return
         }
 
-        // Leer del documento Firestore → users/{userId}
+        Log.d("AccountSettings", "Fetching profile for uid=${currentUser.uid}")
         userRepo.getUser(
             currentUser.uid,
             onSuccess = { profile: User ->
-                // Cuando tengamos el profile, mostramos el displayName
-                val nombre = if (profile.displayName.isNotBlank()) {
-                    profile.displayName
-                } else {
-                    "usuario"
-                }
+                // Evitar NPE si vista ya destruida
+                if (!isAdded || _binding == null) return@getUser
+                val nombre = profile.displayName.takeIf { it.isNotBlank() } ?: "usuario"
+                Log.d("AccountSettings", "Profile loaded: displayName=$nombre")
                 binding.textGreeting.text = "¡Hola, $nombre!"
             },
-            onFailure = { exception ->
-                // Si falla, igual mostramos algo
+            onFailure = onFailure@{ exception: Exception ->
+                if (!isAdded || _binding == null) return@onFailure
+                Log.e("AccountSettings", "Error loading profile", exception)
                 binding.textGreeting.text = "¡Hola, usuario!"
-                Toast.makeText(
-                    requireContext(),
-                    "Error cargando nombre: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val msg = when (exception) {
+                    is FirebaseFirestoreException -> "Error de red"
+                    else -> exception.message ?: "Error desconocido"
+                }
+                Toast.makeText(requireContext(), "Error cargando nombre: $msg", Toast.LENGTH_SHORT).show()
             }
         )
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

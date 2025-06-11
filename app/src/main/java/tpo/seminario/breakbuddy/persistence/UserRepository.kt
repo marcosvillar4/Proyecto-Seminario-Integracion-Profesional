@@ -7,6 +7,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import java.util.Date
 
@@ -27,8 +28,8 @@ data class UserProfile(
     val uid: String = "",
     val hobbies: List<String> = emptyList(),
     val hobbiesCompletados: Boolean = false,
-    val orgIds: List<String> = emptyList(),
-    val personalGroupIds: List<String> = emptyList()
+    val organizationIds: List<String> = emptyList(),
+    val groupIds: List<String> = emptyList()
 )
 
 class UserTokenRepository {
@@ -109,8 +110,8 @@ class UserRepository {
         val profile = mapOf(
             "hobbies" to emptyList<String>(),
             "hobbiesCompletados" to false,
-            "orgIds" to emptyList<String>(),
-            "personalGroupIds" to emptyList<String>()
+            "organizationIds" to emptyList<String>(),
+            "groupIds" to emptyList<String>()
         )
         db.collection("userProfiles")
             .document(uid)
@@ -147,19 +148,129 @@ class UserRepository {
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     ) {
-        val data = mapOf(
-            "hobbies" to hobbies,
-            "hobbiesCompletados" to true
+        val docRef = profilesCollection.document(uid)
+        // 1) Actualizar hobbies en perfil ligero
+        docRef.update(
+            mapOf(
+                "hobbies" to hobbies,
+                "hobbiesCompletados" to true,
+                "updatedAt" to FieldValue.serverTimestamp()
+            )
         )
-        db.collection("userProfiles")
-            .document(uid)
-            .set(data, SetOptions.merge())
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener(onFailure)
+            .addOnSuccessListener {
+                // 2) Leer groupIds actuales
+                docRef.get()
+                    .addOnSuccessListener { snap ->
+                        val groupIds = (snap.get("groupIds") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                        if (groupIds.isEmpty()) {
+                            // No pertenece a grupos, ya terminamos
+                            onSuccess()
+                            return@addOnSuccessListener
+                        }
+                        // 3) Batch para actualizar memberHobbies en cada grupo
+                        val batch = Firebase.firestore.batch()
+                        for (gId in groupIds) {
+                            val gRef = Firebase.firestore.collection("groups").document(gId)
+                            batch.set(
+                                gRef,
+                                mapOf(
+                                    "memberHobbies" to mapOf(uid to hobbies),
+                                    "updatedAt" to FieldValue.serverTimestamp()
+                                ),
+                                SetOptions.merge()
+                            )
+                        }
+                        batch.commit()
+                            .addOnSuccessListener { onSuccess() }
+                            .addOnFailureListener { e ->
+                                onFailure(e)
+                            }
+                    }
+                    .addOnFailureListener { e ->
+                        onFailure(e)
+                    }
+            }
+            .addOnFailureListener { e ->
+                onFailure(e)
+            }
+    }
+
+    /**
+     * Envuelve saveUserHobbiesProfile para:
+     * 1) Leer los hobbies anteriores.
+     * 2) Guardar los nuevos.
+     * 3) Sincronizar cambios con las organizaciones.
+     */
+    /**
+     * Guarda los nuevos hobbies y luego sincroniza cambios en organizaciones.
+     */
+    fun saveUserHobbiesProfileWithSync(
+        uid: String,
+        newHobbies: List<String>,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        // 1) Leer hobbies actuales
+        getUserHobbiesProfile(uid,
+            onSuccess = { oldHobbies ->
+                // 2) Guardar nuevos
+                saveUserHobbiesProfile(
+                    uid = uid,
+                    hobbies = newHobbies,
+                    onSuccess = {
+                        // 3) Sincronizar cambios de hobbies con organizaciones
+                        OrganizationRepository().syncUserHobbyChanges(
+                            uid = uid,
+                            oldHobbies = oldHobbies,
+                            newHobbies = newHobbies
+                        )
+                        onSuccess()
+                    },
+                    onFailure = { e -> onFailure(e) }
+                )
+            },
+            onFailure = { err -> onFailure(Exception(err)) }
+        )
     }
 
 
+    /** 5) Obtener solo groupIds */
+    fun getUserGroupIds(
+        uid: String,
+        onSuccess: (List<String>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        profilesCollection.document(uid)
+            .get()
+            .addOnSuccessListener { doc ->
+                if (doc.exists()) {
+                    val list = (doc.get("groupIds") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                    onSuccess(list)
+                } else {
+                    onFailure(IllegalStateException("Perfil ligero no encontrado"))
+                }
+            }
+            .addOnFailureListener { e -> onFailure(e) }
+    }
 
+    /** 6) Obtener solo organizationIds */
+    fun getUserOrganizationIds(
+        uid: String,
+        onSuccess: (List<String>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        profilesCollection.document(uid)
+            .get()
+            .addOnSuccessListener { doc ->
+                if (doc.exists()) {
+                    val list = (doc.get("organizationIds") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                    onSuccess(list)
+                } else {
+                    onFailure(IllegalStateException("Perfil ligero no encontrado"))
+                }
+            }
+            .addOnFailureListener { e -> onFailure(e) }
+    }
 
     /**
      *  Asegura que exista el documento de usuario.
@@ -442,6 +553,52 @@ class UserRepository {
                 }
         }
     }
+    /**
+     * Dado un listado de UIDs, lee de /users/{uid} el campo "email"
+     * y devuelve en onComplete un map uid→email y la lista de UIDs faltantes.
+     */
+    fun fetchEmailsForUids(
+        uids: List<String>,
+        onComplete: (Map<String, String>, List<String>) -> Unit
+    ) {
+        if (uids.isEmpty()) {
+            onComplete(emptyMap(), emptyList())
+            return
+        }
+
+        val db = FirebaseFirestore.getInstance()
+        val uidToEmail = mutableMapOf<String, String>()
+        val missing = mutableListOf<String>()
+        var remaining = uids.size
+
+        for (uid in uids) {
+            db.collection("users").document(uid)
+                .get()
+                .addOnSuccessListener { snap ->
+                    val email = snap.getString("email")
+                    if (email != null && email.isNotBlank()) {
+                        uidToEmail[uid] = email
+                    } else {
+                        missing += uid
+                    }
+                    if (--remaining == 0) {
+                        onComplete(uidToEmail, missing)
+                    }
+                }
+                .addOnFailureListener {
+                    // Si falla la lectura, lo tratamos como faltante
+                    missing += uid
+                    if (--remaining == 0) {
+                        onComplete(uidToEmail, missing)
+                    }
+
+
+                }
+        }
+
+
+    }
+
 
 
 }

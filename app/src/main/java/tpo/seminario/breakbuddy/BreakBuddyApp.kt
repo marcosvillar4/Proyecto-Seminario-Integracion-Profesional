@@ -1,69 +1,53 @@
 package tpo.seminario.breakbuddy
 
 import android.app.Application
+import android.content.pm.ApplicationInfo
 import android.util.Log
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.BuildConfig
-import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.google.firebase.firestore.firestore
-
 
 class BreakBuddyApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        Log.d("BreakBuddyApp", "🛠️ Application.onCreate start")
 
+        // 1) Inicializa FirebaseApp y AdMob
+        MobileAds.initialize(this) { Log.d("BreakBuddyApp", "AdMob initialized") }
+        FirebaseApp.initializeApp(this)
+        Log.d("BreakBuddyApp", "FirebaseApp initialized")
 
-        // Inicializa el SDK de AdMob
-        MobileAds.initialize(this) { initializationStatus ->
-            // Opcional: loguear status
-            Log.d("BreakBuddyApp", "AdMob initialized: $initializationStatus")
+        // 2) Detectar debug / emulador
+        val isDebuggable = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
+        if (!isDebuggable) {
+            Log.d("BreakBuddyApp", "🔌 DEBUG mode: conectando a Emuladores")
+            FirebaseAuth.getInstance().useEmulator("10.0.2.2", 9099)
+            // ¡Importante!: esta llamada precede a cualquier getInstance() de Firestore
+            FirebaseFirestore.getInstance().useEmulator("10.0.2.2", 8080)
+            Log.d("BreakBuddyApp", "✅ Conectado a Firebase Emulators")
+        } else {
+            Log.d("BreakBuddyApp", "⚠️ RELEASE mode: usando producción")
         }
 
-        // 1) Inicializar Firebase
-        FirebaseApp.initializeApp(this)
-
-        //2)
-        // === Configuración offline ===
-        // No hace falta .setPersistenceEnabled(true)??????? — puede que ya esté activo por defecto en Android.
-        // Se puede ajustar el tamaño de la caché local:
+        // 3) Ahora sí configuramos Firestore settings
         val settings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
-            // límite de caché local (por defecto 100 MB):
-            // .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
             .build()
-
-        /*
-        * Todavía hace falta diseñar y escribir el código en la parte de app (en Fragments, Activities, ViewModels, etc.)
-        * para que funcione fluidamente, mostrando datos de la caché cuando sea necesario y manejando las operaciones
-        * de escritura offline de una manera que tenga sentido para el usuario, es decir, hace falta poder implementar
-        * el funcionamiento de la app de manera que pueda escribir tambien en la caché local.
-        */
-
         FirebaseFirestore.getInstance().firestoreSettings = settings
-
+        Log.d("BreakBuddyApp", "Firestore persistence enabled (emulator or prod)")
 
         // Configura Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // de Firebase Console
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         GoogleSignIn.getClient(this, gso)
+        Log.d("BreakBuddyApp", "Google Sign-In configured")
 
 
-        // 3) Conectar al Emulator Suite solo en debug builds
-        if (BuildConfig.DEBUG) {
-            // Para Android emulator: localhost -> 10.0.2.2
-            FirebaseAuth.getInstance().useEmulator("10.0.2.2", 9099)
-            Firebase.firestore.useEmulator("10.0.2.2", 8080)
-            Log.d("BreakBuddyApp", "Connected to Firebase Emulators")
-        }
+    }
 }
-}
-
-
