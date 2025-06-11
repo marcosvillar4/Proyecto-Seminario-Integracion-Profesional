@@ -237,11 +237,6 @@ class OrganizationRepository {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        val currentUser = auth.currentUser ?: run {
-            onFailure("Usuario no autenticado")
-            return
-        }
-        val newUid = currentUser.uid
         val newEmail = email.trim().lowercase()
         if (newEmail.isEmpty()) {
             onFailure("Email vacío"); return
@@ -250,112 +245,117 @@ class OrganizationRepository {
             onFailure("Email inválido: $newEmail"); return
         }
 
-        val orgRef = db.collection("organizations").document(orgId)
-        val batch = db.batch()
+        // 0) Resolver UID del nuevo miembro
+        userRepo.fetchUidsForEmails(
+            emails = listOf(newEmail),
+            onComplete = { emailToUid, missing ->
+                if (missing.isNotEmpty()) {
+                    onFailure("El email $newEmail no está registrado"); return@fetchUidsForEmails
+                }
+                val newUid = emailToUid[newEmail]!!
 
-        // 1) Leer hobbies del nuevo miembro
-        userRepo.getUserProfileLight(newUid,
-            onSuccess = { userProfile ->
-                val newHobbies = userProfile.hobbies ?: emptyList<String>()
-
-                // 2) Leer estado actual de la organización
-                orgRef.get()
-                    .addOnSuccessListener { orgSnap ->
-                        if (!orgSnap.exists()) {
-                            onFailure("Organización no encontrada")
-                            return@addOnSuccessListener
-                        }
-
-                        // Arrays actuales
-                        @Suppress("UNCHECKED_CAST")
-                        val derivedMaps = (orgSnap.get("gruposDerivados") as? List<Map<String, Any>>)
-                            ?.toMutableList() ?: mutableListOf()
-                        @Suppress("UNCHECKED_CAST")
-                        val uniqueMaps = (orgSnap.get("hobbiesUnicos") as? List<Map<String, Any>>)
-                            ?.toMutableList() ?: mutableListOf()
-
-                        // Convertimos a estructuras mutables
-                        val derived = derivedMaps.map {
-                            DerivedGroupEntry(
-                                hobby = it["hobby"] as String,
-                                groupId = it["groupId"] as String
-                            )
-                        }.toMutableList()
-                        val unique = uniqueMaps.map {
-                            UniqueHobbyEntry(
-                                hobby = it["hobby"] as String,
-                                userId = it["userId"] as String
-                            )
-                        }.toMutableList()
-
-                        // 3) Procesar cada hobby nuevo
-                        data class PendingNewGroup(val hobby: String, val ownerUid: String)
-
-                        val pendingNewGroups = mutableListOf<PendingNewGroup>()
-
-                        // Por cada hobby, decidimos ruta
-                        for (hobby in newHobbies) {
-                            // 3.a) Si ya hay grupo derivado
-                            val existingDerived = derived.find { it.hobby == hobby }
-                            if (existingDerived != null) {
-                                // actualizar grupo existente
-                                val grpRef = db.collection("groups").document(existingDerived.groupId)
-                                batch.update(grpRef,
-                                    "memberIds", FieldValue.arrayUnion(newUid),
-                                    "emails", FieldValue.arrayUnion(newEmail),
-                                    "memberCount", FieldValue.increment(1),
-                                    "updatedAt", FieldValue.serverTimestamp()
-                                )
-                                continue
+                // 1) Leer hobbies del nuevo miembro con tu método existente
+                userRepo.getUserHobbiesProfile(
+                    uid = newUid,
+                    onSuccess = { newHobbies ->
+                        // 2) Leer estado de la organización
+                        val orgRef = db.collection("organizations").document(orgId)
+                        orgRef.get().addOnSuccessListener { orgSnap ->
+                            if (!orgSnap.exists()) {
+                                onFailure("Organización no encontrada"); return@addOnSuccessListener
                             }
-                            // 3.b) Si hobby está en uniques
-                            val uniqueEntry = unique.find { it.hobby == hobby }
-                            if (uniqueEntry != null) {
-                                // programar crear nuevo grupo derivado con uniqueEntry.userId + newUid
-                                pendingNewGroups += PendingNewGroup(hobby, uniqueEntry.userId)
-                                // quitar de uniques
-                                unique.remove(uniqueEntry)
-                                continue
-                            }
-                            // 3.c) hobby completamente nuevo → añadir a uniques
-                            unique += UniqueHobbyEntry(hobby = hobby, userId = newUid)
-                        }
+                            val orgName = orgSnap.getString("name").orEmpty()
+                            @Suppress("UNCHECKED_CAST")
+                            val derivedMaps = (orgSnap.get("gruposDerivados") as? List<Map<String, Any>>) ?: emptyList()
+                            @Suppress("UNCHECKED_CAST")
+                            val uniqueMaps  = (orgSnap.get("hobbiesUnicos")   as? List<Map<String, Any>>) ?: emptyList()
 
-                        // 4) Ejecutar creaciones de nuevos grupos derivados
-                        if (pendingNewGroups.isEmpty()) {
-                            // Ya no hay más trabajo, aplicamos sólo la actualización de la organización:
-                            applyOrgUpdates(orgRef, derived, unique, batch, newUid, newEmail, onSuccess, onFailure)
-                        } else {
-                            // Por cada pending, creamos en paralelo y luego actualizamos org
-                            var remaining = pendingNewGroups.size
-                            for (pending in pendingNewGroups) {
-                                createDerivedGroup(
-                                    orgId = orgId,
-                                    hobby = pending.hobby,
-                                    memberIds = listOf(pending.ownerUid, newUid),
-                                    orgName = orgSnap.get("name") as String,
-                                    ownerUid = pending.ownerUid
-                                ) { newGroupId ->
-                                    if (newGroupId != null) {
-                                        derived += DerivedGroupEntry(hobby = pending.hobby, groupId = newGroupId)
-                                    }
-                                    if (--remaining == 0) {
-                                        // Cuando todas las creaciones acaben, aplicamos batch org
-                                        applyOrgUpdates(orgRef, derived, unique, batch, newUid, newEmail, onSuccess, onFailure)
+                            // Reconstruir listas mutables
+                            val derived = derivedMaps.map {
+                                DerivedGroupEntry(it["hobby"] as String, it["groupId"] as String)
+                            }.toMutableList()
+                            val unique = uniqueMaps.map {
+                                UniqueHobbyEntry(it["hobby"] as String, it["userId"] as String)
+                            }.toMutableList()
+
+                            // 3) Arrancar batch para la org
+                            val batch = db.batch()
+                            batch.update(orgRef,
+                                "memberIds",   FieldValue.arrayUnion(newUid),
+                                "emails",      FieldValue.arrayUnion(newEmail),
+                                "memberCount", FieldValue.increment(1),
+                                "updatedAt",   FieldValue.serverTimestamp()
+                            )
+
+                            // 4) Procesar hobbies del nuevo miembro
+                            data class PendingNewGroup(val hobby: String, val ownerUid: String)
+                            val pending = mutableListOf<PendingNewGroup>()
+                            for (hobby in newHobbies) {
+                                // a) Grupo derivado existente?
+                                val existing = derived.find { it.hobby == hobby }
+                                if (existing != null) {
+                                    val grpRef = db.collection("groups").document(existing.groupId)
+                                    batch.update(grpRef,
+                                        "memberIds",   FieldValue.arrayUnion(newUid),
+                                        "emails",      FieldValue.arrayUnion(newEmail),
+                                        "memberCount", FieldValue.increment(1),
+                                        "updatedAt",   FieldValue.serverTimestamp()
+                                    )
+                                    continue
+                                }
+                                // b) Hobby en únicos?
+                                val uEntry = unique.find { it.hobby == hobby }
+                                if (uEntry != null) {
+                                    pending += PendingNewGroup(hobby = hobby, ownerUid = uEntry.userId)
+                                    unique.remove(uEntry)
+                                    continue
+                                }
+                                // c) Hobby completamente nuevo
+                                unique += UniqueHobbyEntry(hobby = hobby, userId = newUid)
+                            }
+
+                            // 5) Crear grupos pendientes y luego aplicar batch de org
+                            if (pending.isEmpty()) {
+                                applyOrgUpdates(orgRef, derived, unique, batch, newUid, newEmail, onSuccess, onFailure)
+                            } else {
+                                var remaining = pending.size
+                                for (p in pending) {
+                                    createDerivedGroup(
+                                        orgId     = orgId,
+                                        orgName   = orgName,
+                                        hobby     = p.hobby,
+                                        memberIds = listOf(p.ownerUid, newUid),
+                                        ownerUid  = p.ownerUid
+                                    ) { newGroupId ->
+                                        if (newGroupId != null) {
+                                            derived += DerivedGroupEntry(hobby = p.hobby, groupId = newGroupId)
+                                        }
+                                        if (--remaining == 0) {
+                                            applyOrgUpdates(
+                                                orgRef, derived, unique, batch,
+                                                newUid, newEmail, onSuccess, onFailure
+                                            )
+                                        }
                                     }
                                 }
                             }
+
+                        }.addOnFailureListener { e ->
+                            onFailure("Error leyendo organización: ${e.message}")
                         }
+                    },
+                    onFailure = { e ->
+                        onFailure("Error leyendo hobbies del usuario: ${e.message}")
                     }
-                    .addOnFailureListener { e ->
-                        onFailure("Error leyendo organización: ${e.message}")
-                    }
+                )
             },
-            onFailure = { msg ->
-                onFailure("Error leyendo perfil de usuario: $msg")
+            onError = { e ->
+                onFailure("Error buscando UID para $newEmail: ${e.message}")
             }
         )
     }
+
+
     /**
      * Aplica los cambios a /organizations/{orgId},
      * añade newUid y newEmail al array memberIds/emails,
@@ -442,7 +442,31 @@ class OrganizationRepository {
                         "organizationIds" to FieldValue.arrayRemove(orgId),
                         "updatedAt" to FieldValue.serverTimestamp()
                     ), SetOptions.merge())
-                    .addOnSuccessListener { onSuccess() }
+                    .addOnSuccessListener {
+                        // 2) Limpiar hobbiesUnicos en la organización
+                        val uid = currentUser.uid
+                        db.collection("organizations").document(orgId)
+                            .get()
+                            .addOnSuccessListener { orgSnap ->
+                                @Suppress("UNCHECKED_CAST")
+                                val uniqueMaps = (orgSnap.get("hobbiesUnicos") as? List<Map<String, Any>>)
+                                    ?.filter { it["userId"] != uid }
+                                    ?: emptyList()
+                                // 3) Actualizamos solo ese campo
+                                db.collection("organizations").document(orgId)
+                                    .update(
+                                        "hobbiesUnicos", uniqueMaps,
+                                        "updatedAt", FieldValue.serverTimestamp()
+                                    )
+                                    .addOnSuccessListener { onSuccess() }
+                                    .addOnFailureListener { e ->
+                                        onFailure("Saliste, pero no limpio hobbiesUnicos: ${e.message}")
+                                    }
+                            }
+                            .addOnFailureListener { e ->
+                                onFailure("Saliste, pero no pude recargar org: ${e.message}")
+                            }
+                    }
                     .addOnFailureListener { e -> onFailure("Saliste de la organización, pero fallo actualizar perfil: ${e.message}") }
             }
             .addOnFailureListener { e -> onFailure("Error saliendo de organización: ${e.message}") }
@@ -668,24 +692,27 @@ class OrganizationRepository {
                         "updatedAt"       to FieldValue.serverTimestamp()
                     ), SetOptions.merge())
                     .addOnSuccessListener {
-                        // 3) Limpieza de hobbiesUnicos en la organización
-                        orgRef.get().addOnSuccessListener { orgSnap ->
-                            // Reconstruir la lista excluyendo al userId removido
-                            @Suppress("UNCHECKED_CAST")
-                            val uniqueMaps = (orgSnap.get("hobbiesUnicos") as? List<Map<String, Any>>)
-                                ?.filter { it["userId"] != memberUidToRemove }
-                                ?: emptyList()
-                            orgRef.update(
-                                "hobbiesUnicos", uniqueMaps,
-                                "updatedAt", FieldValue.serverTimestamp()
-                            )
-                                .addOnSuccessListener { onSuccess() }
-                                .addOnFailureListener { e ->
-                                    onFailure("Miembro removido, pero fallo limpieza hobbiesUnicos: ${e.message}")
-                                }
-                        }.addOnFailureListener { e ->
-                            onFailure("Error recargando org para limpieza: ${e.message}")
-                        }
+                        // 3) Limpieza de hobbiesUnicos
+                        db.collection("organizations").document(orgId)
+                            .get()
+                            .addOnSuccessListener { orgSnap ->
+                                @Suppress("UNCHECKED_CAST")
+                                val uniqueMaps = (orgSnap.get("hobbiesUnicos") as? List<Map<String, Any>>)
+                                    ?.filter { it["userId"] != memberUidToRemove }
+                                    ?: emptyList()
+                                db.collection("organizations").document(orgId)
+                                    .update(
+                                        "hobbiesUnicos", uniqueMaps,
+                                        "updatedAt", FieldValue.serverTimestamp()
+                                    )
+                                    .addOnSuccessListener { onSuccess() }
+                                    .addOnFailureListener { e ->
+                                        onFailure("Miembro removido, pero hobbiesUnicos no se limpió: ${e.message}")
+                                    }
+                            }
+                            .addOnFailureListener { e ->
+                                onFailure("Miembro removido, pero no pude recargar org: ${e.message}")
+                            }
                     }
                     .addOnFailureListener { e ->
                         onFailure("Miembro removido, pero fallo actualizar perfil: ${e.message}")
