@@ -157,7 +157,7 @@ class OrganizationRepository {
                                                         var remaining = pendingCreations.size
                                                         if (remaining == 0) {
                                                             // No hay grupos derivados que crear
-                                                            commitOrgUpdate(orgId, derivedEntries, uniqueEntries, ownerUid, onSuccess, onFailure)
+                                                            commitOrgUpdate(orgId, derivedEntries, uniqueEntries, code, onSuccess, onFailure)
                                                         } else {
                                                             pendingCreations.forEach { (hobby, uids) ->
                                                                 createDerivedGroup( orgId, orgData["name"] as String, hobby, uids, ownerUid) { groupId ->
@@ -165,7 +165,7 @@ class OrganizationRepository {
                                                                         derivedEntries += DerivedGroupEntry(hobby = hobby, groupId = groupId)
                                                                     }
                                                                     if (--remaining == 0) {
-                                                                        commitOrgUpdate(orgId, derivedEntries, uniqueEntries, ownerUid, onSuccess, onFailure)
+                                                                        commitOrgUpdate(orgId, derivedEntries, uniqueEntries, code, onSuccess, onFailure)
                                                                     }
                                                                 }
                                                             }
@@ -371,26 +371,31 @@ class OrganizationRepository {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        // 1) Actualizar members en la org
-        batch.update(orgRef,
-            "memberIds", FieldValue.arrayUnion(newUid),
-            "emails",    FieldValue.arrayUnion(newEmail),
-            "memberCount", FieldValue.increment(1),
-            "updatedAt", FieldValue.serverTimestamp()
-        )
-
-        // 2) Actualizar arrays derivados
+        // 1) Actualizar arrays derivados
         val derivedMaps = derived.map { mapOf("hobby" to it.hobby, "groupId" to it.groupId) }
         batch.update(orgRef, "gruposDerivados", derivedMaps)
 
-        // 3) Actualizar hobbiesUnicos
+        // 2) Actualizar hobbiesUnicos
         val uniqueMaps = unique.map { mapOf("hobby" to it.hobby, "userId" to it.userId) }
         batch.update(orgRef, "hobbiesUnicos", uniqueMaps)
 
-        // 4) Finalmente: commit y callback
+        // 3) Commit del batch de grupos y org
         batch.commit()
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { e -> onFailure("Error sincronizando organización: ${e.message}") }
+            .addOnSuccessListener {
+                // 4) CORREGIDO: Actualizar userProfile del usuario AGREGADO (newUid), no del usuario actual
+                db.collection("userProfiles").document(newUid)
+                    .set(mapOf(
+                        "organizationIds" to FieldValue.arrayUnion(orgRef.id),
+                        "updatedAt" to FieldValue.serverTimestamp()
+                    ), SetOptions.merge())
+                    .addOnSuccessListener { onSuccess() }
+                    .addOnFailureListener { e ->
+                        onFailure("Usuario agregado a org, pero fallo actualizar su perfil: ${e.message}")
+                    }
+            }
+            .addOnFailureListener { e ->
+                onFailure("Error sincronizando organización: ${e.message}")
+            }
     }
 
     /**
@@ -559,6 +564,7 @@ class OrganizationRepository {
         if (code.isBlank()) {
             onFailure("El código no puede estar vacío"); return
         }
+
         db.collection("organizations")
             .whereEqualTo("code", code)
             .get()
@@ -569,8 +575,10 @@ class OrganizationRepository {
                     else -> {
                         val doc = docs.documents.first()
                         val orgId = doc.id
-                        // Reusar addMemberByEmail para lógica uniforme
                         val email = currentUser.email ?: ""
+
+                        // Usar addMemberByEmail para mantener consistencia en la lógica
+                        // La actualización del userProfile ya se maneja dentro de addMemberByEmail -> applyOrgUpdates
                         addMemberByEmail(orgId, email, onSuccess, onFailure)
                     }
                 }
@@ -1106,7 +1114,7 @@ class OrganizationRepository {
         orgId: String,
         derived: List<DerivedGroupEntry>,
         unique: List<UniqueHobbyEntry>,
-        ownerUid: String,
+        code: String,
         onSuccess: (String) -> Unit,
         onFailure: (String) -> Unit
     ) {
@@ -1122,7 +1130,7 @@ class OrganizationRepository {
                 "updatedAt"       to FieldValue.serverTimestamp()
             )
         )
-            .addOnSuccessListener { onSuccess(orgId) }
+            .addOnSuccessListener { onSuccess(code) }
             .addOnFailureListener { e -> onFailure("Error actualizando arrays derivados: ${e.message}") }
     }
 

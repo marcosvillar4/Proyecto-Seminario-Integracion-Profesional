@@ -348,6 +348,14 @@ class GroupRepository {
      * - Si queda en 0, borra el documento.
      * - Si el miembro eliminado era el dueño (ownerUid), reasigna "ownerUid" a otro miembro.
      */
+    /**
+     * Quita un miembro (memberUidToRemove) de un grupo.
+     * - Remueve su UID de "memberIds" y su email de "emails".
+     * - Ajusta "memberCount".
+     * - Si queda en 0 miembros Y NO ES DERIVADO, borra el documento.
+     * - Si el grupo es derivado, nunca se elimina independientemente de la cantidad de miembros.
+     * - Si el miembro eliminado era el dueño (ownerUid), reasigna "ownerUid" a otro miembro.
+     */
     fun removeMemberFromGroup(
         groupId: String,
         memberUidToRemove: String,
@@ -359,65 +367,90 @@ class GroupRepository {
         db.runTransaction { transaction ->
             val snap = transaction.get(groupRef)
             if (!snap.exists()) throw Exception("El grupo no existe.")
+
             val currentMemberIds = (snap.get("memberIds") as? List<String>) ?: emptyList()
             if (!currentMemberIds.contains(memberUidToRemove)) {
                 throw Exception("El usuario no es miembro de este grupo.")
             }
-            // Nueva lista
+
+            // Verificar si el grupo es derivado
+            val isDerivado = snap.getBoolean("derivado") ?: false
+
+            // Nueva lista de miembros
             val newMemberIds = currentMemberIds.filter { it != memberUidToRemove }
             val currentEmails = (snap.get("emails") as? List<String>) ?: emptyList()
             val newEmailsMutable = currentEmails.toMutableList()
             val idx = currentMemberIds.indexOf(memberUidToRemove)
             if (idx in newEmailsMutable.indices) newEmailsMutable.removeAt(idx)
+
             val newCount = newMemberIds.size
-            if (newCount == 0) {
-                // borrar grupo
+
+            // Solo eliminar el grupo si no quedan miembros Y NO ES DERIVADO
+            if (newCount == 0 && !isDerivado) {
+                // Borrar grupo solo si no es derivado
                 transaction.delete(groupRef)
-                // En este caso, still remove groupId de userProfile más abajo
                 return@runTransaction null
             }
-            // Owner reasignación si aplica
-            val currentOwnerUid = snap.getString("ownerUid") ?: throw Exception("Falta ownerUid")
-            var newOwner = currentOwnerUid
-            if (memberUidToRemove == currentOwnerUid) {
-                newOwner = newMemberIds.first()
-            }
-            // Actualizar fields
-            transaction.update(groupRef, mapOf(
+
+            // Si llegamos aquí, el grupo se mantiene (tiene miembros o es derivado)
+            var fieldsToUpdate = mutableMapOf<String, Any>(
                 "memberIds" to newMemberIds,
                 "emails" to newEmailsMutable,
                 "memberCount" to newCount,
-                "ownerUid" to newOwner,
                 "updatedAt" to FieldValue.serverTimestamp()
-            ))
+            )
+
+            // Reasignar owner si es necesario y hay miembros restantes
+            val currentOwnerUid = snap.getString("ownerUid") ?: throw Exception("Falta ownerUid")
+            if (memberUidToRemove == currentOwnerUid && newMemberIds.isNotEmpty()) {
+                fieldsToUpdate["ownerUid"] = newMemberIds.first()
+            }
+
+            // Actualizar campos del grupo
+            transaction.update(groupRef, fieldsToUpdate)
             return@runTransaction null
+
         }.addOnSuccessListener {
             // Tras transacción exitosa en group doc, actualizar userProfile y group.memberHobbies
             // 1) userProfile arrayRemove groupId
             val uRef = db.collection("userProfiles").document(memberUidToRemove)
-            uRef.update("groupIds", FieldValue.arrayRemove(groupId), "updatedAt", FieldValue.serverTimestamp())
-                .addOnSuccessListener {
-                    // 2) group.memberHobbies remove key
-                    // Para eliminar la clave dentro de un map, usamos update con FieldValue.delete()
-                    db.collection("groups").document(groupId)
-                        .update("memberHobbies.${memberUidToRemove}", FieldValue.delete(),
-                            "updatedAt", FieldValue.serverTimestamp())
-                        .addOnSuccessListener {
+            uRef.update(
+                "groupIds", FieldValue.arrayRemove(groupId),
+                "updatedAt", FieldValue.serverTimestamp()
+            ).addOnSuccessListener {
+                // 2) group.memberHobbies remove key (solo si el grupo no fue eliminado)
+                // Para eliminar la clave dentro de un map, usamos update con FieldValue.delete()
+                db.collection("groups").document(groupId).get()
+                    .addOnSuccessListener { groupExists ->
+                        if (groupExists.exists()) {
+                            // El grupo existe, podemos actualizar memberHobbies
+                            db.collection("groups").document(groupId)
+                                .update(
+                                    "memberHobbies.${memberUidToRemove}", FieldValue.delete(),
+                                    "updatedAt", FieldValue.serverTimestamp()
+                                )
+                                .addOnSuccessListener {
+                                    onSuccess()
+                                }
+                                .addOnFailureListener { e ->
+                                    // El grupo quedó modificado en membership, pero no pudo borrar hobbies. Notificar.
+                                    onFailure("Miembro eliminado, pero fallo al limpiar hobbies: ${e.message}")
+                                }
+                        } else {
+                            // El grupo fue eliminado (no era derivado y quedó sin miembros)
                             onSuccess()
                         }
-                        .addOnFailureListener { e ->
-                            // El grupo quedó modificado en membership, pero no pudo borrar hobbies. Notificar.
-                            onFailure("Miembro eliminado, pero fallo al limpiar hobbies: ${e.message}")
-                        }
-                }
-                .addOnFailureListener { e ->
-                    onFailure("Miembro eliminado, pero fallo al actualizar perfil: ${e.message}")
-                }
+                    }
+                    .addOnFailureListener { e ->
+                        onFailure("Miembro eliminado, pero fallo al verificar grupo: ${e.message}")
+                    }
+            }.addOnFailureListener { e ->
+                onFailure("Miembro eliminado, pero fallo al actualizar perfil: ${e.message}")
+            }
         }.addOnFailureListener { e ->
             onFailure(e.message ?: "Error al eliminar miembro")
         }
     }
-
 
 
 
