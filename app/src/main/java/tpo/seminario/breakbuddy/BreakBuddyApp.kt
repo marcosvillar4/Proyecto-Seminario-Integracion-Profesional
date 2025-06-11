@@ -63,7 +63,6 @@ class BreakBuddyApp : Application() {
             Firebase.firestore.useEmulator("10.0.2.2", 8080)
             Log.d("BreakBuddyApp", "Connected to Firebase Emulators")
         }
-        //prueba 3
 }
 }
 
