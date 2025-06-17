@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx.v2440)
     implementation(libs.firebase.firestore.ktx)
 
+    implementation (libs.firebase.functions.ktx)
 
     // --- AndroidX Lifecycle (ViewModel + LiveData) ---
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")

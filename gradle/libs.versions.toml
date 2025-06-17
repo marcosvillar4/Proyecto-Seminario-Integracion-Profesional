@@ -2,7 +2,9 @@
 agp = "8.10.1"
 compiler = "4.16.0"
 firebaseBom = "33.13.0"
+firebaseBomVersion = "33.15.0"
 firebaseFirestoreKtxVersion = "24.4.0"
+firebaseFunctionsKtx = "24.4.0"
 firebaseMessaging = "24.1.1"
 flexbox = "3.0.0"
 glide = "4.16.0"
@@ -39,10 +41,13 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-bom-v33150 = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
 firebase-firestore-ktx-v2440 = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtxVersion" }
+firebase-functions-ktx = { module = "com.google.firebase:firebase-functions-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
 flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+google-firebase-functions-ktx = { module = "com.google.firebase:firebase-functions-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

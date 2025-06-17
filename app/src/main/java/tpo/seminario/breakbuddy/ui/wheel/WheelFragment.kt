@@ -1,11 +1,17 @@
 package tpo.seminario.breakbuddy.ui.wheel
 
+import android.R.attr.logo
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.caneryilmaz.apps.luckywheel.constant.TextOrientation
 import com.caneryilmaz.apps.luckywheel.data.WheelData
 import com.caneryilmaz.apps.luckywheel.ui.LuckyWheelView
 import tpo.seminario.breakbuddy.R
@@ -30,34 +36,40 @@ class WheelFragment : Fragment() {
         // 1) Armo la lista de WheelData
         wheelItems = arrayListOf(
             WheelData(
+                icon = loadBitmapFromResource(R.drawable.weekend_24dp_),
                 text = "Descanso 5’",
-                textColor = intArrayOf(resources.getColor(R.color.black, null)),       // negro
+                textColor = intArrayOf(resources.getColor(R.color.white, null)),       // negro
+                backgroundColor = intArrayOf(resources.getColor(R.color.green_200, null))
+            ),
+            WheelData(
+                icon = loadBitmapFromResource(R.drawable.water_drop_24dp_),
+                text = "Hidratarte",
+                textColor = intArrayOf(resources.getColor(R.color.white, null)),
                 backgroundColor = intArrayOf(resources.getColor(R.color.green_500, null))
             ),
             WheelData(
-                text = "Hidratarte",
-                textColor = intArrayOf(resources.getColor(R.color.black, null)),
-                backgroundColor = intArrayOf(resources.getColor(R.color.blue_500, null))
-            ),
-            WheelData(
+                icon = loadBitmapFromResource(R.drawable.physical_therapy_24dp_),
                 text = "Estiramiento",
-                textColor = intArrayOf(resources.getColor(R.color.black, null)),
-                backgroundColor = intArrayOf(resources.getColor(R.color.purple_500, null))
+                textColor = intArrayOf(resources.getColor(R.color.white, null)),
+                backgroundColor = intArrayOf(resources.getColor(R.color.green_200, null))
             ),
             WheelData(
+                icon = loadBitmapFromResource(R.drawable.directions_walk_24dp_png),
                 text = "Caminar",
-                textColor = intArrayOf(resources.getColor(R.color.black, null)),
-                backgroundColor = intArrayOf(resources.getColor(R.color.orange_500, null))
+                textColor = intArrayOf(resources.getColor(R.color.white, null)),
+                backgroundColor = intArrayOf(resources.getColor(R.color.green_500, null))
             ),
             WheelData(
+                icon = loadBitmapFromResource(R.drawable.self_improvement_24dp_),
                 text = "Meditación",
-                textColor = intArrayOf(resources.getColor(R.color.black, null)),
-                backgroundColor = intArrayOf(resources.getColor(R.color.teal_200, null))
+                textColor = intArrayOf(resources.getColor(R.color.white, null)),
+                backgroundColor = intArrayOf(resources.getColor(R.color.green_200, null))
             ),
             WheelData(
+                icon = loadBitmapFromResource(R.drawable.pulmonology_24dp_),
                 text = "Respirar",
-                textColor = intArrayOf(resources.getColor(R.color.black, null)),
-                backgroundColor = intArrayOf(resources.getColor(R.color.red_500, null))
+                textColor = intArrayOf(resources.getColor(R.color.white, null)),
+                backgroundColor = intArrayOf(resources.getColor(R.color.green_500, null))
             )
         )
 
@@ -71,8 +83,58 @@ class WheelFragment : Fragment() {
         val paddingPx = resources.getDimension(R.dimen.luckywheel_padding)
         (binding.lwv as LuckyWheelView).setTextPadding(paddingPx)
 
+        binding.lwv.apply {
+
+            setWheelCenterImage(R.drawable.logo2)
+            setWheelCenterImageSize(70.toFloat(), 70.toFloat())
+            drawCenterPoint(true)
+            setCenterPointColor(resources.getColor(R.color.white, null))
+            setCenterPointRadius(120.toFloat())
+            drawWheelStroke(true)
+            var array = intArrayOf(resources.getColor(R.color.green_500, null))
+            setWheelStrokeColor(array)
+            setWheelStrokeThickness(15.toFloat())
+            setTextFont(R.font.poppins_medium)
+            setTextPadding(20.toFloat())
+            setTextOrientation(TextOrientation.HORIZONTAL)
+            setTextSize(0)
+            setWheelTopArrowSize(55.toFloat(),55.toFloat())
+            setWheelTopArrowColor(resources.getColor(R.color.acento, null))
+            drawItemSeparator(true)
+            var array2 = intArrayOf(resources.getColor(R.color.acento, null))
+            setWheelItemSeparatorColor(array2)
+            setItemSeparatorThickness(10.toFloat())
+            setIconPosition(0.8f)
+        }
+
         return binding.root
     }
+
+    private fun drawableToBitmap(drawableId: Int, widthPx: Int? = null, heightPx: Int? = null): Bitmap? {
+        val drawable = ContextCompat.getDrawable(requireContext(), drawableId) ?: return null
+        // Determinar dimensiones
+        val w = widthPx ?: drawable.intrinsicWidth.takeIf { it > 0 } ?: 24.dpToPx()
+        val h = heightPx ?: drawable.intrinsicHeight.takeIf { it > 0 } ?: 24.dpToPx()
+        // Crear bitmap y canvas
+        val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, w, h)
+        drawable.draw(canvas)
+        return bitmap
+    }
+
+    private fun loadBitmapFromResource(resId: Int): Bitmap? {
+        return try {
+            BitmapFactory.decodeResource(resources, resId)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    /** Extensión para convertir Int dp a px */
+    private fun Int.dpToPx(): Int =
+        (this * resources.displayMetrics.density).toInt()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

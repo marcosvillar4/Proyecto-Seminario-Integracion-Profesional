@@ -8,24 +8,31 @@
     android:padding="24dp"
     tools:context=".ui.wheel.WheelFragment">
 
-    <!-- Guideline horizontal al 50% de altura -->
+    <!-- Guideline superior al 5% -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_50"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.15"
+        app:layout_constraintGuide_percent="0.05"
         android:orientation="horizontal" />
 
-    <!-- Rueda: top pegado a la Guideline, bottom al botón -->
+    <!-- Guideline inferior al 90% -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.70"
+        android:orientation="horizontal" />
+
+    <!-- Rueda: altura = espacio entre guidelines; ancho = misma altura -->
     <com.caneryilmaz.apps.luckywheel.ui.LuckyWheelView
         android:id="@+id/lwv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@+id/guideline_50"
-        app:layout_constraintBottom_toTopOf="@+id/btnSpin"
+        android:layout_width="420dp"
+        android:layout_height="420dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_50"
+        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="1:1" />
+        app:layout_constraintEnd_toEndOf="parent"> </com.caneryilmaz.apps.luckywheel.ui.LuckyWheelView>
 
     <!-- Botón “Girar” debajo de la ruleta -->
     <Button
@@ -43,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/lwv"
         android:layout_marginTop="16dp" />
 
-    <!-- Resto de vistas (tvStatus, btnAceptar, btnRespin) igual que antes... -->
+    <!-- Resto de vistas (tvStatus, btnAceptar, btnRespin) idénticas -->
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
