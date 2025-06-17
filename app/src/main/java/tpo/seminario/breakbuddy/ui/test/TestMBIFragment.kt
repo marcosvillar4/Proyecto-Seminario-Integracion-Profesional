@@ -43,6 +43,7 @@ class TestMBIFragment : Fragment() {
     private lateinit var txtRealizacion: TextView
     private lateinit var txtImpacto: TextView
     private lateinit var cardResultado: MaterialCardView
+    private lateinit var txtRecomendaciones: TextView
 
     private val viewModel: TestMBIViewModel by viewModels()  // ← Nuevo ViewModel
 
@@ -66,6 +67,8 @@ class TestMBIFragment : Fragment() {
         txtRealizacion = view.findViewById(R.id.txtRealizacion)
         txtImpacto = view.findViewById(R.id.txtImpacto)
         cardResultado = view.findViewById(R.id.cardResultado)
+        txtRecomendaciones = view.findViewById(R.id.txtRecomendaciones)
+
 
         // Mostrar la primera pregunta
         mostrarPregunta()
@@ -117,7 +120,16 @@ class TestMBIFragment : Fragment() {
         val nivelAgotamiento       = categorizar(agotamiento, listOf(4, 8))
         val nivelDespersonalizacion= categorizar(despersonalizacion, listOf(3, 6))
         val nivelRealizacion       = categorizarInvertido(realizacion, listOf(3, 6))
-        val nivelImpacto           = "$impacto/6"  // puedes adaptar si necesitas otra forma
+        val nivelImpacto           = "$impacto/6"
+
+        val recomendaciones = when (nivelAgotamiento) {
+            "Alto" -> "⚠️ Te recomendamos realizar pausas activas, limitar horas extra y ."
+            "Moderado" -> "😊 Vas bien. Podrías incorporar ejercicios de relajación o microdescansos diarios."
+            "Bajo" -> "🎉 Excelente. Mantené tus hábitos actuales y escuchá a tu cuerpo regularmente."
+            else -> ""
+        }
+        txtRecomendaciones.text = recomendaciones
+        txtRecomendaciones.visibility = View.VISIBLE
 
         // Mostrar en los TextView del layout
         txtAgotamiento.text        = "Agotamiento emocional: $nivelAgotamiento"
@@ -140,7 +152,6 @@ class TestMBIFragment : Fragment() {
             nivelRealizacion = nivelRealizacion,
             nivelImpacto = nivelImpacto
         )
-
         // 2) Llamar al ViewModel para guardarlo en Firestore
         viewModel.saveResult(resultadoAGuardar)
     }

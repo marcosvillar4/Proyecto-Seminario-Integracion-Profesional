@@ -117,9 +117,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <!-- NUEVO: Recomendaciones -->
+            <TextView
+                android:id="@+id/txtRecomendaciones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="12dp"
+                android:visibility="gone" />
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
 
     <Button
         android:id="@+id/btnSiguiente"
