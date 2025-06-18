@@ -142,8 +142,8 @@
         tools:layout="@layout/fragment_account_settings">
 
         <action
-            android:id="@+id/action_accountSettingsFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_accountSettingsFragment_to_WelcomeFragment"
+            app:destination="@id/welcomeFragment"
             app:popUpTo="@id/mobile_navigation"
             app:popUpToInclusive="true" />
 

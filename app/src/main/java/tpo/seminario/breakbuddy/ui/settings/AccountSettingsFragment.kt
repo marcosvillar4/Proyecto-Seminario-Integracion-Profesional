@@ -63,7 +63,7 @@ class AccountSettingsFragment : Fragment() {
                 .setPopUpTo(R.id.mobile_navigation, true)
                 .build()
             findNavController().navigate(
-                R.id.action_accountSettingsFragment_to_loginFragment,
+                R.id.action_accountSettingsFragment_to_WelcomeFragment,
                 null,
                 options
             )
