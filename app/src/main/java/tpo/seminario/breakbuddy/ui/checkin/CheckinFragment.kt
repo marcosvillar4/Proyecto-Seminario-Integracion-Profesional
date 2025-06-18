@@ -74,7 +74,7 @@ class CheckinFragment : Fragment() {
             "fechaRegistro" to Timestamp.now()
         )
 
-        db.collection("usuarios").document(userId)
+        db.collection("userProfiles").document(userId)
             .collection("checkins")
             .document(today)
             .set(checkin)

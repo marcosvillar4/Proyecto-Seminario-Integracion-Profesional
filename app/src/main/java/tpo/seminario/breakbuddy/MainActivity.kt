@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         val today = dateFormat.format(calendar.time)
 
         return try {
-            val snapshot = db.collection("usuarios")
+            val snapshot = db.collection("userProfiles")
                 .document(userId)
                 .collection("checkins")
                 .document(today)
