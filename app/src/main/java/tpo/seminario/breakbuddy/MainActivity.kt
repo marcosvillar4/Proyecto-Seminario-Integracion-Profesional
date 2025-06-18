@@ -74,7 +74,8 @@ class MainActivity : AppCompatActivity() {
         // Comprobar si debe mostrar el Check-in
         lifecycleScope.launch {
             if (shouldNavigateToCheckin()) {
-                navController.navigate(R.id.action_global_checkinFragment)
+                findNavController(R.id.nav_host_fragment_activity_main)
+                    .navigate(R.id.action_global_checkinFragment)
             }
         }
 
@@ -100,18 +101,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun shouldNavigateToCheckin(): Boolean {
-        // Obtener hora actual con Calendar (compat API 24)
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
 
-        if (hour < 21) return false
+        Log.d("CheckinDebug", "🕘 Hora actual: $hour:$minute")
 
-        // Obtener fecha como yyyy-MM-dd
+        // Solo permitir entre 21:00 y 23:59
+        if (hour < 21 || hour > 23) {
+            Log.d("CheckinDebug", "⛔ Fuera del horario de check-in")
+            return false
+        }
+
+        val auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        if (user == null) {
+            Log.d("CheckinDebug", "⛔ Usuario no logueado aún")
+            return false
+        }
+
+        val userId = user.uid
+        val db = FirebaseFirestore.getInstance()
+
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val today = dateFormat.format(calendar.time)
-
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return false
-        val db = FirebaseFirestore.getInstance()
 
         return try {
             val snapshot = db.collection("usuarios")
@@ -121,12 +134,17 @@ class MainActivity : AppCompatActivity() {
                 .get()
                 .await()
 
-            !snapshot.exists() // true si NO existe → debe mostrar check-in
+            if (snapshot.exists()) {
+                Log.d("CheckinDebug", "✅ Check-in ya hecho hoy")
+                false
+            } else {
+                Log.d("CheckinDebug", "🟢 Mostrar check-in (aún no hecho)")
+                true
+            }
         } catch (e: Exception) {
-            Log.e("Checkin", "Error consultando checkin de hoy", e)
+            Log.e("CheckinDebug", "❌ Error consultando check-in: ${e.message}")
             false
         }
     }
-
 
 }
