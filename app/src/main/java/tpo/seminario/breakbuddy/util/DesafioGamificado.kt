@@ -6,5 +6,6 @@ data class DesafioGamificado(
     val recompensa: Int,
     val iconoResId: Int,
     val requiereTemporizador: Boolean = false,
-    val duracionSegundos: Int = 0
+    val duracionSegundos: Int = 0,
+    val quiz: QuizQuestion? = null
 )

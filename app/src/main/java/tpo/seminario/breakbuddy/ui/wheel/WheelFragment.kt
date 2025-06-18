@@ -4,18 +4,30 @@ import android.R.attr.logo
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.caneryilmaz.apps.luckywheel.constant.TextOrientation
 import com.caneryilmaz.apps.luckywheel.data.WheelData
 import com.caneryilmaz.apps.luckywheel.ui.LuckyWheelView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.functions.FirebaseFunctions
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentWheelBinding
+import tpo.seminario.breakbuddy.persistence.UserProfile
+import tpo.seminario.breakbuddy.util.DesafioGamificado
+import tpo.seminario.breakbuddy.util.HobbyQuestionsProvider
+import tpo.seminario.breakbuddy.util.PhysicalChallengesProvider
 import kotlin.random.Random
 
 class WheelFragment : Fragment() {
@@ -23,10 +35,15 @@ class WheelFragment : Fragment() {
     private var _binding: FragmentWheelBinding? = null
     private val binding get() = _binding!!
 
+    private var currentChallengesList: List<DesafioGamificado> = emptyList()
+    // Al inicio de la clase:
+    private val challengeViewModel: ChallengeViewModel by activityViewModels()
+
     private lateinit var wheelItems: ArrayList<WheelData>
     private var hasUsedRespin = false
     private var chosenText: String? = null
     private var lastTargetIndex: Int = -1
+    private var firestoreListener: ListenerRegistration? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,8 +54,8 @@ class WheelFragment : Fragment() {
         wheelItems = arrayListOf(
             WheelData(
                 icon = loadBitmapFromResource(R.drawable.weekend_24dp_),
-                text = "Descanso 5’",
-                textColor = intArrayOf(resources.getColor(R.color.white, null)),       // negro
+                text = "Descanso 5'",
+                textColor = intArrayOf(resources.getColor(R.color.white, null)),
                 backgroundColor = intArrayOf(resources.getColor(R.color.green_200, null))
             ),
             WheelData(
@@ -77,14 +94,12 @@ class WheelFragment : Fragment() {
         binding.lwv.setWheelData(wheelItems)
 
         // 3) Personalizo tamaño y padding del texto
-        //    getDimension returns px as float
         val textSizePx = resources.getDimension(R.dimen.luckywheel_text_size)
         (binding.lwv as LuckyWheelView).setTextSize(textSizePx.toInt())
         val paddingPx = resources.getDimension(R.dimen.luckywheel_padding)
         (binding.lwv as LuckyWheelView).setTextPadding(paddingPx)
 
         binding.lwv.apply {
-
             setWheelCenterImage(R.drawable.logo2)
             setWheelCenterImageSize(70.toFloat(), 70.toFloat())
             drawCenterPoint(true)
@@ -112,10 +127,8 @@ class WheelFragment : Fragment() {
 
     private fun drawableToBitmap(drawableId: Int, widthPx: Int? = null, heightPx: Int? = null): Bitmap? {
         val drawable = ContextCompat.getDrawable(requireContext(), drawableId) ?: return null
-        // Determinar dimensiones
         val w = widthPx ?: drawable.intrinsicWidth.takeIf { it > 0 } ?: 24.dpToPx()
         val h = heightPx ?: drawable.intrinsicHeight.takeIf { it > 0 } ?: 24.dpToPx()
-        // Crear bitmap y canvas
         val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, w, h)
@@ -132,38 +145,70 @@ class WheelFragment : Fragment() {
         }
     }
 
-    /** Extensión para convertir Int dp a px */
     private fun Int.dpToPx(): Int =
         (this * resources.displayMetrics.density).toInt()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
-        // Botón “Girar”
+        firestoreListener = FirebaseFirestore.getInstance()
+            .collection("userProfiles").document(uid)
+            .addSnapshotListener { snap, e ->
+                if (e != null) {
+                    Log.e("WheelFragment","Error leyendo perfil: ${e.message}")
+                    return@addSnapshotListener
+                }
+                if (snap != null && snap.exists()) {
+                    val profile = snap.toObject(UserProfile::class.java)!!
+                    actualizarEstadoSpin(profile)
+                    generateWheelChallenges(profile.hobbies)
+
+                }
+            }
+
+        // Botón "Girar"
         binding.btnSpin.setOnClickListener {
-            binding.tvStatus.text = ""
+            binding.btnSpin.isEnabled = false
+            hasUsedRespin = false
+            chosenText = null
+            binding.tvStatus.text = "Girando..."
             binding.btnAceptar.visibility = View.GONE
-            binding.btnRespin.visibility  = View.GONE
+            binding.btnRespin.visibility = View.GONE
 
-            val idx = Random.nextInt(wheelItems.size)
-            lastTargetIndex = idx
-            binding.lwv.setTarget(idx)
-            binding.lwv.rotateWheel()
+            // Primero validar el spin diario
+            FirebaseFunctions.getInstance()
+                .getHttpsCallable("spinDaily")
+                .call(emptyMap<String, Any>())
+                .addOnSuccessListener {
+                    // Si la validación es exitosa, girar la ruleta
+                    val idx = Random.nextInt(wheelItems.size)
+                    lastTargetIndex = idx
+                    binding.lwv.setTarget(idx)
+                    binding.lwv.rotateWheel()
+                }
+                .addOnFailureListener { e ->
+                    Log.e("WheelFragment","Error validando spin: ${e.message}")
+                    Toast.makeText(requireContext(), e.message ?: "Error al validar spin", Toast.LENGTH_LONG).show()
+                    binding.btnSpin.isEnabled = true
+                    binding.tvStatus.text = ""
+                }
         }
 
         // Listener de fin de rotación
         binding.lwv.setRotationCompleteListener { data ->
+            val b = _binding ?: return@setRotationCompleteListener
             chosenText = data.text
-            binding.tvStatus.text = "¡Desafío: ${data.text}!"
-            binding.btnAceptar.visibility = View.VISIBLE
-            if (!hasUsedRespin) binding.btnRespin.visibility = View.VISIBLE
+            b.tvStatus.text = "¡Desafío: ${data.text}!"
+            b.btnAceptar.visibility = View.VISIBLE
+            if (!hasUsedRespin) b.btnRespin.visibility = View.VISIBLE
         }
 
-        // Botón “Aceptar”
+        // Botón "Aceptar" - Solo navega al desafío, NO otorga puntos
         binding.btnAceptar.setOnClickListener {
             val texto = chosenText ?: return@setOnClickListener
             val instrucciones = mapOf(
-                "Descanso 5’" to "Poné el celular a un lado y relajate 5 minutos.",
+                "Descanso 5'" to "Poné el celular a un lado y relajate 5 minutos.",
                 "Hidratarte"  to "Andá a buscar agua y tomate un vaso.",
                 "Estiramiento" to "Estirá cuello, espalda y piernas.",
                 "Caminar"     to "Caminá 2 minutos por tu espacio.",
@@ -171,20 +216,22 @@ class WheelFragment : Fragment() {
                 "Respirar"    to "Hacé 5 respiraciones profundas."
             )
             val detalle = instrucciones[texto] ?: "Realizá el desafío."
-            val recompensa = if (hasUsedRespin) "+5 puntos" else "+10 puntos"
 
-            findNavController().navigate(
-                R.id.challengeFragment,
-                Bundle().apply {
-                    putString("nombre", texto)
-                    putString("instruccion", detalle)
-                    putString("recompensa", recompensa)
-                    putBoolean("respin", hasUsedRespin)
-                }
-            )
+            // Solo navegar al desafío
+            if (_binding != null) {
+                findNavController().navigate(
+                    R.id.challengeFragment,
+                    Bundle().apply {
+                        putString("nombre", texto)
+                        putString("instruccion", detalle)
+                        putInt("recompensa", if (hasUsedRespin) 5 else 10)
+                        putBoolean("respin", hasUsedRespin)
+                    }
+                )
+            }
         }
 
-        // Botón “Re-spin”
+        // Botón "Re-spin"
         binding.btnRespin.setOnClickListener {
             if (!hasUsedRespin) {
                 hasUsedRespin = true
@@ -203,8 +250,94 @@ class WheelFragment : Fragment() {
         }
     }
 
+    private fun actualizarEstadoSpin(profile: UserProfile) {
+        val currentBinding = _binding ?: return
+
+        val now = System.currentTimeMillis()
+        val last = profile.lastSpinAt ?: 0L
+        val dayMillis = 10000 // 24 horas
+
+        if (now - last >= dayMillis) {
+            currentBinding.btnSpin.isEnabled = true
+            currentBinding.tvStatus.text = "¡Gira la ruleta para obtener un desafío!"
+            hasUsedRespin = false
+        } else {
+            currentBinding.btnSpin.isEnabled = false
+            val millisLeft = dayMillis - (now - last)
+            val hours = millisLeft / (1000 * 60 * 60)
+            val minutes = (millisLeft % (1000 * 60 * 60)) / (1000 * 60)
+            val seconds = (millisLeft % (1000 * 60)) / 1000
+            currentBinding.tvStatus.text = "Próximo spin disponible en ${hours}h ${minutes}m ${seconds}s"
+        }
+    }
+    private fun generateWheelChallenges(hobbies: List<String>) {
+        // 1) Físicos
+        val phys = PhysicalChallengesProvider.physicalChallenges.shuffled().take(3)
+
+        // 2) Quizzes de hobby
+        val hobbyMap = HobbyQuestionsProvider.hobbyQuizzes
+        val quizzes = hobbies
+            .filter { hobbyMap.containsKey(it) }
+            .flatMap { hobbyMap[it]!! }
+            .shuffled()
+            .take(3)
+            .map { qq ->
+                DesafioGamificado(
+                    nombre = qq.question,
+                    instruccion = qq.question,
+                    recompensa = 10,
+                    iconoResId = getIconForHobbyQuiz(),
+                    quiz = qq
+                )
+            }
+
+        // 3) Extra físicos si faltan
+        val faltan = 6 - (phys.size + quizzes.size)
+        val extra = if (faltan > 0) PhysicalChallengesProvider.physicalChallenges.shuffled().drop(3).take(faltan) else emptyList()
+
+        // 4) Mezclar y guardar
+        val all = (phys + quizzes + extra).shuffled()
+        challengeViewModel.setCurrentChallenges(all.associateBy { it.nombre })
+
+        // 5) WheelData
+        wheelItems = ArrayList(all.map { d ->
+            val bmp = loadBitmapFromResource(d.iconoResId) ?: createPlaceholderBitmap()
+            WheelData(
+                icon = bmp,
+                text = d.nombre,
+                textColor = intArrayOf(resources.getColor(R.color.white, null)),
+                backgroundColor = intArrayOf(resources.getColor(R.color.green_500, null))
+            )
+        })
+        binding.lwv.setWheelData(wheelItems)
+    }
+
+    private fun getIconForHobbyQuiz(): Int = R.drawable.question_mark_24dp_
+
+
+    private fun getIconForHobby(hobby: String): Int {
+        return when(hobby) {
+            "Volley" -> R.drawable.sports_volleyball_24dp_
+            "Cocinar" -> R.drawable.chef_hat_24dp_
+            "Leer"    -> R.drawable.menu_book_24dp_
+            // ...
+            else -> R.drawable.question_mark_24dp_
+        }
+    }
+    private fun createPlaceholderBitmap(): Bitmap {
+        // Un cuadrado sencillo
+        val size = 48.dpToPx()
+        val bmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bmp)
+        canvas.drawColor(ContextCompat.getColor(requireContext(), R.color.gray_300))
+        val paint = Paint()
+        return bmp
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        firestoreListener?.remove()
+        firestoreListener = null
         _binding = null
     }
 }

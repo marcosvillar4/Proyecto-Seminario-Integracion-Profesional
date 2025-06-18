@@ -1,0 +1,73 @@
+[33mcommit b7aa3db365f2946d0b4934e0b40f267d489ae49d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Agustin Nari <agusnari21@gmail.com>
+Date:   Sun May 18 00:58:34 2025 -0300
+
+    Registro e inicio de sesión con Firebase
+
+[33mcommit 0ffe5a447e8a69dd6e01eb303a9c9f3ced83f8e7[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Agustin Nari <agusnari21@gmail.com>
+Date:   Sat May 17 02:18:51 2025 -0300
+
+    Firebase Authentication
+
+[33mcommit 457322893f7880a3d10b585198513edf67789fb1[m
+Author: SantiMussi <santimussi1959@gmail.com>
+Date:   Thu May 15 20:04:57 2025 -0300
+
+    Centrado de iniciar sesion y register
+
+[33mcommit a3314c5e7764bfde2c031c3a47f0232a67ae41b6[m
+Author: SantiMussi <santimussi1959@gmail.com>
+Date:   Thu May 15 17:25:40 2025 -0300
+
+    Arreglo register
+
+[33mcommit fc26efa15ddf7b62efb679f654a283ef19b3c661[m
+Author: SantiMussi <santimussi1959@gmail.com>
+Date:   Thu May 15 17:20:57 2025 -0300
+
+    Parametros de contrasenia
+
+[33mcommit 83a73fa8d1cc513707cf139bd11aab6186e04904[m
+Author: SantiMussi <santimussi1959@gmail.com>
+Date:   Thu May 15 14:34:41 2025 -0300
+
+    +Paleta de colores
+
+[33mcommit 2db935a86f452bd731ba9253d9f31340fbf997cf[m
+Author: SantiMussi <santimussi1959@gmail.com>
+Date:   Wed May 14 21:50:32 2025 -0300
+
+    Login & Register fragments
+
+[33mcommit 55a73d14cd559dd9b7273e5f851bdacdf35c7d26[m
+Author: SantiMussi <santimussi1959@gmail.com>
+Date:   Wed May 14 15:18:51 2025 -0300
+
+    Texto bienvenida
+
+[33mcommit b48e3e0f2f21d2421a18c5ed49168b427535aaea[m
+Author: SantiMussi <santimussi1959@gmail.com>
+Date:   Wed May 14 14:25:51 2025 -0300
+
+    Welcome screen
+
+[33mcommit ef5edc15182a195c14b62f0971d98ce8f521adba[m
+Author: marcosvillar4 <75869096+marcosvillar4@users.noreply.github.com>
+Date:   Tue May 13 20:47:51 2025 -0300
+
+    Update google-services.json
+    
+    Saque la api key para evitar problemas de seguridad
+
+[33mcommit 6e26506bfd2e13697a2f6eb154c62b0f5ef418b7[m
+Author: Agustin Nari <agusnari21@gmail.com>
+Date:   Tue May 13 20:13:51 2025 -0300
+
+    abcd
+
+[33mcommit e8abbb42595b4c776758d4e75d09a55f65a4602c[m
+Author: Agustin Nari <agusnari21@gmail.com>
+Date:   Tue May 13 19:31:00 2025 -0300
+
+    initial commit

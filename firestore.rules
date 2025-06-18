@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1) Colección “users”
+    // Permitir que cualquier usuario autenticado lea todos los documentos de user (para poder consultar emails, existencias, etc.)
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      // Sólo el usuario dueño puede escribir su propio documento
+      allow write: if request.auth != null && request.auth.uid == userId;
+      // Subcolección tests, si la usas:
+      match /tests/{testId} {
+        allow create: if request.auth != null && request.auth.uid == userId;
+        allow read:   if request.auth != null && request.auth.uid == userId;
+        allow update, delete: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // 2) Colección “userProfiles” (perfil ligero)
+    match /userProfiles/{uid} {
+    allow read: if request.auth != null;
+    allow write: if request.auth != null;
+
+      // Subcolección "checkins"
+    	 match /checkins/{checkinId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+
+  }
+
+
+    // 3) Colección “groups”
+    match /groups/{groupId} {
+      // Cualquier usuario autenticado puede crear un grupo (cliente se encarga de validar campos mínimos)
+      allow create: if request.auth != null;
+      // Leer o listar grupos: cualquier usuario autenticado (para consultas como whereEqualTo("code", ...) o whereArrayContains("memberIds", uid))
+      allow get, list: if request.auth != null;
+      // Actualizar o borrar: cualquier usuario autenticado. Confiamos en la lógica cliente/repositorio para no hacer cosas indebidas.
+      allow update, delete: if request.auth != null;
+
+      // Subcolección mensajes: 
+      match /messages/{messageId} {
+       allow read, create: if request.auth != null && request.auth.uid in get(/databases/$(database)/documents/groups/$(groupId)).data.memberIds;
+      }
+    }
+
+    // 4) Colección “organizations”
+    match /organizations/{orgId} {
+      // Crear organización: cualquier usuario autenticado
+      allow create: if request.auth != null;
+      // Leer/listar organizaciones: cualquier usuario autenticado (para buscar por código o whereArrayContains)
+      allow get, list: if request.auth != null;
+      // Actualizar o borrar: cualquier usuario autenticado. La lógica cliente debe encargarse de no dejar salir o entrar indebidamente.
+      allow update, delete: if request.auth != null;
+    }
+
+    // 5) Otras colecciones: ajusta de forma similar o crea reglas específicas.
+  }
+}

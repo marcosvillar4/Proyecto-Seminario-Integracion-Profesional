@@ -29,7 +29,9 @@ data class UserProfile(
     val hobbies: List<String> = emptyList(),
     val hobbiesCompletados: Boolean = false,
     val organizationIds: List<String> = emptyList(),
-    val groupIds: List<String> = emptyList()
+    val groupIds: List<String> = emptyList(),
+    val accumulatedPoints: Long? = 0L,
+    val lastSpinAt: Long? = 0L
 )
 
 class UserTokenRepository {
@@ -111,7 +113,9 @@ class UserRepository {
             "hobbies" to emptyList<String>(),
             "hobbiesCompletados" to false,
             "organizationIds" to emptyList<String>(),
-            "groupIds" to emptyList<String>()
+            "groupIds" to emptyList<String>(),
+            "accumulatedPoints" to 0L,
+            "lastSpinAt" to null
         )
         db.collection("userProfiles")
             .document(uid)

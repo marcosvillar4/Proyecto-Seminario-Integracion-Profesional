@@ -2,138 +2,159 @@ package tpo.seminario.breakbuddy.ui.challenge
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.functions.FirebaseFunctions
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentChallengeBinding
+import tpo.seminario.breakbuddy.ui.wheel.ChallengeViewModel
 import tpo.seminario.breakbuddy.util.DesafioGamificado
+import tpo.seminario.breakbuddy.util.QuizQuestion
 
-class ChallengeFragment : Fragment() {
+class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
 
     private var _binding: FragmentChallengeBinding? = null
     private val binding get() = _binding!!
     private var temporizador: CountDownTimer? = null
-
-    private val desafios = mapOf(
-        "Descanso 5’" to DesafioGamificado(
-            nombre = "Descanso 5’",
-            instruccion = "Poné el celular a un lado y relajate 5 minutos.",
-            recompensa = 10,
-            iconoResId = R.drawable.ic_timer,
-            requiereTemporizador = true,
-            duracionSegundos = 300
-        ),
-        "Hidratarte" to DesafioGamificado(
-            nombre = "Hidratarte",
-            instruccion = "Tomate un vaso de agua y recargá energías.",
-            recompensa = 10,
-            iconoResId = R.drawable.ic_water
-        ),
-        "Estiramiento" to DesafioGamificado(
-            nombre = "Estiramiento",
-            instruccion = "Estirá cuello, espalda y piernas por 1 minuto.",
-            recompensa = 10,
-            iconoResId = R.drawable.ic_stretch
-        ),
-        "Caminar" to DesafioGamificado(
-            nombre = "Caminar",
-            instruccion = "Caminá al menos 2 minutos por tu espacio.",
-            recompensa = 10,
-            iconoResId = R.drawable.ic_walk,
-            requiereTemporizador = true,
-            duracionSegundos = 120
-        ),
-        "Meditación" to DesafioGamificado(
-            nombre = "Meditación",
-            instruccion = "Respirá profundo durante 3 minutos.",
-            recompensa = 10,
-            iconoResId = R.drawable.ic_meditate,
-            requiereTemporizador = true,
-            duracionSegundos = 180
-        ),
-        "Respirar" to DesafioGamificado(
-            nombre = "Respirar",
-            instruccion = "Hacé 5 respiraciones profundas y conscientes.",
-            recompensa = 10,
-            iconoResId = R.drawable.ic_breath
-        )
-    )
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentChallengeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val challengeViewModel: ChallengeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentChallengeBinding.bind(view)
 
-        val respin = arguments?.getBoolean("respin", false) ?: false
+        val respin = arguments?.getBoolean("respin") ?: false
         val nombre = arguments?.getString("nombre") ?: return
-        val desafio = desafios[nombre] ?: return
-
-        binding.tvTituloDesafio.text = "¡Desafío: ${desafio.nombre}!"
-        binding.tvInstruccion.text = desafio.instruccion
-        binding.imgDesafio.setImageResource(desafio.iconoResId)
-
-        if (respin) {
-            binding.tvInstruccion.text = "${desafio.instruccion}\n\n⚠️ Este desafío fue obtenido con Re-spin y otorga la mitad de puntos."
-            binding.btnCompletar.setBackgroundTintList(
-                resources.getColorStateList(R.color.alerta, null)
-            )
-            binding.btnCompletar.text = "Aceptar (Re-spin)"
+        val desafio = challengeViewModel.currentChallenges.value?.get(nombre) ?: run {
+            findNavController().navigateUp()
+            return
         }
 
+        binding.tvTituloDesafio.text = "¡${desafio.nombre}!"
+        binding.imgDesafio.setImageResource(desafio.iconoResId)
+
+        // Selecciona flujo según tipo
+        desafio.quiz?.let { quiz ->
+            setupQuiz(quiz, desafio.recompensa, respin)
+        } ?: setupPhysical(desafio, respin)
+    }
+
+    private fun setupQuiz(quiz: QuizQuestion, recompensa: Int, respin: Boolean) {
+        val puntos = if (respin) recompensa / 2 else recompensa
+        binding.tvInstruccion.text = quiz.question
+        binding.rgOpciones.visibility = View.VISIBLE
+
+        val opciones = listOf(
+            binding.rbOpcion1, binding.rbOpcion2,
+            binding.rbOpcion3, binding.rbOpcion4
+        )
+        quiz.options.forEachIndexed { i, texto ->
+            opciones[i].apply {
+                text = texto
+                visibility = View.VISIBLE
+            }
+        }
+
+        binding.btnCompletar.apply {
+            text = if (respin) "Responder (Re-spin) - $puntos pts" else "Responder - $puntos pts"
+            isEnabled = true
+            setOnClickListener {
+                val selId = binding.rgOpciones.checkedRadioButtonId
+                if (selId == -1) return@setOnClickListener
+                val idx = opciones.indexOfFirst { it.id == selId }
+                val earnedLocal = if (idx == quiz.correctIndex) puntos else 0
+                val feedback = if (idx == quiz.correctIndex) {
+                    "¡Correcto! +$earnedLocal pts"
+                } else {
+                    val correcta = quiz.options[quiz.correctIndex]
+                    "Incorrecto. La respuesta correcta era: $correcta. +0 pts"
+                }
+
+                // Si no hay puntos ganados, mostrar feedback y regresar sin llamar backend
+                if (earnedLocal == 0) {
+                    Toast.makeText(requireContext(), feedback, Toast.LENGTH_LONG).show()
+                    findNavController().navigateUp()
+                } else {
+                    completeChallenge(respin, quiz.question, earnedLocal, feedback)
+                }
+            }
+        }
+    }
+
+    private fun setupPhysical(desafio: DesafioGamificado, respin: Boolean) {
+        val puntos = if (respin) desafio.recompensa / 2 else desafio.recompensa
+        binding.tvInstruccion.text = desafio.instruccion
+
+        // Temporizador
         if (desafio.requiereTemporizador) {
             binding.tvTemporizador.visibility = View.VISIBLE
             binding.progressBar.visibility = View.VISIBLE
             binding.progressBar.max = desafio.duracionSegundos
             binding.progressBar.progress = 0
 
-            temporizador?.cancel() // cancelación previa
+            temporizador?.cancel()
             temporizador = object : CountDownTimer(desafio.duracionSegundos * 1000L, 1000L) {
-                override fun onTick(millisUntilFinished: Long) {
-                    val segundosRestantes = (millisUntilFinished / 1000).toInt()
-                    val segundosPasados = desafio.duracionSegundos - segundosRestantes
-                    binding.progressBar.progress = segundosPasados
-
-                    val minutos = segundosRestantes / 60
-                    val segundos = segundosRestantes % 60
-                    val tiempoRestante = String.format("%02d:%02d", minutos, segundos)
-
-                    binding.tvTemporizador.animate().scaleX(1.1f).scaleY(1.1f).setDuration(100).withEndAction {
-                        binding.tvTemporizador.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
-                    }.start()
-
-                    binding.tvTemporizador.text = "Tiempo restante: $tiempoRestante"
+                override fun onTick(ms: Long) {
+                    val secLeft = (ms / 1000).toInt()
+                    val passed = desafio.duracionSegundos - secLeft
+                    binding.progressBar.progress = passed
+                    val min = secLeft / 60
+                    val sec = secLeft % 60
+                    binding.tvTemporizador.text = String.format("Tiempo restante: %02d:%02d", min, sec)
                 }
-
                 override fun onFinish() {
                     binding.tvTemporizador.text = "¡Tiempo cumplido!"
                     binding.btnCompletar.isEnabled = true
-                    binding.progressBar.progress = binding.progressBar.max
                 }
-            }.also { it.start() }
-
-            binding.btnCompletar.isEnabled = false
+            }.also { timer ->
+                binding.btnCompletar.isEnabled = false
+                timer.start()
+            }
         } else {
             binding.tvTemporizador.visibility = View.GONE
             binding.progressBar.visibility = View.GONE
             binding.btnCompletar.isEnabled = true
         }
 
-        binding.btnCompletar.setOnClickListener {
-            val puntos = if (respin) desafio.recompensa / 2 else desafio.recompensa
-            Toast.makeText(requireContext(), "¡Ganaste $puntos puntos!", Toast.LENGTH_LONG).show()
-            findNavController().navigateUp()
+        binding.btnCompletar.apply {
+            text = if (respin) "Completar (Re-spin) - $puntos pts" else "Completar - $puntos pts"
+            setOnClickListener {
+                val feedback = "¡Ganaste $puntos pts!"
+                completeChallenge(respin, desafio.nombre, puntos, feedback)
+            }
         }
+    }
+
+    private fun completeChallenge(
+        respin: Boolean,
+        name: String,
+        earned: Int,
+        feedback: String
+    ) {
+        binding.btnCompletar.isEnabled = false
+        FirebaseFunctions.getInstance()
+            .getHttpsCallable("completeChallenge")
+            .call(mapOf(
+                "isRespin" to respin,
+                "challengeName" to name,
+                "earnedPoints" to earned
+            ))
+            .addOnSuccessListener { result ->
+                val data = result.data as? Map<*, *> ?: emptyMap<Any,Any>()
+                val total = (data["totalPoints"] as? Number)?.toInt() ?: -1
+                Toast.makeText(
+                    requireContext(),
+                    "$feedback. Total: $total pts",
+                    Toast.LENGTH_LONG
+                ).show()
+                findNavController().navigateUp()
+            }
+            .addOnFailureListener { e ->
+                binding.btnCompletar.isEnabled = true
+                Toast.makeText(requireContext(), e.message ?: "Error", Toast.LENGTH_LONG).show()
+            }
     }
 
     override fun onDestroyView() {

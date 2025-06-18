@@ -36,12 +36,13 @@ class MissionDialogFragment(
         savedInstanceState: Bundle?
     ): View {
         _binding = DialogMissionBinding.inflate(inflater, container, false)
-        dialog?.setCanceledOnTouchOutside(false) // ← bloquea el toque afuera
+        dialog?.setCanceledOnTouchOutside(false) // bloquea toque fuera
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Configurar UI inicial
         binding.tvTitulo.text = mision.titulo
         binding.tvDescripcion.text = mision.descripcion
         binding.btnListo.isEnabled = false
@@ -64,39 +65,62 @@ class MissionDialogFragment(
     }
 
     private fun iniciarTemporizador() {
-        temporizador = object : CountDownTimer(mision.duracionSegundos * 1000L, 1000L) {
+        // Aseguramos que duracionSegundos > 0
+        val duracionMs = (mision.duracionSegundos * 1000L).coerceAtLeast(0L)
+        temporizador?.cancel()
+        temporizador = object : CountDownTimer(duracionMs, 1000L) {
             override fun onTick(millisUntilFinished: Long) {
+                val b = _binding ?: run {
+                    cancel()
+                    return
+                }
                 val segundos = millisUntilFinished / 1000
-                binding.tvTemporizador.text = "Completando... ${segundos}s"
-                binding.tvTemporizador.animate().scaleX(1.1f).scaleY(1.1f).setDuration(100).withEndAction {
-                    binding.tvTemporizador.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+                b.tvTemporizador.text = "Completando... ${segundos}s"
+                // Animación segura: dentro de lambda volver a verificar binding
+                b.tvTemporizador.animate().scaleX(1.1f).scaleY(1.1f).setDuration(100).withEndAction {
+                    val b2 = _binding ?: return@withEndAction
+                    b2.tvTemporizador.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
                 }.start()
             }
 
             override fun onFinish() {
-                binding.tvTemporizador.text = "¡Listo!"
-                binding.btnListo.isEnabled = true
+                val b = _binding ?: return
+                b.tvTemporizador.text = "¡Listo!"
+                b.btnListo.isEnabled = true
             }
-        }.start()
+        }.also { it.start() }
     }
 
     private fun iniciarGuiaPasos() {
-        val pasos = mision.pasosGuiados ?: return
+        val pasos = mision.pasosGuiados
+        if (pasos.isNullOrEmpty()) {
+            // Si no hay pasos, habilitar botón inmediatamente
+            val b0 = _binding ?: return
+            b0.tvTemporizador.text = "¡Bien hecho!"
+            b0.btnListo.isEnabled = true
+            return
+        }
+        pasoIndex = 0
         val duracionTotal = pasos.size * 2000L
-
+        temporizador?.cancel()
         temporizador = object : CountDownTimer(duracionTotal, 2000L) {
             override fun onTick(millisUntilFinished: Long) {
+                val b = _binding ?: run {
+                    cancel()
+                    return
+                }
                 if (pasoIndex < pasos.size) {
-                    binding.tvTemporizador.text = pasos[pasoIndex]
+                    b.tvTemporizador.text = pasos[pasoIndex]
                     pasoIndex++
                 }
             }
 
             override fun onFinish() {
-                binding.tvTemporizador.text = "¡Bien hecho!"
-                binding.btnListo.isEnabled = true
+                val b = _binding ?: return
+                b.tvTemporizador.text = "¡Bien hecho!"
+                b.btnListo.isEnabled = true
             }
-        }.start()
+        }.also { it.start() }
     }
 
     override fun getTheme(): Int {
@@ -104,8 +128,9 @@ class MissionDialogFragment(
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         temporizador?.cancel()
+        temporizador = null
         _binding = null
+        super.onDestroyView()
     }
 }

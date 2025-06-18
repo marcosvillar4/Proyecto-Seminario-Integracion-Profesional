@@ -19,17 +19,13 @@ import android.util.Log
 import com.google.firebase.auth.UserProfileChangeRequest
 import tpo.seminario.breakbuddy.persistence.*
 
-
-
-
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-
-    private lateinit var auth: FirebaseAuth // Declara una variable para mantener la instancia
-    private val TAG = "RegisterFragment" //REVISAR ESTO BIEN
+    private lateinit var auth: FirebaseAuth
+    private val TAG = "RegisterFragment"
 
     private val userRepo = UserRepository()
 
@@ -39,14 +35,14 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        auth = Firebase.auth // Inicializa la instancia de Auth
+        auth = Firebase.auth
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Mostrar requisitos solo cuando el campo de contrasenia tiene foco
+        // Mostrar requisitos solo cuando el campo de contrasenia tiene foco
         binding.inputPassword.setOnFocusChangeListener { _, hasFocus ->
             val visibility = if (hasFocus) View.VISIBLE else View.GONE
             binding.requirementLength.visibility = visibility
@@ -54,30 +50,25 @@ class RegisterFragment : Fragment() {
             binding.requirementDigit.visibility = visibility
         }
 
-        //Escuchar cambios en el texto de la contraseña
+        // Escuchar cambios en el texto de la contraseña
         binding.inputPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val password = s.toString()
                 checkPasswordRequirements(password)
             }
-
             override fun afterTextChanged(s: Editable?) {}
         })
 
         binding.inputRepeatPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val password = binding.inputPassword.text.toString()
                 val repeat = s.toString()
-
                 if (repeat == password) {
                     binding.repeatPasswordLayout.error = null
                 }
             }
-
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -90,101 +81,126 @@ class RegisterFragment : Fragment() {
 
             when {
                 name.isEmpty() || email.isEmpty() || password.isEmpty() -> {
-                    Toast.makeText(requireContext(), "Completá todos los campos", Toast.LENGTH_SHORT).show()
+                    context?.let { ctx ->
+                        Toast.makeText(ctx, "Completá todos los campos", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 // Verificacion de requisitos de contrasenia
                 password.length < 8 || !password.any { it.isUpperCase() } || !password.any { it.isDigit() } -> {
-                    Toast.makeText(requireContext(), "La contraseña no cumple con los requisitos", Toast.LENGTH_SHORT).show()
+                    context?.let { ctx ->
+                        Toast.makeText(ctx, "La contraseña no cumple con los requisitos", Toast.LENGTH_SHORT).show()
+                    }
                 }
-                password != repeatPassword ->{
+                password != repeatPassword -> {
                     binding.repeatPasswordLayout.error = "Las contraseñas no coinciden"
                 }
                 else -> {
-                    binding.repeatPasswordLayout.error = null;
-                    Toast.makeText(requireContext(), "Creando cuenta...", Toast.LENGTH_SHORT).show()
+                    binding.repeatPasswordLayout.error = null
+                    context?.let { ctx ->
+                        Toast.makeText(ctx, "Creando cuenta...", Toast.LENGTH_SHORT).show()
+                    }
 
-                    //Firebase
+                    // Firebase: create user
                     auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(requireActivity()) { task ->
+                        .addOnCompleteListener { task ->
+                            if (!isAdded) return@addOnCompleteListener
                             if (task.isSuccessful) {
                                 val user = auth.currentUser!!
-                                // 1) Actualizar displayName en Auth
                                 val profileUpdates = UserProfileChangeRequest.Builder()
                                     .setDisplayName(name)
                                     .build()
                                 user.updateProfile(profileUpdates)
                                     .addOnCompleteListener { updateTask ->
-                                        // Incluso si falla displayName, continuamos
-                                        // 2) Crear documento en /users/{uid}
+                                        if (!isAdded) return@addOnCompleteListener
+                                        // Continuar aunque falle el displayName
                                         userRepo.createUserDocument(
                                             user,
                                             onSuccess = {
-                                                // 3) Crear perfil ligero en /userProfiles/{uid}
+                                                if (!isAdded) return@createUserDocument
                                                 userRepo.createUserProfile(
                                                     user.uid,
                                                     onSuccess = {
-                                                        // 4) Envía email de verificación
+                                                        if (!isAdded) return@createUserProfile
                                                         user.sendEmailVerification()
                                                             .addOnSuccessListener {
-                                                                Toast.makeText(
-                                                                    requireContext(),
-                                                                    "Se envió un email de verificación a ${user.email}. Revisá tu bandeja de entrada.",
-                                                                    Toast.LENGTH_LONG
-                                                                ).show()
-                                                                // 5) Cierra sesión para forzar verificación antes de login
+                                                                if (!isAdded) return@addOnSuccessListener
+                                                                context?.let { ctx2 ->
+                                                                    Toast.makeText(
+                                                                        ctx2,
+                                                                        "Se envió un email de verificación a ${user.email}. Revisá tu bandeja de entrada.",
+                                                                        Toast.LENGTH_LONG
+                                                                    ).show()
+                                                                }
                                                                 Firebase.auth.signOut()
-                                                                // 6) Navega a pantalla de bienvenida o similar
-                                                                findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                                if (isAdded) {
+                                                                    findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                                }
                                                             }
                                                             .addOnFailureListener { e ->
-                                                                Toast.makeText(
-                                                                    requireContext(),
-                                                                    "Error enviando verificación: ${e.message}",
-                                                                    Toast.LENGTH_LONG
-                                                                ).show()
-                                                                // Aún podemos cerrar sesión y volver
+                                                                if (!isAdded) return@addOnFailureListener
+                                                                context?.let { ctx3 ->
+                                                                    Toast.makeText(
+                                                                        ctx3,
+                                                                        "Error enviando verificación: ${e.message}",
+                                                                        Toast.LENGTH_LONG
+                                                                    ).show()
+                                                                }
                                                                 Firebase.auth.signOut()
-                                                                findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                                if (isAdded) {
+                                                                    findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                                }
                                                             }
                                                     },
                                                     onFailure = { eProfile ->
-                                                        // Si falla crear perfil ligero, registrar en logs y avisar usuario
+                                                        if (!isAdded) return@createUserProfile
                                                         Log.w(TAG, "Error creando perfil ligero: ${eProfile.message}")
-                                                        Toast.makeText(
-                                                            requireContext(),
-                                                            "Cuenta creada pero error interno al inicializar perfil. Intentá reiniciar la app.",
-                                                            Toast.LENGTH_LONG
-                                                        ).show()
-                                                        // Opcional: aun así enviamos verificación y cerramos sesión:
+                                                        context?.let { ctx4 ->
+                                                            Toast.makeText(
+                                                                ctx4,
+                                                                "Cuenta creada pero error interno al inicializar perfil. Intentá reiniciar la app.",
+                                                                Toast.LENGTH_LONG
+                                                            ).show()
+                                                        }
+                                                        // Aún así enviamos verificación y cerramos sesión
                                                         user.sendEmailVerification()
                                                             .addOnSuccessListener {
+                                                                if (!isAdded) return@addOnSuccessListener
                                                                 Firebase.auth.signOut()
-                                                                findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                                if (isAdded) {
+                                                                    findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                                }
                                                             }
                                                             .addOnFailureListener {
+                                                                if (!isAdded) return@addOnFailureListener
                                                                 Firebase.auth.signOut()
-                                                                findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                                if (isAdded) {
+                                                                    findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                                                                }
                                                             }
                                                     }
                                                 )
                                             },
                                             onFailure = { e ->
-                                                // Si falla crear /users/{uid}
+                                                if (!isAdded) return@createUserDocument
                                                 Log.w(TAG, "Error creando documento /users: ${e.message}")
-                                                Toast.makeText(
-                                                    requireContext(),
-                                                    "Error interno al crear perfil. Intentá nuevamente.",
-                                                    Toast.LENGTH_LONG
-                                                ).show()
-                                                // Podrías optar por borrar el usuario de Auth (auth.currentUser?.delete()) si quieres
+                                                context?.let { ctx5 ->
+                                                    Toast.makeText(
+                                                        ctx5,
+                                                        "Error interno al crear perfil. Intentá nuevamente.",
+                                                        Toast.LENGTH_LONG
+                                                    ).show()
+                                                }
+                                                // Opcional: podrías borrar el usuario de Auth si lo deseas
                                             }
                                         )
                                     }
                             } else {
-                                // Si falla createUserWithEmailAndPassword
+                                if (!isAdded) return@addOnCompleteListener
                                 Log.w(TAG, "createUserWithEmail:failure", task.exception)
                                 val errorMessage = task.exception?.message ?: "Error al crear la cuenta."
-                                Toast.makeText(requireContext(), "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+                                context?.let { ctx ->
+                                    Toast.makeText(ctx, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
                 }
@@ -193,7 +209,9 @@ class RegisterFragment : Fragment() {
 
         // Link a iniciar sesión
         binding.textGoLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            if (isAdded) {
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            }
         }
     }
 
@@ -201,7 +219,6 @@ class RegisterFragment : Fragment() {
         val colorOK = resources.getColor(android.R.color.holo_green_dark, null)
         val colorNO = resources.getColor(android.R.color.darker_gray, null)
 
-        // Longitud mínima
         if (password.length >= 8) {
             binding.requirementLength.apply {
                 text = "✓ Al menos 8 caracteres"
@@ -216,7 +233,6 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        // Al menos una mayúscula
         if (password.any { it.isUpperCase() }) {
             binding.requirementUppercase.apply {
                 text = "✓ Al menos 1 letra mayúscula"
@@ -231,7 +247,6 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        // Al menos un número
         if (password.any { it.isDigit() }) {
             binding.requirementDigit.apply {
                 text = "✓ Al menos 1 número"

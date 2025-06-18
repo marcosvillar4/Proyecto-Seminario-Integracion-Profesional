@@ -16,14 +16,13 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import tpo.seminario.breakbuddy.persistence.UserRepository
 
-
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var auth: FirebaseAuth // Declara una variable para mantener la instancia
-    private val TAG = "LoginFragment" //REVISAR ESTO BIEN
+    private lateinit var auth: FirebaseAuth
+    private val TAG = "LoginFragment"
 
     private val userRepo = UserRepository()
 
@@ -33,47 +32,57 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        auth = Firebase.auth // Inicializa la instancia de Auth
+        auth = Firebase.auth
+
+        // NOTA: no iniciamos listeners aquí que dependen de la UI; la lógica principal va en onViewCreated
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener {
             val email = binding.inputEmail.text.toString()
             val password = binding.inputPassword.text.toString()
 
-            // Validación básica
             if (email.isBlank() || password.isBlank()) {
-                Toast.makeText(requireContext(), "Completá todos los campos", Toast.LENGTH_SHORT).show()
+                context?.let { ctx ->
+                    Toast.makeText(ctx, "Completá todos los campos", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                // Acá iría el intento de login real
-                Toast.makeText(requireContext(), "Iniciando sesión...", Toast.LENGTH_SHORT).show()
-
-                // Firebase
-
-                // 1) Login con Firebase Auth
+                context?.let { ctx ->
+                    Toast.makeText(ctx, "Iniciando sesión...", Toast.LENGTH_SHORT).show()
+                }
                 auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(requireActivity()) { task ->
+                    .addOnCompleteListener { task ->
+                        if (!isAdded) return@addOnCompleteListener
                         if (task.isSuccessful) {
                             val user = auth.currentUser!!
-                            // 2) Verifica email confirmado
+                            // Verifica email confirmado
                             if (!user.isEmailVerified) {
                                 FirebaseAuth.getInstance().signOut()
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Por favor, verificá tu email antes de iniciar sesión.",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                context?.let { ctx2 ->
+                                    Toast.makeText(
+                                        ctx2,
+                                        "Por favor, verificá tu email antes de iniciar sesión.",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
                                 return@addOnCompleteListener
                             }
 
-                            // 3) Asegura/actualiza lastLogin en Firestore
+                            // Asegura/actualiza lastLogin en Firestore
                             userRepo.ensureUserDocumentExists(
                                 user,
                                 onSuccess = {
+                                    if (!isAdded) return@ensureUserDocumentExists
                                     // Asegurar perfil ligero:
                                     userRepo.ensureUserProfileExists(user.uid)
                                     // Leer perfil ligero:
                                     userRepo.getUserProfileLight(
                                         user.uid,
                                         onSuccess = { profileLight ->
+                                            if (!isAdded) return@getUserProfileLight
                                             val baseOptions = NavOptions.Builder()
                                                 .setPopUpTo(R.id.mobile_navigation, true)
                                                 .build()
@@ -92,7 +101,8 @@ class LoginFragment : Fragment() {
                                             }
                                         },
                                         onFailure = { e ->
-                                            Log.w("LoginFragment", "Error leyendo perfil ligero: ${e.message}")
+                                            if (!isAdded)
+                                            Log.w(TAG, "Error leyendo perfil ligero: ${e.message}")
                                             // Fallback: forzar a Hobbies
                                             findNavController().navigate(
                                                 R.id.action_loginFragment_to_hobbiesFragment,
@@ -103,37 +113,44 @@ class LoginFragment : Fragment() {
                                     )
                                 },
                                 onFailure = { e ->
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Error actualizando perfil: ${e.message}",
-                                        Toast.LENGTH_LONG
-                                    ).show()
+                                    if (!isAdded)
+                                    context?.let { ctx3 ->
+                                        Toast.makeText(
+                                            ctx3,
+                                            "Error actualizando perfil: ${e.message}",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
                                 }
                             )
                         } else {
-                            // Error en login
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
+                            if (!isAdded) return@addOnCompleteListener
                             val errorMessage = task.exception?.message ?: "Error al iniciar sesión."
-                            Toast.makeText(
-                                requireContext(),
-                                "Error: $errorMessage",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            context?.let { ctx ->
+                                Toast.makeText(
+                                    ctx,
+                                    "Error: $errorMessage",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
             }
         }
 
         binding.textGoRegister.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            if (isAdded) {
+                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
         }
 
         binding.textGoChangePassword.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_passwordResetFragment)
+            if (isAdded) {
+                findNavController().navigate(R.id.action_loginFragment_to_passwordResetFragment)
+            }
         }
-        return binding.root
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

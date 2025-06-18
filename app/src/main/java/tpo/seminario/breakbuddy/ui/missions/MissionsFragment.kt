@@ -12,7 +12,6 @@ import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.data.MisionProvider
 import tpo.seminario.breakbuddy.databinding.FragmentMissionsBinding
 import tpo.seminario.breakbuddy.util.missions.Mision
-import tpo.seminario.breakbuddy.util.missions.TipoMision
 
 class MissionsFragment : Fragment() {
 
@@ -44,9 +43,10 @@ class MissionsFragment : Fragment() {
 
             card.findViewById<Button>(R.id.btnCompletar).setOnClickListener {
                 val dialog = MissionDialogFragment(mision) {
+                    // Al completar la misión: remover la tarjeta
                     layout.removeView(card)
-
                     if (layout.childCount == 0) {
+                        // Si ya no quedan misiones, mostrar mensaje
                         val mensajeFinal = TextView(requireContext()).apply {
                             text = "¡Buen trabajo! Vuelve mañana"
                             textSize = 16f

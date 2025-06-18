@@ -10,6 +10,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.functions.FirebaseFunctions
 
 class BreakBuddyApp : Application() {
     override fun onCreate() {
@@ -23,11 +24,11 @@ class BreakBuddyApp : Application() {
 
         // 2) Detectar debug / emulador
         val isDebuggable = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
-        if (!isDebuggable) {
+        if (isDebuggable) {
             Log.d("BreakBuddyApp", "🔌 DEBUG mode: conectando a Emuladores")
             FirebaseAuth.getInstance().useEmulator("10.0.2.2", 9099)
-            // ¡Importante!: esta llamada precede a cualquier getInstance() de Firestore
             FirebaseFirestore.getInstance().useEmulator("10.0.2.2", 8080)
+            FirebaseFunctions.getInstance().useEmulator("10.0.2.2", 5001)
             Log.d("BreakBuddyApp", "✅ Conectado a Firebase Emulators")
         } else {
             Log.d("BreakBuddyApp", "⚠️ RELEASE mode: usando producción")
