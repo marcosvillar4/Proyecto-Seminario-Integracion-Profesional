@@ -40,10 +40,7 @@ class CheckinFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val user = FirebaseAuth.getInstance().currentUser
-        val userId = user?.uid
 
-        Log.d("CheckinDebug", "🆔 UID actual: $userId")
         emojiViews.forEach { emoji ->
             emoji.setOnClickListener {
                 selectedEmoji = emoji.text.toString()

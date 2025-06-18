@@ -104,7 +104,10 @@ class MainActivity : AppCompatActivity() {
         calendar.timeZone = TimeZone.getDefault()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
+        val user2 = FirebaseAuth.getInstance().currentUser
+        val userId2 = user2?.uid
 
+        Log.d("CheckinDebug", "🆔 UID actual: $userId2")
         Log.d("CheckinDebug", "🕘 Hora actual: $hour:$minute")
 
         // Solo permitir entre 21:00 y 23:59
