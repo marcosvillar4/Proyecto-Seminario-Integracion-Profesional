@@ -63,28 +63,33 @@ class CheckinFragment : Fragment() {
     }
 
     private fun guardarCheckin(emoji: String) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val db = FirebaseFirestore.getInstance()
-
-        // Fecha del día en formato yyyy-MM-dd
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val today = dateFormat.format(Date())
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
         val checkin = hashMapOf(
             "estadoEmocional" to emoji,
             "fechaRegistro" to Timestamp.now()
         )
 
+        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            .format(Date())
+
+// Guardar en subcolección "checkins"
         db.collection("userProfiles").document(userId)
             .collection("checkins")
             .document(today)
             .set(checkin)
             .addOnSuccessListener {
+                // ✅ También actualizamos el último emoji en el documento principal
+                db.collection("userProfiles").document(userId)
+                    .update("ultimoCheckin", emoji)
+
                 Toast.makeText(context, "Gracias por compartir ❤️", Toast.LENGTH_SHORT).show()
                 requireActivity().finish()
             }
             .addOnFailureListener {
                 Toast.makeText(context, "Error al guardar", Toast.LENGTH_SHORT).show()
+                Log.e("CheckinDebug", "❌ Error guardando check-in", it)
             }
     }
 }
