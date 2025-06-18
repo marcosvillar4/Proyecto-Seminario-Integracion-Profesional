@@ -15,8 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalTime
+import java.util.TimeZone
 import java.util.Calendar
 import java.util.Locale
 
@@ -102,6 +101,7 @@ class MainActivity : AppCompatActivity() {
 
     private suspend fun shouldNavigateToCheckin(): Boolean {
         val calendar = Calendar.getInstance()
+        calendar.timeZone = TimeZone.getDefault()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
