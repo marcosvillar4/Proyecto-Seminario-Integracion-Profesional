@@ -61,4 +61,15 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <!--Emojis checkin-->
+    <style name="EmojiOption">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+
 </resources>

@@ -338,5 +338,16 @@
         android:label="Misiones"
         tools:layout="@layout/fragment_missions" />
 
+    <!--Checkin-->
+
+    <fragment
+        android:id="@+id/checkinFragment"
+        android:name="tpo.seminario.breakbuddy.ui.checkin.CheckinFragment"
+        android:label="Check-in"
+        tools:layout="@layout/fragment_checkin" />
+
+    <action
+        android:id="@+id/action_global_checkinFragment"
+        app:destination="@id/checkinFragment" />
 
 </navigation>
