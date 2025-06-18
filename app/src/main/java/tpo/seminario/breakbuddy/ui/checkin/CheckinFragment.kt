@@ -1,6 +1,7 @@
 package tpo.seminario.breakbuddy.ui.checkin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,10 @@ class CheckinFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val user = FirebaseAuth.getInstance().currentUser
+        val userId = user?.uid
 
+        Log.d("CheckinDebug", "🆔 UID actual: $userId")
         emojiViews.forEach { emoji ->
             emoji.setOnClickListener {
                 selectedEmoji = emoji.text.toString()
