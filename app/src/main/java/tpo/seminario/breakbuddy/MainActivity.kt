@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("CheckinDebug", "🕘 Hora actual: $hour:$minute")
 
         // Solo permitir entre 21:00 y 23:59
-        if (hour < 21 || hour > 23) {
+        if (hour < 2) {
             Log.d("CheckinDebug", "⛔ Fuera del horario de check-in")
             return false
         }
