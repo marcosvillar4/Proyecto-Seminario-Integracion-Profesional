@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.Timestamp
@@ -90,7 +91,7 @@ class CheckinFragment : Fragment() {
             .addOnSuccessListener {
                 Log.d("CheckinDebug", "✅ Check-in guardado")
                 Toast.makeText(context, "Gracias por compartir ❤️", Toast.LENGTH_SHORT).show()
-                requireActivity().finish()
+                findNavController().popBackStack()
             }
             .addOnFailureListener { e ->
                 Log.e("CheckinDebug", "❌ Error guardando check-in", e)
