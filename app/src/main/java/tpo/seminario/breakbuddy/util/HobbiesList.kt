@@ -13,5 +13,14 @@ object HobbiesList {
         "Escribir", "Bloggear", "Canto", "Programar", "Diseño gráfico",
         "Correr", "Nadar", "Trekking", "Ajedrez", "Astronomía",
         "Voluntariado", "Restaurar muebles", "Tejer", "Cerámica", "Basket", "Volley", "Golf"
+
+        // nuevos hobbies - intereses
+        "Costura","Bordado","Cocina","Pasteleria","Crucigramas","Avistamiento de aves","Origami",
+        "Marroquineria", "Dibujo","Bisuteria","Coleccionismo","Adiestramiento de animales","Carpinteria",
+        "Maquillaje profesional","Ilusionismo","Crochet","Pilates","Dardos","Tarot","Acuarelas","Escultura",
+        "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
+        "Peluqueria","Decoracion de interiores","Damas","Rummy Burako",
+        "Bonsai","Prensado de flores","Lepidopterología","Macramé","Sudoku","Confección de encaje","Sopa de letras",
+        "Bingo","Pirograbado"
     )
 }
