@@ -15,7 +15,7 @@ object HobbiesList {
         "Voluntariado", "Restaurar muebles", "Tejer", "Cerámica", "Basket", "Volley", "Golf"
 
         // nuevos hobbies - intereses
-        "Costura","Bordado","Cocina","Pasteleria","Crucigramas","Avistamiento de aves","Origami",
+        "Costura","Bordado","Pasteleria","Crucigramas","Avistamiento de aves","Origami",
         "Marroquineria", "Dibujo","Bisuteria","Coleccionismo","Adiestramiento de animales","Carpinteria",
         "Maquillaje profesional","Ilusionismo","Crochet","Pilates","Dardos","Tarot","Acuarelas","Escultura",
         "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
