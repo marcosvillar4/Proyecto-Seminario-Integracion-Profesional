@@ -21,6 +21,6 @@ object HobbiesList {
         "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
         "Peluqueria","Decoracion de interiores","Damas","Rummy Burako",
         "Bonsai","Prensado de flores","Lepidopterología","Macramé","Sudoku","Confección de encaje","Sopa de letras",
-        "Bingo","Pirograbado"
+        "Bingo"
     )
 }
