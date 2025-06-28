@@ -37,6 +37,84 @@ object HobbyQuestionsProvider{
                 question = "¿A qué temperatura hierve el agua al nivel del mar?",
                 options = listOf("90 °C", "95 °C", "100 °C", "105 °C"),
                 correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿De dónde es originario el rissotto?",
+                options = listOf("España","Grecia", "Italia", "Francia"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el tzatiki?",
+                options = listOf("Una sopa rusa","Una ensalada griega", "Una crema bulgara", "Una salsa húngara"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el ingrediente principal de la sopa borscht?",
+                options = listOf("Calabacín","Berenjena", "Cebolla", "Remolacha"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Dónde se origina el kebab?",
+                options = listOf("Occidente","Medio Oriente", "Sudamerica", "África"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué condimento es rojo?",
+                options = listOf("Paprika","Curry", "Tomillo", "Canela"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes cortes NO es de vaca?",
+                options = listOf("Churrasco","Short rib", "Cochinita pibil", "Tomakawk"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de las siguientes opciones es una verdura?",
+                options = listOf("Calabaza","Nabo", "Cilantro", "Choclo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "Es el alimento base de las culturas orientales",
+                options = listOf("Arroz","Trigo", "Cereales varios", "Centeno"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "El Asado es un método de cocción...",
+                options = listOf("Compuesto","En seco", "A las brasas", "Mixto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "Consiste en sumergir los alimentos en materia grasa caliente",
+                options = listOf("Sofreír","Saltear", "Bridar", "Freír"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "Se elabora principalmente a partir de huesos de ave",
+                options = listOf("Fondo Blanco","Fasolada", "Consomé", "Caldo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes métodos de conserva consiste en sumergir un alimento en sal?",
+                options = listOf("Salmuera","Encurtir", "Macerar", "Curar"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "Al cocinar huevos escalfados ¿Qué se le hecha generalmente al agua para facilitar el proceso?",
+                options = listOf("Sal","Aceite", "Vinagre", "Pimienta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es la actividad acuosa?",
+                options = listOf("Es la cantidad de lípidos que se encuentran en un alimento",
+                    "Es un alimento con altos contenidos de microorganismos y gérmenes",
+                    "Es la cantidad de agua disponible en un alimento", "Es una modificación en el alimento"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "De que esta compuesto, clásicamente, el Strogonoff?",
+                options = listOf("Carne, setas, papas fritas, crema agria",
+                    "Pollo, limon, zanahoria, tomate", "Cerdo, manzanas, crema agridulce", "Pollo, setas, papas españolas"),
+                correctIndex = 0
             )
         ),
 
@@ -47,11 +125,95 @@ object HobbyQuestionsProvider{
                 question = "¿Cuál es considerado el libro más leído del mundo?",
                 options = listOf("Don Quijote", "La Biblia", "El Principito", "1984"),
                 correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Quien es el creador del Realismo Mágico?",
+                options = listOf("Vicente García-Huidobro", "Nicanor Parra", "Ernesto Sábato", "Gabriel García Márquez"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos escritores latinoamericanos NO ganó el Nobel?",
+                options = listOf("Jorge Luis Borges", "Mario Vargas Llosa", "Octavio Paz", "Miguel Ángel Asturias"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Quién es el autor de El Quijote de la Mancha?",
+                options = listOf("Patrick Süskind", "Miguel de Cervantes", "Marcela Paz", "Antonio Machado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "La Divina comedia fue escrita a finales de...",
+                options = listOf("Renacimiento", "Barroco","La Edad Media", "Neoclásico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿A que época pertenece William Shakespeare?",
+                options = listOf("Contemporánea", "Edad Media","Antigua", "Renacimiento"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "Es considerado uno de los padres de la Ciencia Ficción",
+                options = listOf("Isaac Asimov", "Ray Bradbury","Aldous Huxley", "Julio Verne"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "Autor de Frankenstein",
+                options = listOf("Jane Austen", "Mary Shelley","Charles Dickens", "Edgar Allan Poe"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de obra es 'El extranjero'?",
+                options = listOf("Vanguardista", "Existencialista","Ciencia Ficción", "Psicológica"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántas reglas o mandamientos crearon los cerdos en la novela 'Rebelión en la granja'?",
+                options = listOf("5", "6","7", "9"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de las siguientes novelas es psicológica?",
+                options = listOf("Un Mundo Feliz", "Rebelión en la Granja","Crimen y Castigo", "Todas las anteriores"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Como se llama el personaje principar de 'Metamorfosis'?",
+                options = listOf("Gregorio Samsa", "Gretha Samsa","Ana", "Rodrigo Somsa"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de las siguientes obras NO fue escrita por Ray Bradbury?",
+                options = listOf("Un Marciano Entre Nosotros", "Fahrenheit 451","Crónicas Marcianas", "El Extranjero"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Como se llama el antagonista principal de 'El Resplandor'?",
+                options = listOf("Johnny Carson", "Jack Torrance","Dick Hallorann", "Delbert Grady"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Quien es el culpable del asesinato de las dos mujeres en 'Los Asesinatos de la Calle Morgue'?",
+                options = listOf("Un marinero", "Un carnicero","Un orangután de Borneo", "El vecino de ambas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿A qué se dedican los bomberos en la novela 'Fahrenheit 451'?",
+                options = listOf("Hacer casas", "Quemar aparatos electrónicos","Quemar libros", "Apagar incendios"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "Escribió la Odisea y la Ilíada",
+                options = listOf("Homero","Eurípides", "Virgilio", "Esopo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "Famosa novela de Alejandro Dumas",
+                options = listOf("El Fantasma de la Ópera","Ana Karenina", "El Conde de Montecristo", "Rayuela"),
+                correctIndex = 2
             )
         ),
 
         //********************************************************************************************************************************
-
 
         "Jardinería" to listOf(
             QuizQuestion(
@@ -150,7 +312,117 @@ object HobbyQuestionsProvider{
                 correctIndex = 1
             )
         ),
+
         //********************************************************************************************************************************
+
+        "Pintar" to listOf(
+            QuizQuestion(
+                question = "¿Quién pinto la Gioconda?",
+                options = listOf("Pablo Picasso", "Salvador Dali", "Leonardo Da Vinci", "Rafael Sanzio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "Famosa pintura de Gustav Klimt: ",
+                options = listOf("El beso", "Guernica", "Las meninas", "La joven de la perla"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica de pintura se usó para pintar la boveda de la Capilla Sixtina?",
+                options = listOf("Pintura al Óleo", "Gouache", "Fresco", "Aerografía"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes colores NO es primario?",
+                options = listOf("Amarillo", "Rojo", "Azul", "Verde"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes elementos de pintura tiene el menor tiempo de secado?",
+                options = listOf("Pintura al Óleo", "Pintura acrílica", "Gouache", "Acuarelas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué componente de la pintura actúa como el 'vehículo' que ayuda a la aplicación?",
+                options = listOf("Pigmento", "Resina", "Solvente", "Aditivo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes es un pigmento blanco utilizado comúnmente en pinturas?",
+                options = listOf("Óxido de hierro", "Dióxido de titanio", "Sulfato de bario", "Talco"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿El 'Tono de viridiano' es un tono de qué color?",
+                options = listOf("Rojo", "Violeta", "Marrón", "Verde"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de aditivo se utiliza para mejorar la resistencia al agua de la pintura?",
+                options = listOf("Aditivo biocida", "Aditivo hidrofugante", "Aditivo nivelador", "Aditivo antiespumante"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el nombre del famoso cuadro de Salvador Dalí que retrata un paisaje con relojes derretidos?",
+                options = listOf("El tiempo ahumando una pintura", "El sueño", "La persistencia de la memoria", "La continuidad del tiempo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes pintores NO es impresionista?",
+                options = listOf("Claude Monet", "Edgar Degas", "Paul Cézanne", "Sandro Botticelli"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿En qué lugar se inspiró Monet para elaborar una serie de pinturas conocidas como 'Los nenúfares'?",
+                options = listOf("En los lagos de Italia", "En los estanques del río Magdalena", "En los estanques de su propia casa", "En los estanques de los paisajes estadounidenses"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el tema principal que interesa a los pintores impresionistas?",
+                options = listOf("El paisaje","La naturaleza muerta o bodegones", "El retrato", "El tema histórico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una pintura?",
+                options = listOf("Una mezcla homogénea de pigmentos y solventes",
+                    "Una mezcla homogénea de uno o más pigmentos dispersos en un aglutinante",
+                    "Una combinación de resuinas y aditivos dispersos en solventes",
+                    "Un producto utilizado para la protección y decoreción de superficies"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función principal de los pigmentos en una pintura?",
+                options = listOf("Proveer color y opacidad","Actuar como aglutinante", "Mejorar la adhesión a la superficie",
+                    "Proporcionar dirabilidad a la película de pintura"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿En qué tarea el aglutinante no realiza ningún aporte?",
+                options = listOf("Fijar el color en la superficie","Facilitar la aplicación de la pintura al reducir su viscosidad",
+                    "Mejorar la adherencia de la pintura a la superficie",
+                    "Proporcionar durabilidad a la película de pintura"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "La temática de la pintura renacentista se centra en...",
+                options = listOf("Naturaleza muerta","Paisajes", "Temática antropológica y religiosa", "Temática religiosa, mitología y retratos"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "Considerado co-fundador del cubismo junto con Pablo Picasso: ",
+                options = listOf("Joaquín Sorolla","Paul Cézanne", "Georges Braque", "Joan Miró"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de las siguientes características es típica de la pintura metafísica?",
+                options = listOf("Uso de colores brillantes y vibrantes","Representación realista de la naturaleza",
+                    "Escenas oníricas con objetos cotidianos en contextos inusuales", "Abstracción"),
+                correctIndex = 2
+            )
+        ),
+
+
+        //********************************************************************************************************************************
+
 
         "Lepidopterología" to listOf(
             QuizQuestion(
