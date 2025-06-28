@@ -5,7 +5,7 @@ admin.initializeApp();
 // Función solo para validar el spin diario
 export const spinDaily = functions.https.onCall(async (data, context) => {
   if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated','Usuario no autenticado');
+    throw new functions.https.HttpsError("unauthenticated", "Usuario no autenticado");
   }
   const uid = context.auth.uid;
   const userRef = admin.firestore().collection("userProfiles").doc(uid);
@@ -14,7 +14,7 @@ export const spinDaily = functions.https.onCall(async (data, context) => {
     await admin.firestore().runTransaction(async (tx) => {
       const snap = await tx.get(userRef);
       if (!snap.exists) {
-        throw new functions.https.HttpsError('not-found','Perfil no existe');
+        throw new functions.https.HttpsError("not-found", "Perfil no existe");
       }
       const profile = snap.data()!;
       const lastSpin: number = (profile.lastSpinAt as any) || 0;
@@ -24,33 +24,33 @@ export const spinDaily = functions.https.onCall(async (data, context) => {
 
       if (lastSpin > 0 && delta < dayMillis) {
         const millisLeft = dayMillis - delta;
-        const hoursLeft = Math.ceil(millisLeft / (10000)); //TODO, CAMBIAR ESTO PARA 24 HORAS - ATENCIÓN - REVISAR
+        const hoursLeft = Math.ceil(millisLeft / (10000)); // TODO, CAMBIAR ESTO PARA 24 HORAS - ATENCIÓN - REVISAR
         throw new functions.https.HttpsError(
-          'failed-precondition',
+          "failed-precondition",
           `Ya giraste hoy. Intenta de nuevo en ${hoursLeft} horas.`
         );
       }
 
       // Solo actualizar el timestamp, NO los puntos
       tx.update(userRef, {
-        lastSpinAt: nowMillis
+        lastSpinAt: nowMillis,
       });
     });
 
     return {
       success: true,
-      message: "Spin validado. Completa el desafío para obtener puntos."
+      message: "Spin validado. Completa el desafío para obtener puntos.",
     };
   } catch (err: any) {
     if (err instanceof functions.https.HttpsError) throw err;
-    throw new functions.https.HttpsError('internal','Error en spin: '+err.message);
+    throw new functions.https.HttpsError("internal", "Error en spin: "+err.message);
   }
 });
 
 // Nueva función para completar el desafío y otorgar puntos
 export const completeChallenge = functions.https.onCall(async (data, context) => {
   if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated','Usuario no autenticado');
+    throw new functions.https.HttpsError("unauthenticated", "Usuario no autenticado");
   }
   const uid = context.auth.uid;
   const userRef = admin.firestore().collection("userProfiles").doc(uid);
@@ -60,14 +60,14 @@ export const completeChallenge = functions.https.onCall(async (data, context) =>
   const challengeName = data.challengeName as string;
 
   if (!challengeName) {
-    throw new functions.https.HttpsError('invalid-argument','Nombre del desafío requerido');
+    throw new functions.https.HttpsError("invalid-argument", "Nombre del desafío requerido");
   }
 
   try {
     const result = await admin.firestore().runTransaction(async (tx) => {
       const snap = await tx.get(userRef);
       if (!snap.exists) {
-        throw new functions.https.HttpsError('not-found','Perfil no existe');
+        throw new functions.https.HttpsError("not-found", "Perfil no existe");
       }
 
       const profile = snap.data()!;
@@ -79,8 +79,8 @@ export const completeChallenge = functions.https.onCall(async (data, context) =>
       // Verificar que el spin fue hoy (tolerancia de 30 minutos extra)
       if (delta > dayMillis + (30 * 60 * 1000)) {
         throw new functions.https.HttpsError(
-          'failed-precondition',
-          'El desafío ha expirado. Gira la ruleta nuevamente.'
+          "failed-precondition",
+          "El desafío ha expirado. Gira la ruleta nuevamente."
         );
       }
 
@@ -91,7 +91,7 @@ export const completeChallenge = functions.https.onCall(async (data, context) =>
         "Estiramiento": 12,
         "Caminar": 15,
         "Meditación": 20,
-        "Respirar": 8
+        "Respirar": 8,
       };
 
       const baseEarned = challengePoints[challengeName] || 10;
@@ -105,20 +105,20 @@ export const completeChallenge = functions.https.onCall(async (data, context) =>
       // Actualizar puntos y marcar como completado
       tx.update(userRef, {
         accumulatedPoints: newPoints,
-        lastChallengeCompletedAt: nowMillis
+        lastChallengeCompletedAt: nowMillis,
       });
 
-      return { earned, newPoints, prevPoints };
+      return {earned, newPoints, prevPoints};
     });
 
     return {
       earnedPoints: result.earned,
       totalPoints: result.newPoints,
       previousPoints: result.prevPoints,
-      message: `¡Completaste el desafío! Obtuviste ${result.earned} puntos. Total: ${result.newPoints}.`
+      message: `¡Completaste el desafío! Obtuviste ${result.earned} puntos. Total: ${result.newPoints}.`,
     };
   } catch (err: any) {
     if (err instanceof functions.https.HttpsError) throw err;
-    throw new functions.https.HttpsError('internal','Error completando desafío: '+err.message);
+    throw new functions.https.HttpsError("internal", "Error completando desafío: "+err.message);
   }
 });

@@ -24,7 +24,7 @@ class BreakBuddyApp : Application() {
 
         // 2) Detectar debug / emulador
         val isDebuggable = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
-        if (isDebuggable) {
+        if (!isDebuggable) {
             Log.d("BreakBuddyApp", "🔌 DEBUG mode: conectando a Emuladores")
             FirebaseAuth.getInstance().useEmulator("10.0.2.2", 9099)
             FirebaseFirestore.getInstance().useEmulator("10.0.2.2", 8080)
