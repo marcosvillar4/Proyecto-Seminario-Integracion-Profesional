@@ -11,13 +11,13 @@ object HobbiesList {
         // Nuevos hobbies añadidos
         "Andar en bicicleta", "Escalada", "Skate", "Armar rompecabezas", "Modelismo",
         "Escribir", "Bloggear", "Canto", "Programar", "Diseño gráfico",
-        "Correr", "Nadar", "Trekking", "Ajedrez", "Astronomía",
+        "Correr", "Natación", "Trekking", "Ajedrez", "Astronomía",
         "Voluntariado", "Restaurar muebles", "Tejer", "Cerámica", "Basket", "Volley", "Golf"
 
         // nuevos hobbies - intereses
-        "Costura","Bordado","Repostería","Crucigramas","Avistamiento de aves","Origami",
-        "Marroquineria", "Dibujo","Bisuteria","Coleccionismo","Adiestramiento de animales","Carpinteria",
-        "Maquillaje profesional","Ilusionismo","Crochet","Pilates","Dardos","Tarot","Escultura",
+        "Corte y confección","Bordado","Repostería","Crucigramas","Avistamiento de aves","Origami",
+        "Marroquinería", "Dibujo","Bisutería","Coleccionismo","Adiestramiento de animales","Carpintería",
+        "Maquillaje profesional","Ilusionismo","Pilates","Dardos","Tarot","Escultura",
         "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
         "Peluqueria","Decoracion de interiores","Damas","Rummy Burako",
         "Bonsai","Prensado de flores","Lepidopterología","Sudoku","Sopa de letras","Bingo"
