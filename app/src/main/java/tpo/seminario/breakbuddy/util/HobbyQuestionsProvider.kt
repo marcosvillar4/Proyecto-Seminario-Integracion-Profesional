@@ -5,16 +5,16 @@ package tpo.seminario.breakbuddy.util
 Natación / Cocinar / Repostería / Leer / Fotografía / Pescar / Jardineria / Escuchar música / Canto / Tocar un instrumento musical / Bailar / Ver películas /
 Actuar / Aprender idiomas / Carpinteria / Pintar / Cerámica / Corte y confección / Tejer / Marroquineria / Escultura / Bisutería / Maquillaje profesional /
 Videojuegos / Juegos de mesa / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping / Meditar / Astronomía / Avistamiento de aves /
-Lepidopterologia /
+Lepidopterologia / Escribir / Ajedrez / Dibujo /
 */
 
 /*TODAVIA FALTAN: "Manualidades", "Creación de contenido",
         "Andar en bicicleta",  "Armar rompecabezas", ,
-        "Escribir", "Bloggear", "Programar", "Diseño gráfico",
-        "Correr", , "Ajedrez", ,
+        , "Bloggear", "Programar", "Diseño gráfico",
+        "Correr", ,  ,
         "Voluntariado", "Restaurar muebles","Basket", "Volley", "Golf"
 	,"Bordado","Crucigramas",,"Origami",
-        , "Dibujo","Coleccionismo","Adiestramiento de animales",,
+        , ,"Coleccionismo","Adiestramiento de animales",,
         ,"Ilusionismo","Crochet","Pilates","Dardos","Tarot",,
         "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
         "Peluqueria","Decoracion de interiores","Damas", Rummy Burako",
@@ -6839,6 +6839,322 @@ object HobbyQuestionsProvider{
                 options = listOf("Noctuidae","Brassolidae", "Sphingidae", "Pieridae"),
                 correctIndex = 1
             )
+        ),
+
+        //************************************************************************************************************************
+
+        "Escribir" to listOf(
+            QuizQuestion(
+                question = "¿Qué se entiende por narrador omnisciente?",
+                options = listOf("Que sabe todo lo que ocurre", "Que narra en primera persona", "Que participa en la historia", "Que solo describe acciones"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos géneros pertenece a la escritura creativa?",
+                options = listOf("Cuento", "Informe técnico", "Manual de usuario", "Carta formal"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué figura literaria compara dos elementos usando 'como'?",
+                options = listOf("Metáfora", "Personificación", "Símil", "Hipérbole"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un personaje plano?",
+                options = listOf("Tiene evolución compleja", "Es cambiante", "Es simple y no evoluciona", "Rompe la cuarta pared"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de una historia presenta el conflicto principal?",
+                options = listOf("Introducción", "Nudo", "Desenlace", "Epílogo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de narrador usa el 'yo' para contar la historia?",
+                options = listOf("Omnisciente", "Testigo", "Protagonista", "Editorial"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito de un borrador al escribir?",
+                options = listOf("Publicarlo directamente", "Organizar y desarrollar ideas", "Eliminar ideas", "Usarlo como resumen"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'show, don't tell' en escritura?",
+                options = listOf("Decir lo que pasa claramente", "Mostrar con acciones en vez de explicar", "Usar adjetivos siempre", "Evitar el diálogo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el antónimo de escritura persuasiva?",
+                options = listOf("Narrativa", "Informativa", "Argumentativa", "Crítica"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se revisa en una corrección de estilo?",
+                options = listOf("Ortografía solamente", "Contenido factual", "Fluidez, tono y coherencia", "Diseño visual"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un ensayo?",
+                options = listOf("Texto en verso", "Narración corta", "Reflexión argumentativa", "Resumen biográfico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de texto intenta convencer al lector?",
+                options = listOf("Narrativo", "Expositivo", "Argumentativo", "Lírico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del texto expresa la idea principal?",
+                options = listOf("Conclusión", "Introducción", "Tesis", "Desarrollo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una sinestesia?",
+                options = listOf("Contradicción poética", "Unión de sentidos diferentes", "Exageración extrema", "Rima interna"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un diálogo en narrativa?",
+                options = listOf("Decorar el texto", "Dar ritmo", "Mostrar acciones", "Revelar carácter y avanzar la trama"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'voz narrativa'?",
+                options = listOf("Volumen del texto", "Tono de los personajes", "Perspectiva del narrador", "Lenguaje figurado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una anáfora?",
+                options = listOf("Repetición al principio de frases", "Oposición de ideas", "Enumeración caótica", "Rima inesperada"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una crónica?",
+                options = listOf("Relato ordenado de hechos reales", "Cuento fantástico", "Opinión breve", "Artículo técnico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué recurso estilístico hay en 'el silencio gritaba'?",
+                options = listOf("Hipérbole", "Paradoja", "Personificación", "Ironía"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del cuento resuelve el conflicto?",
+                options = listOf("Clímax", "Desenlace", "Nudo", "Giro argumental"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Ajedrez" to listOf(
+            QuizQuestion(
+                question = "¿Cuántas casillas tiene un tablero de ajedrez?",
+                options = listOf("64", "72", "81", "100"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cómo se mueve el alfil?",
+                options = listOf("En línea recta", "En L", "Diagonal", "Una casilla en cualquier dirección"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza puede realizar el enroque junto al rey?",
+                options = listOf("Peón", "Reina", "Alfil", "Torre"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la única pieza que puede saltar sobre otras?",
+                options = listOf("Reina", "Caballo", "Alfil", "Torre"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa jaque mate?",
+                options = listOf("Empate", "Rey no puede escapar al ataque", "Cambio de turno", "Captura de reina"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza comienza en d1 para blancas?",
+                options = listOf("Reina", "Rey", "Torre", "Alfil"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si un peón llega al final del tablero?",
+                options = listOf("Gana la partida", "Captura automáticamente", "Se promociona", "Se convierte en rey"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuántas piezas mayores hay al inicio por jugador?",
+                options = listOf("2", "3", "4", "5"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Quién fue campeón mundial desde 1985 hasta 2000?",
+                options = listOf("Fischer", "Karpov", "Kasparov", "Carlsen"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué apertura comienza con e4 e5 Cf3 Cc6?",
+                options = listOf("Defensa francesa", "Apertura italiana", "Gambito de dama", "Defensa siciliana"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué valor tiene usualmente una torre?",
+                options = listOf("3", "5", "9", "1"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera una táctica?",
+                options = listOf("Plan a largo plazo", "Maniobra inmediata para obtener ventaja", "Control del centro", "Enroque"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el enroque?",
+                options = listOf("Cambio de reina", "Intercambio de torres", "Movimiento especial del rey y torre", "Empate técnico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador popularizó la defensa Petrov?",
+                options = listOf("Kramnik", "Petrosian", "Petrov", "Alekhine"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el Elo en ajedrez?",
+                options = listOf("Edad", "Nacionalidad", "Fuerza de juego", "Tiempo restante"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si se repite una posición 3 veces?",
+                options = listOf("Victoria blanca", "Victoria negra", "Empate", "Cambio de colores"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un zugzwang?",
+                options = listOf("Empate", "Peón pasado", "Situación en la que mover empeora", "Ataque doble"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo del medio juego?",
+                options = listOf("Capturar peones", "Intercambiar piezas", "Atacar al rey", "Desarrollar aperturas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador argentino fue campeón mundial en 1927?",
+                options = listOf("Najdorf", "Panno", "Fischer", "Capablanca"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si ambos reyes están en jaque?",
+                options = listOf("Es legal", "No puede ocurrir", "Se repite la jugada", "Mate doble"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Dibujo" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el claroscuro en dibujo?",
+                options = listOf("Técnica de color digital", "Contraste entre luces y sombras", "Dibujo con tinta blanca", "Técnica de escultura"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos elementos define la perspectiva?",
+                options = listOf("Sombras", "Líneas de fuga", "Textura", "Volumen"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se utiliza para difuminar grafito?",
+                options = listOf("Lápiz rojo", "Difumino", "Regla", "Compás"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa la línea de horizonte en perspectiva?",
+                options = listOf("La base del dibujo", "El límite del cielo", "La altura del ojo del observador", "El final del papel"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'boceto'?",
+                options = listOf("Dibujo terminado", "Versión en tinta", "Esbozo inicial", "Retrato realista"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de lápiz deja una línea más oscura?",
+                options = listOf("H", "HB", "2H", "6B"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de plano se usa para dibujar rostros realistas?",
+                options = listOf("Perspectiva aérea", "Plano técnico", "Proporciones faciales", "Escala de grises"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se entiende por 'valor tonal' en dibujo?",
+                options = listOf("Uso de la línea", "Brillo y sombra de un color", "Color exacto", "Grosor del trazo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de la cara se encuentra a mitad del cráneo en proporciones clásicas?",
+                options = listOf("Boca", "Ojos", "Nariz", "Mentón"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica usa puntos para crear sombras?",
+                options = listOf("Rayado cruzado", "Sfumato", "Punteado", "Esgrafiado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la forma básica del cuerpo humano en dibujo académico?",
+                options = listOf("Cubo", "Esfera", "Figura de palitos", "Bloques geométricos"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué artista es conocido por su manejo del dibujo anatómico?",
+                options = listOf("Leonardo da Vinci", "Van Gogh", "Monet", "Dalí"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué papel es más adecuado para acuarela?",
+                options = listOf("Opalina", "Papel manteca", "Papel de alto gramaje", "Papel cebolla"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento da profundidad en un dibujo?",
+                options = listOf("Color primario", "Sombra", "Perspectiva", "Contorno fuerte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta NO se usa normalmente en dibujo tradicional?",
+                options = listOf("Difumino", "Lápiz", "Tablet", "Regla"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca con los ejercicios de línea continua?",
+                options = listOf("Crear sombras", "Ganar confianza y fluidez", "Aumentar el contraste", "Definir volumen"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra con la técnica de rayado cruzado?",
+                options = listOf("Color", "Volumen y sombra", "Proporción", "Composición"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una silueta?",
+                options = listOf("Forma interior", "Luz secundaria", "Contorno sólido sin detalles", "Boceto a color"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa dibujar del natural?",
+                options = listOf("Inventar figuras", "Dibujar desde fotografía", "Copiar de otro dibujo", "Observar y dibujar desde la realidad"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos no es un principio del dibujo académico?",
+                options = listOf("Perspectiva", "Proporción", "Expresión emocional", "Sombra y luz"),
+                correctIndex = 2
+            )
+        ),
+
         )
-    )
 }
