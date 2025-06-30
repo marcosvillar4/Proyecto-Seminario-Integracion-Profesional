@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import tpo.seminario.breakbuddy.util.missions.Mision
 import java.util.Date
 
 // Modelo de datos de usuario
@@ -23,6 +24,7 @@ data class User(
     val description: String? = null
 )
 
+
 data class UserProfile(
     @DocumentId
     val uid: String = "",
@@ -31,7 +33,9 @@ data class UserProfile(
     val organizationIds: List<String> = emptyList(),
     val groupIds: List<String> = emptyList(),
     val accumulatedPoints: Long? = 0L,
-    val lastSpinAt: Long? = 0L
+    val lastSpinAt: Long? = 0L,
+    val missionsGeneratedAt: Long? = 0L,
+    val dailyMissions: List<Mision> = emptyList()
 )
 
 class UserTokenRepository {
@@ -115,7 +119,9 @@ class UserRepository {
             "organizationIds" to emptyList<String>(),
             "groupIds" to emptyList<String>(),
             "accumulatedPoints" to 0L,
-            "lastSpinAt" to null
+            "lastSpinAt" to null,
+            "missionsGeneratedAt" to null,
+            "dailyMissions" to emptyList<Mision>()
         )
         db.collection("userProfiles")
             .document(uid)

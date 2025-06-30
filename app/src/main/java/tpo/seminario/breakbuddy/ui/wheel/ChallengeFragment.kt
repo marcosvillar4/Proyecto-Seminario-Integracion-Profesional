@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.functions.FirebaseFunctionsException
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentChallengeBinding
 import tpo.seminario.breakbuddy.ui.wheel.ChallengeViewModel
@@ -77,7 +79,7 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
                     Toast.makeText(requireContext(), feedback, Toast.LENGTH_LONG).show()
                     findNavController().navigateUp()
                 } else {
-                    completeChallenge(respin, quiz.question, earnedLocal, feedback)
+                    completeChallenge(respin, quiz.question, feedback)
                 }
             }
         }
@@ -122,40 +124,48 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
             text = if (respin) "Completar (Re-spin) - $puntos pts" else "Completar - $puntos pts"
             setOnClickListener {
                 val feedback = "¡Ganaste $puntos pts!"
-                completeChallenge(respin, desafio.nombre, puntos, feedback)
+                completeChallenge(respin, desafio.nombre, feedback)
             }
         }
     }
 
-    private fun completeChallenge(
-        respin: Boolean,
-        name: String,
-        earned: Int,
-        feedback: String
-    ) {
+    // 1) Eliminar "earnedPoints"
+    private fun completeChallenge(respin: Boolean, name: String, feedback: String) {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user == null) {
+            Toast.makeText(requireContext(),"Debes iniciar sesión",Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // instancia ya configurada en Application.onCreate()
+        val functions = FirebaseFunctions.getInstance()
+
         binding.btnCompletar.isEnabled = false
-        FirebaseFunctions.getInstance()
+        functions
             .getHttpsCallable("completeChallenge")
-            .call(mapOf(
-                "isRespin" to respin,
-                "challengeName" to name,
-                "earnedPoints" to earned
-            ))
-            .addOnSuccessListener { result ->
-                val data = result.data as? Map<*, *> ?: emptyMap<Any,Any>()
-                val total = (data["totalPoints"] as? Number)?.toInt() ?: -1
-                Toast.makeText(
-                    requireContext(),
-                    "$feedback. Total: $total pts",
-                    Toast.LENGTH_LONG
-                ).show()
+            .call(mapOf("isRespin" to respin, "challengeName" to name))
+            .addOnSuccessListener { snap ->
+                val data = snap.data as Map<*,*>
+                val earned = (data["earnedPoints"] as Number).toInt()
+                val total  = (data["totalPoints"]  as Number).toInt()
+                Toast.makeText(requireContext(), "$feedback\n+${earned} pts\nTotal: ${total}", Toast.LENGTH_LONG).show()
                 findNavController().navigateUp()
             }
             .addOnFailureListener { e ->
                 binding.btnCompletar.isEnabled = true
-                Toast.makeText(requireContext(), e.message ?: "Error", Toast.LENGTH_LONG).show()
+                if (e is FirebaseFunctionsException) {
+                    // tu HttpsError llega en e.details
+                    val details = e.details as? Map<*,*>
+                    Toast.makeText(requireContext(),
+                        details?.get("message")?.toString() ?: e.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                }
             }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

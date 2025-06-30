@@ -26,9 +26,14 @@ module.exports = {
     "import",
   ],
   rules: {
+  // Desactiva el error por CRLF vs LF:
+      "linebreak-style": 0,
+
     "max-len": ["error", {"code": 120, "ignoreUrls": true, "ignoreComments": true}],
     "quotes": ["error", "double"],
     "import/no-unresolved": 0,
     "indent": ["error", 2],
+
+    "no-irregular-whitespace": 0,
   },
 };
