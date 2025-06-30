@@ -5,16 +5,17 @@ package tpo.seminario.breakbuddy.util
 Natación / Cocinar / Repostería / Leer / Fotografía / Pescar / Jardineria / Escuchar música / Canto / Tocar un instrumento musical / Bailar / Ver películas /
 Actuar / Aprender idiomas / Carpinteria / Pintar / Cerámica / Corte y confección / Tejer / Marroquineria / Escultura / Bisutería / Maquillaje profesional /
 Programar / Videojuegos / Juegos de mesa / Ajedrez / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping / Meditar / Astronomía /
-Avistamiento de aves / Adiestramiento de animales / Lepidopterologia / Escribir / Crochet / Dardos
+Avistamiento de aves / Adiestramiento de animales / Lepidopterologia / Escribir / Crochet / Dardos / Manualidades / Creación de contenido /
+Andar en bicicleta / Armar rompecabezas / Bloggear / Diseño gráfico /
 */
 
-/*TODAVIA FALTAN: "Manualidades", "Creación de contenido",
-        "Andar en bicicleta",  "Armar rompecabezas",
-        , "Bloggear", "Diseño gráfico",
+/*TODAVIA FALTAN: , ,
+        ,  ,
+        , , ,
         "Correr",
         "Voluntariado", "Restaurar muebles","Basket", "Volley", "Golf"
 	,"Bordado","Crucigramas",,"Origami",
-        , ,"Coleccionismo"
+        , ,"Coleccionismo"------
         ,"Ilusionismo",,"Pilates",,"Tarot",,
         "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
         "Peluqueria","Decoracion de interiores","Damas", Rummy Burako",
@@ -7459,7 +7460,8 @@ object HobbyQuestionsProvider{
             ),
             QuizQuestion(
                 question = "¿Qué significa 'imprinting' en animales?",
-                options = listOf("Un tipo de castigo", "Una técnica de exposición", "El reconocimiento de un objeto como figura parental", "Un estilo de caminar"),
+                options = listOf("Un tipo de castigo", "Una técnica de exposición",
+                "El reconocimiento de un objeto como figura parental", "Un estilo de caminar"),
                 correctIndex = 2
             ),
             QuizQuestion(
@@ -7469,17 +7471,19 @@ object HobbyQuestionsProvider{
             ),
             QuizQuestion(
                 question = "¿Qué es el 'refuerzo negativo'?",
-                options = listOf("Quitar algo agradable para reducir una conducta", "Aplicar castigo", "Quitar algo desagradable para aumentar una conducta", "Ignorar al animal completamente"),
+                options = listOf("Quitar algo agradable para reducir una conducta", "Aplicar castigo",
+                "Quitar algo desagradable para aumentar una conducta", "Ignorar al animal completamente"),
                 correctIndex = 2
             ),
             QuizQuestion(
                 question = "¿Qué técnica consiste en exponer gradualmente al animal a un estímulo que teme?",
-                options = listOf("Condicionamiento clásico", "Refuerzo positivo", "Desensibilización sistemática", "Shaping"),
-                correctIndex = 2
+                options = listOf("Condicionamiento clásico", "Refuerzo positivo", "Desensibilización sistemática", "Shaping", "Desensibilización sistemática"),
+                correctIndex = 3
             ),
             QuizQuestion(
                 question = "¿Qué es el 'shaping' o moldeado?",
-                options = listOf("Forzar al animal a realizar una acción", "Castigar una mala conducta", "Premiar aproximaciones sucesivas al comportamiento deseado", "Asociar palabras con gestos"),
+                options = listOf("Forzar al animal a realizar una acción", "Castigar una mala conducta",
+                "Premiar aproximaciones sucesivas al comportamiento deseado", "Asociar palabras con gestos"),
                 correctIndex = 2
             ),
             QuizQuestion(
@@ -7489,38 +7493,41 @@ object HobbyQuestionsProvider{
             ),
             QuizQuestion(
                 question = "¿Qué es el 'clicker training'?",
-                options = listOf("Un entrenamiento de obediencia avanzada", "Un tipo de ejercicio físico", "Un método de refuerzo positivo basado en sonido", "Una forma de castigo leve"),
+                options = listOf("Un entrenamiento de obediencia avanzada", "Un tipo de ejercicio físico",
+                "Un método de refuerzo positivo basado en sonido", "Una forma de castigo leve"),
                 correctIndex = 2
             ),
             QuizQuestion(
                 question = "¿Cuál es un ejemplo de conducta operante?",
-                options = listOf("Respirar", "Pestañear", "Sentarse al dar una orden", "Salivar al oler comida"),
-                correctIndex = 2
+                options = listOf("Respirar", "Pestañear", "Salivar al oler comida", "Sentarse al dar una orden"),
+                correctIndex = 3
             ),
             QuizQuestion(
                 question = "¿Qué profesional se especializa en problemas de comportamiento animal?",
-                options = listOf("Veterinario general", "Psicólogo humano", "Etólogo", "Nutricionista animal"),
-                correctIndex = 2
+                options = listOf("Etólogo","Veterinario general", "Psicólogo humano",  "Nutricionista animal"),
+                correctIndex = 0
             ),
             QuizQuestion(
                 question = "¿Cuál es el objetivo del adiestramiento en positivo?",
-                options = listOf("Castigar comportamientos no deseados", "Reprimir al animal", "Recompensar comportamientos deseados", "Obligar a obedecer sin pensar"),
+                options = listOf("Castigar comportamientos no deseados", "Reprimir al animal",
+                "Recompensar comportamientos deseados", "Obligar a obedecer sin pensar"),
                 correctIndex = 2
             ),
             QuizQuestion(
                 question = "¿Qué animal es comúnmente adiestrado en espectáculos marinos?",
-                options = listOf("Canguro", "Caballo", "Orca", "Gato"),
-                correctIndex = 2
+                options = listOf("Canguro", "Caballo","Gato", "Orca"),
+                correctIndex = 3
             ),
             QuizQuestion(
                 question = "¿Qué significa que un perro esté 'reactivo'?",
-                options = listOf("Es muy dormilón", "Se distrae con facilidad", "Reacciona de forma exagerada a estímulos", "Solo responde con comida"),
+                options = listOf("Es muy dormilón", "Se distrae con facilidad", "Reacciona de forma exagerada a estímulos",
+                    "Solo responde con comida"),
                 correctIndex = 2
             ),
             QuizQuestion(
                 question = "¿Cuál de estos NO es un tipo de refuerzo?",
-                options = listOf("Premio", "Caricia", "Corrección física", "Juego"),
-                correctIndex = 2
+                options = listOf("Premio", "Caricia", "Juego", "Corrección física"),
+                correctIndex = 3
             ),
             QuizQuestion(
                 question = "¿Qué es un reforzador secundario?",
@@ -7555,6 +7562,7 @@ object HobbyQuestionsProvider{
             QuizQuestion(
                 question = "¿Cuál de estas especies es más difícil de adiestrar?",
                 options = listOf("Caballo", "Perro", "Gato", "Delfín"),
+                options = listOf("Caballo", "Perro", "Delfín"),
                 correctIndex = 2
             ),
             QuizQuestion(
@@ -7569,8 +7577,8 @@ object HobbyQuestionsProvider{
             ),
             QuizQuestion(
                 question = "¿Qué comando se enseña para evitar que un perro jale de la correa?",
-                options = listOf("Túmbate", "Quieto", "Junto", "Arriba"),
-                correctIndex = 2
+                options = listOf("Túmbate", "Quieto", "Arriba", "Junto"),
+                correctIndex = 3
             ),
             QuizQuestion(
                 question = "¿Qué raza es popular en competencias de obediencia?",
@@ -7634,8 +7642,211 @@ object HobbyQuestionsProvider{
             )
         ),
 
-        
+
         //********************************************************************************************************************************
+
+
+        "Manicura" to listOf(
+                QuizQuestion(
+                    question = "¿Qué herramienta se utiliza para empujar la cutícula?",
+                    options = listOf("Lima de uñas", "Alicate", "Cortaúñas", "Empujador de cutícula"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué es una manicura francesa?",
+                    options = listOf("Uñas rojas con decoración", "Uñas con esmalte negro", "Uñas cuadradas y mates", "Uñas con puntas blancas y base natural"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué material se utiliza para hacer uñas acrílicas?",
+                    options = listOf("Gel y lámpara", "Esmalte regular", "Polvo acrílico y monómero", "Removedor de esmalte"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué es el monómero en uñas acrílicas?",
+                    options = listOf("Una lima especial", "Una resina de secado rápido", "Un desinfectante", "Un líquido que se mezcla con el polvo acrílico"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué función cumple la base coat?",
+                    options = listOf("Dar brillo", "Fijar los cristales", "Proteger la uña natural", "Secar el esmalte"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué tipo de lámpara se utiliza para secar esmalte en gel?",
+                    options = listOf("Lámpara incandescente", "Lámpara UV/LED", "Lámpara halógena", "Secador de cabello"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué producto se usa para eliminar esmalte en gel?",
+                    options = listOf("Alcohol", "Monómero", "Acetona pura", "Removedor con agua"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué herramienta se usa para dar forma a las uñas?",
+                    options = listOf("Pinza", "Brocha", "Tijeras", "Lima"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué forma de uña es puntiaguda y termina en pico?",
+                    options = listOf("Cuadrada", "Ovalada", "Stiletto", "Almendra"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Cuál es la principal función del top coat?",
+                    options = listOf("Eliminar impurezas", "Aportar color", "Crear textura", "Proteger y dar brillo al esmalte"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué es una manicura semipermanente?",
+                    options = listOf("Uso de productos naturales", "Dura 1-2 días", "Utiliza esmalte tradicional", "Esmalte en gel que dura más de una semana"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué se debe hacer antes de aplicar esmalte en gel?",
+                    options = listOf("Aplicar aceite de cutícula", "Humedecer las uñas", "Desengrasar y pulir la uña", "Pintar con esmalte regular"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué es el 'nail art'?",
+                    options = listOf("Corte de uñas", "Decoración creativa en uñas", "Tinte de uñas", "Tratamiento para cutículas"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué se usa para adherir cristales o decoraciones a la uña?",
+                    options = listOf("Top coat", "Alcohol", "Pegamento para uñas", "Desinfectante"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué causa el lifting en uñas acrílicas?",
+                    options = listOf("Uso de top coat", "Secado con lámpara", "Buena preparación", "Mala adherencia o preparación de la uña"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué significa 'cutícula'?",
+                    options = listOf("La forma de la uña", "La base del esmalte", "La piel que protege la matriz de la uña", "Un tipo de esmalte"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Cuál es la función del primer en uñas acrílicas?",
+                    options = listOf("Eliminar cutículas", "Sellar la uña", "Ayudar en la adhesión del producto", "Dar color"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué material se utiliza para crear uñas de gel?",
+                    options = listOf("Polvo acrílico y monómero", "Gel UV y lámpara", "Acetona y base coat", "Cristales y resina"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué herramienta eléctrica se usa para retirar uñas acrílicas?",
+                    options = listOf("Pinza térmica", "Taladro o torno eléctrico", "Lámpara UV", "Cortaúñas"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué es una uña encapsulada?",
+                    options = listOf("Una uña cubierta con esmalte tradicional", "Una técnica sin decoración", "Una decoración protegida dentro del acrílico o gel", "Una uña con esmalte mate"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué puede provocar infecciones en las uñas?",
+                    options = listOf("Mala higiene o humedad","Uso de top coat", "Herramientas esterilizadas",  "Secado rápido"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Qué parte de la uña es responsable del crecimiento?",
+                    options = listOf("Cutícula", "Lecho ungueal", "Matriz", "Punta"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué se debe hacer si una clienta presenta hongos en las uñas?",
+                    options = listOf("Recomendar visitar al dermatólogo","Aplicar acrílico", "Ignorarlo",  "Cubrir con esmalte oscuro"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Qué es una lima 100/180?",
+                    options = listOf("Una herramienta para pulir cutículas", "Un tipo de pincel", "Una lima con diferentes granos de abrasividad", "Un desinfectante"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Cuál es el primer paso en una manicura básica?",
+                    options = listOf("Aplicar esmalte", "Pulir la uña", "Limpiar y desinfectar manos", "Colocar aceite de cutícula"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Cuánto suele durar el esmalte en gel correctamente aplicado?",
+                    options = listOf("1-2 semanas", "1 día", "3-5 días", "1 mes"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Qué color es tradicional en una manicura francesa?",
+                    options = listOf("Negro", "Rojo", "Blanco", "Dorado"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué es el 'nail stamping'?",
+                    options = listOf("Técnica de alisado", "Decoración con pegatinas", "Técnica de decoración con placas y sellos", "Tipo de esculpido"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué se debe hacer después de usar cada herramienta?",
+                    options = listOf("Desecharla", "Guardarla sin limpiar", "Esterilizar o desinfectar", "Dejarla al aire"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué producto se aplica para hidratar la cutícula?",
+                    options = listOf("Top coat", "Aceite de cutícula", "Removedor de esmalte", "Base coat"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué técnica permite alargar la uña natural con moldes?",
+                    options = listOf("Nail art", "Manicura exprés", "Esculpido con acrílico o gel", "Decorado con esmalte"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Cuál de los siguientes productos es usado para pulir la superficie de la uña?",
+                    options = listOf("Alicate", "Removedor de cutícula", "Buffer o pulidor", "Top coat"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué forma de uña es más resistente?",
+                    options = listOf("Stiletto", "Almendra", "Ovalada", "Cuadrada con bordes redondeados"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué significa 'nail prep'?",
+                    options = listOf("Aplicar esmalte", "Preparar la cutícula", "Preparación de la uña natural para mayor adherencia", "Secado de gel"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué pasa si se aplica gel sobre una uña húmeda?",
+                    options = listOf("Se adhiere mejor", "No ocurre nada", "Se forma hongo", "Puede despegarse o causar lifting"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué indica un esmalte con símbolo de libre de '3-free'?",
+                    options = listOf("Solo para uñas postizas", "Que es resistente al agua", "Que no contiene 3 químicos tóxicos comunes", "Que solo dura 3 días"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué se recomienda para proteger las uñas después de remover gel o acrílico?",
+                    options = listOf("No hacer nada", "Usar alcohol", "Aplicar aceite y fortalecedor", "Pintarlas con esmalte negro"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué tipo de esmalte necesita curado en lámpara?",
+                    options = listOf("Esmalte regular", "Esmalte en gel", "Esmalte en spray", "Esmalte mate"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué uña se suele decorar más en el 'nail art'?",
+                    options = listOf("Índice", "Pulgar", "Meñique", "Anular"),
+                    correctIndex = 3
+                )
+            ),
+
+        //********************************************************************************************************************************
+
+
 
 
         "Lepidopterología" to listOf(
@@ -8353,6 +8564,1242 @@ object HobbyQuestionsProvider{
                 correctIndex = 1
             )
         ),
+
+        //************************************************************************************************************************
+
+        "Manualidades" to listOf(
+            QuizQuestion(
+                question = "¿Qué son las manualidades?",
+                options = listOf("Trabajos hechos con las manos, usualmente decorativos o útiles", "Ejercicios físicos", "Obras musicales", "Tareas de oficina"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes materiales es común en manualidades?",
+                options = listOf("Cartón", "Líquido refrigerante", "Plomo", "Aceite de motor"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para cortar papel con precisión?",
+                options = listOf("Regla", "Tijera", "Cúter", "Aguja"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de pegamento se usa para papel y cartulina?",
+                options = listOf("Silicona caliente", "Cola vinílica", "Superglue", "Adhesivo epóxico"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el scrapbooking?",
+                options = listOf("Técnica para unir madera", "Decoración de cuadernos o álbumes con fotos, recortes y adornos", "Una técnica de tejido", "Pintura sobre vidrio"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se usa para hacer origami?",
+                options = listOf("Papel", "Tela", "Plástico", "Cartón grueso"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'DIY' en el contexto de manualidades?",
+                options = listOf("Distribuye y Yarda", "Dibuja y Yunta", "Do It Yourself", "Diseño Idealizado Yermo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica implica moldear objetos con las manos?",
+                options = listOf("Pirograbado", "Modelado", "Sublimación", "Bordado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de pintura es ideal para manualidades en madera?",
+                options = listOf("Acuarela", "Acrílica", "Óleo", "Esmalte sintético"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para calentar y aplicar pegamento termofusible?",
+                options = listOf("Cúter", "Sierra eléctrica", "Pistola de silicona", "Pincel"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se necesita para comenzar con el bordado básico?",
+                options = listOf("Hilo, aguja e hilo de pescar", "Tela, aguja, hilo y bastidor", "Cartón, tijera y pegamento", "Lana y pincel"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es la goma eva?",
+                options = listOf("Tipo de pintura", "Material espumoso flexible para decorar", "Adhesivo fuerte", "Tinta para sublimar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas es una técnica de decoración sobre vidrio?",
+                options = listOf("Decoupage", "Transferencia térmica", "Pintura en frío", "Tinte directo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de papel se usa comúnmente en origami?",
+                options = listOf("Papel corrugado", "Papel glasé", "Papel especial cuadrado y fino", "Cartulina gruesa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra con el decoupage?",
+                options = listOf("Coser dos piezas", "Pegar recortes decorativos sobre superficies", "Modelar figuras", "Bordar letras"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se necesita para hacer velas artesanales?",
+                options = listOf("Agua, cartón, hilo", "Cera, mecha, molde", "Aceite, lana, hilo", "Silicona y papel"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué material es común en bisutería artesanal?",
+                options = listOf("Perlas, mostacillas, hilos", "Piedras volcánicas", "Tornillos y clavos", "Vidrio templado"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se usa para proteger una superficie de trabajo?",
+                options = listOf("Una tapa", "Un mantel decorado", "Un tapete o base de corte", "Un cartón doblado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica consiste en enrollar tiras de papel para formar figuras?",
+                options = listOf("Scrapbooking", "Quilling", "Plegado japonés", "Cardado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una plantilla en manualidades?",
+                options = listOf("Un molde reutilizable para repetir una forma", "Una regla de medir", "Una herramienta de coser", "Un tipo de tijera"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se puede usar para sellar superficies pintadas en manualidades?",
+                options = listOf("Acrílico blanco", "Barniz o sellador transparente", "Pintura en aerosol", "Agua con cola vinílica"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta es útil para hacer agujeros precisos en papel o goma eva?",
+                options = listOf("Punzón", "Tijera", "Cinta adhesiva", "Cúter"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito del bastidor en bordado?",
+                options = listOf("Cortar la tela", "Estirar la tela para facilitar el bordado", "Pintar sobre ella", "Enrollar hilo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica utiliza hilo y aguja para formar imágenes o textos sobre tela?",
+                options = listOf("Pintura textil", "Estampado", "Bordado", "Modelado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer antes de pintar madera en manualidades?",
+                options = listOf("Sumergirla en agua", "Pintar directamente", "Lijar la superficie", "Barnizarla"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa repujar?",
+                options = listOf("Coser en zigzag", "Dar relieve a una superficie metálica", "Cortar tela gruesa", "Moldear con las manos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una guirnalda en manualidades?",
+                options = listOf("Una estructura de madera", "Una tira decorativa colgante", "Una técnica de tejido", "Un tipo de pintura"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se puede usar para decorar frascos de vidrio?",
+                options = listOf("Solo pintura en aerosol", "Servilletas, cintas, pintura acrílica", "Silicona líquida", "Tela gruesa y pegamento"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el fieltro?",
+                options = listOf("Una pintura", "Un pegamento textil", "Un tipo de tela gruesa y suave", "Un hilo metálico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué son las mostacillas?",
+                options = listOf("Piedras grandes para escultura", "Pequeñas cuentas para decorar", "Láminas de goma eva", "Tijeras curvas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se usa para pintar en tela sin que se corra?",
+                options = listOf("Acuarela", "Témpera", "Pintura para tela", "Tinta china"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de nudo es común en macramé?",
+                options = listOf("Nudo llano", "Nudo corredizo", "Nudo francés", "Nudo triple inverso"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una perforadora de formas?",
+                options = listOf("Una herramienta para costura", "Un molde metálico", "Una tijera dentada", "Un cortador que genera figuras decorativas en papel"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica permite transferir imágenes impresas a madera o tela?",
+                options = listOf("Quilling", "Estampado", "Transferencia", "Barnizado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'reciclado creativo' en manualidades?",
+                options = listOf("Desechar materiales", "Reutilizar objetos para crear decoraciones", "Usar pinturas costosas", "Solo trabajar con papel reciclado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento se usa para hacer pompones de lana?",
+                options = listOf("Tenedor", "Cinta", "Cartón o herramienta circular", "Gancho de crochet"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de hilo se usa comúnmente para pulseras artesanales?",
+                options = listOf("Hilo dental", "Hilo de bordar o hilo encerado", "Hilo de pescar", "Hilo invisible"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica se usa para decorar objetos con pequeñas piedras o brillos?",
+                options = listOf("Brillantina", "Piedrería o strass", "Esmaltado", "Serigrafía"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito de una regla metálica en manualidades?",
+                options = listOf("Cortar con cúter sin dañarla", "Medir con más color", "Reforzar papel", "Diseñar plantillas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra al usar plantillas para estarcido (stencil)?",
+                options = listOf("Coser figuras", "Moldear formas", "Pintar patrones repetidos con precisión", "Cortar más rápido"),
+                correctIndex = 2
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Creación de contenido" to listOf(
+            QuizQuestion(
+                question = "¿Qué es un 'creador de contenido'?",
+                options = listOf("Alguien que comparte contenido digital con un público", "Un productor de televisión", "Un editor de libros", "Un programador de videojuegos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas plataformas es común para creadores de contenido en video?",
+                options = listOf("YouTube", "Dropbox", "Google Maps", "WhatsApp"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'stream'?",
+                options = listOf("Un tipo de video editado", "Una transmisión en vivo por internet", "Un podcast grabado", "Una imagen animada"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué aplicación es ideal para editar videos desde el celular?",
+                options = listOf("CapCut", "Waze", "Excel", "Notion"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento mejora la calidad del audio al grabar?",
+                options = listOf("Un trípode", "Un micrófono externo", "Una lámpara LED", "Un fondo verde"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'reel' en redes sociales?",
+                options = listOf("Una imagen viral", "Un video corto y dinámico", "Un comentario destacado", "Un hashtag"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos formatos es típico para podcasts?",
+                options = listOf("Audio grabado", "Video vertical", "Texto animado", "Post de blog"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un 'ring light'?",
+                options = listOf("Estabilizar la cámara", "Iluminar de forma pareja el rostro", "Transmitir en vivo", "Editar el sonido"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué red social es conocida por el formato de video corto y viral?",
+                options = listOf("TikTok", "LinkedIn", "Google Drive", "Pinterest"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'algoritmo' en redes sociales?",
+                options = listOf("Una herramienta de edición", "El sistema que decide qué mostrar al usuario", "Un filtro de cámara", "Un tipo de audio viral"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'contenido orgánico'?",
+                options = listOf("Contenido pagado", "Contenido que se genera sin promoción paga", "Contenido de comida", "Contenido con filtros"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas herramientas permite grabar la pantalla del celular?",
+                options = listOf("Grabador de pantalla", "Spotify", "Trello", "Grammarly"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué hace un editor de video?",
+                options = listOf("Organiza grabaciones, corta y agrega efectos o música", "Diseña videojuegos", "Escribe textos académicos", "Desarrolla software"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'guion' en creación de contenido?",
+                options = listOf("Un texto para saber qué decir y grabar", "Un efecto visual", "Una canción de fondo", "Un subtítulo automático"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'engagement'?",
+                options = listOf("La calidad del audio", "La cantidad de likes, comentarios y participación del público", "La duración de un video", "El número de videos vistos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué formato se usa comúnmente para publicaciones en Instagram?",
+                options = listOf("Cuadrado o vertical", "Horizontal solamente", "Formato de Word", "Texto plano"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas opciones mejora la iluminación al grabar con celular?",
+                options = listOf("Luz natural o aros LED", "Modo nocturno", "Brillo automático", "Filtro sepia"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'viralizar' un contenido?",
+                options = listOf("Eliminarlo de internet", "Compartirlo con pocos amigos", "Que se difunda rápidamente por muchas personas", "Publicarlo en secreto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas es una plataforma para hacer transmisiones en vivo?",
+                options = listOf("Twitch", "Photoshop", "Google Docs", "Duolingo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué rol cumple la música en los videos de contenido?",
+                options = listOf("Sirve como relleno", "Agrega ritmo, emoción o ambiente al contenido", "Cambia la calidad del video", "Evita que se escuche la voz"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'thumbnail' en YouTube?",
+                options = listOf("La imagen previa del video que invita a hacer clic", "Un tipo de comentario", "Una animación final", "Un efecto de sonido"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué representa un 'hashtag'?",
+                options = listOf("Una cuenta bloqueada", "Una etiqueta para clasificar contenido", "Un archivo multimedia", "Una mención privada"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'programar publicaciones'?",
+                options = listOf("Publicar en vivo siempre", "Configurar cuándo se publicará un contenido automáticamente", "Eliminar contenido antiguo", "Etiquetar usuarios"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas apps permite editar imágenes para contenido digital?",
+                options = listOf("Canva", "Spotify", "Telegram", "Audacity"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'feedback' de la audiencia?",
+                options = listOf("El ruido en los micrófonos", "La retroalimentación que los seguidores dan al contenido", "Un resumen del video", "Una herramienta de edición"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'monetizar' contenido?",
+                options = listOf("Eliminar publicaciones", "Ganar dinero a través del contenido", "Cambiar el diseño", "Actualizar la biografía"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'colaboración' entre creadores?",
+                options = listOf("Copiar ideas", "Bloquearse mutuamente", "Crear contenido juntos o cruzado", "Usar el mismo fondo musical"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta permite ver las estadísticas de un video?",
+                options = listOf("YouTube Studio", "Google Translate", "Spotify", "Zoom"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda hacer al grabar en exteriores?",
+                options = listOf("Ignorar el ruido ambiente", "Usar micrófono con protección de viento y buena iluminación", "Grabar sin trípode", "Evitar el sol completamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'call to action'?",
+                options = listOf("Un error en edición", "Una invitación clara a que el público haga algo", "Un tipo de video viral", "Una técnica de iluminación"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un trípode?",
+                options = listOf("Sujetar la cámara o celular de forma estable", "Agregar efectos visuales", "Grabar audio", "Reducir el tamaño del video"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'bloopers reel'?",
+                options = listOf("Una lista de hashtags", "Una recopilación de errores divertidos durante la grabación", "Un tipo de música viral", "Una herramienta de edición"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca con un buen título en YouTube?",
+                options = listOf("Evitar visitas", "Confundir al público", "Llamar la atención y generar clics", "Incluir solo hashtags"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'contenido evergreen'?",
+                options = listOf("Contenido que solo sirve una vez", "Contenido que envejece mal", "Contenido útil y relevante a lo largo del tiempo", "Contenido navideño"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta ayuda a hacer transmisiones en vivo desde PC?",
+                options = listOf("OBS Studio", "PowerPoint", "Slack", "Excel"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'script' en la planificación de un video?",
+                options = listOf("Un texto que detalla lo que se va a decir y mostrar", "Una animación", "Un efecto de sonido", "Una intro automática"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda evitar al subir videos con música?",
+                options = listOf("Usar música libre de derechos", "Ignorar los derechos de autor", "Usar títulos cortos", "Hacer ediciones lentas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué ayuda a mejorar la presencia en redes sociales?",
+                options = listOf("Publicar de forma constante y conocer a la audiencia", "Borrar contenido viejo", "Evitar las tendencias", "Copiar exactamente a otros creadores"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué son los 'shorts' en YouTube?",
+                options = listOf("Videos cortos en formato vertical", "Miniaturas animadas", "Resúmenes de series", "Audios virales"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'intro' en creación de videos?",
+                options = listOf("El resumen del final", "Un video de bienvenida breve y con identidad", "Un texto en miniatura", "Una transición entre escenas"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Andar en bicicleta" to listOf(
+            QuizQuestion(
+                question = "¿Qué parte de la bicicleta se utiliza para frenar?",
+                options = listOf("Los pedales", "El manubrio", "Los frenos", "El asiento"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función del casco al andar en bicicleta?",
+                options = listOf("Proteger del sol", "Guardar objetos", "Proteger la cabeza en caso de caída", "Hacer más rápido al ciclista"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento se recomienda usar de noche al andar en bicicleta?",
+                options = listOf("Luz delantera y trasera", "Gafas de sol", "Guantes gruesos", "Camiseta oscura"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de bicicleta es ideal para caminos de tierra y montaña?",
+                options = listOf("Bicicleta urbana", "Bicicleta de montaña (MTB)", "Bicicleta de ruta", "Bicicleta plegable"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe revisar antes de salir a andar en bicicleta?",
+                options = listOf("Presión de neumáticos, frenos y cadena", "Color del cuadro", "Estilo del casco", "Música del celular"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'pedaleo eficiente'?",
+                options = listOf("Pedalear sin usar las manos", "Utilizar cambios correctamente para ahorrar energía", "Frenar constantemente", "Usar el celular mientras se pedalea"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la altura adecuada del asiento?",
+                options = listOf("Donde los pies queden completamente en el suelo", "Tan alto como sea posible", "Donde la pierna se estire casi por completo al pedalear", "Donde la espalda esté curva"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué equipo básico de seguridad debería tener un ciclista?",
+                options = listOf("Sombrero, lentes, guantes", "Casco, luces, reflectantes", "Botella de agua, gorra, mochila", "Parlantes, celular, gorro"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte conecta los pedales con la rueda trasera?",
+                options = listOf("Manubrio", "Cadena", "Asiento", "Guardabarros"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se usa para inflar las ruedas?",
+                options = listOf("Compresor de aire", "Inflador de bicicleta", "Aceite", "Destornillador"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple el cambio de marchas?",
+                options = listOf("Cambiar la música", "Regular la velocidad y el esfuerzo del pedaleo", "Frenar más rápido", "Aumentar el tamaño de la rueda"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una ciclovía?",
+                options = listOf("Zona para correr", "Carril exclusivo o compartido para bicicletas", "Estacionamiento", "Zona peatonal con luces"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante hidratarse durante una salida en bicicleta?",
+                options = listOf("Para no tener hambre", "Para evitar calambres y fatiga", "Para ir más lento", "Para gastar menos energía"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una señal de mano para girar a la izquierda?",
+                options = listOf("Brazo izquierdo extendido hacia el costado", "Mano derecha levantada", "Ambas manos en alto", "No se hace señal"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de neumáticos se usan para ciudad?",
+                options = listOf("Gruesos con tacos", "Lisos y delgados", "Rígidos de madera", "De clavos metálicos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede causar una cadena oxidada?",
+                options = listOf("Mayor velocidad", "Mayor fricción y posibles roturas", "Mejor tracción", "Menos peso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué accesorio sirve para guardar herramientas o una cámara de repuesto?",
+                options = listOf("Bolso bajo asiento", "Reflectante", "Timbre", "Guarda cadena"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'bikepacking'?",
+                options = listOf("Competencia profesional", "Viajar en bicicleta llevando equipaje liviano", "Andar sin frenos", "Armar la bicicleta uno mismo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué precaución se debe tomar al cruzar vías del tren en bicicleta?",
+                options = listOf("Pasar rápido y en diagonal", "Evitar frenar", "Cruzar perpendicularmente y con precaución", "Cruzar en zigzag"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio físico tiene andar en bicicleta?",
+                options = listOf("Aumenta el estrés", "Mejora la salud cardiovascular y fortalece piernas", "Disminuye la resistencia", "Baja la capacidad pulmonar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica un timbre en la bicicleta?",
+                options = listOf("Sirve para avisar la presencia a peatones u otros ciclistas", "Sirve para cambiar de marcha", "Es solo decorativo", "Mide la velocidad"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de frenos requiere menos mantenimiento?",
+                options = listOf("Frenos de disco hidráulicos", "Frenos de contrapedal", "Frenos V-Brake", "Frenos de zapata"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función de un cuadro en una bicicleta?",
+                options = listOf("Sujetar los frenos", "Decorar el diseño", "Estructura principal que une todos los componentes", "Sostener el asiento solamente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta es útil para ajustar tuercas en una bicicleta?",
+                options = listOf("Martillo", "Llave Allen o inglesa", "Destornillador plano", "Cúter"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'gravel bike'?",
+                options = listOf("Bicicleta para niños", "Bicicleta urbana", "Bicicleta versátil para caminos de tierra y asfalto", "Bicicleta con tres ruedas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la presión adecuada de las ruedas en ciudad?",
+                options = listOf("Alta, para reducir fricción", "Baja, para mayor tracción", "Siempre la más baja posible", "Depende del clima únicamente"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda llevar en una salida larga en bicicleta?",
+                options = listOf("Solo el celular", "Herramientas, agua, repuestos y comida ligera", "Nada, para ir más liviano", "Una silla plegable"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte permite girar la dirección de la bicicleta?",
+                options = listOf("Cadena", "Sillín", "Manubrio", "Pedal"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Por qué se usan reflectores en la bicicleta?",
+                options = listOf("Para decorar", "Para evitar pinchazos", "Para aumentar visibilidad en condiciones de poca luz", "Para medir velocidad"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué recomienda la ley en muchos países respecto al uso del casco?",
+                options = listOf("Es opcional", "Es obligatorio en ciclovías", "Es obligatorio en todos los casos", "Solo es obligatorio para mayores de 60"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de la bicicleta debe mantenerse lubricada regularmente?",
+                options = listOf("Cuadro", "Manubrio", "Cadena", "Asiento"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una bicicleta eléctrica?",
+                options = listOf("Una bicicleta con luces LED decorativas", "Una bicicleta que funciona exclusivamente a batería", "Una bicicleta con asistencia de motor eléctrico para pedalear", "Una bicicleta de carreras"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué indica el término 'cadencia' en ciclismo?",
+                options = listOf("La presión de los neumáticos", "La frecuencia de pedaleo (vueltas por minuto)", "La distancia entre frenos", "La altura del asiento"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué riesgo hay al usar auriculares mientras se pedalea en ciudad?",
+                options = listOf("Ninguno si están a volumen bajo", "Se pierde concentración y percepción sonora del entorno", "Mejora la experiencia", "Ayuda a seguir el ritmo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una señal de tránsito con bicicleta dibujada?",
+                options = listOf("Está prohibido andar en bici", "Estacionamiento exclusivo", "Zona compartida con ciclistas o ciclovía", "Cruce peatonal"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte permite cambiar de velocidad en la bicicleta?",
+                options = listOf("Piñón y plato", "Frenos", "Guardabarros", "Sillín"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una bicicleta con canasto delantero?",
+                options = listOf("Es para niños", "Sirve para transporte urbano ligero", "Es solo para mujeres", "Es de paseo solamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué precaución tomar en días de lluvia?",
+                options = listOf("Aumentar la velocidad", "Frenar más fuerte", "Evitar giros bruscos y frenar con anticipación", "Usar casco sin ventilación"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué ventaja tiene el uso del ciclocomputador o GPS para bicicletas?",
+                options = listOf("Solo muestra la hora", "Mejora el frenado", "Permite ver velocidad, distancia y rutas", "Evita el uso del manubrio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el sillín de una bicicleta?",
+                options = listOf("El freno trasero", "El asiento", "El manubrio", "La cadena"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Armar rompecabezas" to listOf(
+            QuizQuestion(
+                question = "¿Qué es un rompecabezas?",
+                options = listOf("Un juego de mesa con dados", "Una figura que se arma encajando piezas", "Un juguete electrónico", "Un libro para colorear"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué material es más común en los rompecabezas tradicionales?",
+                options = listOf("Metal", "Plástico", "Cartón", "Vidrio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estrategia es útil al comenzar un rompecabezas?",
+                options = listOf("Empezar por el centro", "Armar primero los bordes", "Comenzar sin mirar la imagen", "Revolver las piezas constantemente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del rompecabezas suele armarse primero?",
+                options = listOf("Las piezas centrales", "Las piezas de un solo color", "Las piezas del borde", "Las que tienen formas raras"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué indica que una pieza es de borde?",
+                options = listOf("Tiene una forma curva", "Tiene al menos un lado recto", "Es la más pequeña", "Tiene colores oscuros"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio tiene armar rompecabezas?",
+                options = listOf("Disminuye la creatividad", "Desarrolla concentración y pensamiento espacial", "Reduce la memoria", "Aumenta la ansiedad"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de imagen es más fácil para un rompecabezas?",
+                options = listOf("Imagen con muchos colores y detalles", "Imagen completamente blanca", "Imagen en blanco y negro", "Imagen borrosa"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa clasificar las piezas por colores o formas?",
+                options = listOf("Desordenarlas", "Separarlas por patrones visuales similares", "Romperlas", "Dibujar encima"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas frases es verdadera?",
+                options = listOf("Todas las piezas encajan con cualquiera", "Cada pieza tiene una ubicación única", "Las piezas se doblan para encajar", "No hay una forma correcta de armarlos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué ayuda a no perder piezas del rompecabezas?",
+                options = listOf("Armar en una superficie plana y limpia", "Tirarlas en una caja abierta", "Guardarlas en el piso", "Jugar con ellas en exteriores"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué indica el número de piezas en una caja de rompecabezas?",
+                options = listOf("La edad recomendada", "El tamaño del rompecabezas armado", "La dificultad aproximada", "El peso total del rompecabezas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de rompecabezas requiere usar más habilidades espaciales?",
+                options = listOf("Rompecabezas 2D", "Rompecabezas 3D", "Rompecabezas con letras", "Rompecabezas virtuales"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un tapete enrollable para rompecabezas?",
+                options = listOf("Un mantel para comer", "Una base para pintar", "Una superficie que permite guardar el rompecabezas sin desmontarlo", "Un juego de cartas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede dificultar armar un rompecabezas?",
+                options = listOf("Buena iluminación", "Piezas faltantes o repetidas", "Una imagen clara", "Superficie firme"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un rompecabezas personalizado?",
+                options = listOf("Un puzzle con piezas gigantes", "Un puzzle con tu propia foto o diseño", "Un juego de cartas", "Un puzzle sin imagen"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una señal de que una pieza no encaja?",
+                options = listOf("Entra muy forzada o queda suelta", "Tiene colores similares", "Es de borde", "Tiene una forma común"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'puzzle mat'?",
+                options = listOf("Una herramienta para limpiar piezas", "Un accesorio para guardar y transportar el rompecabezas armado o a medio hacer", "Un tipo de rompecabezas gigante", "Un juego de rompecabezas online"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede indicar una pieza con una forma muy particular?",
+                options = listOf("Que encaja en cualquier lugar", "Que pertenece a un borde", "Que es clave para una sección específica", "Que está mal fabricada"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué hacer si una pieza parece encajar pero la imagen no coincide?",
+                options = listOf("Forzarla igual", "Dejarla ahí", "Buscar otra pieza que encaje tanto en forma como en imagen", "Doblarla para que entre"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa armar un rompecabezas colaborativo?",
+                options = listOf("Hacerlo entre varias personas", "Ver a otro hacerlo", "Jugar con cronómetro", "Competir contra otros"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio tiene armar rompecabezas en grupo?",
+                options = listOf("Reduce la comunicación", "Aumenta la frustración", "Fomenta la cooperación y el trabajo en equipo", "Hace más difícil el proceso"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué suele indicar una pieza completamente blanca en un rompecabezas con fondo blanco?",
+                options = listOf("Que es del borde", "Que es fácil de colocar", "Que será difícil de ubicar", "Que está mal impresa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una técnica común al avanzar en un rompecabezas grande?",
+                options = listOf("Armar secciones por colores o elementos de la imagen", "Armar solo con piezas rectas", "Tirar las piezas y mezclarlas bien", "Pegar las piezas con cinta"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede ayudar a conservar un rompecabezas armado?",
+                options = listOf("Volver a guardarlo en la caja", "Pegarlo con adhesivo especial y enmarcarlo", "Separarlo por colores", "Cortar las piezas con cúter"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué implica que un rompecabezas sea de 'mil piezas'?",
+                options = listOf("Que es para niños", "Que tiene una imagen infantil", "Que requiere mayor tiempo y paciencia", "Que es muy fácil de armar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un rompecabezas de doble cara?",
+                options = listOf("Tiene piezas reversibles con imágenes distintas en ambos lados", "Es más fácil de armar", "Tiene piezas imantadas", "Se puede usar como espejo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué recomienda la mayoría de aficionados antes de comenzar?",
+                options = listOf("Tirar todas las piezas al piso", "Separar y clasificar por colores y bordes", "Armar sin mirar la imagen", "Elegir piezas al azar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de superficie es ideal para armar un rompecabezas?",
+                options = listOf("Inclinada", "Con textura", "Plana y firme", "Desnivelada"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta puede ayudarte si pierdes una pieza?",
+                options = listOf("Cinta adhesiva", "Una lupa para buscar bien en la zona", "Regla metálica", "Pintura acrílica"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un puzzle 'sin borde'?",
+                options = listOf("No tiene una imagen definida", "No tiene piezas rectas para el marco externo", "No se puede terminar", "Tiene forma circular solamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué característica tienen los rompecabezas para niños pequeños?",
+                options = listOf("Piezas grandes y fáciles de manipular", "Muchos colores repetidos", "Piezas del mismo tamaño", "Dificultad extrema"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas acciones puede arruinar un rompecabezas?",
+                options = listOf("Guardarlo en caja con cuidado", "Armarlo sobre una manta", "Exponerlo a humedad o líquidos", "Usar pinzas para mover piezas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si se fuerza una pieza en lugar incorrecto?",
+                options = listOf("Nada", "Puede deformar la pieza y afectar el encaje", "Encaja igual", "Se arregla después"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de puzzles son populares en formato digital?",
+                options = listOf("Rompecabezas de paisajes", "Rompecabezas 3D físicos", "Cubos Rubik", "Sudokus"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de ilustraciones suelen ser más complejas de armar?",
+                options = listOf("Con colores planos", "Con mucha repetición de formas y patrones", "Con figuras geométricas simples", "Con textos grandes"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Por qué es útil guardar la imagen de referencia visible?",
+                options = listOf("Para ignorarla", "Para hacer una competencia", "Para usarla como guía visual constante", "Para ocultarla a otros"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué acción facilita el avance cuando hay muchas piezas similares?",
+                options = listOf("Separarlas por forma de encaje", "Tirarlas de nuevo", "Pintarlas", "Reiniciar todo el armado"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que una pieza tenga 'forma única'?",
+                options = listOf("No encaja en ningún lugar", "Puede ser una pista clave para ubicarla fácilmente", "Es un error de fabricación", "Es de borde siempre"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de puzzle puede tener forma circular o irregular?",
+                options = listOf("Puzzle tradicional", "Puzzle temático o artístico", "Puzzle matemático", "Puzzle con letras"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué habilidad desarrolla principalmente armar rompecabezas complejos?",
+                options = listOf("Fuerza física", "Memoria espacial y resolución de problemas", "Rapidez con números", "Expresión oral"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Bloggear" to listOf(
+            QuizQuestion(
+                question = "¿Qué es un blog?",
+                options = listOf("Una red social", "Un sitio web personal o temático donde se publican artículos", "Una aplicación de mensajería", "Un juego en línea"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se llama 'entrada' o 'post' en un blog?",
+                options = listOf("El pie de página", "Cada artículo publicado", "El formulario de contacto", "El título del blog"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué plataforma es popular para crear blogs?",
+                options = listOf("Excel", "WordPress", "Discord", "Photoshop"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una buena práctica al escribir para un blog?",
+                options = listOf("Escribir sin estructura", "No usar subtítulos", "Incluir párrafos claros y bien organizados", "Evitar imágenes"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede ayudar a que un blog tenga más visitas?",
+                options = listOf("Ocultar los posts", "No actualizarlo nunca", "Compartirlo en redes sociales y aplicar SEO", "Usar títulos genéricos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el SEO en el contexto de los blogs?",
+                options = listOf("Una herramienta de diseño gráfico", "Una técnica de optimización para motores de búsqueda", "Un error de formato", "Una red social privada"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una palabra clave ('keyword')?",
+                options = listOf("Una contraseña para el blog", "Una palabra que define el tema del post y ayuda al posicionamiento", "Un error ortográfico", "Una función para cambiar el fondo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué formato suele usarse para el contenido de un blog?",
+                options = listOf("Videos exclusivamente", "Texto con imágenes, enlaces y listas", "Solo emojis", "Tablas complejas sin explicación"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para analizar visitas a un blog?",
+                options = listOf("Paint", "Google Analytics", "Google Maps", "PowerPoint"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una categoría en un blog?",
+                options = listOf("Un tema general que agrupa varios posts", "El diseño del menú", "La edad del lector", "Una aplicación para comentarios"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué ventaja tiene escribir un blog personal?",
+                options = listOf("Permite expresar ideas, compartir experiencias y crear comunidad", "Es ilegal en muchos países", "Solo sirve para famosos", "No tiene ningún uso útil"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué contenido es ideal para mantener a los lectores interesados?",
+                options = listOf("Copiar y pegar de otros sitios", "Publicaciones variadas, útiles y originales", "Contenido desactualizado", "Títulos confusos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'plugin' en plataformas como WordPress?",
+                options = listOf("Un tipo de post", "Un complemento que agrega funcionalidades al blog", "Un comentario", "Una sección fija"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué importancia tiene el título de un post?",
+                options = listOf("Ninguna", "Es clave para captar atención y mejorar posicionamiento", "Debe ser siempre largo", "Debe evitarse"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué permite una plantilla o 'theme' en un blog?",
+                options = listOf("Editar solo los comentarios", "Cambiar la apariencia y diseño general del blog", "Traducir el contenido", "Cerrar el blog automáticamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una entrada destacada?",
+                options = listOf("Una entrada oculta", "Una entrada antigua", "Una publicación resaltada en la portada", "Una página de error"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'actualizar contenido' en un blog?",
+                options = listOf("Borrar todo", "Editar posts antiguos para mantenerlos vigentes y útiles", "Publicar cada minuto", "Cerrar el blog"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumplen los comentarios en un blog?",
+                options = listOf("Romper el diseño", "Generar spam", "Fomentar la interacción con los lectores", "Eliminar contenido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué debe incluir el 'about me' o sección 'sobre mí' en un blog personal?",
+                options = listOf("Datos bancarios", "Una biografía breve y contexto del autor", "Solo emojis", "Contraseñas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una página de contacto en un blog?",
+                options = listOf("Una entrada antigua", "Una sección donde los lectores pueden enviar mensajes o consultas", "Una sección privada", "Una lista de compras"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una entrada programada en un blog?",
+                options = listOf("Una publicación que se sube manualmente", "Una entrada que se publica automáticamente en una fecha y hora definidas", "Una entrada que se borra sola", "Un comentario fijado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Por qué es útil insertar imágenes en un post?",
+                options = listOf("Para hacerlo más largo", "Para ilustrar y complementar el contenido", "Para ocultar el texto", "Para ralentizar la carga"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un enlace interno en un blog?",
+                options = listOf("Lleva a sitios externos", "Conecta con otra entrada dentro del mismo blog", "Redirige a una red social", "Descarga archivos automáticamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'call to action' (CTA)?",
+                options = listOf("Un tipo de imagen", "Una invitación al lector para hacer algo (comentar, suscribirse, etc.)", "Una categoría", "Un error de diseño"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué debe tener un buen encabezado H1?",
+                options = listOf("Ser largo y confuso", "Tener errores ortográficos", "Reflejar claramente el tema del post", "Estar oculto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta ayuda a revisar la legibilidad del texto?",
+                options = listOf("Yoast SEO", "Excel", "Audacity", "Photoshop"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué importancia tiene la frecuencia de publicación en un blog?",
+                options = listOf("Ninguna", "Es clave para mantener el interés y el tráfico", "Cansa al lector", "Está prohibida por las plataformas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'bounce rate' o tasa de rebote?",
+                options = listOf("La cantidad de comentarios", "El número de enlaces en un post", "La proporción de visitantes que abandonan el sitio sin interactuar", "Una técnica de edición de texto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué ventaja tiene un blog con diseño responsivo?",
+                options = listOf("No se puede ver en celular", "Carga más lento", "Se adapta a distintos dispositivos (celular, tablet, PC)", "No tiene imágenes"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'slug' en una entrada de blog?",
+                options = listOf("Una parte de la URL amigable para buscadores", "Un tipo de plugin", "Una plantilla", "Un fondo animado"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas acciones mejora el posicionamiento de un post?",
+                options = listOf("Usar keywords relevantes en el título y subtítulos", "No incluir imágenes", "Copiar otros contenidos", "Publicar sin revisar"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede provocar el uso excesivo de palabras clave?",
+                options = listOf("Mejor posicionamiento", "Penalizaciones por parte de los buscadores", "Mayor claridad", "Más visitas automáticas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hace un formulario de suscripción?",
+                options = listOf("Permite que los lectores reciban novedades por correo", "Elimina lectores", "Impide ver los posts", "Agrega anuncios"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una estrategia efectiva para fidelizar lectores?",
+                options = listOf("No actualizar el contenido", "Publicar contenido útil y responder comentarios", "Desactivar el buscador", "Eliminar entradas anteriores"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de imágenes es mejor usar en un blog?",
+                options = listOf("Imágenes grandes sin optimizar", "Fotos pixeladas", "Imágenes propias o libres de derechos", "Capturas borrosas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa monetizar un blog?",
+                options = listOf("Cerrar el blog", "Ganar dinero a través de publicidad, afiliación o contenido patrocinado", "Eliminar comentarios", "Crear encuestas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una entrada 'evergreen'?",
+                options = listOf("Una entrada que expira", "Una entrada de temática navideña", "Una publicación que se mantiene útil y relevante con el tiempo", "Un borrador sin publicar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una etiqueta (tag)?",
+                options = listOf("Una marca de agua", "Una palabra clave que organiza los posts según temas específicos", "Una imagen del post", "Una página nueva"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué acción ayuda a fortalecer la marca personal del autor?",
+                options = listOf("Escribir con voz propia, coherencia visual y constancia", "Usar plantillas distintas cada vez", "No firmar los posts", "Evitar redes sociales"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué aspecto técnico puede mejorar la velocidad de carga del blog?",
+                options = listOf("Subir archivos pesados", "No usar plugins", "Optimizar imágenes y elegir un buen hosting", "Evitar actualizar el CMS"),
+                correctIndex = 2
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Diseño gráfico" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el diseño gráfico?",
+                options = listOf("La creación de bases de datos", "El arte de comunicar visualmente ideas usando texto e imágenes", "La edición de video exclusivamente", "Una técnica para imprimir documentos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos programas es comúnmente usado en diseño gráfico?",
+                options = listOf("Excel", "Illustrator", "Zoom", "Premiere Pro"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una paleta de colores?",
+                options = listOf("Una lista de herramientas", "Un conjunto de colores armónicos seleccionados para un diseño", "Un menú de impresión", "Un fondo animado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el formato PNG?",
+                options = listOf("Un formato de video", "Un tipo de audio", "Una imagen con fondo transparente", "Una fuente tipográfica"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una tipografía?",
+                options = listOf("Un tipo de imagen", "Un estilo de letra o fuente", "Una animación", "Un filtro de cámara"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que un diseño tenga 'buena legibilidad'?",
+                options = listOf("Tiene muchos adornos", "Se entiende fácilmente el texto", "Solo usa imágenes", "Está todo en mayúsculas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el contraste en diseño gráfico?",
+                options = listOf("Una herramienta de recorte", "La diferencia visual entre elementos para destacar algo", "Un tipo de archivo", "Un color específico"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se entiende por jerarquía visual?",
+                options = listOf("El orden de instalación de programas", "El orden en que se presentan elementos según su importancia", "La gama de colores", "Un plugin de texto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta permite editar imágenes rasterizadas?",
+                options = listOf("Photoshop", "Notepad", "Excel", "Canva"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué formato es más adecuado para impresión de alta calidad?",
+                options = listOf("JPG de baja calidad", "PDF en CMYK", "GIF animado", "SVG con fondo negro"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un mockup?",
+                options = listOf("Un boceto dibujado a mano", "Una presentación realista de cómo se verá un diseño aplicado", "Un tipo de tipografía", "Un programa de código"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa CMYK?",
+                options = listOf("Un sistema de colores para impresión (Cian, Magenta, Amarillo y Negro)", "Un programa de edición de sonido", "Un tipo de fuente", "Un estilo de animación"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el diseño responsive?",
+                options = listOf("Un diseño que responde preguntas", "Un diseño que se adapta a distintos dispositivos y tamaños de pantalla", "Una plantilla para imprenta", "Una animación interactiva"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un archivo vectorial?",
+                options = listOf("Una imagen basada en píxeles", "Una imagen que puede escalarse sin perder calidad", "Un documento de texto", "Un archivo comprimido"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué programa es ideal para trabajar con vectores?",
+                options = listOf("Microsoft Word", "Adobe Illustrator", "VLC Media Player", "FL Studio"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas opciones mejora la accesibilidad de un diseño?",
+                options = listOf("Texto pequeño y opaco", "Alto contraste y fuentes legibles", "Colores iguales en fondo y texto", "Evitar todo texto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el espacio negativo en diseño?",
+                options = listOf("Una crítica al diseño", "El área vacía que rodea los elementos y da equilibrio", "Un filtro de color", "Una parte de la interfaz"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una guía de estilo?",
+                options = listOf("Un software de edición", "Un conjunto de reglas visuales para mantener coherencia en una marca", "Una guía turística", "Una herramienta de codificación"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca con la alineación en un diseño?",
+                options = listOf("Desordenar los elementos", "Aumentar la saturación", "Organizar visualmente de manera coherente", "Reducir el tamaño del archivo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué rol tiene el color en diseño gráfico?",
+                options = listOf("No tiene importancia", "Comunica emociones y mensajes", "Sirve solo como relleno", "Debe evitarse en marcas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una retícula o grid en diseño gráfico?",
+                options = listOf("Un patrón de impresión", "Una estructura guía de líneas que organiza el contenido", "Un tipo de pincel", "Un fondo decorativo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos elementos puede romper la armonía visual si se usa mal?",
+                options = listOf("El contraste", "La alineación", "Las sombras", "El uso excesivo de fuentes distintas"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué programa es popular para diseño gráfico en línea?",
+                options = listOf("Canva", "Notepad++", "Audacity", "AutoCAD"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué implica exportar un archivo para impresión?",
+                options = listOf("Guardar en cualquier formato", "Guardar en CMYK y con sangrías", "Usar formato .mp3", "Reducir su resolución"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una ilustración vectorial?",
+                options = listOf("Un collage", "Una imagen formada por líneas y curvas escalables", "Una fotografía editada", "Una infografía estática"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué ventaja tienen los archivos SVG?",
+                options = listOf("Son más pesados", "Pueden escalarse sin perder calidad y son ideales para web", "No son compatibles con navegadores", "Tienen fondo opaco siempre"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda para elegir una buena tipografía?",
+                options = listOf("Elegir varias por estética", "Usar muchas diferentes en un mismo diseño", "Priorizar legibilidad y coherencia con el mensaje", "Usar solo fuentes decorativas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una tendencia actual en diseño gráfico?",
+                options = listOf("Imágenes pixeladas", "Diseños minimalistas y uso estratégico del espacio blanco", "Texto sin formato", "Colores neón exclusivamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'flat design'?",
+                options = listOf("Diseño con muchas sombras", "Diseño tridimensional", "Diseño simple, sin efectos 3D ni sombras", "Diseño fotográfico realista"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda para optimizar un diseño para redes sociales?",
+                options = listOf("Usar mucho texto", "No pensar en el tamaño", "Adaptar la resolución y formato al tipo de red (ej. cuadrado para Instagram)", "Poner letras muy pequeñas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un briefing en diseño gráfico?",
+                options = listOf("Describir requisitos, objetivos y expectativas de un proyecto", "Presentar memes", "Hacer encuestas", "Diseñar sin límites"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'kerning' en tipografía?",
+                options = listOf("El color del texto", "El espaciado entre letras", "El estilo de negrita", "El interlineado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un logo escalable?",
+                options = listOf("Uno que cambia solo", "Uno que pierde calidad al agrandarlo", "Uno creado como vector para mantener su calidad en cualquier tamaño", "Uno animado siempre"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un moodboard?",
+                options = listOf("Un tablero visual con inspiración de estilo, color y concepto", "Un tipo de presentación", "Una red social", "Un plugin de Photoshop"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante la coherencia visual?",
+                options = listOf("Porque desorganiza el diseño", "Porque transmite un mensaje claro y profesional", "Porque evita que se vea moderno", "Porque ahorra tinta"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un favicon?",
+                options = listOf("Una fuente tipográfica", "Un ícono pequeño que representa un sitio web en la pestaña del navegador", "Una herramienta de diseño", "Una marca de agua"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el interlineado?",
+                options = listOf("El espacio entre párrafos", "El espacio entre líneas de texto", "El margen del documento", "El grosor del trazo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa un diseño saturado?",
+                options = listOf("Uno con buen equilibrio", "Uno limpio", "Uno recargado de elementos visuales que compiten entre sí", "Uno monocromático"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo principal del diseño gráfico?",
+                options = listOf("Hacer diseños para imprimir", "Comunicar visualmente ideas y emociones de forma efectiva", "Aprender programas", "Usar muchos colores"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un diseño centrado en el usuario?",
+                options = listOf("Uno que prioriza la estética", "Uno que está pensado en función de la experiencia y necesidades del público", "Uno complejo y artístico", "Uno difícil de entender"),
+                correctIndex = 1
+            )
+        ),
+
+
+
+
+
+
 
 
         )
