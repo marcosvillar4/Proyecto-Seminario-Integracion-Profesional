@@ -1,20 +1,20 @@
 package tpo.seminario.breakbuddy.util
 
 
-/*Hasta ahora esta (mas o menos):
+/*Hasta ahora esta (mas o menos): ESTAN PUESTAS EN ESTE ORDEN ESPECIFICO
 Natación / Cocinar / Repostería / Leer / Fotografía / Pescar / Jardineria / Escuchar música / Canto / Tocar un instrumento musical / Bailar / Ver películas /
 Actuar / Aprender idiomas / Carpinteria / Pintar / Cerámica / Corte y confección / Tejer / Marroquineria / Escultura / Bisutería / Maquillaje profesional /
-Videojuegos / Juegos de mesa / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping / Meditar / Astronomía / Avistamiento de aves /
-Lepidopterologia /
+Programar / Videojuegos / Juegos de mesa / Ajedrez / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping / Meditar / Astronomía /
+Avistamiento de aves / Adiestramiento de animales / Lepidopterologia /
 */
 
 /*TODAVIA FALTAN: "Manualidades", "Creación de contenido",
-        "Andar en bicicleta",  "Armar rompecabezas", ,
-        "Escribir", "Bloggear", "Programar", "Diseño gráfico",
-        "Correr", , "Ajedrez", ,
+        "Andar en bicicleta",  "Armar rompecabezas",
+        "Escribir", "Bloggear", "Diseño gráfico",
+        "Correr",
         "Voluntariado", "Restaurar muebles","Basket", "Volley", "Golf"
 	,"Bordado","Crucigramas",,"Origami",
-        , "Dibujo","Coleccionismo","Adiestramiento de animales",,
+        , "Dibujo","Coleccionismo"
         ,"Ilusionismo","Crochet","Pilates","Dardos","Tarot",,
         "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
         "Peluqueria","Decoracion de interiores","Damas", Rummy Burako",
@@ -4303,6 +4303,213 @@ object HobbyQuestionsProvider{
 
         //********************************************************************************************************************************
 
+        "Programar" to listOf(
+            QuizQuestion(
+                question = "¿Qué lenguaje se utiliza comúnmente para desarrollo web junto con HTML y CSS?",
+                options = listOf("Java", "Python", "C++", "JavaScript"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa HTML?",
+                options = listOf("HyperText Markup Language", "HighText Modern Language", "HyperType Machine Language", "Home Tool Markup Language"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'bug' en programación?",
+                options = listOf("Un tipo de archivo", "Un lenguaje de código", "Un dispositivo externo", "Un error en el software"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos no es un lenguaje de programación?",
+                options = listOf("Ruby", "C#", "HTML", "Python"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estructura de control permite ejecutar un bloque de código múltiples veces?",
+                options = listOf("if", "loop", "class", "function"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de lenguaje es Python?",
+                options = listOf("Lenguaje de bajo nivel", "Lenguaje de máquina", "Lenguaje de programación visual", "Lenguaje de alto nivel"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué símbolo se usa para comentarios en Python?",
+                options = listOf("//", "/*", "#", "--"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'IDE' en programación?",
+                options = listOf("Interactive Debugging Environment", "Integrated Development Environment", "Internal Design Execution",
+                    "Integrated Data Engine"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes se usa para controlar versiones de código?",
+                options = listOf("Git", "Node.js", "npm", "Python"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una función en programación?",
+                options = listOf("Un archivo de código", "Una estructura de control", "Un conjunto reutilizable de instrucciones", "Una librería externa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje es conocido por su lema 'Write once, run anywhere'?",
+                options = listOf("C++", "Python", "Java", "Ruby"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje se usa típicamente para scripts en servidores?",
+                options = listOf("CSS", "JavaScript", "HTML", "PHP"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué es una API?",
+                options = listOf("Un lenguaje de programación", "Un sistema operativo", "Una interfaz de programación de aplicaciones", "Un servidor web"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una variable?",
+                options = listOf("Un tipo de archivo", "Un número constante", "Un lenguaje de consulta", "Un nombre para almacenar datos"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué operador se usa para igualdad en la mayoría de lenguajes?",
+                options = listOf("=", "==", "===", "!="),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje se usa principalmente en ciencia de datos?",
+                options = listOf("Java", "Swift", "Python", "C"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué framework de JavaScript es mantenido por Meta (Facebook)?",
+                options = listOf("Angular", "Vue", "React", "Svelte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es JSON?",
+                options = listOf("Un lenguaje de backend", "Un sistema operativo", "Un formato de intercambio de datos", "Una base de datos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué extensión tienen los archivos Python?",
+                options = listOf(".py", ".java", ".html", ".js"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos es un tipo de bucle?",
+                options = listOf("try-catch", "if-else", "for", "break"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'null' en programación?",
+                options = listOf("Una cadena vacía", "Un error", "Una variable sin valor asignado", "Una función oculta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es GitHub?",
+                options = listOf("Un lenguaje de programación", "Una red social", "Un sistema operativo", "Una plataforma para alojar código"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué es una base de datos relacional?",
+                options = listOf("Una estructura basada en grafos", "Una colección de archivos", "Una colección organizada en tablas",
+                    "Una secuencia de comandos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es 'front-end' en desarrollo web?",
+                options = listOf("El código que se ejecuta en el servidor", "El lado visual y de interacción de la web", "La base de datos",
+                    "La configuración del servidor"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una ventaja del lenguaje C?",
+                options = listOf("Muy fácil de leer", "No necesita compilación", "Acceso a bajo nivel y rapidez", "Orientado a objetos por defecto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué librería de Python es popular para análisis de datos?",
+                options = listOf("NumPy", "TensorFlow", "OpenGL", "PyGame"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje se usa en Android nativamente?",
+                options = listOf("Python", "Kotlin", "Swift", "Ruby"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'refactorizar' código?",
+                options = listOf("Cambiar el lenguaje", "Eliminar archivos", "Modificar el código sin cambiar su funcionalidad",
+                    "Corregir errores sintácticos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'array'?",
+                options = listOf("Una función", "Una clase", "Una interfaz gráfica", "Una estructura de datos que contiene una colección"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué es un algoritmo?",
+                options = listOf("Una línea de código", "Una estructura de control", "Una secuencia de pasos para resolver un problema", "Un archivo ejecutable"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje está basado en el navegador y es esencial para interactividad web?",
+                options = listOf("Java", "Python", "JavaScript", "Ruby"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función en Python imprime texto en consola?",
+                options = listOf("print()", "echo()", "write()", "console()"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué palabra clave se usa en Java para herencia?",
+                options = listOf("extend", "implements", "inherits", "extends"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'commit' en Git?",
+                options = listOf("Un error", "Una rama", "Un guardado de cambios", "Una solicitud de código"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'excepción' en programación?",
+                options = listOf("Un tipo de bucle", "Una condición esperada", "Un error manejable en tiempo de ejecución", "Un tipo de archivo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje fue creado por Guido van Rossum?",
+                options = listOf("Java", "Python", "C#", "Swift"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'variable global'?",
+                options = listOf("Una variable que existe solo dentro de una función", "Una variable que puede ser accedida en todo el programa",
+                    "Una variable que almacena archivos", "Una variable local renombrada"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'compilar' un programa?",
+                options = listOf("Ejecutarlo directamente", "Convertir código fuente a lenguaje máquina", "Escribirlo en HTML", "Moverlo a la nube"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje usa la extensión '.js'?",
+                options = listOf("Java", "JSON", "Jupyter", "JavaScript"),
+                correctIndex = 3
+            )
+        ),
+
+
+
+        //********************************************************************************************************************************
+
         "Videojuegos" to listOf(
             QuizQuestion(
                 question = "¿Cuál es el personaje principal de la saga The Legend of Zelda?",
@@ -4700,6 +4907,197 @@ object HobbyQuestionsProvider{
                 question = "¿Qué juego popular fue creado por Elizabeth Hargrave?",
                 options = listOf("Wingspan", "Dominion", "Azul", "Everdell"),
                 correctIndex = 0
+            )
+        ),
+
+
+        //********************************************************************************************************************************
+
+        "Ajedrez" to listOf(
+            QuizQuestion(
+                question = "¿Quién fue campeón mundial de ajedrez durante 27 años consecutivos?",
+                options = listOf("Bobby Fischer", "Garry Kasparov", "Magnus Carlsen", "Emanuel Lasker"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza puede saltar sobre otras piezas?",
+                options = listOf("Reina", "Peón", "Torre", "Caballo"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el único movimiento en el que se mueven dos piezas a la vez?",
+                options = listOf("Enroque", "Captura al paso", "Promoción", "Apertura"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador rompió la hegemonía soviética al ganar el Campeonato Mundial en 1972?",
+                options = listOf("Anatoly Karpov", "Viswanathan Anand", "Garry Kasparov", "Bobby Fischer"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué nombre recibe la apertura 1.e4 c5?",
+                options = listOf("Apertura Inglesa", "Defensa Francesa", "Defensa Siciliana", "Gambito de Rey"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza se promueve al llegar a la última fila?",
+                options = listOf( "Caballo", "Torre", "Alfil","Peón"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué país ha tenido más campeones mundiales de ajedrez?",
+                options = listOf("Estados Unidos", "India", "Rusia/URSS", "España"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador fue el primer campeón mundial oficial?",
+                options = listOf("Paul Morphy", "Wilhelm Steinitz", "José Raúl Capablanca", "Emanuel Lasker"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántas casillas tiene un tablero de ajedrez?",
+                options = listOf("64", "100", "81", "72"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cómo se llama la jugada especial que permite capturar a un peón que acaba de avanzar dos casillas?",
+                options = listOf("Enroque", "Ataque doble", "Captura al paso", "Gambito"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el Elo más alto registrado por un jugador?",
+                options = listOf("2882", "2825", "2766", "2905"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas es una apertura de ajedrez?",
+                options = listOf("Defensa Italiana", "Defensa Belga", "Ataque Americano", "Defensa Suiza"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza comienza en la esquina del tablero?",
+                options = listOf("Rey", "Caballo", "Torre", "Alfil"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuántos peones hay al inicio de una partida por jugador?",
+                options = listOf("6", "7", "8", "9"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador es conocido como 'el Mozart del ajedrez'?",
+                options = listOf("Magnus Carlsen", "Hikaru Nakamura", "Bobby Fischer", "José Raúl Capablanca"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la duración típica de una partida de ajedrez clásico?",
+                options = listOf("3 minutos", "90 minutos + incremento", "15 minutos", "10 minutos sin incremento"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'tablas' en ajedrez?",
+                options = listOf("Victoria", "Derrota", "Empate", "Enroque largo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza es más poderosa en el medio juego?",
+                options = listOf("Peón", "Caballo", "Reina", "Rey"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué campeón mundial fue conocido por su estilo defensivo?",
+                options = listOf("Garry Kasparov", "Bobby Fischer", "Tigran Petrosian", "Mikhail Tal"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué variante de ajedrez incluye una fase de 'duelo de preparación' antes del juego?",
+                options = listOf("Ajedrez960", "Ajedrez por correspondencia", "Ajedrez Fischer Random", "Ajedrez Armagedón"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué evento de ajedrez se celebra anualmente en Wijk aan Zee?",
+                options = listOf("Copa Sinquefield", "Torneo de Linares", "Tata Steel", "Copa de Candidatos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza NO puede cambiar de color de casilla en su movimiento?",
+                options = listOf("Caballo", "Alfil", "Torre", "Rey"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo del ajedrez?",
+                options = listOf("Comer todas las piezas", "Llegar al otro lado del tablero", "Dar jaque mate al rey", "Capturar la reina"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Quién escribió 'Mi Sistema'?",
+                options = listOf("Aron Nimzowitsch", "Alexander Alekhine", "Vladimir Kramnik", "Mikhail Botvinnik"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador fue famoso por su estilo táctico y agresivo en los 60s?",
+                options = listOf("Anatoly Karpov", "Mikhail Tal", "Boris Spassky", "Tigran Petrosian"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el nombre del movimiento inicial 1.d4 d5 2.c4?",
+                options = listOf("Gambito de Dama", "Defensa Francesa", "Apertura Inglesa", "Defensa Caro-Kann"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza puede moverse cualquier número de casillas en línea recta o diagonal?",
+                options = listOf("Alfil", "Reina", "Torre", "Caballo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué torneo decide el retador al campeonato mundial?",
+                options = listOf("Torneo de Candidatos", "Olimpiada de Ajedrez", "Tata Steel", "Grand Prix"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el movimiento más raro para dar jaque mate con solo dos movimientos?",
+                options = listOf("Mate de Legal", "Mate del Loco", "Mate de Boden", "Mate de Rey y peón"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Quién fue campeón mundial inmediatamente antes de Magnus Carlsen?",
+                options = listOf("Garry Kasparov", "Vladimir Kramnik", "Viswanathan Anand", "Sergey Karjakin"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'zugzwang'?",
+                options = listOf("Captura forzada", "Situación en la que mover empeora la posición", "Apertura cerrada", "Cambio de dama"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'gambito' en ajedrez?",
+                options = listOf("Capturar una pieza menor", "Perder una torre", "Entregar una pieza por iniciativa", "Cambio de alfiles"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos países NO ha tenido un campeón mundial?",
+                options = listOf("India", "Cuba", "Brasil", "Noruega"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de las siguientes casillas no pertenece a las casillas centrales del tablero de ajedrez?",
+                options = listOf("d4", "e5", "e4", "c3"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo del gambito de rey?",
+                options = listOf("Controlar el centro rápidamente", "Desarrollar el alfil de rey", "Proteger al rey", "Forzar el enroque del oponente"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos campeones mundiales es noruego?",
+                options = listOf("Bobby Fischer", "Magnus Carlsen", "Ding Liren", "Garry Kasparov"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué campeona mundial femenina mantuvo el título 16 años?",
+                options = listOf("Judit Polgar", "Maia Chiburdanidze", "Hou Yifan", "Nona Gaprindashvili"),
+                correctIndex = 3
             )
         ),
 
@@ -6740,6 +7138,202 @@ object HobbyQuestionsProvider{
         ),
 
 
+        //********************************************************************************************************************************
+
+        "Adiestramiento de animales" to listOf(
+            QuizQuestion(
+                question = "¿Qué método de adiestramiento se basa en recompensar conductas deseadas?",
+                options = listOf("Castigo positivo", "Refuerzo negativo", "Refuerzo positivo", "Desensibilización"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes animales es más comúnmente adiestrado como animal de servicio?",
+                options = listOf("Gato", "Perro", "Conejo", "Loro"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa comúnmente en el adiestramiento con clicker?",
+                options = listOf("Silbato", "Correa de estrangulamiento", "Clicker", "Chaleco táctico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'imprinting' en animales?",
+                options = listOf("Un tipo de castigo", "Una técnica de exposición", "El reconocimiento de un objeto como figura parental", "Un estilo de caminar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas razas es famosa por su facilidad para el adiestramiento?",
+                options = listOf("Chow Chow", "Border Collie", "Pekinés", "Shar Pei"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'refuerzo negativo'?",
+                options = listOf("Quitar algo agradable para reducir una conducta", "Aplicar castigo", "Quitar algo desagradable para aumentar una conducta", "Ignorar al animal completamente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica consiste en exponer gradualmente al animal a un estímulo que teme?",
+                options = listOf("Condicionamiento clásico", "Refuerzo positivo", "Desensibilización sistemática", "Shaping"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'shaping' o moldeado?",
+                options = listOf("Forzar al animal a realizar una acción", "Castigar una mala conducta", "Premiar aproximaciones sucesivas al comportamiento deseado", "Asociar palabras con gestos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la edad ideal para empezar el adiestramiento básico en un cachorro?",
+                options = listOf("12 semanas", "6 meses", "8 años", "1 año"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'clicker training'?",
+                options = listOf("Un entrenamiento de obediencia avanzada", "Un tipo de ejercicio físico", "Un método de refuerzo positivo basado en sonido", "Una forma de castigo leve"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un ejemplo de conducta operante?",
+                options = listOf("Respirar", "Pestañear", "Sentarse al dar una orden", "Salivar al oler comida"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué profesional se especializa en problemas de comportamiento animal?",
+                options = listOf("Veterinario general", "Psicólogo humano", "Etólogo", "Nutricionista animal"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo del adiestramiento en positivo?",
+                options = listOf("Castigar comportamientos no deseados", "Reprimir al animal", "Recompensar comportamientos deseados", "Obligar a obedecer sin pensar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué animal es comúnmente adiestrado en espectáculos marinos?",
+                options = listOf("Canguro", "Caballo", "Orca", "Gato"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que un perro esté 'reactivo'?",
+                options = listOf("Es muy dormilón", "Se distrae con facilidad", "Reacciona de forma exagerada a estímulos", "Solo responde con comida"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos NO es un tipo de refuerzo?",
+                options = listOf("Premio", "Caricia", "Corrección física", "Juego"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un reforzador secundario?",
+                options = listOf("Un premio que no tiene valor natural, como un click", "Un juguete", "Una golosina", "Una necesidad biológica"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué raza de perro es muy usada para detectar sustancias?",
+                options = listOf("Dálmata", "Beagle", "Bóxer", "Pastor de Brie"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué animal se adiestra comúnmente para buscar personas en desastres?",
+                options = listOf("Canario", "Perro", "Gato", "Iguana"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué comando básico suele enseñarse primero a los perros?",
+                options = listOf("Túmbate", "Ven", "Quieto", "Siéntate"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué es el condicionamiento clásico?",
+                options = listOf("Asociar una acción con una recompensa", "Asociar un estímulo neutro con uno significativo", "Enseñar trucos complejos", "Reforzar una conducta existente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es la habituación?",
+                options = listOf("Un tipo de castigo", "Reacción excesiva a un estímulo", "Pérdida de respuesta a estímulo repetido", "Un adiestramiento con clicker"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas especies es más difícil de adiestrar?",
+                options = listOf("Caballo", "Perro", "Gato", "Delfín"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué caracteriza al método de adiestramiento tradicional?",
+                options = listOf("Uso de refuerzos positivos", "Estímulos aversivos", "Basado en juegos", "Solo en casa"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'generalización' en adiestramiento?",
+                options = listOf("Usar el mismo comando para todo", "Aprender varios comandos a la vez", "Aplicar una conducta aprendida en diferentes contextos", "Olvidar un comportamiento"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué comando se enseña para evitar que un perro jale de la correa?",
+                options = listOf("Túmbate", "Quieto", "Junto", "Arriba"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué raza es popular en competencias de obediencia?",
+                options = listOf("Yorkshire Terrier", "Border Collie", "Gran Danés", "Mastín Napolitano"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple el refuerzo intermitente?",
+                options = listOf("Castigar malas conductas", "Enseñar trucos nuevos", "Mantener una conducta ya aprendida", "Ignorar conductas no deseadas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué especie es más sensible al uso del castigo?",
+                options = listOf("Perro", "Gato", "Caballo", "Todas"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta ayuda a mantener la atención del animal durante el adiestramiento?",
+                options = listOf("Clicker", "Correa retráctil", "Bozal", "Arnés"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'señal' en adiestramiento?",
+                options = listOf("Una palabra o gesto que provoca una conducta", "Un objeto decorativo", "Una herramienta de castigo", "Una raza de perro"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es la extinción de conducta?",
+                options = listOf("Eliminar un animal del entrenamiento", "Ignorar una conducta hasta que desaparezca", "Reforzar una conducta negativa", "Premiar sin motivo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un target en adiestramiento?",
+                options = listOf("Un objetivo de aprendizaje", "Una herramienta para castigo", "Un objeto que el animal debe tocar", "Un tipo de collar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué animal es entrenado con frecuencia para terapia asistida?",
+                options = listOf("Serpiente", "Perro", "Pato", "Gato"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos animales puede ser adiestrado con refuerzo positivo?",
+                options = listOf("Delfín", "Rata", "Perro", "Todos los anteriores"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué problema se puede presentar si se usa solo comida como refuerzo?",
+                options = listOf("Obesidad", "Agresividad", "Falta de motivación", "Ninguno"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es importante para la efectividad del refuerzo?",
+                options = listOf("Que sea inmediato", "Que se repita muchas veces", "Que sea costoso", "Que sea inesperado"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de adiestramiento mejora el vínculo humano-animal?",
+                options = listOf("Aversivo", "Refuerzo positivo", "Represivo", "Castigo intermitente"),
+                correctIndex = 1
+            )
+        ),
+
+        
         //********************************************************************************************************************************
 
 
