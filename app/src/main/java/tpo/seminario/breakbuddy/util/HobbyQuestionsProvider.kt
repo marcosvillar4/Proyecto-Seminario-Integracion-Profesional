@@ -5,17 +5,17 @@ package tpo.seminario.breakbuddy.util
 Natación / Cocinar / Repostería / Leer / Fotografía / Pescar / Jardineria / Escuchar música / Canto / Tocar un instrumento musical / Bailar / Ver películas /
 Actuar / Aprender idiomas / Carpinteria / Pintar / Cerámica / Corte y confección / Tejer / Marroquineria / Escultura / Bisutería / Maquillaje profesional /
 Programar / Videojuegos / Juegos de mesa / Ajedrez / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping / Meditar / Astronomía /
-Avistamiento de aves / Adiestramiento de animales / Lepidopterologia /
+Avistamiento de aves / Adiestramiento de animales / Lepidopterologia / Escribir / Crochet / Dardos
 */
 
 /*TODAVIA FALTAN: "Manualidades", "Creación de contenido",
         "Andar en bicicleta",  "Armar rompecabezas",
-        "Escribir", "Bloggear", "Diseño gráfico",
+        , "Bloggear", "Diseño gráfico",
         "Correr",
         "Voluntariado", "Restaurar muebles","Basket", "Volley", "Golf"
 	,"Bordado","Crucigramas",,"Origami",
-        , "Dibujo","Coleccionismo"
-        ,"Ilusionismo","Crochet","Pilates","Dardos","Tarot",,
+        , ,"Coleccionismo"
+        ,"Ilusionismo",,"Pilates",,"Tarot",,
         "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
         "Peluqueria","Decoracion de interiores","Damas", Rummy Burako",
         "Bonsai","Prensado de flores","Sudoku","Sopa de letras","Bingo"*/
