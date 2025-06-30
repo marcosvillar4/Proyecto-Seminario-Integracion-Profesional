@@ -117,6 +117,27 @@
     </com.google.android.material.card.MaterialCardView>
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Ver historial de check‑ins"
+        app:srcCompat="@drawable/ic_checkin_history"
+        app:tint="@color/green_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabHistoryTests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Ver historial de Tests MBI"
+        app:srcCompat="@drawable/ic_history_test"
+        app:tint="@color/green_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"/>
 
     <!-- Guideline para el banner -->
     <androidx.constraintlayout.widget.Guideline

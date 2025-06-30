@@ -42,11 +42,18 @@ class ChatAdapter(
             val params = container.layoutParams as ConstraintLayout.LayoutParams
 
             if (message.isSystemMessage) {
-                // Mensaje del sistema → centrar y fondo gris
+                // Fondo gris y centrado
                 container.setBackgroundResource(R.drawable.bg_message_system)
+                val params = container.layoutParams as ConstraintLayout.LayoutParams
                 params.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                params.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                params.endToEnd   = ConstraintLayout.LayoutParams.PARENT_ID
+                container.layoutParams = params
                 textSender.visibility = View.GONE
+
+                textBody.text = message.text
+                textTime.text = SimpleDateFormat("HH:mm", Locale.getDefault())
+                    .format(message.timestamp?.toDate() ?: Date())
+                return
             } else if (message.senderUid == currentUserUid) {
                 // Mensaje propio → alinear a la derecha y fondo verde
                 container.setBackgroundResource(R.drawable.bg_message_user)

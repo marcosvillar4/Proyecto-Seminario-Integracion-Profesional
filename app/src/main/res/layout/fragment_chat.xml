@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,16 +7,30 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- Toolbar en la parte superior -->
+    <!-- Guideline para separar status bar de la Toolbar -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStatusBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="20dp"
+    android:orientation="horizontal" />
+
+    <!-- AppBar con Toolbar posicionado justo debajo de la guideline -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineStatusBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:theme="@style/ThemeOverlay.AppCompat.Light">
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarChat"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="!Sugerencias de actividades!"
+            app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- RecyclerView ocupa todo el espacio entre la AppBar y el panel de input -->
@@ -32,7 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_chat_message" />
 
-    <!-- Barra inferior para escribir mensaje -->
     <!-- Barra inferior para escribir mensaje -->
     <LinearLayout
         android:id="@+id/layoutInput"
@@ -53,30 +67,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:minHeight="56dp"
-        android:hint="Escribe un mensaje">
+            android:hint="Escribe un mensaje">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            style="@style/TextAppearance.App.SubtitleMedium"
-            android:minLines="1"
-            android:maxLines="5"
-            android:gravity="top"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:minLines="1"
+                android:maxLines="5"
+                android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageButton
-        android:id="@+id/buttonSend"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Enviar"
-        android:src="@drawable/ic_send"
-        app:tint="@color/green_500"
-        android:enabled="false" />
-</LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/buttonSend"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_send"
+            android:contentDescription="Enviar"
+            app:tint="@color/green_500"
+            android:enabled="false" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

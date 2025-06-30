@@ -69,6 +69,15 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_missionsFragment)
         }
 
+        // --- FAB Historial check-ins ---
+        binding.fabHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_checkinHistory)
+        }
+
+        // FAB historial tests MBI
+        binding.fabHistoryTests.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_testHistory)
+        }
 
         // Primera carga
         adView.loadAd(AdRequest.Builder().build())

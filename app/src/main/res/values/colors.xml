@@ -30,6 +30,7 @@
     <color name="teal_200">#03DAC5</color>
     <color name="red_500">#F44336</color>
     <color name="gold">#FFD700</color>
+    <color name="gold2">#F6AC2C</color>
     <color name="orange_100">#FFF3E0</color>
     <color name="orange_700">#F57C00</color>
 </resources>

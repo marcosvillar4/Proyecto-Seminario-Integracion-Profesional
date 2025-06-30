@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentGroupsListBinding
+import tpo.seminario.breakbuddy.ui.ranking.RankingDialogFragment
+import tpo.seminario.breakbuddy.ui.ranking.RankingFragment
 import tpo.seminario.breakbuddy.util.groups.Group
 import tpo.seminario.breakbuddy.util.groups.GroupFilter
 import tpo.seminario.breakbuddy.util.groups.GroupsListState
@@ -39,39 +42,30 @@ class GroupsListFragment : Fragment() {
         setupRecyclerView()
         observeViewModel()
         loadGroups()
-
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        // Solo recarga de Firestore, no toca filtros ni lista vacía:
         viewModel.loadUserGroupsAndOrgs()
     }
 
     private fun setupViews() {
-        // Botón para crear nuevo grupo
         binding.fabCreateGroup.setOnClickListener {
             findNavController().navigate(R.id.action_groupsList_to_createGroup)
         }
 
-        // Configurar filtros
         binding.chipAll.setOnClickListener { applyFilter(GroupFilter.ALL) }
         binding.chipPersonal.setOnClickListener { applyFilter(GroupFilter.PERSONAL) }
         binding.chipOrganization.setOnClickListener { applyFilter(GroupFilter.ORGANIZATION) }
         binding.chipOwned.setOnClickListener { applyFilter(GroupFilter.OWNED) }
 
-        // Pull to refresh
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.loadUserGroupsAndOrgs()
         }
 
-        // Configurar búsqueda
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
+        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?) = false
             override fun onQueryTextChange(newText: String?): Boolean {
                 groupsAdapter.filter(newText ?: "")
                 return true
@@ -87,11 +81,10 @@ class GroupsListFragment : Fragment() {
                 findNavController().navigate(action)
             },
             onJoinClick = { group ->
-                // Confirmación
                 AlertDialog.Builder(requireContext())
                     .setTitle("Unirse")
                     .setMessage("¿Deseas unirte a '${group.name}'?")
-                    .setPositiveButton("Unirse") { _,_ ->
+                    .setPositiveButton("Unirse") { _, _ ->
                         viewModel.joinByCode(group.code)
                     }
                     .setNegativeButton("Cancelar", null)
@@ -101,28 +94,33 @@ class GroupsListFragment : Fragment() {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Salir")
                     .setMessage("¿Deseas salir de '${group.name}'?")
-                    .setPositiveButton("Salir") { _,_ ->
+                    .setPositiveButton("Salir") { _, _ ->
                         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@setPositiveButton
-                        val email = FirebaseAuth.getInstance().currentUser?.email ?: ""
+                        val email = FirebaseAuth.getInstance().currentUser?.email.orEmpty()
                         viewModel.removeMemberFromEntity(group.id, group.type, uid, email)
                     }
                     .setNegativeButton("Cancelar", null)
                     .show()
             },
             onChatClick = { group ->
-                // Navegar al ChatFragment, pasando group.id
                 val action = GroupsListFragmentDirections
-                    .actionGroupsListToChatFragment(group.id) // si quieres pasar nombre
+                    .actionGroupsListToChatFragment(group.id)
                 findNavController().navigate(action)
+            },
+            onRankingClick = { group ->
+                val action = GroupsListFragmentDirections
+                    .actionGroupsListToRankingFragment(group.id)
+                findNavController()
+                    .navigate(
+                        R.id.rankingFragment,
+                        bundleOf("groupId" to group.id)
+                    )
             }
-
         )
 
         binding.recyclerViewGroups.apply {
             adapter = groupsAdapter
             layoutManager = LinearLayoutManager(requireContext())
-
-            // Agregar decoración para separar items
             addItemDecoration(
                 DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
             )
@@ -146,13 +144,10 @@ class GroupsListFragment : Fragment() {
     }
 
     private fun updateFilterChips() {
-        // Resetear todos los chips
         binding.chipAll.isChecked = false
         binding.chipPersonal.isChecked = false
         binding.chipOrganization.isChecked = false
         binding.chipOwned.isChecked = false
-
-        // Marcar el chip activo
         when (currentFilter) {
             GroupFilter.ALL -> binding.chipAll.isChecked = true
             GroupFilter.PERSONAL -> binding.chipPersonal.isChecked = true
@@ -162,12 +157,10 @@ class GroupsListFragment : Fragment() {
     }
 
     private fun updateUI(state: GroupsListState) {
-        // Controlar loading
         binding.swipeRefreshLayout.isRefreshing = state.isLoading
-        binding.progressBar.visibility = if (state.isLoading && state.groups.isEmpty())
-            View.VISIBLE else View.GONE
+        binding.progressBar.visibility =
+            if (state.isLoading && state.groups.isEmpty()) View.VISIBLE else View.GONE
 
-        // Mostrar/ocultar vista vacía
         if (state.groups.isEmpty() && !state.isLoading) {
             binding.layoutEmpty.visibility = View.VISIBLE
             binding.recyclerViewGroups.visibility = View.GONE
@@ -176,52 +169,14 @@ class GroupsListFragment : Fragment() {
             binding.recyclerViewGroups.visibility = View.VISIBLE
         }
 
-        // Actualizar lista
         groupsAdapter.updateGroups(state.groups)
 
-        // Manejar errores
-        state.errorMessage?.let { error ->
-            showErrorToast(error)
+        state.errorMessage?.let {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
             viewModel.clearError()
         }
     }
 
-    private fun showJoinGroupDialog(group: Group) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(if (group.type=="organization") "Unirse a la organización" else "Unirse al grupo")
-            .setMessage("¿Deseas unirte a '${group.name}'?")
-            .setPositiveButton("Unirse") { _, _ ->
-                // Usualmente joinByCode usa el código
-                viewModel.joinByCode(group.code)
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
-    }
-
-    private fun showLeaveGroupDialog(group: Group) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(if (group.type == "organization") "Salir de la organización" else "Salir del grupo")
-            .setMessage("¿Estás seguro de que deseas " +
-                    if (group.type == "organization") "salir de '${group.name}'?"
-                    else "salir del grupo '${group.name}'?")
-            .setPositiveButton("Salir") { _, _ ->
-                val currentUser = FirebaseAuth.getInstance().currentUser
-                if (currentUser == null) {
-                    Toast.makeText(requireContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-                val uid = currentUser.uid
-                val email = currentUser.email ?: ""
-                viewModel.removeMemberFromEntity(
-                    entityId = group.id,
-                    type = group.type,
-                    memberUidToRemove = uid,
-                    memberEmailToRemove = email
-                )
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
-    }
 
     private fun showErrorToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).apply {

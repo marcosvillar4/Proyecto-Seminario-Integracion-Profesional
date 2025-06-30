@@ -51,6 +51,14 @@
             android:id="@+id/action_homeFragment_to_missionsFragment"
             app:destination="@id/missionsFragment" />
 
+        <action
+            android:id="@+id/action_home_to_checkinHistory"
+            app:destination="@id/checkinHistoryFragment" />
+
+        <action
+            android:id="@+id/action_home_to_testHistory"
+            app:destination="@id/testHistoryFragment" />
+
     </fragment>
 
     <!--Grupos principal-->
@@ -255,6 +263,18 @@
         android:label="Test MBI"
         tools:layout="@layout/fragment_test_mbi" />
 
+    <fragment
+        android:id="@+id/checkinHistoryFragment"
+        android:name="tpo.seminario.breakbuddy.ui.checkin.CheckinHistoryFragment"
+        android:label="Historial de Check‑ins"
+        tools:layout="@layout/fragment_checkin_history" />
+
+    <fragment
+        android:id="@+id/testHistoryFragment"
+        android:name="tpo.seminario.breakbuddy.ui.test.TestHistoryFragment"
+        android:label="Historial de Tests MBI"
+        tools:layout="@layout/fragment_test_history" />
+
     <!-- Challenge ruleta -->
     <fragment
         android:id="@+id/challengeFragment"
@@ -288,6 +308,11 @@
             <argument
                 android:name="groupId"
                 app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_groupsList_to_rankingFragment"
+            app:destination="@id/rankingFragment">
+            <argument android:name="groupId" app:argType="string" />
         </action>
     </fragment>
 
@@ -323,6 +348,24 @@
                 app:argType="string" />
         </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="tpo.seminario.breakbuddy.ui.ranking.RankingFragment"
+        android:label="Ranking">
+        <argument
+            android:name="groupId"
+            app:argType="string"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_rankingFragment_to_groupDetailsFragment"
+            app:destination="@id/groupDetailsFragment">
+            <argument
+                android:name="groupId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
 
     <!--Unirse a grupo-->
     <fragment

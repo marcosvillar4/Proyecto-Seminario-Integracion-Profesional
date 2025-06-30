@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentChatBinding
+import tpo.seminario.breakbuddy.util.HobbyActivities
+import tpo.seminario.breakbuddy.util.groups.Group
 import tpo.seminario.breakbuddy.util.groups.messages.ChatMessage
 
 class ChatFragment : Fragment() {
@@ -21,12 +22,12 @@ class ChatFragment : Fragment() {
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
 
-    // Firestore & Auth
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var groupId: String
+    private var groupHobby: String? = null
+    private var groupSize: Int = 0
 
-    // RecyclerView y Adapter
     private lateinit var chatAdapter: ChatAdapter
     private var messagesListener: ListenerRegistration? = null
 
@@ -41,112 +42,147 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1) Recuperar groupId desde argumentos
-        groupId = arguments?.getString("groupId") ?: ""
+        // Recuperar ID del grupo
+        groupId = arguments?.getString("groupId").orEmpty()
         if (groupId.isBlank()) {
             Toast.makeText(requireContext(), "Grupo inválido", Toast.LENGTH_SHORT).show()
             requireActivity().onBackPressed()
             return
         }
 
+        setupToolbar()
+        setupRecyclerView()
+        setupInput()
 
-
-        // 2) Configurar RecyclerView
-        chatAdapter = ChatAdapter(currentUserUid = auth.currentUser?.uid ?: "")
-        binding.recyclerViewChat.apply {
-            layoutManager = LinearLayoutManager(requireContext()).apply {
-                stackFromEnd = true // para que se mantenga en los últimos mensajes
+        // Cargar hobby y tamaño del grupo
+        db.collection("groups").document(groupId)
+            .get()
+            .addOnSuccessListener { snap ->
+                if (snap.exists()) {
+                    val grp = snap.toObject(Group::class.java)!!
+                    groupHobby = grp.hobby
+                    groupSize = grp.memberCount
+                }
             }
-            adapter = chatAdapter
-        }
 
-        // 4) Lógica del botón “Enviar”
-        binding.buttonSend.setOnClickListener {
-            sendMessage()
-        }
-
-        // 5) Habilitar/deshabilitar botón “Enviar” según el texto
-        binding.editTextMessage.addTextChangedListener {
-            binding.buttonSend.isEnabled = it.toString().trim().isNotEmpty()
-        }
-
-        // 3) Comenzar a escuchar nuevos mensajes
         attachMessagesListener()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        // 4) Remover listener real-time al salir
-        messagesListener?.remove()
-        _binding = null
+    private fun setupToolbar() {
+        binding.toolbarChat.menu.clear()            // asegurar que no haya nada previo
+        binding.toolbarChat.inflateMenu(R.menu.chat_toolbar_menu)
+        binding.toolbarChat.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.action_suggest) {
+                suggestActivity()
+                true
+            } else false
+        }
     }
 
-    /**
-     * Enviar un mensaje a Firestore: crea un ChatMessage en
-     * /groups/{groupId}/messages con senderUid= currentUser, timestamp=now.
-     */
+    private fun setupRecyclerView() {
+        chatAdapter = ChatAdapter(currentUserUid = auth.currentUser?.uid.orEmpty())
+        binding.recyclerViewChat.apply {
+            layoutManager = LinearLayoutManager(requireContext()).apply { stackFromEnd = true }
+            adapter = chatAdapter
+        }
+    }
+
+    private fun setupInput() {
+        binding.buttonSend.setOnClickListener { sendMessage() }
+        binding.editTextMessage.addTextChangedListener {
+            binding.buttonSend.isEnabled = it.toString().trim().isNotEmpty()
+        }
+    }
+
+    private fun suggestActivity() {
+        val hobby = groupHobby
+        if (hobby.isNullOrEmpty()) {
+            Toast.makeText(requireContext(),
+                "Este grupo no tiene hobby asignado",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+        val candidates = HobbyActivities.getSuggestionsFor(hobby)
+            .filter { groupSize in it.minParticipants..it.maxParticipants }
+
+        if (candidates.isEmpty()) {
+            Toast.makeText(requireContext(),
+                "No hay sugerencias para $groupSize personas",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+        val choice = candidates.random().description
+        postSystemMessage("¡Actividad sugerida para el grupo: $choice!")
+    }
+
+    private fun postSystemMessage(text: String) {
+        val msgRef = db.collection("groups")
+            .document(groupId)
+            .collection("messages")
+            .document()
+        val msg = ChatMessage(
+            id                = msgRef.id,
+            senderUid         = "SYSTEM",
+            senderDisplayName = "BreakBuddy",
+            text              = text,
+            timestamp         = Timestamp.now(),
+            isSystemMessage   = true
+        )
+        msgRef.set(msg)
+    }
+
     private fun sendMessage() {
         val text = binding.editTextMessage.text.toString().trim()
         if (text.isEmpty()) return
-
         val currentUser = auth.currentUser ?: return
-        val newMsgRef = db.collection("groups")
+        val newRef = db.collection("groups")
             .document(groupId)
             .collection("messages")
-            .document() // documento auto-id
-
+            .document()
         val message = ChatMessage(
-            id                = newMsgRef.id,
+            id                = newRef.id,
             senderUid         = currentUser.uid,
             senderDisplayName = currentUser.displayName ?: currentUser.email.orEmpty(),
             text              = text,
             timestamp         = Timestamp.now(),
             isSystemMessage   = false
         )
-
-        // Guardar en Firestore
-        newMsgRef.set(message)
+        newRef.set(message)
             .addOnSuccessListener {
                 binding.editTextMessage.text?.clear()
-                // Scroll al final
                 binding.recyclerViewChat.scrollToPosition(chatAdapter.itemCount - 1)
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error enviando: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),
+                    "Error enviando: ${e.message}",
+                    Toast.LENGTH_SHORT).show()
             }
     }
 
-    /**
-     * Adjunta un listener en tiempo real a /groups/{groupId}/messages,
-     * ordenado por timestamp ascendente.
-     */
     private fun attachMessagesListener() {
-        val messagesQuery = db.collection("groups")
+        val q = db.collection("groups")
             .document(groupId)
             .collection("messages")
             .orderBy("timestamp", Query.Direction.ASCENDING)
-
-        messagesListener = messagesQuery.addSnapshotListener { snapshots, error ->
-            if (error != null) {
-                Toast.makeText(requireContext(), "Error al leer mensajes: ${error.message}", Toast.LENGTH_SHORT).show()
+        messagesListener = q.addSnapshotListener { snaps, err ->
+            if (err != null) {
+                Toast.makeText(requireContext(),
+                    "Error al leer mensajes: ${err.message}",
+                    Toast.LENGTH_SHORT).show()
                 return@addSnapshotListener
             }
-            if (snapshots != null) {
-                val lista = mutableListOf<ChatMessage>()
-                for (doc in snapshots.documents) {
-                    // Convertir cada doc a ChatMessage
-                    val msg = doc.toObject(ChatMessage::class.java)
-                    if (msg != null) {
-                        // Asegurar que tenga el ID correcto
-                        lista.add(msg.copy(id = doc.id))
-                    }
-                }
-                chatAdapter.submitList(lista)
-                // Mantener scrolleado al final
-                if (lista.isNotEmpty()) {
-                    binding.recyclerViewChat.scrollToPosition(lista.size - 1)
-                }
-            }
+            val list = snaps?.documents
+                ?.mapNotNull { it.toObject(ChatMessage::class.java)?.copy(id = it.id) }
+                .orEmpty()
+            chatAdapter.submitList(list)
+            if (list.isNotEmpty())
+                binding.recyclerViewChat.scrollToPosition(list.size - 1)
         }
+    }
+
+    override fun onDestroyView() {
+        messagesListener?.remove()
+        super.onDestroyView()
+        _binding = null
     }
 }

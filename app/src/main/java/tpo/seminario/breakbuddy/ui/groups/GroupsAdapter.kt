@@ -25,7 +25,8 @@ class GroupsAdapter(
     private val onGroupClick: (Group) -> Unit,
     private val onJoinClick: (Group) -> Unit,
     private val onLeaveClick: (Group) -> Unit,
-    private val onChatClick: (Group) -> Unit
+    private val onChatClick: (Group) -> Unit,
+    private val onRankingClick: (Group) -> Unit
 ) : ListAdapter<Group, GroupsAdapter.GroupViewHolder>(GroupDiffCallback()) {
 
     private var allGroups: List<Group> = emptyList()
@@ -97,17 +98,13 @@ class GroupsAdapter(
                 textGroupCode.text = "Código: ${group.code}"
 
                 // Chat: sólo para grupos personales
-                if (group.type == "personal") {
-                    btnChat.visibility = View.VISIBLE
-                    btnChat.setOnClickListener {
-                        onChatClick(group)
-                    }
-                } else {
-                    // tipo "organization": ocultar o deshabilitar
-                    btnChat.visibility = View.GONE
-                    // opcional: quitar listener
-                    btnChat.setOnClickListener(null)
-                }
+                // Chat button
+                btnChat.visibility = if (group.type == "personal") View.VISIBLE else View.GONE
+                btnChat.setOnClickListener { onChatClick(group) }
+
+                // Ranking button (solo personal)
+                btnRanking.visibility = if (group.type == "personal") View.VISIBLE else View.GONE
+                btnRanking.setOnClickListener { onRankingClick(group) }
 
                 // Hobby (opcional)
                 if (group.hobby != null) {
