@@ -1,6 +1,8 @@
+// functions/src/missionProvider.ts
+
 import {Mision} from "./types";
 
-// Lista maestra de posibles misiones
+// Lista maestra de posibles misiones (sin la propiedad `completada`)
 const ALL_MISIONES: Mision[] = [
   {
     id: "1",
@@ -9,7 +11,6 @@ const ALL_MISIONES: Mision[] = [
     tipo: "GUIADA",
     pasosGuiados: ["Inhalá", "Exhalá", "Inhalá", "Exhalá", "Listo"],
     duracionSegundos: 10,
-    completada: false,
   },
   {
     id: "2",
@@ -18,7 +19,6 @@ const ALL_MISIONES: Mision[] = [
     tipo: "TEMPORIZADOR",
     pasosGuiados: null,
     duracionSegundos: 120,
-    completada: false,
   },
   {
     id: "3",
@@ -27,7 +27,6 @@ const ALL_MISIONES: Mision[] = [
     tipo: "TEMPORIZADOR",
     pasosGuiados: null,
     duracionSegundos: 30,
-    completada: false,
   },
   {
     id: "4",
@@ -36,7 +35,6 @@ const ALL_MISIONES: Mision[] = [
     tipo: "SIMPLE",
     pasosGuiados: null,
     duracionSegundos: 0,
-    completada: false,
   },
   {
     id: "5",
@@ -45,7 +43,6 @@ const ALL_MISIONES: Mision[] = [
     tipo: "TEMPORIZADOR",
     pasosGuiados: null,
     duracionSegundos: 60,
-    completada: false,
   },
   {
     id: "6",
@@ -54,7 +51,6 @@ const ALL_MISIONES: Mision[] = [
     tipo: "TEMPORIZADOR",
     pasosGuiados: null,
     duracionSegundos: 20,
-    completada: false,
   },
   {
     id: "7",
@@ -63,13 +59,23 @@ const ALL_MISIONES: Mision[] = [
     tipo: "SIMPLE",
     pasosGuiados: null,
     duracionSegundos: 0,
-    completada: false,
   },
 ];
 
 export const MisionProvider = {
+  /**
+   * Devuelve 3 misiones aleatorias para el día.
+   */
   obtenerMisionesDelDia(): Mision[] {
-    // Devuelve 3 aleatorias cada día
-    return ALL_MISIONES.sort(() => Math.random() - 0.5).slice(0, 3);
+    return ALL_MISIONES
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+  },
+
+  /**
+   * Busca una misión en la lista maestra por su ID.
+   */
+  findById(id: string): Mision | undefined {
+    return ALL_MISIONES.find((m) => m.id === id);
   },
 };

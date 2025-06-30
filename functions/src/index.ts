@@ -129,34 +129,117 @@ export const completeChallenge = functions.https.onCall(async (data, context) =>
 });
 
 
-// Función para generar misiones diarias
-export const generateDailyMissions = functions.https.onCall(
-  async (_data: any, context) => {
-    if (!context.auth) {
-      throw new functions.https.HttpsError("unauthenticated", "Usuario no autenticado");
-    }
-    const uid = context.auth.uid;
-    const userRef = db.collection("userProfiles").doc(uid);
+interface DailyMissionsRecord {
+  missionIds: string[];
+  completedToday: Record<string, boolean>;
+  generatedAt: number;
+}
 
-    return await db.runTransaction(async (tx) => {
+/**
+ * Genera o devuelve las micro‑misiones de hoy.
+ * Siempre devuelve { missions: Mision[], completed: Record<string,boolean> }.
+ */
+export const generateDailyMissions = functions.https.onCall(async (_data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("unauthenticated", "Usuario no autenticado");
+  }
+  const uid = context.auth.uid!;
+  const userRef = db.collection("userProfiles").doc(uid);
+
+  try {
+    const txResult = await db.runTransaction<{ missions: Mision[]; completed: Record<string, boolean> }>(async (tx) => {
       const snap = await tx.get(userRef);
       const now = Date.now();
       const DAY_MS = 24 * 60 * 60 * 1000;
 
-      const existing = snap.get("dailyMissions") as Mision[] | undefined;
-      if (existing && (snap.get("lastMissionsDay") as number) + DAY_MS > now) {
-        return {missions: existing};
+      const weekly: DailyMissionsRecord[] = (snap.get("weeklyMissions") as any[] || []);
+      // ¿Ya hay generación hoy?
+      if (weekly.length > 0 && now - weekly[weekly.length - 1].generatedAt < DAY_MS) {
+        const today = weekly[weekly.length - 1];
+        const full = today.missionIds.map((id) => {
+          const m = MisionProvider.findById(id);
+          if (!m) throw new Error(`Misión no encontrada: ${id}`);
+          return {...m};
+        });
+        return {missions: full, completed: today.completedToday};
       }
 
+      // Generar nuevas 3
       const nuevas = MisionProvider.obtenerMisionesDelDia();
-      tx.set(
-        userRef,
-        {dailyMissions: nuevas, lastMissionsDay: now},
-        {merge: true}
-      );
+      const ids = nuevas.map((m) => m.id);
+      const compMap: Record<string, boolean> = {};
+      ids.forEach((i) => compMap[i] = false);
 
-      return {missions: nuevas};
+      const newRec: DailyMissionsRecord = {
+        missionIds: ids,
+        completedToday: compMap,
+        generatedAt: now,
+      };
+      const updated = [...weekly, newRec];
+      if (updated.length > 7) updated.splice(0, updated.length - 7);
+
+      tx.set(userRef, {
+        weeklyMissions: updated,
+        dailyMissionIds: ids,
+        completed: compMap,
+        lastMissionsDay: now,
+      }, {merge: true});
+
+      return {missions: nuevas, completed: compMap};
     });
-  }
-);
 
+    // Devuelve siempre algo, nunca undefined
+    return {
+      missions: txResult.missions || [],
+      completed: txResult.completed || {},
+    };
+  } catch (e: any) {
+    console.error("generateDailyMissions fallo:", e);
+    // En caso de error devolvemos arrays vacíos
+    return {missions: [], completed: {}};
+  }
+});
+
+/**
+ * Marca una micro‑misión de hoy como completada.
+ */
+export const completeDailyMission = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("unauthenticated", "Usuario no autenticado");
+  }
+  const missionId = data.missionId as string;
+  if (!missionId) {
+    throw new functions.https.HttpsError("invalid-argument", "missionId requerido");
+  }
+  const uid = context.auth.uid!;
+  const userRef = db.collection("userProfiles").doc(uid);
+
+  try {
+    await db.runTransaction(async (tx) => {
+      const snap = await tx.get(userRef);
+      if (!snap.exists) throw new functions.https.HttpsError("not-found", "Perfil no existe");
+
+      const weekly: DailyMissionsRecord[] = (snap.get("weeklyMissions") as any[] || []);
+      if (weekly.length === 0) throw new functions.https.HttpsError("failed-precondition", "No hay micro‑misiones");
+
+      const today = weekly[weekly.length - 1];
+      if (!(missionId in today.completedToday)) {
+        throw new functions.https.HttpsError("invalid-argument", "missionId inválida hoy");
+      }
+
+      today.completedToday[missionId] = true;
+      const updated = [...weekly];
+      updated[updated.length - 1] = today;
+
+      tx.update(userRef, {
+        weeklyMissions: updated,
+        completed: today.completedToday,
+      });
+    });
+
+    return {success: true};
+  } catch (e: any) {
+    console.error("completeDailyMission fallo:", e);
+    throw new functions.https.HttpsError("internal", "Error completando micro‑misión");
+  }
+});

@@ -34,6 +34,9 @@ module.exports = {
     "import/no-unresolved": 0,
     "indent": ["error", 2],
 
+    "valid-jsdoc": 0,
+    "require-jsdoc": 0,
+
     "no-irregular-whitespace": 0,
   },
 };

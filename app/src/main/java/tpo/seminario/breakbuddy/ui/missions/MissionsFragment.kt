@@ -10,28 +10,21 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.functions.FirebaseFunctionsException
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentMissionsBinding
 import tpo.seminario.breakbuddy.util.missions.Mision
 import tpo.seminario.breakbuddy.util.missions.TipoMision
-
 class MissionsFragment : Fragment() {
-
     private var _binding: FragmentMissionsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var misionesHoy: MutableList<Mision>
+    private var misionesHoy = listOf<Mision>()
+    private var completedMap = mapOf<String, Boolean>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMissionsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, c: ViewGroup?, s: Bundle?) =
+        FragmentMissionsBinding.inflate(inflater, c, false).also { _binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,42 +32,74 @@ class MissionsFragment : Fragment() {
     }
 
     private fun fetchDailyMissions() {
-        FirebaseFunctions.getInstance()
+        FirebaseFunctions
+            .getInstance()
             .getHttpsCallable("generateDailyMissions")
             .call()
             .addOnSuccessListener { hr ->
-                @Suppress("UNCHECKED_CAST")
-                val data = hr.data as Map<String,Any>
-                val list = (data["missions"] as List<Map<String,Any>>).map { m ->
-                    Mision(
-                        id             = m["id"] as String,
-                        titulo         = m["titulo"] as String,
-                        descripcion    = m["descripcion"] as String,
-                        tipo           = TipoMision.valueOf(m["tipo"] as String),
-                        duracionSegundos = (m["duracionSegundos"] as Number).toInt(),
-                        pasosGuiados   = (m["pasosGuiados"] as? List<String>),
-                        completada     = m["completada"] as Boolean
-                    )
+                val data = hr.data as? Map<*, *>
+                if (data == null) {
+                    Toast.makeText(requireContext(), "Respuesta nula del servidor", Toast.LENGTH_LONG).show()
+                    return@addOnSuccessListener
                 }
-                misionesHoy = list.toMutableList()
-                mostrarMisiones(misionesHoy)
+
+                // 1) Misiones
+                val rawMissions = data["missions"]
+                if (rawMissions !is List<*>) {
+                    Toast.makeText(requireContext(), "Formato inesperado en missions", Toast.LENGTH_LONG).show()
+                    return@addOnSuccessListener
+                }
+                @Suppress("UNCHECKED_CAST")
+                misionesHoy = rawMissions.mapNotNull { item ->
+                    (item as? Map<String,Any>)?.let { m ->
+                        Mision(
+                            id              = m["id"] as? String ?: return@let null,
+                            titulo          = m["titulo"] as? String ?: "",
+                            descripcion     = m["descripcion"] as? String ?: "",
+                            tipo            = TipoMision.valueOf(m["tipo"] as? String ?: "SIMPLE"),
+                            duracionSegundos= (m["duracionSegundos"] as? Number)?.toInt() ?: 0,
+                            pasosGuiados    = (m["pasosGuiados"] as? List<String>) ?: emptyList()
+                        )
+                    }
+                }
+
+                // 2) Completed
+                val rawComp = data["completed"]
+                completedMap = if (rawComp is Map<*,*>) {
+                    rawComp.entries.filter {
+                        it.key is String && it.value is Boolean
+                    }.associate { it.key as String to it.value as Boolean }
+                } else {
+                    emptyMap()
+                }
+
+                mostrarMisiones()
             }
-            .addOnFailureListener { e -> /* … */ }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
+            }
     }
-    private fun mostrarMisiones(misiones: List<Mision>) {
+
+    private fun mostrarMisiones() {
         binding.layoutMisiones.removeAllViews()
-        misiones.forEachIndexed { idx, m ->
+        if (misionesHoy.isEmpty()) {
+            Toast.makeText(requireContext(), "No hay micro‑misiones hoy", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        misionesHoy.forEach { m ->
             val card = layoutInflater.inflate(R.layout.item_mision, binding.layoutMisiones, false)
             card.findViewById<TextView>(R.id.tvTitulo).text = m.titulo
             card.findViewById<TextView>(R.id.tvDescripcion).text = m.descripcion
             val btn = card.findViewById<Button>(R.id.btnCompletar)
-            btn.isEnabled = !m.completada
 
-            // <-- Aquí abrimos el diálogo:
+            // Inhabilita si ya completada
+            val done = completedMap[m.id] == true
+            btn.isEnabled = !done
+
             btn.setOnClickListener {
                 MissionDialogFragment(m) {
-                    // callback: sólo se ejecuta cuando el user pulsa “Listo” en el diálogo
-                    markMissionCompleted(idx)
+                    completeTodayMission(m.id)
                 }.show(childFragmentManager, "MissionDialog")
             }
 
@@ -82,33 +107,19 @@ class MissionsFragment : Fragment() {
         }
     }
 
-    private fun markMissionCompleted(index: Int) {
-        misionesHoy[index].completada = true
-        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-
-        FirebaseFirestore.getInstance()
-            .collection("userProfiles").document(uid)
-            .update("dailyMissions", misionesHoy)
+    private fun completeTodayMission(missionId: String) {
+        FirebaseFunctions
+            .getInstance()
+            .getHttpsCallable("completeDailyMission")
+            .call(mapOf("missionId" to missionId))
             .addOnSuccessListener {
-                // refresca la UI
-                mostrarMisiones(misionesHoy)
+                // Marcamos y refrescamos
+                completedMap = completedMap.toMutableMap().also { it[missionId] = true }
+                mostrarMisiones()
             }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error guardando misión", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun completeMission(index: Int, currentList: MutableList<Mision>) {
-        currentList[index].completada = true
-        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        // Protegemos el binding antes de actualizar la UI tras guardar
-        FirebaseFirestore.getInstance()
-            .collection("userProfiles").document(uid)
-            .update("dailyMissions", currentList)
-            .addOnSuccessListener {
-                _binding?.let {
-                    mostrarMisiones(currentList)
-                }
+            .addOnFailureListener { e ->
+                val msg = (e as? FirebaseFunctionsException)?.details?.toString() ?: e.message
+                Toast.makeText(requireContext(), "Error: $msg", Toast.LENGTH_LONG).show()
             }
     }
 

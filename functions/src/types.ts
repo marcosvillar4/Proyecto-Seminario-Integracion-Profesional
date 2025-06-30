@@ -1,5 +1,4 @@
-// interfaces de datos compartidos por tus funciones
-
+// functions/src/types.ts
 export interface Mision {
   id: string;
   titulo: string;
@@ -7,5 +6,11 @@ export interface Mision {
   tipo: "TEMPORIZADOR" | "GUIADA" | "SIMPLE";
   duracionSegundos: number;
   pasosGuiados: string[] | null;
-  completada: boolean;
+}
+
+// Guarda sólo IDs + estado completado:
+export interface DailyMissionsRecord {
+  missionIds: string[];
+  completedToday: Record<string, boolean>;
+  generatedAt: number;
 }
