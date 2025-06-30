@@ -8,6 +8,19 @@ Videojuegos / Juegos de mesa / Modelismo / Hacer ejercicio / Trekking / Skate / 
 Lepidopterologia /
 */
 
+/*TODAVIA FALTAN: "Manualidades", "Creación de contenido",
+        "Andar en bicicleta",  "Armar rompecabezas", ,
+        "Escribir", "Bloggear", "Programar", "Diseño gráfico",
+        "Correr", , "Ajedrez", ,
+        "Voluntariado", "Restaurar muebles","Basket", "Volley", "Golf"
+	,"Bordado","Crucigramas",,"Origami",
+        , "Dibujo","Coleccionismo","Adiestramiento de animales",,
+        ,"Ilusionismo","Crochet","Pilates","Dardos","Tarot",,
+        "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
+        "Peluqueria","Decoracion de interiores","Damas", Rummy Burako",
+        "Bonsai","Prensado de flores","Sudoku","Sopa de letras","Bingo"*/
+
+
 object HobbyQuestionsProvider{
     val hobbyQuizzes: Map<String, List<QuizQuestion>> = mapOf(
         "Basket" to listOf(
