@@ -4503,8 +4503,209 @@ object HobbyQuestionsProvider{
                 question = "¿Qué lenguaje usa la extensión '.js'?",
                 options = listOf("Java", "JSON", "Jupyter", "JavaScript"),
                 correctIndex = 3
+            ),
+            QuizQuestion(question = "¿Qué significa la sigla HTML?",
+            options = listOf("HyperText Markup Language", "Hyper Transfer Machine Language", "Home Tool Markup Language", "Hyperlink and Text Management Language"),
+            correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos lenguajes es de tipado dinámico?",
+                options = listOf("Java", "C#", "Python", "C++"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un bucle infinito?",
+                options = listOf("Un error en HTML", "Un ciclo que nunca termina", "Un tipo de variable", "Una función de una sola línea"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Para qué se usa Git?",
+                options = listOf("Crear gráficos", "Controlar versiones de código", "Editar bases de datos", "Compilar programas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué estructura permite repetir instrucciones múltiples veces?",
+                options = listOf("Condicional", "Loop", "Función", "Constante"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una función?",
+                options = listOf("Un bucle", "Un conjunto de instrucciones agrupadas", "Un error del sistema", "Un valor constante"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos es un lenguaje de programación funcional?",
+                options = listOf("Haskell", "C", "SQL", "CSS"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una variable?",
+                options = listOf("Un bucle", "Una constante", "Un espacio para almacenar datos", "Un tipo de error"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito de un compilador?",
+                options = listOf("Traducir código fuente a código máquina", "Corregir errores automáticamente", "Escribir documentación", "Diseñar interfaces"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué operador se usa para comparar igualdad en la mayoría de lenguajes?",
+                options = listOf("=", "==", "!=", "++"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un bug?",
+                options = listOf("Un tipo de hardware", "Una falla en el código", "Una nueva versión", "Una función especial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un bug?",
+                options = listOf("Un tipo de hardware", "Una falla en el código", "Una nueva versión", "Una función especial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un IDE?",
+                options = listOf("Un lenguaje de programación", "Un compilador", "Un entorno de desarrollo integrado", "Un tipo de error"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa la extensión '.py'?",
+                options = listOf("Python", "Perl", "PHP", "Pascal"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué comando se usa para clonar un repositorio en Git?",
+                options = listOf("git init", "git clone", "git fork", "git pull"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa comúnmente para manejar dependencias en proyectos Java?",
+                options = listOf("Composer", "NPM", "Gradle", "Yarn"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una API?",
+                options = listOf("Un lenguaje de programación", "Una base de datos", "Una interfaz de programación de aplicaciones", "Un compilador"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de dato usarías para representar una letra?",
+                options = listOf("Booleano", "String", "Char", "Int"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa depurar un programa?",
+                options = listOf("Eliminar partes del código", "Ejecutarlo", "Buscar y corregir errores", "Compilarlo manualmente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué simboliza `!=` en muchos lenguajes?",
+                options = listOf("Asignación", "Igualdad", "Desigualdad", "Comparación estricta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué hace un backend developer?",
+                options = listOf("Diseña la interfaz", "Escribe código del lado del servidor", "Diseña logos", "Edita videos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa SQL?",
+                options = listOf("Simple Query List", "Structured Query Language", "System Quick Logic", "Sequential Question Language"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas bases de datos es relacional?",
+                options = listOf("MongoDB", "Redis", "MySQL", "Neo4j"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una condición if?",
+                options = listOf("Una constante", "Un bucle", "Una estructura de decisión", "Un comentario"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué operador lógico representa la conjunción (Y)?",
+                options = listOf("&&", "||", "!", "=="),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un commit en Git?",
+                options = listOf("Una fusión", "Un error", "Un guardado de cambios", "Una reversión"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje es conocido por su uso en ciencia de datos?",
+                options = listOf("Ruby", "Python", "Swift", "Assembly"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos no es un lenguaje compilado?",
+                options = listOf("C++", "Go", "Python", "Rust"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué hace una función recursiva?",
+                options = listOf("Se ejecuta en bucle externo", "Llama a otra función", "Se llama a sí misma", "Es parte de una clase abstracta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un breakpoint?",
+                options = listOf("Un tipo de error", "Una interrupción para debug", "Una función especial", "Una condición de bucle"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función de un front-end developer?",
+                options = listOf("Diseñar la lógica del servidor", "Diseñar interfaces de usuario", "Optimizar servidores", "Configurar bases de datos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué comando Git crea una nueva rama?",
+                options = listOf("git commit", "git merge", "git branch", "git init"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué librería se usa comúnmente con React?",
+                options = listOf("NumPy", "Express", "Redux", "Django"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un booleano?",
+                options = listOf("Número decimal", "Cadena de texto", "Tipo de dato que representa verdadero o falso", "Tipo de bucle"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa la extensión '.js'?",
+                options = listOf("Java Symbol", "JavaScript", "JQuery Style", "JSON Script"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hace una API REST?",
+                options = listOf("Conecta hardware", "Permite comunicación entre sistemas a través de HTTP", "Genera HTML dinámico", "Controla acceso a puertos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un error de sintaxis?",
+                options = listOf("Falla en la lógica", "Falla en la conexión", "Falla por mal uso de lenguaje", "Falla del compilador"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa DRY en programación?",
+                options = listOf("Don’t Repeat Yourself", "Debug and Run Yourself", "Develop Rapidly Yes", "Dynamic Runtime Yield"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué lenguaje usa llaves `{}` para bloques de código?",
+                options = listOf("Python", "Ruby", "Java", "Lua"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa refactorizar código?",
+                options = listOf("Eliminar funciones", "Cambiar nombres de variables", "Modificar estructura sin cambiar funcionalidad", "Comprimir el archivo"),
+                correctIndex = 2
             )
         ),
+
+
 
 
 
@@ -5098,6 +5299,106 @@ object HobbyQuestionsProvider{
                 question = "¿Qué campeona mundial femenina mantuvo el título 16 años?",
                 options = listOf("Judit Polgar", "Maia Chiburdanidze", "Hou Yifan", "Nona Gaprindashvili"),
                 correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuántas casillas tiene un tablero de ajedrez?",
+                options = listOf("64", "72", "81", "100"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cómo se mueve el alfil?",
+                options = listOf("En línea recta", "En L", "Diagonal", "Una casilla en cualquier dirección"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza puede realizar el enroque junto al rey?",
+                options = listOf("Peón", "Reina", "Alfil", "Torre"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la única pieza que puede saltar sobre otras?",
+                options = listOf("Reina", "Caballo", "Alfil", "Torre"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa jaque mate?",
+                options = listOf("Empate", "Rey no puede escapar al ataque", "Cambio de turno", "Captura de reina"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza comienza en d1 para blancas?",
+                options = listOf("Reina", "Rey", "Torre", "Alfil"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si un peón llega al final del tablero?",
+                options = listOf("Gana la partida", "Captura automáticamente", "Se promociona", "Se convierte en rey"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuántas piezas mayores hay al inicio por jugador?",
+                options = listOf("2", "3", "4", "5"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Quién fue campeón mundial desde 1985 hasta 2000?",
+                options = listOf("Fischer", "Karpov", "Kasparov", "Carlsen"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué apertura comienza con e4 e5 Cf3 Cc6?",
+                options = listOf("Defensa francesa", "Apertura italiana", "Gambito de dama", "Defensa siciliana"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué valor tiene usualmente una torre?",
+                options = listOf("3", "5", "9", "1"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera una táctica?",
+                options = listOf("Plan a largo plazo", "Maniobra inmediata para obtener ventaja", "Control del centro", "Enroque"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el enroque?",
+                options = listOf("Cambio de reina", "Intercambio de torres", "Movimiento especial del rey y torre", "Empate técnico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador popularizó la defensa Petrov?",
+                options = listOf("Kramnik", "Petrosian", "Petrov", "Alekhine"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el Elo en ajedrez?",
+                options = listOf("Edad", "Nacionalidad", "Fuerza de juego", "Tiempo restante"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si se repite una posición 3 veces?",
+                options = listOf("Victoria blanca", "Victoria negra", "Empate", "Cambio de colores"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un zugzwang?",
+                options = listOf("Empate", "Peón pasado", "Situación en la que mover empeora", "Ataque doble"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo del medio juego?",
+                options = listOf("Capturar peones", "Intercambiar piezas", "Atacar al rey", "Desarrollar aperturas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador argentino fue campeón mundial en 1927?",
+                options = listOf("Najdorf", "Panno", "Fischer", "Capablanca"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si ambos reyes están en jaque?",
+                options = listOf("Es legal", "No puede ocurrir", "Se repite la jugada", "Mate doble"),
+                correctIndex = 1
             )
         ),
 
@@ -7433,6 +7734,626 @@ object HobbyQuestionsProvider{
                 options = listOf("Noctuidae","Brassolidae", "Sphingidae", "Pieridae"),
                 correctIndex = 1
             )
+        ),
+
+        //************************************************************************************************************************
+
+        "Escribir" to listOf(
+            QuizQuestion(
+                question = "¿Qué se entiende por narrador omnisciente?",
+                options = listOf("Que sabe todo lo que ocurre", "Que narra en primera persona", "Que participa en la historia", "Que solo describe acciones"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos géneros pertenece a la escritura creativa?",
+                options = listOf("Cuento", "Informe técnico", "Manual de usuario", "Carta formal"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué figura literaria compara dos elementos usando 'como'?",
+                options = listOf("Metáfora", "Personificación", "Símil", "Hipérbole"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un personaje plano?",
+                options = listOf("Tiene evolución compleja", "Es cambiante", "Es simple y no evoluciona", "Rompe la cuarta pared"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de una historia presenta el conflicto principal?",
+                options = listOf("Introducción", "Nudo", "Desenlace", "Epílogo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de narrador usa el 'yo' para contar la historia?",
+                options = listOf("Omnisciente", "Testigo", "Protagonista", "Editorial"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito de un borrador al escribir?",
+                options = listOf("Publicarlo directamente", "Organizar y desarrollar ideas", "Eliminar ideas", "Usarlo como resumen"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'show, don't tell' en escritura?",
+                options = listOf("Decir lo que pasa claramente", "Mostrar con acciones en vez de explicar", "Usar adjetivos siempre", "Evitar el diálogo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el antónimo de escritura persuasiva?",
+                options = listOf("Narrativa", "Informativa", "Argumentativa", "Crítica"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se revisa en una corrección de estilo?",
+                options = listOf("Ortografía solamente", "Contenido factual", "Fluidez, tono y coherencia", "Diseño visual"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un ensayo?",
+                options = listOf("Texto en verso", "Narración corta", "Reflexión argumentativa", "Resumen biográfico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de texto intenta convencer al lector?",
+                options = listOf("Narrativo", "Expositivo", "Argumentativo", "Lírico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del texto expresa la idea principal?",
+                options = listOf("Conclusión", "Introducción", "Tesis", "Desarrollo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una sinestesia?",
+                options = listOf("Contradicción poética", "Unión de sentidos diferentes", "Exageración extrema", "Rima interna"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un diálogo en narrativa?",
+                options = listOf("Decorar el texto", "Dar ritmo", "Mostrar acciones", "Revelar carácter y avanzar la trama"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'voz narrativa'?",
+                options = listOf("Volumen del texto", "Tono de los personajes", "Perspectiva del narrador", "Lenguaje figurado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una anáfora?",
+                options = listOf("Repetición al principio de frases", "Oposición de ideas", "Enumeración caótica", "Rima inesperada"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una crónica?",
+                options = listOf("Relato ordenado de hechos reales", "Cuento fantástico", "Opinión breve", "Artículo técnico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué recurso estilístico hay en 'el silencio gritaba'?",
+                options = listOf("Hipérbole", "Paradoja", "Personificación", "Ironía"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del cuento resuelve el conflicto?",
+                options = listOf("Clímax", "Desenlace", "Nudo", "Giro argumental"),
+                correctIndex = 1
+            )
+        ),
+        //************************************************************************************************************************
+
+        "Dibujo" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el claroscuro en dibujo?",
+                options = listOf("Técnica de color digital", "Contraste entre luces y sombras", "Dibujo con tinta blanca", "Técnica de escultura"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos elementos define la perspectiva?",
+                options = listOf("Sombras", "Líneas de fuga", "Textura", "Volumen"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se utiliza para difuminar grafito?",
+                options = listOf("Lápiz rojo", "Difumino", "Regla", "Compás"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa la línea de horizonte en perspectiva?",
+                options = listOf("La base del dibujo", "El límite del cielo", "La altura del ojo del observador", "El final del papel"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'boceto'?",
+                options = listOf("Dibujo terminado", "Versión en tinta", "Esbozo inicial", "Retrato realista"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de lápiz deja una línea más oscura?",
+                options = listOf("H", "HB", "2H", "6B"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de plano se usa para dibujar rostros realistas?",
+                options = listOf("Perspectiva aérea", "Plano técnico", "Proporciones faciales", "Escala de grises"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se entiende por 'valor tonal' en dibujo?",
+                options = listOf("Uso de la línea", "Brillo y sombra de un color", "Color exacto", "Grosor del trazo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de la cara se encuentra a mitad del cráneo en proporciones clásicas?",
+                options = listOf("Boca", "Ojos", "Nariz", "Mentón"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica usa puntos para crear sombras?",
+                options = listOf("Rayado cruzado", "Sfumato", "Punteado", "Esgrafiado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la forma básica del cuerpo humano en dibujo académico?",
+                options = listOf("Cubo", "Esfera", "Figura de palitos", "Bloques geométricos"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué artista es conocido por su manejo del dibujo anatómico?",
+                options = listOf("Leonardo da Vinci", "Van Gogh", "Monet", "Dalí"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué papel es más adecuado para acuarela?",
+                options = listOf("Opalina", "Papel manteca", "Papel de alto gramaje", "Papel cebolla"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento da profundidad en un dibujo?",
+                options = listOf("Color primario", "Sombra", "Perspectiva", "Contorno fuerte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta NO se usa normalmente en dibujo tradicional?",
+                options = listOf("Difumino", "Lápiz", "Tablet", "Regla"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca con los ejercicios de línea continua?",
+                options = listOf("Crear sombras", "Ganar confianza y fluidez", "Aumentar el contraste", "Definir volumen"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra con la técnica de rayado cruzado?",
+                options = listOf("Color", "Volumen y sombra", "Proporción", "Composición"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una silueta?",
+                options = listOf("Forma interior", "Luz secundaria", "Contorno sólido sin detalles", "Boceto a color"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa dibujar del natural?",
+                options = listOf("Inventar figuras", "Dibujar desde fotografía", "Copiar de otro dibujo", "Observar y dibujar desde la realidad"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos no es un principio del dibujo académico?",
+                options = listOf("Perspectiva", "Proporción", "Expresión emocional", "Sombra y luz"),
+                correctIndex = 2
+            )
+        ),
+        //************************************************************************************************************************
+
+        "Crochet" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el crochet?",
+                options = listOf("Técnica para coser botones", "Técnica textil con una aguja", "Tipo de bordado", "Tipo de telar industrial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta principal se utiliza en el crochet?",
+                options = listOf("Aguja recta", "Aguja de gancho", "Tijera", "Dedal"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de hilo es más usado en crochet?",
+                options = listOf("Hilo de pescar", "Cuerda de yute", "Algodón", "Nylon grueso"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un patrón en crochet?",
+                options = listOf("Un tipo de hilo", "Una guía escrita de cómo tejer", "Una técnica de cosido", "Una aguja especial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'amigurumi'?",
+                options = listOf("Una bufanda tejida", "Una técnica japonesa de muñecos tejidos", "Un tipo de punto", "Un hilo grueso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se necesita para empezar a tejer crochet?",
+                options = listOf("Hilo, aguja de gancho y patrón", "Agujas rectas y lana", "Telar y gancho", "Máquina de coser"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué punto básico crea una base firme y densa?",
+                options = listOf("Punto alto", "Punto enano", "Punto cadena", "Punto bajo"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué se forma con el 'círculo mágico' en crochet?",
+                options = listOf("Un patrón decorativo", "El inicio de tejidos circulares", "Una puntada final", "Una forma rectangular"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Para qué sirve el marcador de puntos?",
+                options = listOf("Marcar el inicio o final de una vuelta", "Contar cuántos hilos hay", "Sujetar el hilo", "Cortar el hilo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué punto es ideal para tejer bufandas sueltas?",
+                options = listOf("Punto bajo", "Punto alto", "Punto enano", "Punto cruzado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de gancho se recomienda para principiantes?",
+                options = listOf("Gancho muy pequeño", "Gancho grande (5mm o más)", "Gancho de acero", "Gancho doble"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si apretás demasiado los puntos?",
+                options = listOf("El tejido queda flojo", "No afecta nada", "Es más fácil tejer", "El tejido se pone rígido y difícil de trabajar"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del hilo debe estar tensa al tejer?",
+                options = listOf("La cola", "La hebra de trabajo", "El centro", "Ninguna"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'bloqueo' en crochet?",
+                options = listOf("Repetir una vuelta", "Planchar y dar forma al tejido final", "Cortar un error", "Unir dos piezas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica permite cambiar de color prolijamente?",
+                options = listOf("Anudar", "Esconder hilos", "Cambiar hilo antes del último paso del punto", "Cortar y empezar de nuevo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'tejer en espiral'?",
+                options = listOf("Tejer en vueltas sin cerrar", "Tejer con forma de zigzag", "Tejer en líneas rectas", "Tejer con hilo torcido"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el punto cadena?",
+                options = listOf("Punto decorativo", "El punto de inicio para muchas labores", "Un error común", "Un punto para finalizar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función de una aguja lanera?",
+                options = listOf("Tejer puntos pequeños", "Coser piezas tejidas y esconder hilos", "Tejer bufandas", "Cortar hilos gruesos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'tejido a crochet' en inglés?",
+                options = listOf("Knitting", "Crochet", "Sewing", "Spinning"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del gancho se usa para tomar el hilo?",
+                options = listOf("La cabeza", "El mango", "El eje", "La base"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre si el gancho es demasiado pequeño para el hilo?",
+                options = listOf("El tejido queda flojo", "El tejido es imposible", "El tejido queda apretado y rígido", "No afecta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'tejer en redondo'?",
+                options = listOf("Tejer en vueltas cerradas", "Tejer con hilo rojo", "Tejer con dos agujas", "Tejer sin patrón"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Para qué sirve la tensión en el tejido?",
+                options = listOf("Para cortar el hilo", "Para determinar el tamaño final del proyecto", "Para cambiar el color", "Para hacer puntos más rápido"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué punto se usa comúnmente para unir piezas?",
+                options = listOf("Punto alto", "Punto cangrejo", "Punto deslizado", "Punto redondo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un gráfico de crochet?",
+                options = listOf("Una imagen decorativa", "Un dibujo técnico del patrón", "Una foto del producto terminado", "Una medida del hilo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'punto popcorn'?",
+                options = listOf("Un punto básico", "Un punto que crea textura tridimensional", "Una forma de cerrar el tejido", "Un hilo especial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hilo es ideal para hacer amigurumis?",
+                options = listOf("Hilo elástico", "Hilo de algodón", "Hilo de seda", "Hilo peludo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'aumentar puntos'?",
+                options = listOf("Reducir el tamaño del tejido", "Agregar puntos adicionales en una fila", "Terminar el proyecto", "Volver a empezar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'punto relieve'?",
+                options = listOf("Un error común", "Un punto tejido por delante o por detrás del punto base para generar textura", "Un punto de inicio", "Una forma de cortar el hilo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica se usa para hacer flores en crochet?",
+                options = listOf("Punto cangrejo", "Tejido circular con aumentos", "Punto escondido", "Técnica plana"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si cambiás el tipo de hilo respecto al patrón original?",
+                options = listOf("El color cambia", "El tamaño del proyecto puede variar", "No se puede tejer", "Se rompe el hilo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'punto puff'?",
+                options = listOf("Un error", "Un punto decorativo con varias lazadas", "Un punto deslizado", "Un remate"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué punto se suele usar para terminar un proyecto?",
+                options = listOf("Punto cadena", "Punto bajo", "Punto deslizado", "Punto en espiral"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'tensión de muestra'?",
+                options = listOf("La velocidad de tejido", "La cantidad de puntos y filas en una muestra de 10x10 cm", "El tiempo que toma terminar una prenda", "La temperatura del ambiente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué gancho es ideal para hilos finos?",
+                options = listOf("De 10 mm", "De 6 mm", "De 2.5 mm o menos", "De madera gruesa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué punto es más cerrado?",
+                options = listOf("Punto alto", "Punto bajo", "Punto cadena", "Punto triple"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer antes de empezar un proyecto nuevo?",
+                options = listOf("Lavar el hilo", "Tejer una muestra de tensión", "Cortar los hilos sobrantes", "Unir los extremos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es 'rematar' en crochet?",
+                options = listOf("Repetir una vuelta", "Cerrar el tejido de forma prolija", "Coser con hilo de otro color", "Cambiar el patrón"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué símbolo representa normalmente un punto bajo en gráficos?",
+                options = listOf("X", "O", "-", "*"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'patrón gratuito'?",
+                options = listOf("Una técnica especial", "Un patrón que no tiene costo y está disponible online", "Un patrón sin instrucciones", "Una variante improvisada"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Dardos" to listOf(
+            QuizQuestion(
+                question = "¿A qué distancia estándar se lanza un dardo en competencias oficiales?",
+                options = listOf("1 metro", "2.37 metros", "3 metros", "4.5 metros"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el puntaje más alto que se puede obtener con un solo dardo?",
+                options = listOf("60", "50", "40", "100"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del tablero vale 50 puntos?",
+                options = listOf("Doble 25", "Borde exterior", "Bullseye", "Triple 20"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el número más alto en el tablero de dardos?",
+                options = listOf("20", "25", "50", "100"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el área 'doble' en el tablero?",
+                options = listOf("Multiplica por tres", "Puntaje doble", "Pierde puntos", "Es una zona de penalización"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si un dardo cae antes de contarse?",
+                options = listOf("Cuenta como cero", "Se repite el tiro", "Se suma igual", "Pierde el turno"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué material es común para las puntas de los dardos electrónicos?",
+                options = listOf("Acero", "Plástico", "Aluminio", "Madera"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el nombre del tiro que cierra una partida exactamente?",
+                options = listOf("Cierre", "Finisher", "Checkout", "Game shot"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuántos dardos se lanzan por turno en una partida estándar?",
+                options = listOf("1", "2", "3", "5"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué sección del tablero puntúa el triple de su valor?",
+                options = listOf("El anillo exterior", "El anillo interior delgado", "El bullseye", "La zona negra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera un '180' en dardos?",
+                options = listOf("Tres dardos en triple 20", "Un dardo en bullseye", "Una partida ganada", "Puntaje mínimo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del tablero es el 'bullseye'?",
+                options = listOf("El anillo externo", "Centro rojo", "Anillo triple", "Zona superior"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'Bust' en una partida?",
+                options = listOf("Empatar", "Superar el puntaje requerido y anular el turno", "Perder automáticamente", "Fallar un lanzamiento"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de un dardo se agarra al lanzarlo?",
+                options = listOf("Punta", "Caña", "Vástago", "Cuerpo o barril"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué se necesita para ganar una partida de 501?",
+                options = listOf("Llegar a 500", "Terminar en cero con un doble", "Llegar a 1", "Lanzar 3 dardos seguidos al bullseye"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica un tablero con sectores numerados de 1 al 20?",
+                options = listOf("Partida rápida", "Tablero oficial", "Tablero de práctica", "Juego infantil"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de dardos se usan con tableros de cerdas?",
+                options = listOf("De plástico", "Magnéticos", "Con punta de acero", "Con velcro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si un dardo rebota del tablero?",
+                options = listOf("Cuenta como fallo", "Se vuelve a lanzar", "Vale medio punto", "Puntaje parcial"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del dardo influye más en la aerodinámica?",
+                options = listOf("Punta", "Cuerpo", "Aletas o plumas", "Caña"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo se llama el lanzamiento que empieza una partida?",
+                options = listOf("Lanzamiento libre", "Tiro de inicio", "Lanzamiento al bull", "Primera ronda"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera una buena estrategia al jugar 501?",
+                options = listOf("Ir por los números bajos primero", "Evitar el bullseye", "Buscar triples altos y planificar el cierre con dobles", "Tirar siempre al mismo sector"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una puntuación de 26 con tres dardos?",
+                options = listOf("Un tiro perfecto", "Un error común al apuntar al 20", "Un cierre de partida", "Triple 8, triple 8, doble 1"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'oche'?",
+                options = listOf("La línea desde donde se lanzan los dardos", "El centro del tablero", "Una técnica de lanzamiento", "Un error común"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el grosor típico de un dardo profesional?",
+                options = listOf("Muy delgado como un clip", "Entre 6-8 mm", "Más de 1 cm", "No tiene grosor fijo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se necesita para practicar puntería en dardos?",
+                options = listOf("Velocidad", "Fuerza", "Precisión y repetición", "Tablero electrónico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué zona del tablero es más difícil de acertar?",
+                options = listOf("Triple 20", "Bullseye", "Doble 1", "Triple 5"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del dardo se puede cambiar para ajustar el vuelo?",
+                options = listOf("Punta", "Cuerpo", "Plumas o aletas", "Color"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'double out'?",
+                options = listOf("Salir de una partida con cualquier puntuación", "Terminar con un dardo en la zona doble", "Fallar dos tiros", "Jugar con dos personas a la vez"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de tablero usan los jugadores profesionales?",
+                options = listOf("De plástico", "De velcro", "De cerdas", "De cartón"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el mejor lugar para practicar dardos en casa?",
+                options = listOf("Sobre el piso", "En una pared sólida con protección", "Cerca de ventanas", "Encima de una mesa"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puntaje equivale a tres dardos en triple 19?",
+                options = listOf("57", "76", "81", "60"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una partida de 'cricket' en dardos?",
+                options = listOf("Un juego en el que se buscan cerrar números del 15 al 20 y el bullseye", "Una variante infantil", "Un juego de velocidad", "Una partida sin puntaje"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del dardo puede estar hecha de tungsteno?",
+                options = listOf("Punta", "Plumas", "Barril o cuerpo", "Caña"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué permite una caña más larga?",
+                options = listOf("Mayor precisión para algunos jugadores", "Menor alcance", "Mayor velocidad", "Lanzar con efecto"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda al apuntar en dardos?",
+                options = listOf("Fijar la mirada en el tablero y relajar el brazo", "Cerrar un ojo", "Mirar el dardo", "Mover el brazo completo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué factor NO influye en el lanzamiento de un dardo?",
+                options = listOf("Forma del barril", "Tipo de zapatilla", "Peso del dardo", "Longitud de la caña"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hace un árbitro en competencias profesionales?",
+                options = listOf("Coloca los dardos", "Supervisa las reglas y anota puntajes", "Reemplaza al jugador", "Controla la música"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si un dardo no queda clavado en el tablero?",
+                options = listOf("Se cuenta igual", "Se anula el turno completo", "No se cuenta", "Se penaliza con -10"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la diferencia entre el bullseye interno y externo?",
+                options = listOf("Ninguna", "El interno vale 50 y el externo 25 puntos", "El interno no puntúa", "El externo es decorativo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de lanzamiento es ideal en dardos?",
+                options = listOf("Fuerte y rápido", "Controlado y recto", "Curvado", "Con rebote"),
+                correctIndex = 1
+            )
+        ),
+
+
         )
-    )
 }
