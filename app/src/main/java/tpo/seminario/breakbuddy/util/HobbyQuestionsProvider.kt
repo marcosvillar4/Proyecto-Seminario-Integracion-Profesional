@@ -2,25 +2,20 @@ package tpo.seminario.breakbuddy.util
 
 
 /*Hasta ahora esta (mas o menos): ESTAN PUESTAS EN ESTE ORDEN ESPECIFICO
-Natación / Cocinar / Repostería / Leer / Fotografía / Pescar / Jardineria / Escuchar música / Canto / Tocar un instrumento musical / Bailar / Ver películas /
-Actuar / Aprender idiomas / Carpinteria / Pintar / Cerámica / Corte y confección / Tejer / Marroquineria / Escultura / Bisutería / Maquillaje profesional /
-Programar / Videojuegos / Juegos de mesa / Ajedrez / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping / Meditar / Astronomía /
-Avistamiento de aves / Adiestramiento de animales / Lepidopterologia / Escribir / Crochet / Dardos / Manualidades / Creación de contenido /
-Andar en bicicleta / Armar rompecabezas / Bloggear / Diseño gráfico / Correr / Voluntariado / Restaurar muebles / Basket / Volley / Golf /
-Bordado / Crucigramas / Origami /
+Basket / Volley / Natación / Cocinar / Repostería / Leer / Fotografía / Pescar / Jardineria / Escuchar música / Canto / Tocar un instrumento musical / Bailar /
+Ver películas / Actuar / Aprender idiomas / Carpinteria / Pintar / Cerámica / Corte y confección / Tejer / Marroquineria / Escultura / Bisutería /
+Maquillaje profesional / Programar / Videojuegos / Juegos de mesa / Ajedrez / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping /
+Meditar / Astronomía / Avistamiento de aves / Adiestramiento de animales / Manicura / Diseño floral / Lepidopterologia / Escribir / Dibujo / Crochet /
+Dardos / Manualidades / Creación de contenido / Andar en bicicleta / Armar rompecabezas / Bloggear / Diseño gráfico / Correr / Voluntariado /
+Restaurar muebles / Golf / Bordado / Crucigramas / Origami / Poesía / Caligrafia / Vidrieria artistica
 
 */
 
-/*TODAVIA FALTAN: , ,
-        ,  ,
-        , , ,
-        ,
-        , ,, ,
-	,,,,,
-        , ,"Coleccionismo"------
+/*TODAVIA FALTAN:
+        , ,"Coleccionismo"
         ,"Ilusionismo",,"Pilates",,"Tarot",,
         ------------------------------------
-        "Caligrafia","Vidrieria artistica","Hacer velas"
+        ,,"Hacer velas"
         "Peluqueria","Decoracion de interiores","Damas"
         "Bonsai""Sudoku","Sopa de letras","Bingo"*/
 
@@ -8030,407 +8025,409 @@ object HobbyQuestionsProvider{
 
 
         "Manicura" to listOf(
-                QuizQuestion(
-                    question = "¿Qué herramienta se utiliza para empujar la cutícula?",
-                    options = listOf("Lima de uñas", "Alicate", "Cortaúñas", "Empujador de cutícula"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué es una manicura francesa?",
-                    options = listOf("Uñas rojas con decoración", "Uñas con esmalte negro", "Uñas cuadradas y mates", "Uñas con puntas blancas y base natural"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué material se utiliza para hacer uñas acrílicas?",
-                    options = listOf("Gel y lámpara", "Esmalte regular", "Polvo acrílico y monómero", "Removedor de esmalte"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué es el monómero en uñas acrílicas?",
-                    options = listOf("Una lima especial", "Una resina de secado rápido", "Un desinfectante", "Un líquido que se mezcla con el polvo acrílico"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué función cumple la base coat?",
-                    options = listOf("Dar brillo", "Fijar los cristales", "Proteger la uña natural", "Secar el esmalte"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué tipo de lámpara se utiliza para secar esmalte en gel?",
-                    options = listOf("Lámpara incandescente", "Lámpara UV/LED", "Lámpara halógena", "Secador de cabello"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué producto se usa para eliminar esmalte en gel?",
-                    options = listOf("Alcohol", "Monómero", "Acetona pura", "Removedor con agua"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué herramienta se usa para dar forma a las uñas?",
-                    options = listOf("Pinza", "Brocha", "Tijeras", "Lima"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué forma de uña es puntiaguda y termina en pico?",
-                    options = listOf("Cuadrada", "Ovalada", "Stiletto", "Almendra"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Cuál es la principal función del top coat?",
-                    options = listOf("Eliminar impurezas", "Aportar color", "Crear textura", "Proteger y dar brillo al esmalte"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué es una manicura semipermanente?",
-                    options = listOf("Uso de productos naturales", "Dura 1-2 días", "Utiliza esmalte tradicional", "Esmalte en gel que dura más de una semana"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué se debe hacer antes de aplicar esmalte en gel?",
-                    options = listOf("Aplicar aceite de cutícula", "Humedecer las uñas", "Desengrasar y pulir la uña", "Pintar con esmalte regular"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué es el 'nail art'?",
-                    options = listOf("Corte de uñas", "Decoración creativa en uñas", "Tinte de uñas", "Tratamiento para cutículas"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué se usa para adherir cristales o decoraciones a la uña?",
-                    options = listOf("Top coat", "Alcohol", "Pegamento para uñas", "Desinfectante"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué causa el lifting en uñas acrílicas?",
-                    options = listOf("Uso de top coat", "Secado con lámpara", "Buena preparación", "Mala adherencia o preparación de la uña"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué significa 'cutícula'?",
-                    options = listOf("La forma de la uña", "La base del esmalte", "La piel que protege la matriz de la uña", "Un tipo de esmalte"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Cuál es la función del primer en uñas acrílicas?",
-                    options = listOf("Eliminar cutículas", "Sellar la uña", "Ayudar en la adhesión del producto", "Dar color"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué material se utiliza para crear uñas de gel?",
-                    options = listOf("Polvo acrílico y monómero", "Gel UV y lámpara", "Acetona y base coat", "Cristales y resina"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué herramienta eléctrica se usa para retirar uñas acrílicas?",
-                    options = listOf("Pinza térmica", "Taladro o torno eléctrico", "Lámpara UV", "Cortaúñas"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué es una uña encapsulada?",
-                    options = listOf("Una uña cubierta con esmalte tradicional", "Una técnica sin decoración", "Una decoración protegida dentro del acrílico o gel", "Una uña con esmalte mate"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué puede provocar infecciones en las uñas?",
-                    options = listOf("Mala higiene o humedad","Uso de top coat", "Herramientas esterilizadas",  "Secado rápido"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Qué parte de la uña es responsable del crecimiento?",
-                    options = listOf("Cutícula", "Lecho ungueal", "Matriz", "Punta"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué se debe hacer si una clienta presenta hongos en las uñas?",
-                    options = listOf("Recomendar visitar al dermatólogo","Aplicar acrílico", "Ignorarlo",  "Cubrir con esmalte oscuro"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Qué es una lima 100/180?",
-                    options = listOf("Una herramienta para pulir cutículas", "Un tipo de pincel", "Una lima con diferentes granos de abrasividad", "Un desinfectante"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Cuál es el primer paso en una manicura básica?",
-                    options = listOf("Aplicar esmalte", "Pulir la uña", "Limpiar y desinfectar manos", "Colocar aceite de cutícula"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Cuánto suele durar el esmalte en gel correctamente aplicado?",
-                    options = listOf("1-2 semanas", "1 día", "3-5 días", "1 mes"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Qué color es tradicional en una manicura francesa?",
-                    options = listOf("Negro", "Rojo", "Blanco", "Dorado"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué es el 'nail stamping'?",
-                    options = listOf("Técnica de alisado", "Decoración con pegatinas", "Técnica de decoración con placas y sellos", "Tipo de esculpido"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué se debe hacer después de usar cada herramienta?",
-                    options = listOf("Desecharla", "Guardarla sin limpiar", "Esterilizar o desinfectar", "Dejarla al aire"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué producto se aplica para hidratar la cutícula?",
-                    options = listOf("Top coat", "Aceite de cutícula", "Removedor de esmalte", "Base coat"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué técnica permite alargar la uña natural con moldes?",
-                    options = listOf("Nail art", "Manicura exprés", "Esculpido con acrílico o gel", "Decorado con esmalte"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Cuál de los siguientes productos es usado para pulir la superficie de la uña?",
-                    options = listOf("Alicate", "Removedor de cutícula", "Buffer o pulidor", "Top coat"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué forma de uña es más resistente?",
-                    options = listOf("Stiletto", "Almendra", "Ovalada", "Cuadrada con bordes redondeados"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué significa 'nail prep'?",
-                    options = listOf("Aplicar esmalte", "Preparar la cutícula", "Preparación de la uña natural para mayor adherencia", "Secado de gel"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué pasa si se aplica gel sobre una uña húmeda?",
-                    options = listOf("Se adhiere mejor", "No ocurre nada", "Se forma hongo", "Puede despegarse o causar lifting"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué indica un esmalte con símbolo de libre de '3-free'?",
-                    options = listOf("Solo para uñas postizas", "Que es resistente al agua", "Que no contiene 3 químicos tóxicos comunes", "Que solo dura 3 días"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué se recomienda para proteger las uñas después de remover gel o acrílico?",
-                    options = listOf("No hacer nada", "Usar alcohol", "Aplicar aceite y fortalecedor", "Pintarlas con esmalte negro"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué tipo de esmalte necesita curado en lámpara?",
-                    options = listOf("Esmalte regular", "Esmalte en gel", "Esmalte en spray", "Esmalte mate"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué uña se suele decorar más en el 'nail art'?",
-                    options = listOf("Índice", "Pulgar", "Meñique", "Anular"),
-                    correctIndex = 3
-                )
+            QuizQuestion(
+                question = "¿Qué herramienta se utiliza para empujar la cutícula?",
+                options = listOf("Lima de uñas", "Alicate", "Cortaúñas", "Empujador de cutícula"),
+                correctIndex = 3
             ),
-
-            //********************************************************************************************************************************
-
-            "Diseño floral" to listOf(
-                    QuizQuestion(
-                        question = "¿Cuál es el objetivo principal del diseño floral?",
-                        options = listOf("Aromatizar un espacio", "Colorear las paredes", "Crear composiciones estéticas con flores", "Evitar que se marchiten las flores"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué herramienta se usa para cortar tallos con precisión?",
-                        options = listOf("Tijeras de papel", "Cuchillo de cocina", "Podadora o tijeras de florista", "Lima metálica", "Podadora o tijeras de florista"),
-                        correctIndex = 3
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué se utiliza para mantener las flores hidratadas en un arreglo?",
-                        options = listOf("Aire comprimido", "Espuma floral (oasis)", "Tierra seca", "Arena"),
-                        correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué tipo de flor es ideal para diseños florales duraderos?",
-                        options = listOf("Girasol", "Lirio", "Crisantemo", "Orquídea silvestre"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué es el 'follaje' en un arreglo floral?",
-                        options = listOf("Las flores más grandes", "Decoraciones plásticas", "Las hojas verdes que acompañan las flores", "Las cintas decorativas"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Cuál de los siguientes es un principio del diseño floral?",
-                        options = listOf("Pesadez", "Desorden", "Opacidad", "Equilibrio"),
-                        correctIndex = 3
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué se entiende por 'armonía' en un arreglo floral?",
-                        options = listOf("Que las flores sean del mismo tipo", "Que haya muchas flores", "Que los elementos del diseño combinen entre sí", "Que no se utilice follaje"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué color se asocia con tranquilidad en el diseño floral?",
-                        options = listOf("Azul","Rojo", "Amarillo",  "Naranja"),
-                        correctIndex = 0
-                    ),
-                    QuizQuestion(
-                        question = "¿Cuál es una técnica común en arreglos florales contemporáneos?",
-                        options = listOf("Asimetría", "Simetría estricta", "Flores artificiales", "Uso exclusivo de rosas"),
-                        correctIndex = 0
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué herramienta se utiliza para fijar flores en estructuras?",
-                        options = listOf("Pegamento escolar", "Clavos", "Cinta floral", "Silicona líquida"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué significa 'línea' en diseño floral?",
-                        options = listOf("La forma de una flor", "El tipo de recipiente", "La dirección visual que guía el ojo", "Una cuerda decorativa"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué se logra al usar flores en diferentes etapas de floración?",
-                        options = listOf("Desorden", "Armonía visual", "Pérdida de color", "Menor duración"),
-                        correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué tipo de arreglo se usa comúnmente en bodas?",
-                        options = listOf("Centro de mesa bajo", "Arreglo fúnebre", "Ramo en cascada", "Jarrón de exterior"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué flores se asocian comúnmente con el romanticismo?",
-                        options = listOf("Margaritas", "Cactus", "Rosas rojas", "Girasoles"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué tipo de arreglo floral se utiliza típicamente en funerales?",
-                        options = listOf("Bouquet de novia", "Centro de mesa redondo", "Ramillete de solapa", "Corona floral"),
-                        correctIndex = 3
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué propiedad ayuda a mantener las flores frescas por más tiempo?",
-                        options = listOf("Altas temperaturas", "Cambios bruscos de luz", "Agua limpia y fresca", "Ambientes secos"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Cuál es una flor común en diseño floral japonés (ikebana)?",
-                        options = listOf("Girasol", "Clavel", "Crisantemo", "Azucena"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué se busca al crear un punto focal en un arreglo?",
-                        options = listOf("Que todas las flores sean iguales", "Dirigir la atención hacia un área específica", "Reducir el uso de flores", "Alinear los tallos"),
-                        correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué flor se usa comúnmente en arreglos secos?",
-                        options = listOf("Hortensia", "Lirio de agua", "Tulipán", "Gladiolo"),
-                        correctIndex = 0
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué significa 'proporción' en diseño floral?",
-                        options = listOf("Cantidad de agua usada", "Relación entre flores y recipiente", "Cantidad de color", "Número exacto de flores"),
-                        correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué flor es conocida por su fragancia intensa?",
-                        options = listOf("Crisantemo", "Peonía", "Lavanda", "Dalia"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué es un arreglo monocromático?",
-                        options = listOf("Hecho con un solo tipo de flor", "Hecho sin hojas", "Hecho en un solo color", "Hecho solo con tallos largos", "Hecho en un solo color"),
-                        correctIndex = 3
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué flor simboliza la amistad?",
-                        options = listOf("Rosa roja", "Girasol", "Lirio blanco", "Rosa negra"),
-                        correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué se debe hacer con los tallos antes de colocarlos en agua?",
-                        options = listOf("Pintarlos", "Enrollarlos", "Cortarlos en diagonal", "Secarlos al sol"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué tipo de floración dura más en florero?",
-                        options = listOf("Rosas abiertas", "Tulipanes", "Claveles", "Lirios completamente abiertos"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué se utiliza para dar altura en un diseño floral?",
-                        options = listOf("Flores de base", "Follaje rastrero", "Tallos largos o estructuras", "Flores pequeñas", "Tallos largos o estructuras"),
-                        correctIndex = 3
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué color suele utilizarse en arreglos elegantes y sobrios?",
-                        options = listOf("Fucsia", "Amarillo neón", "Blanco", "Verde lima"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué tipo de arreglo floral se lleva en la solapa?",
-                        options = listOf("Boutonniere","Corsage", "Ramo de novia",  "Corona de flores"),
-                        correctIndex = 0
-                    ),
-                    QuizQuestion(
-                        question = "¿Cuál de las siguientes es una flor de temporada primavera-verano?",
-                        options = listOf("Poinsettia", "Crisantemo", "Tulipán", "Acebo"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué flor es muy usada en arreglos tropicales?",
-                        options = listOf("Hortensia", "Ave del paraíso", "Rosa", "Clavel"),
-                        correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué estilo floral enfatiza la línea y el espacio negativo?",
-                        options = listOf("Moderno europeo", "Campestre", "Ikebana", "Minimalista urbano"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué material se puede usar para estructuras modernas?",
-                        options = listOf("Cartón", "Ramas secas, alambres o bambú", "Tierra húmeda", "Paños húmedos"),
-                        correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué herramienta se usa para pelar tallos gruesos?",
-                        options = listOf("Cuchillo de mantequilla", "Cepillo de uñas", "Pelador o cuchillo floral", "Tenedor de jardinería"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué es el 'balance' visual en un arreglo?",
-                        options = listOf("El peso del florero", "Cantidad de agua usada", "Distribución armoniosa del peso visual", "Igual número de flores en cada lado"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué se puede hacer para evitar que las flores se marchiten rápido?",
-                        options = listOf("Dejarlas al sol directo", "No cambiar el agua", "Cortar tallos cada pocos días", "Ponerles sal", "Cortar tallos cada pocos días"),
-                        correctIndex = 3
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué flor es conocida por su forma redonda y textura densa?",
-                        options = listOf("Girasol", "Dalia", "Geranio", "Jazmín"),
-                        correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué significa 'textura' en el diseño floral?",
-                        options = listOf("Color de las flores", "Cantidad de flores", "Sensación visual o táctil de las superficies", "Tipo de aroma"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Cuál es una buena práctica al transportar arreglos florales?",
-                        options = listOf("Ponerlos en bolsas cerradas", "Mantenerlos sin agua", "Sujetar firmemente y proteger del calor", "Voltearlos para que respiren"),
-                        correctIndex = 2
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué estilo floral es más natural y suelto?",
-                        options = listOf("Lineal japonés", "Romántico clásico", "Simétrico ceremonial", "Campestre o rústico"),
-                        correctIndex = 3
-                    )
-                ),
+            QuizQuestion(
+                question = "¿Qué es una manicura francesa?",
+                options = listOf("Uñas rojas con decoración", "Uñas con esmalte negro", "Uñas cuadradas y mates", "Uñas con puntas blancas y base natural"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué material se utiliza para hacer uñas acrílicas?",
+                options = listOf("Gel y lámpara", "Esmalte regular", "Polvo acrílico y monómero", "Removedor de esmalte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el monómero en uñas acrílicas?",
+                options = listOf("Una lima especial", "Una resina de secado rápido", "Un desinfectante", "Un líquido que se mezcla con el polvo acrílico"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple la base coat?",
+                options = listOf("Dar brillo", "Fijar los cristales", "Proteger la uña natural", "Secar el esmalte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de lámpara se utiliza para secar esmalte en gel?",
+                options = listOf("Lámpara incandescente", "Lámpara UV/LED", "Lámpara halógena", "Secador de cabello"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué producto se usa para eliminar esmalte en gel?",
+                options = listOf("Alcohol", "Monómero", "Acetona pura", "Removedor con agua"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para dar forma a las uñas?",
+                options = listOf("Pinza", "Brocha", "Tijeras", "Lima"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué forma de uña es puntiaguda y termina en pico?",
+                options = listOf("Cuadrada", "Ovalada", "Stiletto", "Almendra"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la principal función del top coat?",
+                options = listOf("Eliminar impurezas", "Aportar color", "Crear textura", "Proteger y dar brillo al esmalte"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué es una manicura semipermanente?",
+                options = listOf("Uso de productos naturales", "Dura 1-2 días", "Utiliza esmalte tradicional", "Esmalte en gel que dura más de una semana"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer antes de aplicar esmalte en gel?",
+                options = listOf("Aplicar aceite de cutícula", "Humedecer las uñas", "Desengrasar y pulir la uña", "Pintar con esmalte regular"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'nail art'?",
+                options = listOf("Corte de uñas", "Decoración creativa en uñas", "Tinte de uñas", "Tratamiento para cutículas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se usa para adherir cristales o decoraciones a la uña?",
+                options = listOf("Top coat", "Alcohol", "Pegamento para uñas", "Desinfectante"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué causa el lifting en uñas acrílicas?",
+                options = listOf("Uso de top coat", "Secado con lámpara", "Buena preparación", "Mala adherencia o preparación de la uña"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'cutícula'?",
+                options = listOf("La forma de la uña", "La base del esmalte", "La piel que protege la matriz de la uña", "Un tipo de esmalte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función del primer en uñas acrílicas?",
+                options = listOf("Eliminar cutículas", "Sellar la uña", "Ayudar en la adhesión del producto", "Dar color"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué material se utiliza para crear uñas de gel?",
+                options = listOf("Polvo acrílico y monómero", "Gel UV y lámpara", "Acetona y base coat", "Cristales y resina"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta eléctrica se usa para retirar uñas acrílicas?",
+                options = listOf("Pinza térmica", "Taladro o torno eléctrico", "Lámpara UV", "Cortaúñas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una uña encapsulada?",
+                options = listOf("Una uña cubierta con esmalte tradicional", "Una técnica sin decoración", "Una decoración protegida dentro del acrílico o gel", "Una uña con esmalte mate"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede provocar infecciones en las uñas?",
+                options = listOf("Mala higiene o humedad","Uso de top coat", "Herramientas esterilizadas",  "Secado rápido"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de la uña es responsable del crecimiento?",
+                options = listOf("Cutícula", "Lecho ungueal", "Matriz", "Punta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer si una clienta presenta hongos en las uñas?",
+                options = listOf("Recomendar visitar al dermatólogo","Aplicar acrílico", "Ignorarlo",  "Cubrir con esmalte oscuro"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una lima 100/180?",
+                options = listOf("Una herramienta para pulir cutículas", "Un tipo de pincel", "Una lima con diferentes granos de abrasividad", "Un desinfectante"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el primer paso en una manicura básica?",
+                options = listOf("Aplicar esmalte", "Pulir la uña", "Limpiar y desinfectar manos", "Colocar aceite de cutícula"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuánto suele durar el esmalte en gel correctamente aplicado?",
+                options = listOf("1-2 semanas", "1 día", "3-5 días", "1 mes"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué color es tradicional en una manicura francesa?",
+                options = listOf("Negro", "Rojo", "Blanco", "Dorado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'nail stamping'?",
+                options = listOf("Técnica de alisado", "Decoración con pegatinas", "Técnica de decoración con placas y sellos", "Tipo de esculpido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer después de usar cada herramienta?",
+                options = listOf("Desecharla", "Guardarla sin limpiar", "Esterilizar o desinfectar", "Dejarla al aire"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué producto se aplica para hidratar la cutícula?",
+                options = listOf("Top coat", "Aceite de cutícula", "Removedor de esmalte", "Base coat"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica permite alargar la uña natural con moldes?",
+                options = listOf("Nail art", "Manicura exprés", "Esculpido con acrílico o gel", "Decorado con esmalte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes productos es usado para pulir la superficie de la uña?",
+                options = listOf("Alicate", "Removedor de cutícula", "Buffer o pulidor", "Top coat"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué forma de uña es más resistente?",
+                options = listOf("Stiletto", "Almendra", "Ovalada", "Cuadrada con bordes redondeados"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'nail prep'?",
+                options = listOf("Aplicar esmalte", "Preparar la cutícula", "Preparación de la uña natural para mayor adherencia", "Secado de gel"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si se aplica gel sobre una uña húmeda?",
+                options = listOf("Se adhiere mejor", "No ocurre nada", "Se forma hongo", "Puede despegarse o causar lifting"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué indica un esmalte con símbolo de libre de '3-free'?",
+                options = listOf("Solo para uñas postizas", "Que es resistente al agua", "Que no contiene 3 químicos tóxicos comunes", "Que solo dura 3 días"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda para proteger las uñas después de remover gel o acrílico?",
+                options = listOf("No hacer nada", "Usar alcohol", "Aplicar aceite y fortalecedor", "Pintarlas con esmalte negro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de esmalte necesita curado en lámpara?",
+                options = listOf("Esmalte regular", "Esmalte en gel", "Esmalte en spray", "Esmalte mate"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué uña se suele decorar más en el 'nail art'?",
+                options = listOf("Índice", "Pulgar", "Meñique", "Anular"),
+                correctIndex = 3
+            )
+        ),
 
 
 
         //********************************************************************************************************************************
 
+
+        "Diseño floral" to listOf(
+            QuizQuestion(
+                question = "¿Cuál es el objetivo principal del diseño floral?",
+                options = listOf("Aromatizar un espacio", "Colorear las paredes", "Crear composiciones estéticas con flores", "Evitar que se marchiten las flores"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para cortar tallos con precisión?",
+                options = listOf("Tijeras de papel", "Cuchillo de cocina", "Podadora o tijeras de florista", "Lima metálica", "Podadora o tijeras de florista"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué se utiliza para mantener las flores hidratadas en un arreglo?",
+                options = listOf("Aire comprimido", "Espuma floral (oasis)", "Tierra seca", "Arena"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de flor es ideal para diseños florales duraderos?",
+                options = listOf("Girasol", "Lirio", "Crisantemo", "Orquídea silvestre"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'follaje' en un arreglo floral?",
+                options = listOf("Las flores más grandes", "Decoraciones plásticas", "Las hojas verdes que acompañan las flores", "Las cintas decorativas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes es un principio del diseño floral?",
+                options = listOf("Pesadez", "Desorden", "Opacidad", "Equilibrio"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué se entiende por 'armonía' en un arreglo floral?",
+                options = listOf("Que las flores sean del mismo tipo", "Que haya muchas flores", "Que los elementos del diseño combinen entre sí", "Que no se utilice follaje"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué color se asocia con tranquilidad en el diseño floral?",
+                options = listOf("Azul","Rojo", "Amarillo",  "Naranja"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una técnica común en arreglos florales contemporáneos?",
+                options = listOf("Asimetría", "Simetría estricta", "Flores artificiales", "Uso exclusivo de rosas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se utiliza para fijar flores en estructuras?",
+                options = listOf("Pegamento escolar", "Clavos", "Cinta floral", "Silicona líquida"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'línea' en diseño floral?",
+                options = listOf("La forma de una flor", "El tipo de recipiente", "La dirección visual que guía el ojo", "Una cuerda decorativa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra al usar flores en diferentes etapas de floración?",
+                options = listOf("Desorden", "Armonía visual", "Pérdida de color", "Menor duración"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de arreglo se usa comúnmente en bodas?",
+                options = listOf("Centro de mesa bajo", "Arreglo fúnebre", "Ramo en cascada", "Jarrón de exterior"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué flores se asocian comúnmente con el romanticismo?",
+                options = listOf("Margaritas", "Cactus", "Rosas rojas", "Girasoles"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de arreglo floral se utiliza típicamente en funerales?",
+                options = listOf("Bouquet de novia", "Centro de mesa redondo", "Ramillete de solapa", "Corona floral"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué propiedad ayuda a mantener las flores frescas por más tiempo?",
+                options = listOf("Altas temperaturas", "Cambios bruscos de luz", "Agua limpia y fresca", "Ambientes secos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una flor común en diseño floral japonés (ikebana)?",
+                options = listOf("Girasol", "Clavel", "Crisantemo", "Azucena"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca al crear un punto focal en un arreglo?",
+                options = listOf("Que todas las flores sean iguales", "Dirigir la atención hacia un área específica", "Reducir el uso de flores", "Alinear los tallos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué flor se usa comúnmente en arreglos secos?",
+                options = listOf("Hortensia", "Lirio de agua", "Tulipán", "Gladiolo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'proporción' en diseño floral?",
+                options = listOf("Cantidad de agua usada", "Relación entre flores y recipiente", "Cantidad de color", "Número exacto de flores"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué flor es conocida por su fragancia intensa?",
+                options = listOf("Crisantemo", "Peonía", "Lavanda", "Dalia"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un arreglo monocromático?",
+                options = listOf("Hecho con un solo tipo de flor", "Hecho sin hojas", "Hecho en un solo color", "Hecho solo con tallos largos", "Hecho en un solo color"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué flor simboliza la amistad?",
+                options = listOf("Rosa roja", "Girasol", "Lirio blanco", "Rosa negra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer con los tallos antes de colocarlos en agua?",
+                options = listOf("Pintarlos", "Enrollarlos", "Cortarlos en diagonal", "Secarlos al sol"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de floración dura más en florero?",
+                options = listOf("Rosas abiertas", "Tulipanes", "Claveles", "Lirios completamente abiertos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se utiliza para dar altura en un diseño floral?",
+                options = listOf("Flores de base", "Follaje rastrero", "Tallos largos o estructuras", "Flores pequeñas", "Tallos largos o estructuras"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué color suele utilizarse en arreglos elegantes y sobrios?",
+                options = listOf("Fucsia", "Amarillo neón", "Blanco", "Verde lima"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de arreglo floral se lleva en la solapa?",
+                options = listOf("Boutonniere","Corsage", "Ramo de novia",  "Corona de flores"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de las siguientes es una flor de temporada primavera-verano?",
+                options = listOf("Poinsettia", "Crisantemo", "Tulipán", "Acebo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué flor es muy usada en arreglos tropicales?",
+                options = listOf("Hortensia", "Ave del paraíso", "Rosa", "Clavel"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo floral enfatiza la línea y el espacio negativo?",
+                options = listOf("Moderno europeo", "Campestre", "Ikebana", "Minimalista urbano"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué material se puede usar para estructuras modernas?",
+                options = listOf("Cartón", "Ramas secas, alambres o bambú", "Tierra húmeda", "Paños húmedos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para pelar tallos gruesos?",
+                options = listOf("Cuchillo de mantequilla", "Cepillo de uñas", "Pelador o cuchillo floral", "Tenedor de jardinería"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'balance' visual en un arreglo?",
+                options = listOf("El peso del florero", "Cantidad de agua usada", "Distribución armoniosa del peso visual", "Igual número de flores en cada lado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se puede hacer para evitar que las flores se marchiten rápido?",
+                options = listOf("Dejarlas al sol directo", "No cambiar el agua", "Cortar tallos cada pocos días", "Ponerles sal", "Cortar tallos cada pocos días"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué flor es conocida por su forma redonda y textura densa?",
+                options = listOf("Girasol", "Dalia", "Geranio", "Jazmín"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'textura' en el diseño floral?",
+                options = listOf("Color de las flores", "Cantidad de flores", "Sensación visual o táctil de las superficies", "Tipo de aroma"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una buena práctica al transportar arreglos florales?",
+                options = listOf("Ponerlos en bolsas cerradas", "Mantenerlos sin agua", "Sujetar firmemente y proteger del calor", "Voltearlos para que respiren"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo floral es más natural y suelto?",
+                options = listOf("Lineal japonés", "Romántico clásico", "Simétrico ceremonial", "Campestre o rústico"),
+                correctIndex = 3
+            )
+        ),
+
+
+
+        //********************************************************************************************************************************
 
 
 
@@ -8531,211 +8528,11 @@ object HobbyQuestionsProvider{
                 correctIndex = 1
             )
         ),
-        //************************************************************************************************************************
-
-
-        "Rummy Burako" to listOf(
-                QuizQuestion(
-                    question = "¿Cuántas fichas contiene el juego estándar de Rummy Burako?",
-                    options = listOf("44", "56", "104", "78"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Cuántos jugadores pueden participar en una partida típica?",
-                    options = listOf("2‑6", "8‑10", "11‑12", "1 solo"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Qué se necesita para 'hacer burako'?",
-                    options = listOf("Una escalera de tres fichas", "Dos tríos", "Siete fichas iguales", "Dos escaleras de cinco fichas"),
-                    correctIndex = 3
-                ),
-
-                QuizQuestion(
-                    question = "¿Qué valor tienen los comodines en Burako?",
-                    options = listOf("0 puntos", "20 puntos", "50 puntos", "100 puntos"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Cómo se inicia una partida?",
-                    options = listOf("Cada jugador toma 15 fichas", "Tirada al azar de 10 fichas", "Empieza quien tenga la ficha 1‑negra", "Se reparten 20 fichas"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Cuál es el objetivo principal del Rummy Burako?",
-                    options = listOf("Acumular puntos", "Descartar todas las fichas", "Formar solo escaleras", "Ser el último en jugar"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué sucede al descartar una ficha?",
-                    options = listOf("Termina el turno sin robar", "El oponente puede tomarla", "Se cuenta como joker", "Pierde turno"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué es un 'pozo' en Burako?",
-                    options = listOf("El montículo de descarte", "El montón donde se acumulan burakos terminados", "La mano de fichas oculta", "Un tipo de combinación"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué pasa si el pozo se ha vaciado?",
-                    options = listOf("Se repone desde el descarte", "El juego termina", "Se mezclan fichas", "Nada cambia"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Qué se considera un burako limpio?",
-                    options = listOf("Sin comodines", "Solo con comodines", "Sin escaleras", "Incluyendo duplicados"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Cuántas fichas se roban al inicio del turno?",
-                    options = listOf("1 o del pozo o del descarte", "2 del pozo obligatoriamente", "3 del descarte", "4 del mazo"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Qué combina un 'trío'?",
-                    options = listOf("Tres fichas distintas del mismo color", "Tres fichas con el mismo número", "Tres comodines", "Tres escaleras"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Cuándo se puede 'hacer salida'?",
-                    options = listOf("Con un burako limpio", "Al reunir la salida mínima (50/51 puntos)", "Con tres tríos", "Con tres comodines"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué puntaje mínimo se requiere para hacer la salida?",
-                    options = listOf("30 puntos", "50/51 puntos", "70 puntos", "100 puntos"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué son los 'puntos de salida'?",
-                    options = listOf("Puntos ganados al final", "Puntos del primer depósito en la mesa", "Puntos del último burako", "Puntos de los descartes"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué ocurre si robas del pozo pero no usas la ficha en una jugada válida?",
-                    options = listOf("Pierdes turno", "Debes descartarla automáticamente", "Pierdes 10 puntos", "Se descarta sin uso"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué significa 'armar' en Burako?",
-                    options = listOf("Separar fichas", "Formar una combinación válida", "Robar extra", "Perder fichas"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué se contabiliza al final de la partida?",
-                    options = listOf("Solo burakos", "Solo descartes", "Burakos y fichas no jugadas", "Tríos y escaleras"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Cómo se cierra la partida?",
-                    options = listOf("Haciendo burako limpio", "Quedándose sin fichas", "Con comodines en la mesa", "Con más de 100 puntos"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué vale más, un burako limpio o sucio?",
-                    options = listOf("Suyo valen lo mismo", "Sujeto valen más", "Limpio vale más", "Suelto vale más"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿En qué consiste un burako sucio?",
-                    options = listOf("Tiene comodines", "No tiene escaleras", "Está incompleto", "Tiene más de 7 fichas"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Qué valor extra tienen los burakos sucios comparado con los limpios?",
-                    options = listOf("0 puntos", "20 puntos menos", "Mismo valor", "20 puntos más"),
-                    correctIndex = 3
-                ),
-                QuizQuestion(
-                    question = "¿Qué se hace con los comodines en escaleras mezcladas?",
-                    options = listOf("No se permiten", "Pueden completar escaleras o tríos", "Solo en tríos", "Debes descartarlos"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué acción permite tomar la ficha que descartó el oponente?",
-                    options = listOf("Robar sin restricciones", "Solo si la usas inmediatamente", "Puedes guardarla", "Robar y pasar turno"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Cuándo se pierde la salida si no se alcanza el mínimo?",
-                    options = listOf("Se pierde turno", "Se penaliza con -30 puntos", "Se continúa igual", "Se gana de todos modos"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué ocurre si se agota el mazo de robo?",
-                    options = listOf("Se reshuffle y sigue", "Se termina la partida", "Se roba del descarte", "Queda anulado"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Cómo se cuentan los puntos de las fichas que quedaron en mano del perdedor?",
-                    options = listOf("No cuentan", "Se suman y restan del perdedor", "Van al ganador", "Se ignoran"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué puntuación final suele determinar el ganador?",
-                    options = listOf("2500 puntos", "500 puntos", "1000 puntos", "200 puntos"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué tipo de escalera es válida?",
-                    options = listOf("De más de 7 fichas", "Con comodín en medio", "De sólo 2 fichas", "Con comodines al final"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Quién puede tomar una ficha del descarte?",
-                    options = listOf("Solo el inicio", "Siempre que la uses luego", "Solo el oponente", "Nadie"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Cuál es la longitud mínima de escalera para hacer burako?",
-                    options = listOf("5 fichas", "3 fichas", "7 fichas", "10 fichas"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Qué pieza especial permite reemplazar otras fichas?",
-                    options = listOf("Burako", "Comodín", "Trío", "Pozo"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué se debe hacer si un jugador se queda sin fichas?",
-                    options = listOf("Pierde automáticamente", "Se cierra y se puntúan las manos", "Gana doble", "Continúa sin robar"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Cuál es la función del descarte?",
-                    options = listOf("Aumentar el pozo", "Finalizar la partida", "Reducir fichas en mano", "Robar puntos"),
-                    correctIndex = 2
-                ),
-                QuizQuestion(
-                    question = "¿Cuál es la penalización si guardas una ficha del descarte sin usarla?",
-                    options = listOf("–10 puntos", "Sanción de turno", "– 5 puntos", "No hay penalización"),
-                    correctIndex = 0
-                ),
-                QuizQuestion(
-                    question = "¿Cuántos burakos completos puede haber en una partida sin comodines?",
-                    options = listOf("1", "2", "3", "0"),
-                    correctIndex = 1
-                ),
-                QuizQuestion(
-                    question = "¿Qué condición permite usar dos comodines en la misma escalera?",
-            options = listOf("Escalera muy larga", "Comodín + comodín + ficha real", "No está permitido", "Solo en tríos"),
-            correctIndex = 1
-        ),
-        QuizQuestion(
-            question = "¿Qué nombre recibe el montón de fichas disponibles para robar?",
-            options = listOf("Pozo", "Descarte", "Mazo", "Burako"),
-            correctIndex = 2
-        ),
-        QuizQuestion(
-            question = "¿Cuándo un burako sucio vale menos que uno limpio?",
-            options = listOf("Siempre", "Solo si lleva comodines", "Nunca", "Si es muy grande"),
-            correctIndex = 1
-        )
-    ),
 
 
 
         //************************************************************************************************************************
+
 
         "Escribir" to listOf(
             QuizQuestion(
@@ -8777,17 +8574,17 @@ object HobbyQuestionsProvider{
                 question = "¿Qué es el 'show, don't tell' en escritura?",
                 options = listOf("Decir lo que pasa claramente", "Mostrar con acciones en vez de explicar", "Usar adjetivos siempre", "Evitar el diálogo"),
                 correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Cuál es el antónimo de escritura persuasiva?",
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el antónimo de escritura persuasiva?",
                 options = listOf("Narrativa", "Informativa", "Argumentativa", "Crítica"),
                 correctIndex = 1
-                    ),
-                    QuizQuestion(
-                        question = "¿Qué se revisa en una corrección de estilo?",
+            ),
+            QuizQuestion(
+                question = "¿Qué se revisa en una corrección de estilo?",
                 options = listOf("Ortografía solamente", "Contenido factual", "Fluidez, tono y coherencia", "Diseño visual"),
                 correctIndex = 2
-                            ),
+            ),
             QuizQuestion(
                 question = "¿Qué es un ensayo?",
                 options = listOf("Texto en verso", "Narración corta", "Reflexión argumentativa", "Resumen biográfico"),
@@ -8839,6 +8636,8 @@ object HobbyQuestionsProvider{
                 correctIndex = 1
             )
         ),
+
+
         //************************************************************************************************************************
 
         "Dibujo" to listOf(
@@ -8943,6 +8742,8 @@ object HobbyQuestionsProvider{
                 correctIndex = 2
             )
         ),
+
+
         //************************************************************************************************************************
 
         "Crochet" to listOf(
@@ -9149,6 +8950,7 @@ object HobbyQuestionsProvider{
         ),
 
         //************************************************************************************************************************
+
 
         "Dardos" to listOf(
             QuizQuestion(
@@ -12017,6 +11819,602 @@ object HobbyQuestionsProvider{
                 correctIndex = 3
             )
         ),
+
+
+        //************************************************************************************************************************
+
+        "Poesía" to listOf(
+            QuizQuestion(
+                question = "¿Quién escribió 'Veinte poemas de amor y una canción desesperada'?",
+                options = listOf("Federico García Lorca", "Octavio Paz", "Pablo Neruda", "César Vallejo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un haiku?",
+                options = listOf("Un poema épico largo", "Un verso libre moderno", "Un poema japonés de 3 versos y 17 sílabas", "Una oda en prosa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos poetas pertenece al Siglo de Oro español?",
+                options = listOf("Rubén Darío", "Luis de Góngora", "Mario Benedetti", "Jorge Luis Borges"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta escribió 'La tierra baldía'?",
+                options = listOf("Walt Whitman", "T. S. Eliot", "John Keats", "Emily Dickinson"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una elegía?",
+                options = listOf("Una oda a la alegría", "Un canto épico", "Un poema sobre la muerte o la pérdida", "Un soneto religioso"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Quién escribió 'Cien sonetos de amor'?",
+                options = listOf("Nicanor Parra", "Pablo Neruda", "Julio Cortázar", "Gabriela Mistral"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué métrica tiene un soneto clásico?",
+                options = listOf("14 versos de 11 sílabas", "8 versos de 8 sílabas", "10 versos de 12 sílabas", "12 versos de 10 sílabas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué autor es conocido por el poemario 'Poeta en Nueva York'?",
+                options = listOf("Octavio Paz", "Jaime Sabines", "Federico García Lorca", "Alfonsina Storni"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta es considerado el fundador del Modernismo en lengua española?",
+                options = listOf("Juan Ramón Jiménez", "Rubén Darío", "César Vallejo", "Jorge Guillén"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos poetas fue también filósofo?",
+                options = listOf("Antonio Machado", "Platón", "Walt Whitman", "Friedrich Hölderlin"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta escribió extensamente sobre la naturaleza y la muerte en Estados Unidos en el siglo XIX?",
+                options = listOf("Robert Frost", "Emily Dickinson", "Sylvia Plath", "Allen Ginsberg"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'verso libre'?",
+                options = listOf("Versos sin ningún tipo de lenguaje poético", "Versos que no riman ni siguen métrica fija", "Versos con estrofas de 4 líneas", "Versos rimados en pares"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta chilena ganó el Premio Nobel de Literatura?",
+                options = listOf("Gabriela Mistral", "Isabel Allende", "Violeta Parra", "María Luisa Bombal"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos escritores también fue poeta y novelista del realismo mágico?",
+                options = listOf("Carlos Fuentes", "Julio Cortázar", "Gabriel García Márquez", "Ernesto Cardenal"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta español escribió 'Campos de Castilla'?",
+                options = listOf("Juan Ramón Jiménez", "Antonio Machado", "Luis Cernuda", "Pedro Salinas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una metáfora?",
+                options = listOf("Una exageración", "Una comparación indirecta", "Una contradicción lógica", "Una repetición sonora"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el tema central del poema 'If' de Rudyard Kipling?",
+                options = listOf("La paternidad", "La religión", "La guerra", "La paciencia y madurez"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta argentino escribió 'El Aleph' y también cultivó la poesía?",
+                options = listOf("Ernesto Sábato", "Jorge Luis Borges", "Leopoldo Lugones", "Ricardo Piglia"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué corriente poética se caracteriza por la ruptura de normas clásicas y el uso del absurdo?",
+                options = listOf("Simbolismo", "Romanticismo", "Dadaísmo", "Modernismo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una anáfora en poesía?",
+                options = listOf("Una figura que cambia el orden de las palabras", "Repetición de una o varias palabras al inicio del verso", "Una palabra inventada", "Uso de lenguaje técnico"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta es conocido por 'Leaves of Grass'?",
+                options = listOf("Walt Whitman", "Robert Frost", "T. S. Eliot", "Ezra Pound"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes no es un tipo de poema?",
+                options = listOf("Oda", "Soneto", "Novela", "Égloga"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta escribió 'Altazor o el viaje en paracaídas'?",
+                options = listOf("Vicente Huidobro", "Octavio Paz", "Jorge Teillier", "Pablo Neruda"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué recurso poético se usa en la frase 'el viento susurra'?",
+                options = listOf("Metáfora", "Hipérbaton", "Personificación", "Epíteto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Quién fue el máximo exponente del Romanticismo en la poesía española?",
+                options = listOf("Gustavo Adolfo Bécquer", "Antonio Machado", "Luis de Góngora", "Pedro Calderón de la Barca"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta escribió sobre el amor y el dolor con el seudónimo de Alfonsina?",
+                options = listOf("Gabriela Mistral", "Rosario Castellanos", "Alfonsina Storni", "Juana de Ibarbourou"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué movimiento poético surgió como respuesta a la industrialización y el racionalismo?",
+                options = listOf("Romanticismo", "Modernismo", "Neoclasicismo", "Vanguardismo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta francés escribió 'Las flores del mal'?",
+                options = listOf("Arthur Rimbaud", "Charles Baudelaire", "Paul Verlaine", "Victor Hugo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué país es la cuna del haiku?",
+                options = listOf("China", "Japón", "Corea", "Vietnam"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta se destaca por usar el humor y la ironía en sus poemas antipoéticos?",
+                options = listOf("Mario Benedetti", "Julio Cortázar", "Jorge Drexler", "Nicanor Parra"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta español fue asesinado al inicio de la Guerra Civil Española?",
+                options = listOf("Antonio Machado", "Luis Cernuda", "Federico García Lorca", "Miguel Hernández"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de poema se caracteriza por su tono solemne y está dedicado a una persona o idea?",
+                options = listOf("Elegía", "Oda", "Égloga", "Haiku"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta mexicano escribió 'Piedra de sol'?",
+                options = listOf("Carlos Pellicer", "José Emilio Pacheco", "Manuel Acuña", "Octavio Paz"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta inglés escribió 'Ode to a Nightingale'?",
+                options = listOf("William Wordsworth", "Percy Shelley", "John Keats", "Lord Byron"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta nicaragüense escribió 'Azul...'?",
+                options = listOf("Rubén Darío", "José Coronel Urtecho", "Ernesto Cardenal", "Carlos Martínez Rivas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué término describe la repetición de sonidos consonantes en poesía?",
+                options = listOf("Rima asonante", "Aliteración", "Anáfora", "Epíteto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta es conocido por su relación con la Generación del 27?",
+                options = listOf("Federico García Lorca", "Pablo Neruda", "Jorge Guillén", "Vicente Aleixandre"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué poeta de habla inglesa escribió 'Do Not Go Gentle into That Good Night'?",
+                options = listOf("W. H. Auden", "Ted Hughes", "Dylan Thomas", "T. S. Eliot"),
+                correctIndex = 2
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Caligrafía" to listOf(
+            QuizQuestion(
+                question = "¿Qué es la caligrafía?",
+                options = listOf("El arte de escribir correctamente", "Una técnica de pintura", "Un estilo de impresión digital", "El dibujo técnico con tinta"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes instrumentos es más usado en caligrafía tradicional?",
+                options = listOf("Lápiz mecánico", "Bolígrafo", "Pluma estilográfica", "Marcador fluorescente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el término para referirse al espacio entre letras?",
+                options = listOf("Kerning", "Leading", "Tracking", "Baseline"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'serif' en tipografía?",
+                options = listOf("Un estilo sin decoraciones", "Una línea decorativa al final de un trazo", "Un trazo curvo en la letra", "Una fuente digital"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué país es conocido por su estilo de caligrafía Kanji?",
+                options = listOf("Corea del Sur", "China", "Japón", "Vietnam"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de pluma se usa comúnmente para hacer letras góticas?",
+                options = listOf("Pluma redonda", "Pincel plano", "Pluma de punta ancha", "Bolígrafo de gel"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'downstroke' en caligrafía?",
+                options = listOf("Un trazo descendente", "Un trazo curvo", "Un trazo que cambia de color", "Un trazo decorativo en la parte superior"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se utiliza comúnmente para la caligrafía con tinta china?",
+                options = listOf("Rotulador", "Pincel", "Tiza", "Acuarela"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo caligráfico era común en la Edad Media?",
+                options = listOf("Copperplate", "Italic", "Gótico", "Modern Script"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se utiliza para practicar trazos en caligrafía moderna?",
+                options = listOf("Lijas", "Papel milimetrado", "Hojas de práctica con guías", "Tela de lino"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de la letra se llama 'ascendente'?",
+                options = listOf("La línea inferior", "La parte del trazo que sube por encima de la altura media", "El trazo que baja por debajo de la línea base", "El trazo horizontal central"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo caligráfico es más utilizado en invitaciones formales?",
+                options = listOf("Brush lettering", "Gótico", "Copperplate", "Sans serif"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es 'brush lettering'?",
+                options = listOf("Un tipo de escritura con bolígrafo", "Escritura con plumilla rígida", "Escritura con pincel o marcador flexible", "Una técnica de grabado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una diferencia entre tipografía y caligrafía?",
+                options = listOf("Tipografía es digital, caligrafía es manual", "Ambas son lo mismo", "Caligrafía usa fuentes tipográficas", "Tipografía es más artística"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'x-height' en caligrafía?",
+                options = listOf("La altura total de una mayúscula", "La distancia entre la línea base y la altura media",
+                    "El espacio entre palabras", "La inclinación de la letra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de papel es ideal para caligrafía con tinta líquida?",
+                options = listOf("Papel reciclado", "Papel satinado sin poros", "Papel con textura rugosa", "Papel para acuarela grueso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes estilos es cursivo y elegante?",
+                options = listOf("Gótico", "Roman capital", "Italic", "Stencil"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta digital permite practicar caligrafía en una tablet?",
+                options = listOf("Teclado mecánico", "Puntero láser", "Ratón óptico", "Lápiz digital o stylus"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'ligadura' en caligrafía y tipografía?",
+                options = listOf("Un error de escritura", "Una conexión entre dos letras", "Un tipo de tinta", "Una regla para medir líneas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Quién fue Edward Johnston?",
+                options = listOf("Un escultor moderno", "El creador de la tipografía sans serif", "El padre de la caligrafía moderna occidental",
+                    "Un poeta renacentista"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'baseline'?",
+                options = listOf("La línea sobre la que se apoyan las letras", "La parte superior de las letras", "El espacio entre letras", "La curvatura de las letras"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de tinta se usa comúnmente en caligrafía tradicional?",
+                options = listOf("Tinta acrílica", "Tinta de bolígrafo", "Tinta de impresora", "Tinta china o india"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'flourish' en caligrafía?",
+                options = listOf("Un error en el trazo", "Una decoración o adorno en las letras", "Una mancha de tinta", "Un estilo de papel"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la diferencia principal entre una pluma de punta flexible y una rígida?",
+                options = listOf("La tinta que usan", "El peso", "La variación en el grosor del trazo", "El color del trazo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo es popular en caligrafía moderna por su fluidez y apariencia informal?",
+                options = listOf("Roman Capitals", "Gótico", "Modern Calligraphy", "Copperplate"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de una letra sobresale por debajo de la línea base?",
+                options = listOf("Ascendente", "Descendente", "Flourish", "Remate"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de marcador es ideal para el brush lettering?",
+                options = listOf("Marcador permanente", "Marcador con punta pincel", "Marcador fosforescente", "Marcador de pizarra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué nombre recibe una letra decorada con detalles florales y colores en manuscritos antiguos?",
+                options = listOf("Letra ilustrada", "Letra capital", "Letra gótica", "Letra itálica"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'nib' en caligrafía?",
+                options = listOf("El mango del pincel", "La punta metálica de una pluma", "Una guía de letras", "Un tipo de papel"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de fuente se inspira en la escritura a mano cursiva?",
+                options = listOf("Sans serif", "Script", "Monoespaciada", "Stencil"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos estilos no es un estilo caligráfico tradicional?",
+                options = listOf("Roman", "Italic", "Comic Sans", "Uncial"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué debe evitarse al practicar caligrafía?",
+                options = listOf("Usar una superficie inclinada", "Usar tinta resistente al agua", "Escribir con prisa", "Seguir guías de práctica"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'leading' en tipografía?",
+                options = listOf("El espacio entre letras", "El tamaño de la fuente", "El color de la letra", "El espacio entre líneas de texto"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de papel puede hacer que la tinta se corra o sangre?",
+                options = listOf("Papel satinado", "Papel poroso o muy absorbente", "Papel vegetal", "Cartón plastificado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'layout' en caligrafía?",
+                options = listOf("El diseño general de una composición escrita", "Una fuente digital", "Un trazo de sombra", "Una hoja de papel especial"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes no es un estilo de letra caligráfica?",
+                options = listOf("Copperplate", "Gótica", "Helvetica", "Uncial"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'tracking' en diseño de letras?",
+                options = listOf("Espaciado uniforme entre letras", "La inclinación del texto", "La decoración en la letra capital", "La altura de las mayúsculas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo principal de la caligrafía?",
+                options = listOf("Aumentar la velocidad de escritura", "Mejorar la legibilidad de documentos técnicos", "Expresar belleza a través de la escritura", "Codificar mensajes secretos"),
+                correctIndex = 2
+            )
+        ),
+
+
+        //************************************************************************************************************************
+
+
+        "Vidriería artística" to listOf(
+            QuizQuestion(
+                question = "¿Qué es la vidriería artística?",
+                options = listOf("Técnica de pintura al óleo sobre tela", "Arte de crear figuras con cerámica",
+                    "Arte de trabajar con vidrio decorativo, especialmente vitrales", "Técnica para esmaltar metales"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué material se utiliza para unir piezas de vidrio en un vitral tradicional?",
+                options = listOf("Cinta adhesiva", "Pasta de cal", "Aluminio líquido", "Plomo"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para cortar vidrio?",
+                options = listOf("Sierra de mano", "Cortavidrios o rulina", "Torno", "Cúter de metal"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el grisalla?",
+                options = listOf("Un tipo de vidrio azul", "Una herramienta para pulir vidrio",
+                    "Pigmento aplicado al vidrio para sombrear o detallar", "Un esmalte protector de vidrio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica consiste en aplicar calor para fundir diferentes vidrios?",
+                options = listOf("Vidrio soplado", "Fusing", "Empalmado", "Arenado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo de arte popularizó el uso decorativo del vitral en interiores?",
+                options = listOf("Renacimiento", "Minimalismo", "Art Nouveau", "Dadaísmo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de soldadura se usa en vitrales con técnica Tiffany?",
+                options = listOf("Soldadura TIG", "Soldadura con estaño y cobre", "Soldadura por arco eléctrico", "Soldadura autógena"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el vidrio catedral?",
+                options = listOf("Vidrio totalmente opaco", "Vidrio claro con textura rugosa", "Vidrio usado exclusivamente en catedrales",
+                    "Vidrio tallado con diamante"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la principal función de la cinta de cobre en la técnica Tiffany?",
+                options = listOf("Dar color al vidrio", "Pintar los bordes", "Permitir la unión de piezas con soldadura", "Sujetar el vidrio al marco"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué artista es famoso por sus obras en vidrio y vitrales Art Nouveau?",
+                options = listOf("Antoni Gaudí", "Louis Comfort Tiffany", "Henri Matisse", "René Magritte"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de vidrio cambia de color dependiendo del ángulo de luz?",
+                options = listOf("Vidrio polarizado", "Vidrio de seguridad", "Vidrio dicroico", "Vidrio pulido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para alisar soldaduras en vitrales?",
+                options = listOf("Martillo", "Cautín o soldador", "Pinzas", "Pulidora de disco"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se utiliza para proteger y sellar un vitral tradicional?",
+                options = listOf("Laca acrílica", "Masilla o cemento para vitral", "Barniz de poliuretano", "Yeso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una vidriera emplomada?",
+                options = listOf("Un vidrio fundido en un molde", "Una ventana hecha con piezas de vidrio unidas por plomo",
+                    "Una técnica de grabado sobre vidrio", "Una pintura sobre vidrio esmerilado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de vidrio tiene apariencia de escarcha o hielo?",
+                options = listOf("Vidrio float", "Vidrio arenado", "Vidrio esmerilado", "Vidrio opalino"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué proceso usa arena o partículas para dar textura mate al vidrio?",
+                options = listOf("Esmerilado", "Termoformado", "Fusing", "Vitrofusión"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos vidrios es ideal para difundir la luz sin perder color?",
+                options = listOf("Vidrio opaco", "Vidrio espejo", "Vidrio translúcido", "Vidrio polarizado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para pulir los bordes del vidrio después del corte?",
+                options = listOf("Cautín", "Escofina", "Lija metálica", "Esmeriladora o pulidora de vidrio"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes NO es un paso en la creación de vitrales?",
+                options = listOf("Diseño o patrón", "Corte de vidrio", "Impresión digital sobre vidrio", "Soldadura de uniones"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de vidrio contiene óxidos metálicos para lograr colores vivos?",
+                options = listOf("Vidrio templado", "Vidrio reciclado", "Vidrio de laboratorio", "Vidrio teñido en masa"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica se usa para pintar detalles finos en un vitral?",
+                options = listOf("Esmaltado por inmersión", "Técnica de grisalla", "Sopleteado", "Barnizado acrílico"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de vidrio se usa a menudo para representar cielos en vitrales?",
+                options = listOf("Vidrio rojo rubí", "Vidrio azul catedral", "Vidrio espejado", "Vidrio ácido"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento se funde con el vidrio para obtener color verde?",
+                options = listOf("Oro", "Plomo", "Cobalto", "Cobre"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué propiedad tiene el vidrio soplado?",
+                options = listOf("Mayor resistencia térmica", "Textura y burbujas únicas", "Es irrompible", "Total opacidad"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer antes de soldar piezas con cinta de cobre?",
+                options = listOf("Pintarlas", "Pulirlas con ácido", "Aplicar fundente (flux)", "Remojarlas en agua"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo de vidriería es característico por sus colores planos y contornos marcados?",
+                options = listOf("Gótico", "Cubismo", "Románico", "Realismo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un patrón o 'cartón' en vidriería artística?",
+                options = listOf("Papel decorativo para envolver", "Esquema con las formas y colores del vitral", "Muestra del vidrio",
+                    "Plantilla para cortar soldadura"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de vidrio se corta con mayor facilidad?",
+                options = listOf("Vidrio float común","Vidrio templado", "Vidrio opaco", "Vidrio dicroico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'fusing' en vidriería artística?",
+                options = listOf("Proceso de templado del vidrio", "Fusión de piezas de vidrio a alta temperatura", "Técnica de pintar con fuego",
+                    "Esmerilado decorativo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de vidrio tiene una superficie ondulada y textura única?",
+                options = listOf("Vidrio de botella", "Vidrio craquelado", "Vidrio acrílico", "Vidrio soplado artesanal"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa la palabra 'vitral'?",
+                options = listOf("Pintura sobre vidrio", "Vidrio tallado", "Vidrio coloreado ensamblado en una ventana", "Espejo antiguo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué medida de seguridad es fundamental al cortar vidrio?",
+                options = listOf("Usar guantes de lana", "Trabajar descalzo", "Usar lentes de protección", "Rociar el vidrio con agua"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de vidrio se usa para lograr transparencia y resistencia básica?",
+                options = listOf("Vidrio templado", "Vidrio float", "Vidrio blindado", "Vidrio óptico"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica permite crear formas curvas en vidrio usando calor y moldes?",
+                options = listOf("Pulido ácido", "Soplado", "Termoformado o slump", "Arenado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica se utiliza para proteger un vitral del viento o golpes exteriores?",
+                options = listOf("Pintarlo con barniz", "Instalar vidrio laminado detrás", "Pegar cinta adhesiva", "Cubrir con plástico"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el mejor método para limpiar un vitral antiguo?",
+                options = listOf("Con ácido diluido", "Con detergente y cepillo metálico", "Con agua destilada y paño suave", "Con solventes industriales"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos elementos es tóxico y se debe manipular con cuidado en vitralería?",
+                options = listOf("Silicio", "Estaño", "Plomo", "Sodio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué característica tiene el vidrio opalescente?",
+                options = listOf("Es transparente como el agua", "Tiene reflejo tipo espejo", "Tiene apariencia lechosa o perlada", "Es completamente negro"),
+                correctIndex = 2
+            )
+        )
 
 
 
