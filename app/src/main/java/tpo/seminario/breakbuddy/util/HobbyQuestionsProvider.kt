@@ -15,6 +15,9 @@ Avistamiento de aves / Adiestramiento de animales / Lepidopterologia / Escribir 
         "Voluntariado", "Restaurar muebles","Basket", "Volley", "Golf"
 	,"Bordado","Crucigramas",,"Origami",
         , ,"Coleccionismo"
+
+
+
         ,"Ilusionismo",,"Pilates",,"Tarot",,
         "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
         "Peluqueria","Decoracion de interiores","Damas", Rummy Burako",
