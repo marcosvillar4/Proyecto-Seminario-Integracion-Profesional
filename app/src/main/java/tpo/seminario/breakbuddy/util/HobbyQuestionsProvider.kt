@@ -6,52 +6,435 @@ Natación / Cocinar / Repostería / Leer / Fotografía / Pescar / Jardineria / E
 Actuar / Aprender idiomas / Carpinteria / Pintar / Cerámica / Corte y confección / Tejer / Marroquineria / Escultura / Bisutería / Maquillaje profesional /
 Programar / Videojuegos / Juegos de mesa / Ajedrez / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping / Meditar / Astronomía /
 Avistamiento de aves / Adiestramiento de animales / Lepidopterologia / Escribir / Crochet / Dardos / Manualidades / Creación de contenido /
-Andar en bicicleta / Armar rompecabezas / Bloggear / Diseño gráfico /
+Andar en bicicleta / Armar rompecabezas / Bloggear / Diseño gráfico / Correr / Voluntariado / Restaurar muebles / Basket / Volley / Golf /
+Bordado / Crucigramas / Origami /
+
 */
 
 /*TODAVIA FALTAN: , ,
         ,  ,
         , , ,
-        "Correr",
-        "Voluntariado", "Restaurar muebles","Basket", "Volley", "Golf"
-	,"Bordado","Crucigramas",,"Origami",
+        ,
+        , ,, ,
+	,,,,,
         , ,"Coleccionismo"------
         ,"Ilusionismo",,"Pilates",,"Tarot",,
-        "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
-        "Peluqueria","Decoracion de interiores","Damas", Rummy Burako",
-        "Bonsai","Prensado de flores","Sudoku","Sopa de letras","Bingo"*/
+        ------------------------------------
+        "Caligrafia","Vidrieria artistica","Hacer velas"
+        "Peluqueria","Decoracion de interiores","Damas"
+        "Bonsai""Sudoku","Sopa de letras","Bingo"*/
 
 
 object HobbyQuestionsProvider{
     val hobbyQuizzes: Map<String, List<QuizQuestion>> = mapOf(
         "Basket" to listOf(
             QuizQuestion(
-                question = "¿Quién es el máximo anotador en la historia de la NBA?",
-                options = listOf("Kareem Abdul-Jabbar", "LeBron James", "Michael Jordan", "Wilt Chamberlain"),
+                question = "¿Cuántos jugadores por equipo están en cancha al mismo tiempo en un partido de básquet profesional?",
+                options = listOf("5", "6", "7", "4"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo principal en el básquet?",
+                options = listOf("Evitar que el otro equipo anote", "Hacer más triples que el rival", "Encestar el balón en el aro más veces que el rival", "Correr más rápido que el otro equipo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuántos puntos vale una canasta desde dentro de la línea de triple?",
+                options = listOf("3", "2", "1", "4"),
                 correctIndex = 1
             ),
             QuizQuestion(
-                question = "¿Cuántos anillos de campeonato ganó Michael Jordan?",
-                options = listOf("5", "6", "7", "8"),
+                question = "¿Qué es un 'doble-drible' en básquet?",
+                options = listOf("Una jugada ofensiva", "Cuando un jugador dribla, se detiene y vuelve a driblar", "Un tipo de defensa", "Un pase entre dos jugadores"),
                 correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador es conocido por sus volcadas espectaculares y jugó en los Chicago Bulls?",
+                options = listOf("LeBron James", "Michael Jordan", "Stephen Curry", "Shaquille O'Neal"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una asistencia en básquet?",
+                options = listOf("Un pase que lleva directamente a una anotación", "Una ayuda defensiva", "Un rebote ofensivo", "Una sustitución de jugador"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuántos segundos tiene un equipo para intentar lanzar al aro una vez que tiene la posesión en FIBA?",
+                options = listOf("30 segundos", "24 segundos", "10 segundos", "15 segundos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa hacer una 'falta técnica'?",
+                options = listOf("Empujar a un rival", "Cometer una infracción leve durante el juego", "Faltar el respeto al árbitro o conducta antideportiva", "Sacar la pelota del campo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera un triple?",
+                options = listOf("Una canasta desde la línea de tiro libre", "Una canasta desde fuera de la línea de 3 puntos", "Un tiro fallado", "Un pase cruzado largo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función principal tiene el 'pivot' en el equipo?",
+                options = listOf("Defender el perímetro", "Encestar desde fuera", "Jugar cerca del aro, rebotear y anotar", "Organizar el juego desde atrás"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si un jugador comete 5 faltas personales en FIBA?",
+                options = listOf("Se le da una advertencia", "Es expulsado del partido", "Se reanudan los tiros libres", "Se detiene el partido para revisión"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el nombre de la liga profesional más reconocida del mundo?",
+                options = listOf("NFL", "MLS", "NBA", "ATP"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del cuerpo no se puede usar para tocar el balón en básquet?",
+                options = listOf("La cabeza", "El pie o la pierna intencionalmente", "Los codos", "La cadera"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'zona' en defensa?",
+                options = listOf("Una táctica ofensiva", "Una defensa donde los jugadores cubren áreas del campo, no marcas individuales", "Un sistema para pasar el balón", "Una forma de sacar lateral"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántos cuartos tiene un partido oficial de básquet?",
+                options = listOf("2", "4", "3", "5"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un rebote ofensivo?",
+                options = listOf("Recuperar el balón tras un tiro fallado del equipo contrario", "Capturar el balón tras un tiro fallado de tu propio equipo", "Un pase hacia atrás", "Una forma de infracción"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué característica se valora en un base armador?",
+                options = listOf("Altura y fuerza", "Velocidad y buena lectura del juego", "Capacidad para bloquear", "Resistencia al salto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué equipo ganó más títulos de NBA históricamente (hasta 2023)?",
+                options = listOf("Chicago Bulls", "Golden State Warriors", "Los Angeles Lakers", "Boston Celtics"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué acción representa una falta intencional?",
+                options = listOf("Empujar para cortar el ataque", "Driblar demasiado", "Pasar en zona", "Correr sin mirar"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué medida tiene una cancha de básquet oficial FIBA?",
+                options = listOf("20x10 metros", "30x15 metros", "28x15 metros", "25x12 metros"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una bandeja en básquet?",
+                options = listOf("Un tipo de pase largo", "Un tiro en salto con una mano cerca del aro", "Un rebote defensivo", "Una jugada de distracción"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera una violación de pasos?",
+                options = listOf("Correr con la pelota sin picarla", "Driblar con ambas manos", "Pasar sin mirar", "Rotar mal al defender"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador tiene más títulos de NBA como jugador (hasta 2023)?",
+                options = listOf("LeBron James", "Michael Jordan", "Bill Russell", "Kobe Bryant"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué acción se premia con tiros libres?",
+                options = listOf("Una buena jugada", "Una falta en el acto de tiro", "Un triple exitoso", "Un pase largo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una pantalla en básquet?",
+                options = listOf("Una jugada para cortar el drible", "Un bloqueo legal para liberar a un compañero", "Una falta ofensiva", "Un pase aéreo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa la línea de 3 puntos?",
+                options = listOf("Un límite de faltas", "La línea de tiro libre", "Distancia desde la cual un enceste vale 3 puntos", "Límite de cancha"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una jugada de pick and roll?",
+                options = listOf("Un tipo de defensa en zona", "Un pase sin mirar", "Una jugada donde un jugador bloquea y luego corta al aro", "Un rebote defensivo mal tomado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué debe hacer un equipo después de recibir un punto?",
+                options = listOf("Llamar tiempo muerto", "Pasar la pelota desde el fondo en 5 segundos", "Sacar desde la mitad de cancha", "Anotar inmediatamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se entiende por triple doble?",
+                options = listOf("Tres jugadores anotan diez puntos", "Un jugador logra al menos 10 en tres estadísticas (puntos, rebotes, asistencias, etc.)", "Un jugador hace tres tiros libres consecutivos", "Un pase que vale tres puntos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una finta?",
+                options = listOf("Un tipo de pase", "Un amague para desorientar al rival", "Una infracción", "Un triple sin mirar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué rol cumple el alero en la cancha?",
+                options = listOf("Organiza el juego", "Rebotea y anota desde media distancia", "Defiende al base", "Realiza los saques laterales"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántos árbitros suelen dirigir un partido profesional de básquet?",
+                options = listOf("2", "3", "4", "1"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una falta antideportiva?",
+                options = listOf("Una infracción accidental", "Una jugada con contacto excesivo y sin intención de jugar el balón", "Un cambio mal hecho", "Un saque mal ejecutado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué equipo ganó los Juegos Olímpicos de básquet masculino en Tokio 2021?",
+                options = listOf("Francia", "España", "Estados Unidos", "Argentina"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si un partido termina empatado en tiempo reglamentario?",
+                options = listOf("Se lanza una moneda", "Se juega tiempo extra", "Gana el visitante", "El partido se suspende"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un alley-oop?",
+                options = listOf("Un pase largo desde el fondo", "Una jugada donde un jugador lanza y otro encesta en el aire", "Un rebote defensivo rápido", "Una defensa hombre a hombre"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué posición suele tener el número 1 en el dorsal en muchos equipos?",
+                options = listOf("Pivot", "Alero", "Base armador", "Escolta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué regla limita el tiempo que un jugador puede estar en la llave?",
+                options = listOf("Regla de 5 segundos", "Regla de 3 segundos", "Regla del saque rápido", "Regla del paso inicial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una falta ofensiva?",
+                options = listOf("Una falta cometida por el defensor", "Una infracción por contacto del jugador que ataca", "Una demora en el pase", "Un grito al árbitro"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué país es considerado una potencia histórica en básquet junto con EE.UU.?",
+                options = listOf("Brasil", "Francia", "Lituania", "España"),
+                correctIndex = 3
             )
         ),
+
 
         //********************************************************************************************************************************
 
         "Volley" to listOf(
             QuizQuestion(
-                question = "¿Cuántos jugadores hay en cancha por equipo en voleibol?",
-                options = listOf("5", "6", "7", "8"),
+                question = "¿Cuántos jugadores hay en cancha por equipo en un partido de vóley?",
+                options = listOf("4", "6", "5", "7"),
                 correctIndex = 1
             ),
             QuizQuestion(
-                question = "¿Cómo se llama la acción de enviar la pelota al otro lado?",
-                options = listOf("Bloqueo", "Recepción", "Saque", "Colocación"),
+                question = "¿Cómo se llama el jugador especializado en defensa que usa una camiseta diferente?",
+                options = listOf("Capitán", "Central", "Libero", "Colocador"),
                 correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuántos toques puede dar un equipo antes de pasar la pelota al otro lado?",
+                options = listOf("2", "3", "4", "5"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si un jugador toca la red durante una jugada?",
+                options = listOf("Nada", "Se cobra punto para el rival", "Se repite el punto", "Se da una advertencia"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa un 'bloqueo' en vóley?",
+                options = listOf("Un tipo de saque", "Un salto para evitar que el balón pase al campo propio", "Un pase defensivo", "Una pausa entre jugadas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo principal del juego en vóley?",
+                options = listOf("Hacer más saques", "Tener mayor posesión", "Hacer que el balón toque el suelo en el campo rival", "Evitar faltas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de saque es el más habitual en vóley profesional?",
+                options = listOf("Saque por abajo", "Saque flotado", "Saque con efecto lateral", "Saque en salto"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuándo un equipo gana un set?",
+                options = listOf("Al llegar a 15 puntos", "Al llegar a 21 puntos", "Al llegar a 25 puntos con al menos 2 de diferencia", "Cuando el rival se lesiona"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una rotación en vóley?",
+                options = listOf("Un pase especial", "Un tipo de defensa", "El cambio de posiciones en sentido horario cuando se recupera el saque", "Una técnica de saque"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué posición se encuentra en la parte frontal y central de la red?",
+                options = listOf("Punta", "Central", "Libero", "Armador"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si un equipo hace 4 toques antes de pasar la pelota?",
+                options = listOf("Se permite si hay un bloqueo", "Es falta y punto para el rival", "Se repite el punto", "Solo se cobra si fue intencional"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas acciones NO está permitida en vóley?",
+                options = listOf("Pisar la línea al sacar", "Golpear el balón con el pie", "Bloquear un saque", "Pasar el balón con un golpe de antebrazo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo se llama el pase realizado con las yemas de los dedos por encima de la cabeza?",
+                options = listOf("Saque", "Recepción", "Toque de dedos", "Remate"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple el colocador o armador?",
+                options = listOf("Sacar siempre", "Organizar el ataque del equipo", "Defender en zona", "Liderar el equipo en faltas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántos sets gana un equipo para ganar un partido de vóley?",
+                options = listOf("2", "3", "4", "5"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la medida estándar de altura de la red en vóley masculino?",
+                options = listOf("2.24 metros", "2.43 metros", "2.50 metros", "2.10 metros"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera una falta de rotación?",
+                options = listOf("Sacar mal", "Tener un jugador en posición equivocada al momento del saque", "Tocar el balón con el pie", "Fallar un remate"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué equipo masculino ganó la medalla de oro en Tokio 2021 en vóley?",
+                options = listOf("Brasil", "Francia", "Italia", "Rusia"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué acción se realiza para evitar que el balón toque el suelo tras un remate del rival?",
+                options = listOf("Remate", "Toque de dedos", "Recepción o defensa", "Rotación"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del cuerpo se usa comúnmente para hacer una recepción?",
+                options = listOf("Rodillas", "Cabeza", "Antebrazos", "Hombros"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si el balón toca la línea del campo?",
+                options = listOf("Se considera fuera", "Se repite el punto", "Se considera dentro", "El árbitro decide"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el rol del jugador punta o atacante externo?",
+                options = listOf("Recibir saques y rematar desde la banda", "Solo realizar saques", "Actuar como líbero", "Dirigir al equipo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'ace' en vóley?",
+                options = listOf("Un bloqueo efectivo", "Un saque que termina en punto directo", "Una jugada con tres toques", "Un pase alto cruzado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de balón se usa en vóley profesional?",
+                options = listOf("Cuero liso sin costuras", "Pelota pesada sin cámara", "Balón liviano con superficie texturizada", "Balón de caucho"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuántos cambios por set puede hacer un equipo en vóley FIVB?",
+                options = listOf("6", "12", "8", "10"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador inicia el juego con el saque?",
+                options = listOf("El que esté en la posición 1", "El líbero", "El armador", "El central"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si un jugador bloquea y toca el balón pero su equipo luego da 3 toques más?",
+                options = listOf("Es falta", "Se permite porque el bloqueo no cuenta como uno de los tres toques", "Es punto para el rival", "Se repite el punto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué país es una potencia histórica en vóley masculino y femenino?",
+                options = listOf("Argentina", "Italia", "Brasil", "Canadá"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una infracción común en el toque de dedos?",
+                options = listOf("Hacerlo con los pies", "Realizar un pase corto", "Dobles o retención del balón", "Usar solo una mano"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa una jugada de 'pelota libre'?",
+                options = listOf("Un pase intencional sin remate", "Una pelota que puede ser rematada sin bloqueo", "Una pelota enviada al otro campo sin fuerza", "Un balón que rebota fuera de la cancha"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del cuerpo puede usarse legalmente para jugar en vóley?",
+                options = listOf("Solo brazos", "Solo manos", "Cualquier parte del cuerpo", "Solo torso y brazos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué debe hacer un equipo si pierde el punto cuando tenía el saque?",
+                options = listOf("Pedir tiempo muerto", "Rotar", "Cambiar de libero", "Nada, sigue igual"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de defensa se utiliza cuando el rival tiene un buen rematador?",
+                options = listOf("Defensa por zonas", "Defensa de línea", "Defensa flotada", "Defensa alta"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una jugada típica luego de una buena recepción?",
+                options = listOf("Remate", "Toque con la cabeza", "Tiempo muerto", "Cambio de líbero"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué señal realiza el árbitro principal cuando hay un punto?",
+                options = listOf("Levanta el puño", "Muestra la palma abierta hacia arriba", "Levanta el brazo extendido del lado del equipo que ganó", "Cruza los brazos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de comunicación es importante entre jugadores?",
+                options = listOf("Visual y escrita", "Gritos descoordinados", "Verbal y gestual para coordinar jugadas", "Solo por señas del entrenador"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple el juez de línea?",
+                options = listOf("Determina si el balón tocó línea o salió", "Cuenta los puntos", "Lleva estadísticas", "Indica los cambios"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede hacer el líbero durante el juego?",
+                options = listOf("Sacar y rematar", "Recibir saques y hacer defensa", "Bloquear en la red", "Rotar hacia la zona de ataque"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si el balón toca el techo?",
+                options = listOf("Se repite la jugada", "Punto para el rival", "Solo es válido si cae en campo propio", "Sigue en juego sin interrupción"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la duración de un set en caso de quinto set (tie-break)?",
+                options = listOf("25 puntos", "15 puntos con diferencia de 2", "10 puntos fijos", "Hasta que uno saque ventaja de 3"),
+                correctIndex = 1
             )
         ),
-
 
         //********************************************************************************************************************************
 
@@ -7844,6 +8227,208 @@ object HobbyQuestionsProvider{
                 )
             ),
 
+            //********************************************************************************************************************************
+
+            "Diseño floral" to listOf(
+                    QuizQuestion(
+                        question = "¿Cuál es el objetivo principal del diseño floral?",
+                        options = listOf("Aromatizar un espacio", "Colorear las paredes", "Crear composiciones estéticas con flores", "Evitar que se marchiten las flores"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué herramienta se usa para cortar tallos con precisión?",
+                        options = listOf("Tijeras de papel", "Cuchillo de cocina", "Podadora o tijeras de florista", "Lima metálica", "Podadora o tijeras de florista"),
+                        correctIndex = 3
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué se utiliza para mantener las flores hidratadas en un arreglo?",
+                        options = listOf("Aire comprimido", "Espuma floral (oasis)", "Tierra seca", "Arena"),
+                        correctIndex = 1
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué tipo de flor es ideal para diseños florales duraderos?",
+                        options = listOf("Girasol", "Lirio", "Crisantemo", "Orquídea silvestre"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué es el 'follaje' en un arreglo floral?",
+                        options = listOf("Las flores más grandes", "Decoraciones plásticas", "Las hojas verdes que acompañan las flores", "Las cintas decorativas"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Cuál de los siguientes es un principio del diseño floral?",
+                        options = listOf("Pesadez", "Desorden", "Opacidad", "Equilibrio"),
+                        correctIndex = 3
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué se entiende por 'armonía' en un arreglo floral?",
+                        options = listOf("Que las flores sean del mismo tipo", "Que haya muchas flores", "Que los elementos del diseño combinen entre sí", "Que no se utilice follaje"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué color se asocia con tranquilidad en el diseño floral?",
+                        options = listOf("Azul","Rojo", "Amarillo",  "Naranja"),
+                        correctIndex = 0
+                    ),
+                    QuizQuestion(
+                        question = "¿Cuál es una técnica común en arreglos florales contemporáneos?",
+                        options = listOf("Asimetría", "Simetría estricta", "Flores artificiales", "Uso exclusivo de rosas"),
+                        correctIndex = 0
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué herramienta se utiliza para fijar flores en estructuras?",
+                        options = listOf("Pegamento escolar", "Clavos", "Cinta floral", "Silicona líquida"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué significa 'línea' en diseño floral?",
+                        options = listOf("La forma de una flor", "El tipo de recipiente", "La dirección visual que guía el ojo", "Una cuerda decorativa"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué se logra al usar flores en diferentes etapas de floración?",
+                        options = listOf("Desorden", "Armonía visual", "Pérdida de color", "Menor duración"),
+                        correctIndex = 1
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué tipo de arreglo se usa comúnmente en bodas?",
+                        options = listOf("Centro de mesa bajo", "Arreglo fúnebre", "Ramo en cascada", "Jarrón de exterior"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué flores se asocian comúnmente con el romanticismo?",
+                        options = listOf("Margaritas", "Cactus", "Rosas rojas", "Girasoles"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué tipo de arreglo floral se utiliza típicamente en funerales?",
+                        options = listOf("Bouquet de novia", "Centro de mesa redondo", "Ramillete de solapa", "Corona floral"),
+                        correctIndex = 3
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué propiedad ayuda a mantener las flores frescas por más tiempo?",
+                        options = listOf("Altas temperaturas", "Cambios bruscos de luz", "Agua limpia y fresca", "Ambientes secos"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Cuál es una flor común en diseño floral japonés (ikebana)?",
+                        options = listOf("Girasol", "Clavel", "Crisantemo", "Azucena"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué se busca al crear un punto focal en un arreglo?",
+                        options = listOf("Que todas las flores sean iguales", "Dirigir la atención hacia un área específica", "Reducir el uso de flores", "Alinear los tallos"),
+                        correctIndex = 1
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué flor se usa comúnmente en arreglos secos?",
+                        options = listOf("Hortensia", "Lirio de agua", "Tulipán", "Gladiolo"),
+                        correctIndex = 0
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué significa 'proporción' en diseño floral?",
+                        options = listOf("Cantidad de agua usada", "Relación entre flores y recipiente", "Cantidad de color", "Número exacto de flores"),
+                        correctIndex = 1
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué flor es conocida por su fragancia intensa?",
+                        options = listOf("Crisantemo", "Peonía", "Lavanda", "Dalia"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué es un arreglo monocromático?",
+                        options = listOf("Hecho con un solo tipo de flor", "Hecho sin hojas", "Hecho en un solo color", "Hecho solo con tallos largos", "Hecho en un solo color"),
+                        correctIndex = 3
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué flor simboliza la amistad?",
+                        options = listOf("Rosa roja", "Girasol", "Lirio blanco", "Rosa negra"),
+                        correctIndex = 1
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué se debe hacer con los tallos antes de colocarlos en agua?",
+                        options = listOf("Pintarlos", "Enrollarlos", "Cortarlos en diagonal", "Secarlos al sol"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué tipo de floración dura más en florero?",
+                        options = listOf("Rosas abiertas", "Tulipanes", "Claveles", "Lirios completamente abiertos"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué se utiliza para dar altura en un diseño floral?",
+                        options = listOf("Flores de base", "Follaje rastrero", "Tallos largos o estructuras", "Flores pequeñas", "Tallos largos o estructuras"),
+                        correctIndex = 3
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué color suele utilizarse en arreglos elegantes y sobrios?",
+                        options = listOf("Fucsia", "Amarillo neón", "Blanco", "Verde lima"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué tipo de arreglo floral se lleva en la solapa?",
+                        options = listOf("Boutonniere","Corsage", "Ramo de novia",  "Corona de flores"),
+                        correctIndex = 0
+                    ),
+                    QuizQuestion(
+                        question = "¿Cuál de las siguientes es una flor de temporada primavera-verano?",
+                        options = listOf("Poinsettia", "Crisantemo", "Tulipán", "Acebo"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué flor es muy usada en arreglos tropicales?",
+                        options = listOf("Hortensia", "Ave del paraíso", "Rosa", "Clavel"),
+                        correctIndex = 1
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué estilo floral enfatiza la línea y el espacio negativo?",
+                        options = listOf("Moderno europeo", "Campestre", "Ikebana", "Minimalista urbano"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué material se puede usar para estructuras modernas?",
+                        options = listOf("Cartón", "Ramas secas, alambres o bambú", "Tierra húmeda", "Paños húmedos"),
+                        correctIndex = 1
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué herramienta se usa para pelar tallos gruesos?",
+                        options = listOf("Cuchillo de mantequilla", "Cepillo de uñas", "Pelador o cuchillo floral", "Tenedor de jardinería"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué es el 'balance' visual en un arreglo?",
+                        options = listOf("El peso del florero", "Cantidad de agua usada", "Distribución armoniosa del peso visual", "Igual número de flores en cada lado"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué se puede hacer para evitar que las flores se marchiten rápido?",
+                        options = listOf("Dejarlas al sol directo", "No cambiar el agua", "Cortar tallos cada pocos días", "Ponerles sal", "Cortar tallos cada pocos días"),
+                        correctIndex = 3
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué flor es conocida por su forma redonda y textura densa?",
+                        options = listOf("Girasol", "Dalia", "Geranio", "Jazmín"),
+                        correctIndex = 1
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué significa 'textura' en el diseño floral?",
+                        options = listOf("Color de las flores", "Cantidad de flores", "Sensación visual o táctil de las superficies", "Tipo de aroma"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Cuál es una buena práctica al transportar arreglos florales?",
+                        options = listOf("Ponerlos en bolsas cerradas", "Mantenerlos sin agua", "Sujetar firmemente y proteger del calor", "Voltearlos para que respiren"),
+                        correctIndex = 2
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué estilo floral es más natural y suelto?",
+                        options = listOf("Lineal japonés", "Romántico clásico", "Simétrico ceremonial", "Campestre o rústico"),
+                        correctIndex = 3
+                    )
+                ),
+
+
+
         //********************************************************************************************************************************
 
 
@@ -7946,6 +8531,209 @@ object HobbyQuestionsProvider{
                 correctIndex = 1
             )
         ),
+        //************************************************************************************************************************
+
+
+        "Rummy Burako" to listOf(
+                QuizQuestion(
+                    question = "¿Cuántas fichas contiene el juego estándar de Rummy Burako?",
+                    options = listOf("44", "56", "104", "78"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Cuántos jugadores pueden participar en una partida típica?",
+                    options = listOf("2‑6", "8‑10", "11‑12", "1 solo"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Qué se necesita para 'hacer burako'?",
+                    options = listOf("Una escalera de tres fichas", "Dos tríos", "Siete fichas iguales", "Dos escaleras de cinco fichas"),
+                    correctIndex = 3
+                ),
+
+                QuizQuestion(
+                    question = "¿Qué valor tienen los comodines en Burako?",
+                    options = listOf("0 puntos", "20 puntos", "50 puntos", "100 puntos"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Cómo se inicia una partida?",
+                    options = listOf("Cada jugador toma 15 fichas", "Tirada al azar de 10 fichas", "Empieza quien tenga la ficha 1‑negra", "Se reparten 20 fichas"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Cuál es el objetivo principal del Rummy Burako?",
+                    options = listOf("Acumular puntos", "Descartar todas las fichas", "Formar solo escaleras", "Ser el último en jugar"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué sucede al descartar una ficha?",
+                    options = listOf("Termina el turno sin robar", "El oponente puede tomarla", "Se cuenta como joker", "Pierde turno"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué es un 'pozo' en Burako?",
+                    options = listOf("El montículo de descarte", "El montón donde se acumulan burakos terminados", "La mano de fichas oculta", "Un tipo de combinación"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué pasa si el pozo se ha vaciado?",
+                    options = listOf("Se repone desde el descarte", "El juego termina", "Se mezclan fichas", "Nada cambia"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Qué se considera un burako limpio?",
+                    options = listOf("Sin comodines", "Solo con comodines", "Sin escaleras", "Incluyendo duplicados"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Cuántas fichas se roban al inicio del turno?",
+                    options = listOf("1 o del pozo o del descarte", "2 del pozo obligatoriamente", "3 del descarte", "4 del mazo"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Qué combina un 'trío'?",
+                    options = listOf("Tres fichas distintas del mismo color", "Tres fichas con el mismo número", "Tres comodines", "Tres escaleras"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Cuándo se puede 'hacer salida'?",
+                    options = listOf("Con un burako limpio", "Al reunir la salida mínima (50/51 puntos)", "Con tres tríos", "Con tres comodines"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué puntaje mínimo se requiere para hacer la salida?",
+                    options = listOf("30 puntos", "50/51 puntos", "70 puntos", "100 puntos"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué son los 'puntos de salida'?",
+                    options = listOf("Puntos ganados al final", "Puntos del primer depósito en la mesa", "Puntos del último burako", "Puntos de los descartes"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué ocurre si robas del pozo pero no usas la ficha en una jugada válida?",
+                    options = listOf("Pierdes turno", "Debes descartarla automáticamente", "Pierdes 10 puntos", "Se descarta sin uso"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué significa 'armar' en Burako?",
+                    options = listOf("Separar fichas", "Formar una combinación válida", "Robar extra", "Perder fichas"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué se contabiliza al final de la partida?",
+                    options = listOf("Solo burakos", "Solo descartes", "Burakos y fichas no jugadas", "Tríos y escaleras"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Cómo se cierra la partida?",
+                    options = listOf("Haciendo burako limpio", "Quedándose sin fichas", "Con comodines en la mesa", "Con más de 100 puntos"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué vale más, un burako limpio o sucio?",
+                    options = listOf("Suyo valen lo mismo", "Sujeto valen más", "Limpio vale más", "Suelto vale más"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿En qué consiste un burako sucio?",
+                    options = listOf("Tiene comodines", "No tiene escaleras", "Está incompleto", "Tiene más de 7 fichas"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Qué valor extra tienen los burakos sucios comparado con los limpios?",
+                    options = listOf("0 puntos", "20 puntos menos", "Mismo valor", "20 puntos más"),
+                    correctIndex = 3
+                ),
+                QuizQuestion(
+                    question = "¿Qué se hace con los comodines en escaleras mezcladas?",
+                    options = listOf("No se permiten", "Pueden completar escaleras o tríos", "Solo en tríos", "Debes descartarlos"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué acción permite tomar la ficha que descartó el oponente?",
+                    options = listOf("Robar sin restricciones", "Solo si la usas inmediatamente", "Puedes guardarla", "Robar y pasar turno"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Cuándo se pierde la salida si no se alcanza el mínimo?",
+                    options = listOf("Se pierde turno", "Se penaliza con -30 puntos", "Se continúa igual", "Se gana de todos modos"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué ocurre si se agota el mazo de robo?",
+                    options = listOf("Se reshuffle y sigue", "Se termina la partida", "Se roba del descarte", "Queda anulado"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Cómo se cuentan los puntos de las fichas que quedaron en mano del perdedor?",
+                    options = listOf("No cuentan", "Se suman y restan del perdedor", "Van al ganador", "Se ignoran"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué puntuación final suele determinar el ganador?",
+                    options = listOf("2500 puntos", "500 puntos", "1000 puntos", "200 puntos"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué tipo de escalera es válida?",
+                    options = listOf("De más de 7 fichas", "Con comodín en medio", "De sólo 2 fichas", "Con comodines al final"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Quién puede tomar una ficha del descarte?",
+                    options = listOf("Solo el inicio", "Siempre que la uses luego", "Solo el oponente", "Nadie"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Cuál es la longitud mínima de escalera para hacer burako?",
+                    options = listOf("5 fichas", "3 fichas", "7 fichas", "10 fichas"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Qué pieza especial permite reemplazar otras fichas?",
+                    options = listOf("Burako", "Comodín", "Trío", "Pozo"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué se debe hacer si un jugador se queda sin fichas?",
+                    options = listOf("Pierde automáticamente", "Se cierra y se puntúan las manos", "Gana doble", "Continúa sin robar"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Cuál es la función del descarte?",
+                    options = listOf("Aumentar el pozo", "Finalizar la partida", "Reducir fichas en mano", "Robar puntos"),
+                    correctIndex = 2
+                ),
+                QuizQuestion(
+                    question = "¿Cuál es la penalización si guardas una ficha del descarte sin usarla?",
+                    options = listOf("–10 puntos", "Sanción de turno", "– 5 puntos", "No hay penalización"),
+                    correctIndex = 0
+                ),
+                QuizQuestion(
+                    question = "¿Cuántos burakos completos puede haber en una partida sin comodines?",
+                    options = listOf("1", "2", "3", "0"),
+                    correctIndex = 1
+                ),
+                QuizQuestion(
+                    question = "¿Qué condición permite usar dos comodines en la misma escalera?",
+            options = listOf("Escalera muy larga", "Comodín + comodín + ficha real", "No está permitido", "Solo en tríos"),
+            correctIndex = 1
+        ),
+        QuizQuestion(
+            question = "¿Qué nombre recibe el montón de fichas disponibles para robar?",
+            options = listOf("Pozo", "Descarte", "Mazo", "Burako"),
+            correctIndex = 2
+        ),
+        QuizQuestion(
+            question = "¿Cuándo un burako sucio vale menos que uno limpio?",
+            options = listOf("Siempre", "Solo si lleva comodines", "Nunca", "Si es muy grande"),
+            correctIndex = 1
+        )
+    ),
+
+
 
         //************************************************************************************************************************
 
@@ -7989,17 +8777,17 @@ object HobbyQuestionsProvider{
                 question = "¿Qué es el 'show, don't tell' en escritura?",
                 options = listOf("Decir lo que pasa claramente", "Mostrar con acciones en vez de explicar", "Usar adjetivos siempre", "Evitar el diálogo"),
                 correctIndex = 1
-            ),
-            QuizQuestion(
-                question = "¿Cuál es el antónimo de escritura persuasiva?",
+                    ),
+                    QuizQuestion(
+                        question = "¿Cuál es el antónimo de escritura persuasiva?",
                 options = listOf("Narrativa", "Informativa", "Argumentativa", "Crítica"),
                 correctIndex = 1
-            ),
-            QuizQuestion(
-                question = "¿Qué se revisa en una corrección de estilo?",
+                    ),
+                    QuizQuestion(
+                        question = "¿Qué se revisa en una corrección de estilo?",
                 options = listOf("Ortografía solamente", "Contenido factual", "Fluidez, tono y coherencia", "Diseño visual"),
                 correctIndex = 2
-            ),
+                            ),
             QuizQuestion(
                 question = "¿Qué es un ensayo?",
                 options = listOf("Texto en verso", "Narración corta", "Reflexión argumentativa", "Resumen biográfico"),
@@ -9794,6 +10582,1443 @@ object HobbyQuestionsProvider{
                 correctIndex = 1
             )
         ),
+
+        //************************************************************************************************************************
+
+        "Correr" to listOf(
+            QuizQuestion(
+                question = "¿Cuál es uno de los principales beneficios físicos de correr regularmente?",
+                options = listOf("Mejorar la digestión", "Fortalecer el sistema cardiovascular", "Reducir la visión", "Desarrollar habilidades manuales"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'ritmo' al correr?",
+                options = listOf("La cantidad de calorías quemadas", "La distancia entre pasos", "El tiempo promedio por kilómetro o milla", "El número de zancadas por minuto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de calzado es ideal para correr?",
+                options = listOf("Botas de montaña", "Zapatillas con buena amortiguación y soporte", "Sandalias deportivas", "Zapatos formales cómodos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante el calentamiento antes de correr?",
+                options = listOf("Para sudar más", "Para evitar lesiones y preparar el cuerpo", "Para gastar energía antes", "Para mejorar la digestión"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué músculo se trabaja especialmente al correr?",
+                options = listOf("Bíceps", "Gemelos", "Trapecio", "Pectorales"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa hacer una carrera de 10K?",
+                options = listOf("Correr durante 10 minutos", "Correr 10 kilómetros", "Correr con 10 personas", "Correr 10 vueltas a una pista"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué rol cumple la hidratación durante una carrera?",
+                options = listOf("Disminuir la motivación", "Mejorar el humor", "Mantener el rendimiento y evitar calambres", "Ayudar a correr más lento"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una señal de sobreentrenamiento en corredores?",
+                options = listOf("Sueño reparador", "Aumento progresivo del rendimiento", "Fatiga constante y dolor persistente", "Más hambre por la noche"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'fartlek'?",
+                options = listOf("Una marca de calzado", "Una técnica de respiración", "Un entrenamiento con cambios de ritmo", "Un tipo de terreno"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué superficie es más blanda para correr y menos agresiva para las articulaciones?",
+                options = listOf("Asfalto", "Hormigón", "Césped o tierra", "Baldosas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un pulsómetro o smartwatch al correr?",
+                options = listOf("Medir la calidad del aire", "Detectar animales en ruta", "Controlar el ritmo cardíaco y el esfuerzo", "Reproducir videos en carrera"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'media maratón'?",
+                options = listOf("Una carrera de 10 km", "Una carrera de 21.097 km", "Una maratón no competitiva", "Una carrera sin público"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'carrera en trail'?",
+                options = listOf("Correr en pistas de atletismo", "Correr en montaña o senderos naturales", "Correr sobre una cinta en el gimnasio", "Correr en playas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas bebidas es la más recomendable tras correr?",
+                options = listOf("Jugo con gas", "Agua o bebida isotónica", "Refresco azucarado", "Cerveza"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca al estirar después de correr?",
+                options = listOf("Fortalecer los brazos", "Evitar lesiones y relajar los músculos", "Aumentar la frecuencia cardíaca", "Quemar más grasa"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una técnica común de respiración al correr?",
+                options = listOf("Respirar solo por la nariz", "Inspirar y exhalar de forma rítmica según el paso", "Contener la respiración", "Hiperventilar rápidamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'tiempo neto' en una carrera oficial?",
+                options = listOf("El tiempo total desde el disparo de salida", "El tiempo real desde que cruzás la línea de largada hasta llegar a la meta", "El promedio del equipo", "El tiempo descontando pausas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una buena postura al correr?",
+                options = listOf("Hombros encorvados", "Mirada baja", "Espalda recta, mirada al frente y brazos relajados", "Zancadas muy largas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué suele incluir un plan de entrenamiento para correr?",
+                options = listOf("Días de descanso, rutinas progresivas, técnica y estiramientos", "Solo carreras largas", "Ejercicios de fuerza sin correr", "Entrenamiento de brazos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede causar dolor en la espinilla al correr (periostitis)?",
+                options = listOf("Usar ropa ajustada", "Zapatillas desgastadas o técnica incorrecta", "Correr en ayunas", "No usar medias"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una carrera de relevos?",
+                options = listOf("Una competencia de velocidad en bicicleta", "Una carrera donde cada integrante corre una parte del recorrido y pasa un testigo", "Una maratón individual", "Una caminata de larga distancia"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué efecto tiene correr en la salud mental?",
+                options = listOf("Puede aumentar el estrés", "No tiene impacto", "Favorece la liberación de endorfinas y reduce el estrés", "Daña la memoria a corto plazo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda comer antes de una carrera larga?",
+                options = listOf("Comida muy grasosa", "Alimentos livianos con carbohidratos complejos", "Solo frutas ácidas", "Nada en absoluto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'marcapasos' en una carrera?",
+                options = listOf("Un chip en el cuerpo", "Un corredor que mantiene un ritmo constante para guiar a otros", "Una app de música", "Un monitor de sueño"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se mide con el VO2 max en corredores?",
+                options = listOf("Nivel de hidratación", "Velocidad promedio", "Máxima capacidad de oxígeno utilizada en ejercicio", "Frecuencia cardíaca en reposo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa entrenar en 'zona aeróbica'?",
+                options = listOf("Entrenar solo con pesas", "Correr bajo un puente", "Ejercicio moderado con suficiente oxígeno para sostener el esfuerzo", "Correr al máximo todo el tiempo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una ventaja de correr por la mañana?",
+                options = listOf("Hay más tráfico", "Ayuda a establecer una rutina y mejora el estado de ánimo del día", "Hay menos oxígeno", "Evita dormir bien"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué accesorio ayuda a mantener objetos personales al correr?",
+                options = listOf("Riñonera o cinturón de hidratación", "Bufanda", "Guantes de lana", "Bastón de trekking"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede causar una mala técnica de zancada?",
+                options = listOf("Mejor oxigenación", "Fatiga muscular más lenta", "Lesiones en rodillas y tobillos", "Mayor flexibilidad"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'desnivel acumulado' en una carrera?",
+                options = listOf("La distancia total recorrida", "El cambio total de altura ganado o perdido durante la ruta", "La cantidad de personas inscritas", "El tiempo de descanso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué ropa es recomendable para correr con frío?",
+                options = listOf("Ropa de algodón gruesa", "Múltiples capas transpirables y gorro", "Shorts y musculosa", "Impermeables pesados"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede producir una mala hidratación al correr?",
+                options = listOf("Sueño profundo", "Deshidratación, calambres o bajo rendimiento", "Más resistencia", "Mayor velocidad"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'pace' en running?",
+                options = listOf("Ritmo de carrera por kilómetro o milla", "Cantidad de carreras por mes", "Frecuencia cardíaca", "Cantidad de pasos por minuto"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del cuerpo se debe fortalecer para evitar lesiones al correr?",
+                options = listOf("Orejas", "Tobillos, rodillas y core", "Cuello", "Manos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué suele indicar una frecuencia cardíaca muy elevada al correr a ritmo moderado?",
+                options = listOf("Bajo rendimiento físico", "Calidad de sueño óptima", "Buen estado físico", "Estás trotando correctamente"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué factor puede mejorar tu rendimiento en carrera con el tiempo?",
+                options = listOf("Dormir mal", "Ingesta desordenada", "Entrenamiento progresivo y constante", "Evitar el calentamiento"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué suele causar ampollas al correr?",
+                options = listOf("Buena hidratación", "Zapatillas nuevas sin ablandar o calcetines inadecuados", "Estiramientos", "Respirar por la nariz"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de carrera se realiza en una cinta de correr?",
+                options = listOf("Trail", "Indoor running", "Carrera de obstáculos", "Fartlek extremo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es lo ideal al correr en bajadas?",
+                options = listOf("Tirarse hacia adelante", "Aterrizar con control y pasos cortos", "Zancadas largas y rápidas", "Cerrar los ojos por la velocidad"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un error común en principiantes al empezar a correr?",
+                options = listOf("Calentar correctamente", "Empezar demasiado rápido sin preparación", "Usar ropa deportiva", "Elegir zapatillas cómodas"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Voluntariado" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el voluntariado?",
+                options = listOf("Una obligación escolar", "Una actividad no remunerada que busca ayudar a otros o al entorno", "Una competencia deportiva", "Un empleo a tiempo parcial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas actividades es un ejemplo de voluntariado?",
+                options = listOf("Cobrar entradas en un cine", "Cuidar animales en un refugio sin recibir pago", "Dar clases en una universidad privada", "Trabajar en una empresa de tecnología"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué característica define al voluntariado?",
+                options = listOf("Se hace por obligación", "Es remunerado", "Es solidario y altruista", "Debe durar al menos un año"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué motivación personal es común en personas voluntarias?",
+                options = listOf("Ganar dinero", "Ser famoso", "Contribuir al bienestar social", "Recibir un título académico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿En qué sectores se puede hacer voluntariado?",
+                options = listOf("Salud, educación, medio ambiente, inclusión social, cultura", "Solo en empresas", "Únicamente en iglesias", "Exclusivamente en el extranjero"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el voluntariado ambiental?",
+                options = listOf("Ayudar en hospitales", "Cuidar parques y promover el cuidado del planeta", "Dar clases particulares", "Asistir a reuniones escolares"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una forma común de ayudar en comedores comunitarios?",
+                options = listOf("Diseñar afiches", "Tocar música", "Preparar y servir alimentos a quienes lo necesitan", "Dar entrevistas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué actitud es fundamental en el voluntariado?",
+                options = listOf("Egoísmo", "Competencia", "Empatía y compromiso", "Ambición financiera"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué rol puede cumplir un voluntario en eventos deportivos solidarios?",
+                options = listOf("Organizar apuestas", "Cocinar para el equipo", "Coordinar inscripciones o repartir agua", "Vender entradas para beneficio propio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas no es una motivación válida para hacer voluntariado?",
+                options = listOf("Ayudar a otros", "Conocer gente nueva", "Fortalecer el currículum", "Buscar lucro personal"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante el compromiso en el voluntariado?",
+                options = listOf("Para recibir beneficios económicos", "Para asegurarse de que haya cámaras", "Porque muchas organizaciones dependen del esfuerzo voluntario regular", "Para competir con otros voluntarios"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'responsabilidad social' en el contexto del voluntariado?",
+                options = listOf("Delegar tareas", "Participar activamente en mejorar la comunidad", "Supervisar empleados", "Obtener ganancias de la ayuda"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede aprender un voluntario al participar en una ONG?",
+                options = listOf("Solamente tareas físicas", "Política internacional", "Trabajo en equipo, empatía, gestión de recursos", "Técnicas militares"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué grupo suele recibir ayuda en voluntariados sociales?",
+                options = listOf("Personas con recursos suficientes", "Empresas privadas", "Personas en situación de vulnerabilidad", "Comerciantes exitosos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué habilidad interpersonal es clave en el voluntariado?",
+                options = listOf("Autoridad", "Empatía", "Negociación agresiva", "Competitividad"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el voluntariado internacional?",
+                options = listOf("Solo se hace en el país de origen", "Consiste en ayudar en proyectos de otros países", "Un tipo de turismo", "Un curso en línea"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué actitud se espera de alguien que se ofrece como voluntario?",
+                options = listOf("Pasividad", "Interés genuino y disposición a colaborar", "Pedir beneficios", "No involucrarse demasiado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un valor promovido por el voluntariado?",
+                options = listOf("Competitividad", "Individualismo", "Solidaridad", "Inmediatez"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede hacer un voluntario en un refugio de animales?",
+                options = listOf("Asustar animales para que corran", "Dibujar los carteles", "Ayudar a limpiar, alimentar y socializar con los animales", "Comprar nuevos animales"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué hace que una experiencia de voluntariado sea significativa?",
+                options = listOf("Cantidad de horas", "Contribución genuina y aprendizaje personal", "Lugar del voluntariado", "Cantidad de fotos publicadas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se entiende por voluntariado corporativo?",
+                options = listOf("Voluntarios que trabajan solo para empresas", "Iniciativas donde empresas impulsan a sus empleados a hacer voluntariado", "Actividades de marketing disfrazadas", "Donaciones obligatorias de los trabajadores"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa ser voluntario en una campaña de reforestación?",
+                options = listOf("Vender árboles", "Talar con permisos", "Ayudar a plantar árboles y promover el cuidado ambiental", "Recolectar hojas secas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué rol puede tener un voluntario en emergencias o catástrofes?",
+                options = listOf("Evitar actuar para no molestar", "Coordinar redes de ayuda, donar, colaborar en centros de evacuados", "Hacer transmisiones en redes sociales", "Recaudar fondos personales"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede aportar el voluntariado a tu desarrollo personal?",
+                options = listOf("Confusión profesional", "Fatiga emocional", "Crecimiento en empatía, trabajo en equipo y perspectiva social", "Aislamiento"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos NO es un tipo de voluntariado habitual?",
+                options = listOf("Voluntariado cultural", "Voluntariado deportivo", "Voluntariado en cárceles", "Voluntariado de especulación financiera"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'acción solidaria sostenida'?",
+                options = listOf("Una ayuda puntual", "Una actividad que ocurre una sola vez", "Un compromiso constante en el tiempo con una causa", "Una campaña en redes sociales"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es clave para que una organización reciba bien a nuevos voluntarios?",
+                options = listOf("Capacitación inicial, acompañamiento y claridad en las tareas", "Exigencias excesivas", "Pedir resultados inmediatos", "Que se trabaje sin contacto con otros"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el voluntariado digital?",
+                options = listOf("Hacer posteos pagados", "Ayudar desde casa usando herramientas digitales", "Usar tecnología para beneficio personal", "Subir videos a redes sociales sin causa solidaria"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué valor se fortalece al trabajar con personas de distintas realidades sociales?",
+                options = listOf("Prejuicio", "Empatía y tolerancia", "Competitividad", "Distanciamiento"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante la escucha activa en el voluntariado?",
+                options = listOf("Para discutir más", "Para planear discursos", "Para comprender realmente las necesidades de las personas o comunidades", "Para corregir a los demás"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una forma efectiva de apoyar a una organización si no podés participar presencialmente?",
+                options = listOf("Enviar memes", "Difundir su trabajo, donar, o ayudar online", "Ignorar sus publicaciones", "Enviar cartas sin contexto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio adicional puede tener el voluntariado para jóvenes estudiantes?",
+                options = listOf("Conseguir excusas para faltar a clase", "Acceder a entrevistas laborales más rápido por su compromiso social", "Tener más tiempo libre", "Evitar hacer tareas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué valor ético debe tener todo voluntario?",
+                options = listOf("Competencia desleal", "Solidaridad y respeto", "Afanar protagonismo", "Buscar recompensas personales"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta puede utilizar una ONG para organizar sus voluntarios?",
+                options = listOf("Un grupo de WhatsApp o una plataforma de gestión de tareas", "Un diario íntimo", "Carteles en la calle", "Llamadas aleatorias"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué frase refleja mejor el espíritu del voluntariado?",
+                options = listOf("Hacerlo si me pagan", "Ayudo cuando tenga tiempo libre únicamente", "Doy lo mejor de mí para construir un mundo más justo", "Solo si hay beneficios a cambio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se espera de un voluntario que trabaja con personas mayores?",
+                options = listOf("Velocidad y eficiencia", "Paciencia, escucha y respeto", "Competencia y retos", "Que los ignore si no lo entienden"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de voluntariado se puede hacer en bibliotecas populares?",
+                options = listOf("Dar clases de surf", "Ayudar a organizar libros, alfabetizar o coordinar talleres", "Vender libros a altos precios", "Escribir grafitis en los libros"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hace más efectivo el trabajo voluntario en grupo?",
+                options = listOf("Competir entre los voluntarios", "No comunicarse", "Tener objetivos claros y colaborar de forma coordinada", "Imponer decisiones"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una característica clave de las ONG que organizan voluntariado?",
+                options = listOf("Fines lucrativos", "Independencia y misión social clara", "Secretismo", "Pertenencia obligatoria al Estado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una jornada solidaria?",
+                options = listOf("Una reunión social común", "Un día dedicado a una acción concreta de voluntariado", "Un día feriado", "Un festejo escolar"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Restaurar muebles" to listOf(
+            QuizQuestion(
+                question = "¿Qué se entiende por restaurar un mueble?",
+                options = listOf("Reemplazarlo por uno nuevo", "Mejorar o devolverle funcionalidad y estética a uno viejo", "Pintarlo sin lijarlo", "Romperlo para usar sus piezas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función de la lija en la restauración de muebles?",
+                options = listOf("Manchar la madera", "Eliminar impurezas y preparar la superficie", "Pegar partes sueltas", "Barnizar directamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer antes de pintar un mueble viejo?",
+                options = listOf("Encerrarlo", "Aplicar barniz directamente", "Lijarlo y limpiarlo adecuadamente", "Mojarlo con detergente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué producto se usa comúnmente para proteger la madera tras pintarla?",
+                options = listOf("Pintura acrílica", "Goma de borrar", "Aceite de cocina", "Barniz o cera para madera"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta es útil para retirar clavos o tornillos oxidados de muebles antiguos?",
+                options = listOf("Serrucho", "Destornillador plano", "Pinza o tenaza", "Martillo de goma"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'decapar' un mueble?",
+                options = listOf("Repararlo con clavos nuevos", "Cubrirlo con tela", "Quitar la pintura o barniz antiguo", "Colocarle vidrio encima"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito de aplicar sellador en la restauración?",
+                options = listOf("Evitar que la pintura se adhiera", "Proteger y sellar la superficie para que dure más el acabado", "Volver más rústico el mueble", "Pegar los cajones"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de pintura se suele usar para un estilo vintage?",
+                options = listOf("Pintura brillante al aceite", "Pintura epoxi", "Chalk paint (pintura a la tiza)", "Esmalte sintético negro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una patina en restauración?",
+                options = listOf("Un barniz brillante", "Un recubrimiento de vidrio", "Un efecto envejecido en la pintura", "Un tipo de mueble plegable"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer si un mueble tiene carcoma (bichos de la madera)?",
+                options = listOf("Pintarlo encima", "Lijarlo sin más", "Aplicar un tratamiento anticarcoma", "Cubrirlo con telas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento de seguridad es esencial al usar productos químicos en restauración?",
+                options = listOf("Gafas de sol", "Guantes y máscara", "Ropa formal", "Zapatos abiertos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos es un paso básico en cualquier restauración?",
+                options = listOf("Pulverizar el mueble", "Revisar y reparar estructura, limpiar, lijar, pintar", "Congelar el mueble", "Clavar sin revisar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de pegamento se recomienda para unir partes de madera en un mueble?",
+                options = listOf("Silicona líquida", "Cola vinílica o adhesivo para madera", "Pegamento escolar", "Cemento de contacto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede indicar un mueble con mal olor y manchas oscuras internas?",
+                options = listOf("Buen estado", "Presencia de humedad o moho", "Exceso de barniz", "Uso reciente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta es ideal para cortar piezas de madera con precisión?",
+                options = listOf("Cinta métrica", "Destornillador", "Sierra de calar", "Pinzas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una masilla para madera?",
+                options = listOf("Un barniz líquido", "Un relleno para grietas o agujeros", "Un tinte decorativo", "Un tipo de lija"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué precaución se debe tomar al usar un soplete decorativo en madera?",
+                options = listOf("Usarlo sobre alfombras", "Controlar el fuego y usar protección", "Soplar con fuerza", "Aplicarlo en lugares cerrados sin ventilación"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de iluminación ayuda a detectar imperfecciones al restaurar muebles?",
+                options = listOf("Luz de velas", "Luz tenue", "Luz blanca fuerte o natural", "Luz de colores cálidos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo de restauración busca conservar al máximo la apariencia original del mueble?",
+                options = listOf("Rústico extremo", "Minimalista", "Restauración conservadora", "Industrial agresivo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio tiene restaurar muebles en lugar de desecharlos?",
+                options = listOf("Contaminar más", "Gastar más dinero", "Reducir residuos y dar valor a lo antiguo", "Tener menos muebles en casa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué hace un decapante químico en un mueble?",
+                options = listOf("Sella la pintura", "Quita capas viejas de barniz o pintura", "Aumenta la durabilidad", "Le da brillo final"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué riesgo puede haber al lijar sin barbijo?",
+                options = listOf("Ruido", "Inhalación de polvo tóxico o dañino", "Falta de luz", "Gasto energético excesivo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el uso de la goma laca en restauración?",
+                options = listOf("Como capa base para pintura", "Para limpiar herramientas", "Para dar un acabado brillante y proteger la madera", "Para fijar clavos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué maderas suelen usarse en muebles antiguos?",
+                options = listOf("Plástico reciclado", "Madera prensada", "Roble, nogal, cedro", "Fibra de vidrio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia hay entre restaurar y reciclar un mueble?",
+                options = listOf("Restaurar es decorarlo con papeles, reciclar es lo mismo", "Restaurar devuelve la funcionalidad original; reciclar implica una transformación creativa", "Reciclar es para tirar cosas", "No hay diferencia"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra aplicando cera sobre un mueble restaurado?",
+                options = listOf("Volverlo más pesado", "Oscurecerlo sin protección", "Brillo, suavidad y protección final", "Eliminar el color completamente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es la técnica del decapado con vela?",
+                options = listOf("Usar velas para decorar", "Quemar pintura vieja", "Crear un efecto envejecido dejando zonas sin pintar", "Derretir cera sobre la madera"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es importante hacer antes de aplicar pintura a la tiza?",
+                options = listOf("Hervir el mueble", "Pulverizar con agua", "Lijar suavemente y limpiar el polvo", "Cubrirlo con plástico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué efecto tiene aplicar betún de judea en muebles?",
+                options = listOf("Color uniforme y moderno", "Brillo intenso", "Efecto envejecido y tonos oscuros", "Decoloración completa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta eléctrica agiliza el proceso de lijado?",
+                options = listOf("Aspiradora", "Cepillo de dientes eléctrico", "Lijadora orbital", "Sierra circular"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Por qué conviene desmontar un mueble antes de restaurarlo?",
+                options = listOf("Para romperlo más fácil", "Para limpiar mejor cada parte y evitar zonas inaccesibles", "Para cambiarle todas las piezas", "Para no tener que pintarlo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una restauración 'intervencionista'?",
+                options = listOf("Sin cambiar nada", "Rehacer piezas y cambiar funcionalidad original", "Solo limpiar el mueble", "Usar solo materiales digitales"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se puede usar para limpiar restos de pegamento viejo?",
+                options = listOf("Agua con sal", "Solvente específico o alcohol", "Jabón de manos", "Tierra seca"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué precaución tomar al usar un barniz inflamable?",
+                options = listOf("Dejarlo al sol", "Ventilar bien el espacio y alejar fuentes de calor", "Guardarlo con papel", "Agitarlo en exceso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa hacer una restauración ecológica?",
+                options = listOf("Usar plásticos nuevos", "Evitar productos tóxicos y reutilizar materiales", "Tirar muebles grandes", "Decorar con aerosoles brillantes"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda para un acabado suave al tacto?",
+                options = listOf("Dejar la madera al natural", "Lijar entre capas y finalizar con cera o barniz", "No lijar nunca", "Solo pintar con brocha gruesa"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de pincel es ideal para pintura a la tiza?",
+                options = listOf("De cerdas suaves y planas", "Cepillo de alambre", "Rodillo de lana", "Pincel escolar redondo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio tiene aplicar imprimación antes de pintar?",
+                options = listOf("Hace más feo el mueble", "Permite mejor adherencia de la pintura y mayor durabilidad", "Lo hace más pesado", "Sirve como barniz final"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple la cinta de pintor en restauración?",
+                options = listOf("Decorar bordes", "Evitar manchas y delimitar zonas", "Unir piezas", "Reemplazar clavos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una grieta en una pata del mueble?",
+                options = listOf("Que es nuevo", "Que es moderno", "Posible debilidad estructural que debe repararse", "Que está limpio"),
+                correctIndex = 2
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Golf" to listOf(
+            QuizQuestion(
+                question = "¿Cuál es el objetivo principal en el golf?",
+                options = listOf("Hacer el mayor número de golpes", "Llevar la pelota al hoyo en el menor número de golpes", "Evitar los obstáculos del campo", "Jugar en el menor tiempo posible"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cómo se llama el golpe inicial desde el área de salida?",
+                options = listOf("Putt", "Swing", "Drive", "Chip"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'par' en golf?",
+                options = listOf("Un error común", "La cantidad estándar de golpes que se espera para un hoyo", "Un tipo de palo", "Una penalización"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se entiende por 'birdie'?",
+                options = listOf("Hacer un golpe más que el par", "Hacer un hoyo en un solo golpe", "Hacer un golpe menos que el par", "Golpear un pájaro accidentalmente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué instrumento se usa para golpear la pelota en el green?",
+                options = listOf("Driver", "Wedge", "Iron", "Putter"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si la pelota cae en un bunker?",
+                options = listOf("Debe dejarse allí", "Se puede levantar sin penalización", "Debe jugarse desde allí con un golpe de recuperación", "Se repite el tiro sin sanción"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'handicap' en golf?",
+                options = listOf("Una lesión común", "Un tipo de torneo", "Un sistema para igualar el nivel entre jugadores", "Una forma de contar los hoyos ganados"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuántos hoyos tiene una ronda estándar de golf profesional?",
+                options = listOf("9", "12", "18", "24"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'eagle'?",
+                options = listOf("Hacer dos golpes menos que el par", "Fallar dos veces seguidas", "Hacer un hoyo en uno", "Un tipo de palo largo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador es conocido por revolucionar el golf moderno?",
+                options = listOf("Jack Nicklaus", "Tiger Woods", "Phil Mickelson", "Arnold Palmer"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de palo se usa normalmente para golpes cortos y elevados?",
+                options = listOf("Putter", "Iron 3", "Wedge", "Driver"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera una penalización?",
+                options = listOf("Golpear la pelota con la cara del palo", "Tardar demasiado en jugar", "Perder una pelota o golpear fuera de límites", "Usar un palo nuevo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un hoyo en uno?",
+                options = listOf("Completar un hoyo con un solo golpe", "Hacer tres golpes menos que el par", "Hacer un birdie en par 5", "Sacar la pelota del green en un solo intento"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué superficie es conocida como 'fairway'?",
+                options = listOf("Zona de salida", "Zona con césped corto entre el tee y el green", "Área de descanso", "Terreno fuera de límites"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'bogey'?",
+                options = listOf("Un hoyo completado en un golpe", "Un golpe más que el par", "Un tipo de pelota", "Una falta técnica"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si golpeás la pelota dos veces seguidas con el mismo movimiento?",
+                options = listOf("Es válido", "Cuenta como un solo golpe", "Cuenta como dos golpes", "Se repite el tiro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'green fee'?",
+                options = listOf("El palo especial para el green", "La tarifa que se paga para jugar en un campo de golf", "Un tipo de césped", "El color del marcador en el green"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué zona está rodeada por el rough?",
+                options = listOf("El tee de salida", "El green", "El fairway", "La zona de penalización"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple el caddie?",
+                options = listOf("Anotar el puntaje", "Transportar los palos y asistir al golfista", "Cortar el césped", "Observar los fuera de límites"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué torneo forma parte del Grand Slam del golf?",
+                options = listOf("US Open", "Ryder Cup", "FedEx Cup", "Players Championship"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'swing' en golf?",
+                options = listOf("La forma en que se sostiene el palo", "El movimiento completo del golpe", "Un tipo de pelota", "El recorrido del carrito"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica un marcador con un círculo en la tarjeta de puntuación?",
+                options = listOf("Birdie", "Bogey", "Par", "Eagle"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de palo se recomienda usar en un golpe corto sobre un obstáculo?",
+                options = listOf("Driver", "Putter", "Wedge", "Hierro 2"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del campo está especialmente diseñada para finalizar el hoyo?",
+                options = listOf("Fairway", "Green", "Tee", "Bunker"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cómo se llama el torneo más prestigioso del golf británico?",
+                options = listOf("British Masters", "Ryder Cup", "The Open Championship", "St. Andrews Trophy"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué acción es considerada una falta de etiqueta en golf?",
+                options = listOf("Aplaudir un buen golpe", "Caminar por la línea de putt de otro jugador", "Esperar en silencio", "Limpiar la pelota"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'drop' en golf?",
+                options = listOf("Dejar caer la pelota para reanudar el juego tras una penalización", "Bajar el nivel del juego", "Golpear desde el aire", "Finalizar un hoyo con bogey"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se mide en yardas o metros en una tarjeta de score?",
+                options = listOf("La distancia total del recorrido", "La distancia entre jugadores", "La altura del campo", "La longitud del carrito"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre si una pelota se pierde?",
+                options = listOf("No pasa nada", "El jugador puede seguir jugando con otra sin penalización", "Se cobra penalización y se juega desde el punto anterior", "Se borra el hoyo de la tarjeta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos torneos forma parte del Grand Slam masculino?",
+                options = listOf("The Players", "US Open", "WGC Championship", "Copa del Mundo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué jugador tiene más majors ganados en la historia?",
+                options = listOf("Tiger Woods", "Jack Nicklaus", "Rory McIlroy", "Seve Ballesteros"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de césped es habitual en el green?",
+                options = listOf("Césped alto y salvaje", "Césped artificial", "Césped muy corto y liso", "Arena compacta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'rough' en un campo de golf?",
+                options = listOf("Zona con césped largo y difícil", "Área para prácticas", "El hoyo en sí", "La parte de descanso"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca evitar en un swing?",
+                options = listOf("La fuerza", "El ritmo", "El slice", "El follow-through"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del palo golpea la pelota?",
+                options = listOf("Grip", "Cabeza del palo", "Shaft", "Cuello del palo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la penalización por jugar desde el lugar equivocado?",
+                options = listOf("Ninguna", "Un golpe", "Dos golpes", "Descalificación directa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'approach' en golf?",
+                options = listOf("El golpe final dentro del hoyo", "El primer golpe desde el tee", "Un golpe para acercar la pelota al green", "Un tipo de penalización"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué acción NO está permitida antes de ejecutar un putt?",
+                options = listOf("Leer la caída", "Limpiar la pelota", "Probar el golpe en el green con otro palo", "Acomodar la postura"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre si el clima se vuelve peligroso durante una ronda?",
+                options = listOf("Se termina el juego", "Se pausa temporalmente", "Se reduce a 9 hoyos", "Se juega igual pero sin score oficial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el 'tee' en golf?",
+                options = listOf("La zona de práctica", "El palo de inicio", "El soporte donde se coloca la pelota para el golpe inicial", "El tipo de hierba del green"),
+                correctIndex = 2
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Bordado" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el bordado?",
+                options = listOf("Una técnica de tejido con agujas circulares", "Una forma de decoración utilizando hilos sobre tela", "Una forma de escultura textil", "Un tipo de estampado con calor"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se utiliza para sostener la tela mientras se borda?",
+                options = listOf("Bastidor", "Aguja curva", "Dedal", "Grapadora"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes es un punto básico del bordado?",
+                options = listOf("Punto en cruz", "Punto revés", "Punto cadena simple", "Punto jersey"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de hilo se utiliza comúnmente en bordado?",
+                options = listOf("Hilo encerado", "Hilo de bordar mouliné", "Hilo de yute", "Hilo metálico industrial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función del dedal en el bordado?",
+                options = listOf("Afilar la aguja", "Sujetar la tela", "Evitar que la aguja traspase el bastidor", "Proteger el dedo al empujar la aguja"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de tela es ideal para bordado en punto de cruz?",
+                options = listOf("Lino", "Aida", "Seda", "Fieltro grueso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra con el punto satén en el bordado?",
+                options = listOf("Efecto de relieve", "Efecto de relleno liso y brillante", "Contorno definido", "Sombra en la tela"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'bordado a mano libre'?",
+                options = listOf("Usar máquina sin patrón", "Bordar sin seguir un diseño preestablecido", "Bordar con hilo invisible", "Bordar con los dedos solamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos puntos se utiliza comúnmente para contornos?",
+                options = listOf("Punto satén", "Punto de cadeneta", "Punto atrás", "Punto de nudo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del bastidor se ajusta para sujetar la tela?",
+                options = listOf("La base", "La argolla externa", "La tuerca", "La bisagra interior"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda hacer con la tela antes de comenzar a bordar?",
+                options = listOf("Lavarla y plancharla", "Coser los bordes", "Estirarla sin lavarla", "Teñirla con anilina"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué punto se caracteriza por formar pequeños bucles o nudos?",
+                options = listOf("Punto atrás", "Punto satén", "Nudo francés", "Punto festón"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa deshilachar en bordado?",
+                options = listOf("Cortar la tela a mano", "Separar los hilos para dar textura", "Quitar hebras de la tela para crear diseño", "Enhebrar mal la aguja"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de los siguientes es un estilo tradicional de bordado japonés?",
+                options = listOf("Sashiko", "Mandala", "Zentangle", "Nanduti"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta puede ayudarte a ver mejor los detalles del bordado?",
+                options = listOf("Lupa con luz", "Regla de corte", "Cúter rotativo", "Guante antiestático"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué punto es ideal para bordar letras o texto?",
+                options = listOf("Punto cruz", "Punto atrás", "Punto satén", "Punto nudo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de bordado se hace con cintas en lugar de hilo?",
+                options = listOf("Bordado ruso", "Bordado floral", "Bordado en cinta", "Bordado crewel"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se utiliza para marcar diseños sobre la tela antes de bordar?",
+                options = listOf("Lápiz de grafito", "Tiza de sastre", "Marcador al agua o lápiz soluble", "Corrector líquido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el bordado crewel?",
+                options = listOf("Técnica con hilos metálicos", "Técnica en relieve con lana sobre lino", "Técnica con punto cruz geométrico", "Técnica con máquina de coser"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué característica tiene el hilo mouliné?",
+                options = listOf("Es metálico", "Es de goma", "Tiene varios cabos divisibles", "Es rígido y grueso"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función del bastidor en el bordado?",
+                options = listOf("Sujetar los hilos", "Evitar que se tuerzan las puntadas", "Mantener la tela tensa para bordar", "Cubrir el diseño terminado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda hacer con el hilo mouliné antes de bordar?",
+                options = listOf("Separar los cabos", "Calentar el hilo", "Coserlo a la tela", "Lavar con agua fría"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el bordado mexicano tenango?",
+                options = listOf("Un tipo de punto tradicional", "Un estilo colorido con motivos animales y florales", "Un bordado en lino blanco", "Un bordado con cintas gruesas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de aguja es más usada para bordado a mano?",
+                options = listOf("Aguja curva", "Aguja con ojo grande", "Aguja de coser recta", "Aguja de cuero"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué efecto se logra con el punto festón?",
+                options = listOf("Contorno con decoración", "Relleno sólido", "Sombra interior", "Nudos decorativos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una característica del bordado a máquina?",
+                options = listOf("Usa solo punto cruz", "No necesita bastidor", "Sigue patrones digitales", "Se hace sin aguja"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'enhebrar la aguja'?",
+                options = listOf("Cortar el hilo", "Pasar el hilo por el ojo de la aguja", "Doblar el hilo", "Empujar la aguja en la tela"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se puede hacer para evitar que el hilo se enrede al bordar?",
+                options = listOf("Usar hilo seco", "Tensarlo con una plancha", "Utilizar tramos cortos y enhebrar bien", "Humedecerlo constantemente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un bastidor magnético?",
+                options = listOf("Un bastidor que se adhiere a superficies metálicas", "Uno que sujeta la tela sin tornillos usando imanes", "Un bastidor de bordado para electricidad", "Una herramienta para bordar en cuero"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué define al bordado 'blackwork'?",
+                options = listOf("Usar hilo negro para crear patrones geométricos", "Un bordado abstracto con manchas negras", "Un bordado tradicional africano", "Un bordado moderno de estilo libre"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un 'esquema' en bordado?",
+                options = listOf("Un patrón o diseño gráfico que indica los puntos a bordar", "Un hilo especial", "Un tipo de tela", "Un tipo de puntada"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué material es común en bastidores para bordar?",
+                options = listOf("Vidrio", "Acero", "Plástico o madera", "Cartón"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puntada suele usarse para bordar flores?",
+                options = listOf("Punto de nudo", "Punto cadena", "Punto satén", "Todas las anteriores"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos estilos de bordado se asocia con la India?",
+                options = listOf("Tenango", "Sashiko", "Kantha", "Crewel"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Para qué se usa un marcador al agua en bordado?",
+                options = listOf("Marcar tela temporalmente", "Pintar los hilos", "Resaltar el diseño terminado", "Fijar los puntos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puntada se usa para bordar bordes decorativos en servilletas?",
+                options = listOf("Punto festón", "Punto cruz", "Punto atrás", "Punto de nudo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'rematar el hilo' al finalizar una sección?",
+                options = listOf("Cortarlo sin anudar", "Pasarlo por varias puntadas para fijarlo", "Pintarlo de otro color", "Desenrollarlo del bastidor"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué caracteriza al bordado noruego 'Hardanger'?",
+                options = listOf("Uso de hilo grueso sobre fieltro", "Diseños geométricos y recortes en la tela", "Punto cruz con colores fuertes", "Técnicas con cintas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puntada forma una línea continua con aspecto de cadena?",
+                options = listOf("Punto satén", "Punto cadena", "Punto de cruz", "Punto de margarita"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del hilo mouliné se utiliza al bordar?",
+                options = listOf("Los 6 cabos siempre juntos", "Se separan de 1 a 6 cabos según el efecto deseado", "Solo el hilo central", "Solo el borde del hilo trenzado"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Crucigramas" to listOf(
+            QuizQuestion(
+                question = "¿Qué es un crucigrama?",
+                options = listOf("Un rompecabezas numérico", "Un juego de adivinanzas visuales", "Un pasatiempo en el que se completan palabras en una cuadrícula", "Un tipo de sudoku con letras"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una casilla negra en un crucigrama?",
+                options = listOf("Una letra incorrecta", "Una pista especial", "Separación entre palabras", "Fin del juego"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer si dos palabras se cruzan?",
+                options = listOf("Ignorar una de las dos", "Ambas deben tener la misma letra en la casilla compartida", "Eliminar una palabra", "Usar una letra comodín"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cómo suelen estar organizadas las pistas en un crucigrama?",
+                options = listOf("Al azar", "Por tema", "En secciones numéricas aleatorias", "Divididas en horizontal y vertical"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué habilidad se fortalece al resolver crucigramas?",
+                options = listOf("Equilibrio", "Ortografía y vocabulario", "Velocidad de lectura", "Memoria visual"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa una pista con signo de interrogación al final?",
+                options = listOf("Pista capciosa o con juego de palabras", "Pista en otro idioma", "Palabra invertida", "Trampa del creador"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué instrumento se usa comúnmente para completar un crucigrama en papel?",
+                options = listOf("Computadora", "Lápiz o bolígrafo", "Cinta adhesiva", "Tijeras"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué debe coincidir entre una pista y su solución?",
+                options = listOf("Longitud de la palabra", "Color de la casilla", "Hora de publicación", "Idioma original"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es un anagrama, a veces usado en crucigramas?",
+                options = listOf("Una palabra con acento", "Una palabra escondida en otra", "Una palabra formada reordenando letras", "Un sinónimo difícil"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un crucigrama temático?",
+                options = listOf("Con palabras en varios idiomas", "Con pistas escritas por famosos", "Con todas las respuestas relacionadas a un mismo tema", "Con pistas que riman"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de crucigrama no tiene casillas negras prediseñadas?",
+                options = listOf("Crucigrama libre", "Crucigrama americano", "Crucigrama de lógica", "Crucigrama diagramless"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué puede hacer más difícil un crucigrama?",
+                options = listOf("Usar solo sustantivos comunes", "Incluir siglas, nombres propios o palabras técnicas", "Tener menos pistas", "Usar colores llamativos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hace un 'crucigramista' profesional?",
+                options = listOf("Resuelve crucigramas mundialmente", "Crea y edita crucigramas", "Organiza torneos de palabras", "Dirige diccionarios en línea"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una pista entre comillas?",
+                options = listOf("Una cita famosa", "Una frase literal", "Una palabra mal escrita", "Una expresión común que debe interpretarse tal cual"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que una palabra es 'en plural' en una pista?",
+                options = listOf("Debe escribirse dos veces", "Tiene que ir en inglés", "Termina en 's' u otra forma plural", "Se escribe en mayúscula"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una estrategia útil para resolver crucigramas difíciles?",
+                options = listOf("Empezar por las pistas más largas", "Borrar todas las palabras", "Escribir sin mirar", "Empezar por las últimas pistas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede indicar una pista con abreviación?",
+                options = listOf("Que la solución también es una abreviación", "Que debe escribirse en otro idioma", "Que hay un error", "Que es una palabra técnica"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca evitar en los crucigramas bien diseñados?",
+                options = listOf("Palabras comunes", "Letras compartidas", "Palabras demasiado oscuras o arbitrarias", "Temas generales"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué característica es típica de los crucigramas americanos?",
+                options = listOf("Muchas casillas negras", "Simetría rotacional", "Líneas curvas", "Incluir dibujos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hace que un crucigrama sea un 'pasatiempo educativo'?",
+                options = listOf("Es solo para adultos", "Mejora el vocabulario, agilidad mental y memoria", "Se puede imprimir gratis", "Viene con respuestas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué suele indicar una pista con la palabra 'arcaico' o 'antiguo'?",
+                options = listOf("Una palabra común", "Una palabra que debe escribirse en otro idioma", "Una palabra en desuso o poco frecuente", "Un error en la pista"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer si una pista incluye una sigla como 'EE.UU.'?",
+                options = listOf("Ignorarla", "Buscar una sigla como respuesta", "Buscar un país en otro idioma", "Buscar una ciudad cercana"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento visual ayuda a saber cuántas letras tiene una respuesta?",
+                options = listOf("El número de la pista", "Las casillas en blanco disponibles", "El color del fondo", "El tipo de letra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de palabra es más común en crucigramas?",
+                options = listOf("Sustantivos y verbos", "Adverbios exclusivamente", "Palabras con muchas letras", "Palabras compuestas únicamente"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra al resolver un crucigrama sin errores?",
+                options = listOf("Puntos adicionales", "Un patrón estético completo", "El desbloqueo de un nivel", "Recompensas en línea"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de pistas suelen tener más dificultad?",
+                options = listOf("Pistas literales", "Pistas con juego de palabras o dobles sentidos", "Pistas muy cortas", "Pistas en negrita"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede hacer un diccionario de sinónimos mientras resolvés un crucigrama?",
+                options = listOf("Confundirte", "Ayudarte a ampliar vocabulario y encontrar respuestas", "Eliminar opciones", "Mostrar palabras aleatorias"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta moderna ha cambiado la forma de resolver crucigramas?",
+                options = listOf("La tiza", "Las aplicaciones móviles de crucigramas", "La televisión", "El bolígrafo fluorescente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué suele pasar cuando resolvés una palabra correctamente?",
+                options = listOf("Se borra automáticamente", "Ayuda a resolver las que se cruzan", "Desactiva la casilla", "Muestra una imagen"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si una letra de una palabra cruzada está incorrecta?",
+                options = listOf("Todo el crucigrama se invalida", "Esa casilla afecta ambas respuestas", "No afecta el resultado final", "Se salta automáticamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una pista críptica?",
+                options = listOf("Una pista que contiene un acertijo o doble sentido", "Una pista escrita en clave Morse", "Una pista oculta en la imagen", "Una pista con números romanos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'pista cruzada'?",
+                options = listOf("Una pista muy difícil", "Una pista relacionada con otra palabra en la cuadrícula", "Una pista duplicada", "Una pista que viene de otro crucigrama"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos elementos es importante para crear crucigramas?",
+                options = listOf("Simetría y distribución de letras", "Colores llamativos", "Fotografías decorativas", "Ilustraciones en las pistas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué estrategia puede ayudar si no sabés una respuesta?",
+                options = listOf("Revisar las palabras que se cruzan", "Borrar todo", "Escribir cualquier cosa", "Cambiar de pasatiempo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué función tienen los números en una cuadrícula de crucigrama?",
+                options = listOf("Indicar el orden en que debe resolverse", "Indicar la letra correcta", "Relacionar pistas con las casillas donde empieza cada palabra", "Dividir el crucigrama en secciones"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pista podría indicar una palabra en otro idioma?",
+                options = listOf("Una palabra entre paréntesis", "Una indicación como '(fr.)' o '(lat.)'", "Una letra resaltada", "Una palabra en mayúscula"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa una pista que dice 'familia de árboles'?",
+                options = listOf("Busca un tipo de árbol específico", "Busca un color", "Busca una profesión", "Busca un animal"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre si se usa tinta en lugar de lápiz para resolver un crucigrama?",
+                options = listOf("Se mejora la legibilidad", "Se dificulta corregir errores", "Se gana más rápido", "Se activa un modo difícil"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué suele buscar un amante de crucigramas en el diario?",
+                options = listOf("La sección de espectáculos", "El horóscopo", "La página de pasatiempos", "Las ofertas laborales"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un crucigrama inverso?",
+                options = listOf("Uno donde se dan las respuestas y hay que adivinar las pistas", "Uno con letras ya colocadas", "Uno que se resuelve de abajo hacia arriba", "Uno que incluye números"),
+                correctIndex = 0
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Origami" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el origami?",
+                options = listOf("Una técnica para pintar papel", "Un arte de plegado de papel sin cortes ni pegamento", "Un juego de cartas japonés", "Una forma de escultura con arcilla"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el significado de la palabra 'origami'?",
+                options = listOf("Corte de papel", "Arte en papel", "Papel doblado", "Figura decorativa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué animal es un símbolo tradicional del origami japonés?",
+                options = listOf("Tigre", "Grulla", "Serpiente", "Pez koi"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la regla más tradicional del origami clásico?",
+                options = listOf("Solo usar tijeras pequeñas", "No usar colores", "No cortar ni pegar el papel", "Doblar con guantes"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de papel se usa comúnmente en origami?",
+                options = listOf("Cartón grueso", "Papel kraft", "Papel origami delgado y cuadrado", "Papel encerado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda antes de intentar una figura compleja en origami?",
+                options = listOf("Usar pegamento para reforzar", "Practicar los dobleces básicos", "Recortar las esquinas", "Sumergir el papel en agua"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa una línea discontinua en una instrucción de origami?",
+                options = listOf("Un corte", "Una costura", "Un pliegue oculto", "Una doblez que debe realizarse"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué doblez básico se utiliza para dividir el papel en dos mitades iguales?",
+                options = listOf("Doblez de montaña", "Doble pliegue en Z", "Doble de libro o en valle", "Doble en espiral"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué nombre recibe un doblez en el que los bordes exteriores del papel se doblan hacia el centro?",
+                options = listOf("Doble inverso", "Doble preliminar", "Doble puerta", "Doble de cerradura"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué figura se considera un desafío avanzado en origami tradicional?",
+                options = listOf("Grulla", "Caja", "Dragón", "Flor de loto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos beneficios puede aportar la práctica del origami?",
+                options = listOf("Fuerza física", "Agilidad en deportes", "Concentración y motricidad fina", "Conocimiento de álgebra"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'origami modular'?",
+                options = listOf("Usar pegamento para unir figuras", "Construir figuras con múltiples papeles ensamblados", "Origami hecho con papel mojado", "Usar figuras geométricas complejas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta puede usarse para marcar pliegues con precisión?",
+                options = listOf("Cúter", "Pincel", "Plegadera", "Tijeras"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si el papel no es perfectamente cuadrado en origami?",
+                options = listOf("La figura queda mal proporcionada", "El diseño se corrige solo", "No afecta en nada", "Es más fácil de plegar"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué doblez tiene forma de montaña al abrirse?",
+                options = listOf("Doble en espiral", "Doble inverso", "Doble valle", "Doble montaña"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos conceptos está relacionado con origami matemático?",
+                options = listOf("Teorema de Pitágoras", "Axiomas de Huzita-Hatori", "Suma de ángulos interiores", "Regla del paralelogramo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de simetría se encuentra frecuentemente en figuras de origami?",
+                options = listOf("Simetría radial", "Simetría bilateral", "Asimetría total", "Simetría en espiral"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué figura de origami representa un deseo de paz en la cultura japonesa?",
+                options = listOf("Mariposa", "Grulla", "Flor", "Estrella"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué figura se puede hacer comúnmente con origami modular?",
+                options = listOf("Cubo", "Flor simple", "Estrella ninja", "Corazón plano"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una ventaja de usar papel de origami específico?",
+                options = listOf("Es más fácil de cortar", "Tiene aroma", "Es más delgado, flexible y cuadrado perfecto", "Permite dibujar figuras sin doblar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué figura de origami se asocia a Sadako Sasaki y la paz mundial?",
+                options = listOf("Dragón", "Grulla", "Rana", "Cisne"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'wet-folding' en origami?",
+                options = listOf("Plegado con papel mojado para formas más escultóricas", "Doblado solo en días lluviosos", "Uso de agua para cortar papel", "Origami hecho bajo el agua"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué figura básica se utiliza como base para muchas otras en origami?",
+                options = listOf("Base rana", "Base cometa", "Base preliminar", "Base pez"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de papel es ideal para origami complejo?",
+                options = listOf("Cartulina gruesa", "Papel de aluminio", "Papel muy fino y resistente como el washi", "Papel manteca"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una dificultad común al hacer figuras 3D en origami?",
+                options = listOf("Corte del papel", "Pérdida de color", "Papel muy grueso que no permite pliegues precisos", "Tamaño de la figura final"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué figura tradicional se asocia con buena suerte y se cuelga como decoración?",
+                options = listOf("Estrella modular", "Flor de loto", "Grulla", "Caja decorativa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda hacer antes de comenzar una figura complicada?",
+                options = listOf("Doblarla directamente sin ver el patrón", "Leer todo el diagrama y practicar bases simples", "Pintar el papel", "Recortar los bordes"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una ventaja del origami modular?",
+                options = listOf("Permite usar pegamento libremente", "Cada módulo es independiente y ensamblable", "Es más simple que el origami clásico", "Usa papel redondo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede ayudar a lograr líneas de pliegue más precisas?",
+                options = listOf("Un lápiz y una regla", "Una plegadera o incluso una uña", "Un marcador negro", "Tijeras afiladas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de origami permite crear estructuras que se abren y cierran como mecanismos?",
+                options = listOf("Origami artístico", "Origami técnico", "Origami cinético", "Origami interactivo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se necesita para que una figura de origami conserve su forma con el tiempo?",
+                options = listOf("Secar al sol", "Lacado o uso de papel especial como kami", "Guardarla en un libro", "Doblarla muchas veces"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué base comparte la grulla y la rana en origami?",
+                options = listOf("Base pez", "Base preliminar", "Base pájaro", "Base flor"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una desventaja del papel demasiado delgado?",
+                options = listOf("Rompe fácilmente en pliegues complejos", "Ocupa mucho espacio", "Es difícil de encontrar", "No se puede pintar"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'plegadura invertida' en origami?",
+                options = listOf("Una doblez que mete parte del papel hacia adentro", "Una figura doblada al revés", "Una línea diagonal", "Un error de diseño"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de origami suele inspirarse en animales o flores?",
+                options = listOf("Origami industrial", "Origami tradicional", "Origami futurista", "Origami cúbico"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el acto de hacer mil grullas en la cultura japonesa?",
+                options = listOf("Buena suerte en los negocios", "Sabiduría ancestral", "Un deseo de salud, paz o longevidad", "Fuerza física"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué forma se puede lograr fácilmente usando la base rana?",
+                options = listOf("Flor", "Caja", "Salamandra", "Rana saltarina"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas acciones rompe la regla tradicional del origami?",
+                options = listOf("Doblar con las manos", "Usar pegamento o tijeras", "Marcar con uña", "Usar papel de color"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué característica tiene el origami modular bien ensamblado?",
+                options = listOf("Cada pieza es independiente pero se sostiene sin pegamento", "Es rígido porque se grapa", "Requiere recortar las piezas", "Se usa con alambres internos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una figura geométrica frecuente en origami modular?",
+                options = listOf("Hexágono", "Octaedro", "Tetraedro", "Cubo"),
+                correctIndex = 3
+            )
+        ),
+
+
 
 
 
