@@ -124,7 +124,7 @@ class UserRepository {
             "lastSpinAt" to null,
             "missionsGeneratedAt" to null,
             "dailyMissions" to emptyList<Mision>(),
-            "lastMissionDate" to String,
+            "lastMissionDate" to "",
             "missionStreak" to 0L
         )
         db.collection("userProfiles")

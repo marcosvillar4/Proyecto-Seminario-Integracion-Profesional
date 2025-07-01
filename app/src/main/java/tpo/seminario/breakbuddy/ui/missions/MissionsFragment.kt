@@ -2,6 +2,7 @@ package tpo.seminario.breakbuddy.ui.missions
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +35,7 @@ class MissionsFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private val functions = FirebaseFunctions.getInstance()
     private val uid get() = FirebaseAuth.getInstance().currentUser?.uid.orEmpty()
-    private var streak = Long
-    private var lastCompleted = String
+
 
 
     override fun onCreateView(inflater: LayoutInflater, c: ViewGroup?, s: Bundle?) =
@@ -45,6 +45,7 @@ class MissionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchDailyMissions()
+        streakCheckAndUpdate()
 
     }
 
@@ -192,7 +193,35 @@ class MissionsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun completeTodayMission(missionId: String) {
-        db.collection("userProfiles").document(uid).update("lastMissionDate", Instant.now().toString())
+
+
+
+        db.collection("userProfiles").document(uid).get().addOnSuccessListener {
+            document -> if (document != null && document.exists()){
+                val lastCompleted = document.getString("lastMissionDate").toString()//data?.getValue("lastMissionDate").toString()
+                val streak = document.getLong("missionStreak")!!
+
+                //Toast.makeText(context, lastCompleted, Toast.LENGTH_LONG).show()
+
+                if (!lastCompleted.equals("")) {
+                    val datediff = Instant.parse(lastCompleted).until(Instant.now(), ChronoUnit.DAYS)
+                    if ((datediff > 1) and (datediff < 2L)){
+                        db.collection("userProfiles").document(uid).update("missionStreak", streak+1L)
+                        db.collection("userProfiles").document(uid).update("lastMissionDate", Instant.now().toString())
+                    }
+                } else {
+                    // Primer subida de racha
+                    db.collection("userProfiles").document(uid).update("missionStreak", streak+1L)
+                    db.collection("userProfiles").document(uid).update("lastMissionDate", Instant.now().toString())
+                }
+            } else {
+                Log.d("Firestore", "Documento no existe")
+        }
+
+        }
+
+
+
         functions.getHttpsCallable("completeDailyMission")
             .call(mapOf("missionId" to missionId))
             .addOnSuccessListener {
@@ -208,18 +237,26 @@ class MissionsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun streakCheckAndUpdate(){
+        db.collection("userProfiles").document(uid).get().addOnSuccessListener {
+            document -> if (document.exists() && document != null){
+                val lastCompleted = document.getString("lastMissionDate")!!//data?.getValue("lastMissionDate").toString()
+                val streak = document.getLong("missionStreak")!!
 
-        db.collection("userProfile").document(uid).get().addOnSuccessListener {
-            document ->
-            lastCompleted = document.data?.get("lastMissionDate") as String.Companion
-            streak = document.data?.get("streak") as Long.Companion
+                Toast.makeText(context, lastCompleted, Toast.LENGTH_LONG).show()
+                binding.Racha.text = "Racha: " + streak
+
+                if (!lastCompleted.equals("")){
+                    if ((Instant.parse(lastCompleted.toString()).until(Instant.now(), ChronoUnit.DAYS)) > 1){
+                        db.collection("userProfiles").document(uid).update("missionStreak", 0L)
+                    }
+                }
         }
 
-        binding.Racha.text = "Racha: " + streak
-
-        if ((Instant.parse(lastCompleted.toString()).until(Instant.now(), ChronoUnit.DAYS)) > 1){
-            db.collection("userProfiles").document(uid).update("streak", 0L)
         }
+
+
+
+
 
 
     }
