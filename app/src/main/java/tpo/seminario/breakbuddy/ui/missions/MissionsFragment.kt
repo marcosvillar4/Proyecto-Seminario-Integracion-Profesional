@@ -118,6 +118,7 @@ class MissionsFragment : Fragment() {
             if (done) {
                 btn.text = "Completada"
                 btn.isEnabled = false
+                card.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_green))
                 btn.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.gray_300))
             } else {
                 btn.text = "Completar"
