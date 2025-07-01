@@ -233,7 +233,6 @@
                 android:text="ayuda.breakbuddy@gmail.com"
                 android:textColor="@color/green_200"
                 android:textSize="14sp"
-                android:autoLink="email"
                 android:linksClickable="true"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

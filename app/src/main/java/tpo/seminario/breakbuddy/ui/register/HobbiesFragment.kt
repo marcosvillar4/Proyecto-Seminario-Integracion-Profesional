@@ -93,7 +93,7 @@ class HobbiesFragment : Fragment() {
                     "Hobbies guardados correctamente",
                     Toast.LENGTH_SHORT).show()
                 findNavController().navigate(
-                    R.id.action_hobbiesFragment_to_homeFragment
+                    R.id.action_hobbiesFragment_to_wheelFragment
                 )
             },
             onFailure = { e ->

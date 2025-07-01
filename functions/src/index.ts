@@ -42,11 +42,11 @@ export const spinDaily = functions.https.onCall(async (data, context) => {
       const lastSpin: number = (profile.lastSpinAt as any) || 0;
       const nowMillis = Date.now();
       const delta = nowMillis - lastSpin;
-      const dayMillis = 10000; // 24 horas
+      const dayMillis = 60000; // 24 horas //Pasarlo a 24 * 60 * 60 * 1000 en producción, esto es lo que rige en el backend los tiempos de ruleta, pero no los de interfaz
 
       if (lastSpin > 0 && delta < dayMillis) {
         const millisLeft = dayMillis - delta;
-        const hoursLeft = Math.ceil(millisLeft / (10000)); // TODO, CAMBIAR ESTO PARA 24 HORAS - ATENCIÓN - REVISAR
+        const hoursLeft = Math.ceil(millisLeft / (1000 * 60 * 60)); // TODO, CAMBIAR ESTO PARA 24 HORAS - ATENCIÓN - REVISAR
         throw new functions.https.HttpsError(
           "failed-precondition",
           `Ya giraste hoy. Intenta de nuevo en ${hoursLeft} horas.`

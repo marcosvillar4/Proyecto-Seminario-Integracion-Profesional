@@ -290,7 +290,7 @@ class WheelFragment : Fragment() {
 
         val now = System.currentTimeMillis()
         val last = profile.lastSpinAt ?: 0L
-        val dayMillis = 10000 // 24 horas
+        val dayMillis = 60000 // 24 horas //USAR ESTO PARA CAMBIAR EL TIEMPO ENTRE SPINS
 
         if (now - last >= dayMillis) {
             currentBinding.btnSpin.isEnabled = true
