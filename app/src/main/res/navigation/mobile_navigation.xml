@@ -136,6 +136,10 @@
             app:destination="@id/navigation_home" />
 
         <action
+            android:id="@+id/action_registerFragment_to_wheelFragment"
+            app:destination="@id/navigation_wheel" />
+
+        <action
             android:id="@+id/action_registerFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
             app:popUpTo="@id/registerFragment"
@@ -200,6 +204,12 @@
             app:popUpToInclusive="true"
             />
 
+        <action
+            android:id="@+id/action_hobbiesFragment_to_wheelFragment"
+            app:destination="@id/navigation_wheel"
+            app:popUpTo="@id/hobbiesFragment"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
     <!--Editar hobbies-->
@@ -250,8 +260,8 @@
             android:id="@+id/action_wheelFragment_to_homeFragment"
             app:destination="@id/navigation_home" />
         <action
-            android:id="@+id/action_wheelFragment_to_challengeFragment"
-            app:destination="@id/challengeFragment" />
+            android:id="@+id/action_wheelFragment_to_wheelFragment"
+            app:destination="@id/navigation_wheel" />
 
 
     </fragment>

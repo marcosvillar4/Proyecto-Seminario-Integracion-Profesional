@@ -66,7 +66,7 @@ class WelcomeFragment : Fragment() {
         val currentUser = auth.currentUser
 
         if (currentUser != null) {
-            findNavController().navigate(R.id.action_welcomeFragment_to_navigation_home)
+            findNavController().navigate(R.id.action_welcomeFragment_to_wheelFragment)
         } else {
             setupButtonClickListeners()
         }
