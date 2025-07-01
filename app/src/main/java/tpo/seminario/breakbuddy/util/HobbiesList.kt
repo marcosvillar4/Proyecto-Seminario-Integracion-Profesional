@@ -18,8 +18,8 @@ object HobbiesList {
         "Corte y confección","Bordado","Repostería","Crucigramas","Avistamiento de aves","Origami",
         "Marroquinería", "Dibujo","Bisutería","Coleccionismo","Adiestramiento de animales","Carpintería",
         "Maquillaje profesional","Ilusionismo","Crochet","Pilates","Dardos","Tarot","Escultura",
-        "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Arcilla","Manicura",
-        "Peluqueria","Decoracion de interiores","Damas","Rummy Burako",
-        "Bonsai","Prensado de flores","Lepidopterología","Sudoku","Sopa de letras","Bingo"
+        "Caligrafia","Vidrieria artistica","Hacer velas","Poesia","Diseño floral","Manicura",
+        "Peluqueria","Decoracion de interiores","Damas",
+        "Bonsai","Lepidopterología","Sudoku","Sopa de letras","Bingo"
     )
 }
