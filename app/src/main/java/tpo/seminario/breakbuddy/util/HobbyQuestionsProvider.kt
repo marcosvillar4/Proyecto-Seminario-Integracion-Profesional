@@ -7,13 +7,14 @@ Ver películas / Actuar / Aprender idiomas / Carpinteria / Pintar / Cerámica / 
 Maquillaje profesional / Programar / Videojuegos / Juegos de mesa / Ajedrez / Modelismo / Hacer ejercicio / Trekking / Skate / Escalada / Viajar / Camping /
 Meditar / Astronomía / Avistamiento de aves / Adiestramiento de animales / Manicura / Diseño floral / Lepidopterologia / Escribir / Dibujo / Crochet /
 Dardos / Manualidades / Creación de contenido / Andar en bicicleta / Armar rompecabezas / Bloggear / Diseño gráfico / Correr / Voluntariado /
-Restaurar muebles / Golf / Bordado / Crucigramas / Origami / Poesía / Caligrafia / Vidrieria artistica
+Restaurar muebles / Golf / Bordado / Crucigramas / Origami / Poesía / Caligrafia / Vidrieria artistica / Coleccionismo / Ilusionismo / Pilates / Tarot /
+
 
 */
 
 /*TODAVIA FALTAN:
-        , ,"Coleccionismo"
-        ,"Ilusionismo",,"Pilates",,"Tarot",,
+
+
         ------------------------------------
         ,,"Hacer velas"
         "Peluqueria","Decoracion de interiores","Damas"
@@ -12414,7 +12415,835 @@ object HobbyQuestionsProvider{
                 options = listOf("Es transparente como el agua", "Tiene reflejo tipo espejo", "Tiene apariencia lechosa o perlada", "Es completamente negro"),
                 correctIndex = 2
             )
-        )
+        ),
+
+        //************************************************************************************************************************
+
+        "Coleccionismo" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el coleccionismo?",
+                options = listOf("La práctica de vender artículos usados", "La acumulación compulsiva de objetos", "La actividad de reunir objetos de valor personal, histórico o estético", "Una forma de reciclaje creativo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué motiva a muchas personas a coleccionar?",
+                options = listOf("Competencia económica", "Sentido de nostalgia, historia o pasión personal", "Recomendación médica", "Modas pasajeras"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se suele considerar una colección auténtica?",
+                options = listOf("Un conjunto de objetos iguales", "Una serie organizada y curada de objetos con un criterio común", "Cosas que se encuentran al azar", "Todo lo que se acumula sin límite"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de objetos se coleccionan comúnmente?",
+                options = listOf("Solo monedas", "Todo lo que no se usa", "Artículos específicos como monedas, sellos, juguetes, libros, etc.", "Ropa vieja exclusivamente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una razón para catalogar una colección?",
+                options = listOf("Para venderla rápido", "Para saber cuántos objetos se han perdido", "Para mantener un registro organizado y saber qué se posee", "Para compararla con otras colecciones"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se entiende por 'valor sentimental' en el coleccionismo?",
+                options = listOf("El valor económico", "Lo que el objeto vale en subasta", "El vínculo emocional personal con ciertos objetos", "El valor que tiene al ser reciclado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un coleccionista filatélico?",
+                options = listOf("Quien colecciona libros antiguos", "Quien colecciona billetes", "Quien colecciona sellos postales", "Quien colecciona monedas de oro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas prácticas ayuda a conservar una colección física en buen estado?",
+                options = listOf("Dejarla al sol", "Usarla todos los días", "Almacenar en lugares secos, limpios y protegidos de la luz", "Guardarla en cajas sin revisar nunca"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que un objeto sea 'de edición limitada'?",
+                options = listOf("Que es caro", "Que fue producido en una cantidad restringida", "Que tiene muchos usos", "Que se puede modificar fácilmente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede hacer que una colección aumente su valor con el tiempo?",
+                options = listOf("El deterioro del objeto", "El uso constante", "La rareza, estado y demanda de los objetos", "El número de veces que se publica en redes"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué importancia tiene el estado de conservación en una colección?",
+                options = listOf("Ninguna, lo importante es el objeto", "Es clave para determinar el valor estético y económico", "Solo importa si es nuevo", "Depende del tipo de objeto, pero rara vez importa"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué característica hace que un objeto sea considerado 'de colección'?",
+                options = listOf("Ser usado diariamente", "Tener más de 5 años", "Tener algún valor simbólico, histórico o artístico", "Haber sido comprado en rebaja"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta es útil para clasificar una colección digitalmente?",
+                options = listOf("Un marco de fotos", "Una app o planilla de inventario", "Una lupa", "Un contador manual"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el coleccionismo temático?",
+                options = listOf("Coleccionar cualquier cosa sin orden", "Reunir objetos siguiendo una línea común como personajes, épocas o países", "Solo coleccionar objetos nuevos", "Intercambiar objetos duplicados"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué suelen hacer los coleccionistas cuando tienen objetos repetidos?",
+                options = listOf("Los tiran", "Los guardan sin uso", "Los intercambian o venden con otros coleccionistas", "Los regalan sin control"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué evento suele interesar a coleccionistas?",
+                options = listOf("Ferias, convenciones o encuentros temáticos", "Concursos deportivos", "Desfiles de moda", "Charlas de nutrición"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una ventaja emocional del coleccionismo?",
+                options = listOf("Genera ansiedad", "Estimula la nostalgia, la concentración y la satisfacción personal", "Hace perder tiempo", "Impide pensar en otras cosas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué criterio puede seguir una colección de libros?",
+                options = listOf("Colores del lomo", "Autores, géneros o primeras ediciones", "Tamaño de letra", "Precio de compra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hace un coleccionista serio cuando obtiene un nuevo objeto?",
+                options = listOf("Lo guarda sin revisarlo", "Lo muestra sin contexto", "Lo documenta, cataloga y cuida", "Lo sube a redes y lo olvida"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una colección 'cerrada'?",
+                options = listOf("Una colección sin terminar", "Una colección sin fotos", "Una colección que ya tiene todos los elementos posibles dentro de un tema", "Una colección con objetos en cajas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una pieza 'rara' dentro de una colección?",
+                options = listOf("Un objeto popular y fácil de conseguir", "Un ítem producido en grandes cantidades", "Un objeto difícil de hallar por su escasez o contexto histórico", "Un objeto que no tiene valor sentimental"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Por qué algunos coleccionistas prefieren objetos sin usar?",
+                options = listOf("Porque ocupan menos espacio", "Porque aumentan su valor si están en estado original", "Porque no les interesa el objeto en sí", "Porque son más coloridos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'mint condition' en el mundo del coleccionismo?",
+                options = listOf("Objeto con olor a menta", "Objeto usado ligeramente", "Objeto en perfecto estado, como nuevo", "Objeto restaurado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué implica el coleccionismo digital?",
+                options = listOf("Coleccionar archivos en carpetas desordenadas", "Acumular videojuegos sin jugar", "Reunir objetos digitales como NFTs, cromos virtuales o juegos retro en emuladores", "Guardar capturas de pantalla"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué hace más valiosa a una figura de acción coleccionable?",
+                options = listOf("Que se haya usado en películas", "Que tenga articulaciones móviles", "Que esté en su empaque original y sea de edición limitada", "Que tenga muchos colores"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de seguro pueden contratar algunos coleccionistas?",
+                options = listOf("Seguro para viajes", "Seguro para mascotas", "Seguro para colecciones valiosas", "Seguro automotor"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple la documentación de procedencia en una colección?",
+                options = listOf("Sirve para vender más rápido", "Aumenta el valor histórico y prueba la autenticidad", "Permite ocultar el precio original", "Evita que se pierda el objeto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede afectar negativamente una colección física?",
+                options = listOf("Ambientes húmedos, luz directa, plagas o manipulación inadecuada", "Tenerla bien expuesta", "Fotografiarla con frecuencia", "Limpiarla con productos especializados"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'pieza central' dentro de una colección?",
+                options = listOf("El objeto más pequeño", "La figura más reciente", "El objeto más valioso o simbólicamente importante", "Una pieza sin contexto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia al coleccionismo de una simple acumulación?",
+                options = listOf("Nada, son lo mismo", "La acumulación tiene criterio, el coleccionismo no", "El coleccionismo tiene un criterio y organización clara", "El coleccionismo no tiene límites"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede impulsar una moda de coleccionismo repentina?",
+                options = listOf("Cambios climáticos", "Tendencias culturales o relanzamientos de productos clásicos", "La política internacional", "El precio del dólar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'mercado secundario' en coleccionismo?",
+                options = listOf("Venta entre particulares después del lanzamiento oficial", "Tienda oficial de lanzamiento", "Mercado de alimentos", "Intercambio de productos nuevos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas afirmaciones es verdadera sobre el valor en coleccionismo?",
+                options = listOf("Siempre está relacionado con la edad del objeto", "Es subjetivo y depende de la oferta, demanda y contexto", "Los objetos más nuevos valen más", "Solo depende de la marca"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué rol cumplen las comunidades online en el coleccionismo moderno?",
+                options = listOf("Complican el proceso", "No tienen importancia", "Facilitan el intercambio, la información y validación de objetos", "Restringen el acceso a objetos valiosos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede hacer un coleccionista para mejorar su conocimiento?",
+                options = listOf("Solo ver fotos de objetos", "Comprar sin investigar", "Leer libros, participar en foros y asistir a eventos", "Esperar a que otros le cuenten"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de objetos pueden formar parte del coleccionismo arqueológico?",
+                options = listOf("Objetos de construcción moderna", "Artefactos históricos hallados legalmente", "Cualquier cosa que se encuentre", "Objetos reciclables"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se suele hacer con una colección al finalizarla?",
+                options = listOf("Se regala sin registro", "Se guarda en cajas sin mostrar", "Se exhibe, se protege o se vende según el interés del coleccionista", "Se elimina para empezar otra"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede ser considerado coleccionismo temático digital?",
+                options = listOf("Guardar memes sin orden", "Organizar fondos de pantalla por estilo o autor", "Reunir solo imágenes borrosas", "Descargar juegos y no jugarlos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una réplica en el mundo del coleccionismo?",
+                options = listOf("Una imitación exacta sin ser original", "El mismo objeto en dos versiones", "Una parte de la colección original", "Una versión antigua del objeto"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Por qué algunos coleccionistas valoran los errores de fabricación?",
+                options = listOf("Porque son más baratos", "Porque son defectuosos", "Porque pueden ser piezas únicas y raras", "Porque no funcionan bien"),
+                correctIndex = 2
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Ilusionismo" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el ilusionismo?",
+                options = listOf("El arte de leer la mente", "El arte de crear efectos visuales con tecnología", "El arte de entretener creando ilusiones mediante técnicas físicas y psicológicas", "Una ciencia exacta aplicada a juegos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué nombre suele recibir un profesional del ilusionismo?",
+                options = listOf("Ilusionista o mago", "Hipnotista", "Adivino", "Mentalista clínico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia al ilusionismo del engaño con mala intención?",
+                options = listOf("Nada, ambos buscan manipular", "El ilusionismo es un arte consensuado para entretener", "El ilusionismo oculta verdades peligrosas", "El engaño siempre es legal"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas ramas es parte del ilusionismo?",
+                options = listOf("Prestidigitación", "Tiro con arco", "Mímica", "Canto lírico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta es fundamental en los trucos de cartas?",
+                options = listOf("Iluminación especial", "Marcadores permanentes", "Habilidad con las manos y misdirection", "Un mazo electrónico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'misdirection'?",
+                options = listOf("Manipular cartas con imanes", "Utilizar espejos en el escenario", "Desviar la atención del público para ejecutar el truco", "Una técnica de distracción sonora"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas figuras es icónica en la historia del ilusionismo?",
+                options = listOf("Harry Houdini", "Einstein", "Tesla", "Mozart"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué implica la magia de cerca?",
+                options = listOf("Trucos con grandes aparatos", "Ilusionismo realizado en grandes teatros", "Trucos realizados a corta distancia del público", "Hipnosis colectiva"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué papel juega la psicología en el ilusionismo?",
+                options = listOf("Ninguno, es solo técnica", "Es fundamental para entender y manipular la percepción del público", "Solo sirve para distraer", "Sirve solo en trucos mentales"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento es común en las ilusiones ópticas?",
+                options = listOf("Cambios de clima", "Luz, ángulos y perspectiva", "Sonidos repetitivos", "Velocidad extrema"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de magia involucra grandes aparatos y escenarios?",
+                options = listOf("Magia de salón", "Magia de cerca", "Grandes ilusiones", "Mentalismo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un truco de escapismo?",
+                options = listOf("Ilusionismo con fuego", "Liberarse de ataduras, cajas cerradas o cadenas en condiciones difíciles", "Trucos de predicción", "Juegos con fuego y humo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas afirmaciones es verdadera sobre la magia clásica?",
+                options = listOf("Siempre usa tecnología moderna", "Evita el contacto con el público", "Se basa en habilidades manuales y técnicas tradicionales", "Usa efectos visuales digitales"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se necesita para ser un buen ilusionista?",
+                options = listOf("Fuerza física", "Conocimiento técnico, práctica, carisma y control de la atención del público", "Memorizar trucos", "Ser rápido con los pies"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué papel juegan los accesorios en el ilusionismo?",
+                options = listOf("Son decorativos", "Son esenciales para la ejecución y el engaño visual", "Son reemplazables por apps", "Solo sirven en televisión"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué distingue al mentalismo dentro del ilusionismo?",
+                options = listOf("No se considera magia", "Es el arte de simular habilidades psíquicas como la predicción o lectura de mentes", "Usa disfraces", "Depende de trucos ópticos exclusivamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué famoso truco realizó Houdini repetidamente?",
+                options = listOf("Desaparición de una persona", "Cortar a alguien por la mitad", "Escapismo de camisas de fuerza y cajas cerradas", "Levitación sobre el público"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué efecto produce un buen truco de ilusionismo en el espectador?",
+                options = listOf("Risa", "Frustración", "Asombro, sorpresa y confusión deliberada", "Enojo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos no es un elemento esencial en la preparación de un acto de ilusionismo?",
+                options = listOf("Práctica constante", "Dominio escénico", "Vestimenta atractiva", "Aburrimiento deliberado"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de reacción busca el ilusionismo en el público?",
+                options = listOf("Razonamiento lógico inmediato", "Asombro, emoción y suspensión de la incredulidad", "Desagrado", "Distancia emocional"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia a un acto de ilusionismo bien logrado?",
+                options = listOf("El uso de pantallas LED", "Que el espectador no pueda descubrir el truco y quede maravillado", "Que el ilusionista grite mucho", "La cantidad de humo en el escenario"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'acto de cierre' en un espectáculo de ilusionismo?",
+                options = listOf("Un truco improvisado", "La despedida sin más", "El truco final, usualmente el más impactante", "El primer truco que se presenta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué rol cumplen las pausas y el ritmo en una presentación?",
+                options = listOf("Desconectan al público", "Son usadas para manipular la atención y crear tensión", "Sirven para descansar al mago", "No tienen importancia"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca al ensayar repetidamente un truco?",
+                options = listOf("Memorizar el guion", "Evitar errores, perfeccionar movimientos y tiempos", "Cansarse para luego sorprender", "Copiar a otros magos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función puede tener la música en un acto de ilusionismo?",
+                options = listOf("Distracción molesta", "Rellenar silencios", "Enfatizar el clima emocional y acompañar el ritmo del truco", "Tapar errores"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Por qué algunos ilusionistas usan ayudantes?",
+                options = listOf("Para entretener mientras descansan", "Porque no saben hacer magia", "Para colaborar en trucos complejos y desviar la atención", "Por decoración escénica"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué importancia tiene el lenguaje corporal en el ilusionismo?",
+                options = listOf("Es irrelevante", "Es clave para dirigir la atención y generar credibilidad", "Solo importa en televisión", "Sirve para intimidar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'fuerza' en cartomagia?",
+                options = listOf("Una carta con peso especial", "Una forma de hacer que el espectador elija una carta específica sin saberlo", "Un truco con cartas dobles", "Una baraja gigante"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca al mirar directamente al público durante un truco?",
+                options = listOf("Intimidar", "Generar una conexión emocional y controlar su foco de atención", "Buscar aprobación", "Ver si alguien lo descubre"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hace única a la magia improvisada?",
+                options = listOf("No requiere habilidades", "Es espontánea, usando objetos cotidianos en situaciones reales", "Solo sirve para niños", "No genera impacto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué caracteriza al ilusionismo callejero?",
+                options = listOf("Trucos de gran escala", "Uso de cámaras ocultas", "Actuaciones en espacios públicos con cercanía al público", "Solo se hace en festivales"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo de usar historias o narrativas en un truco?",
+                options = listOf("Distraer del error", "Alargar el tiempo", "Aumentar la inmersión y el impacto emocional", "Evitar que el público piense"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'sleight of hand'?",
+                options = listOf("Ilusión sonora", "Juego de cartas especial", "Habilidad manual para realizar trucos sin que se note", "Truco con humo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Por qué algunos ilusionistas revelan trucos después de sus actos?",
+                options = listOf("Por error", "Para mostrar su ego", "Como parte del show educativo o para inspirar", "Porque los olvidan"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué relación tiene la confianza del público con el éxito de un acto?",
+                options = listOf("Ninguna", "Es esencial: si confían en el mago, suspenden su incredulidad", "Solo sirve si hay niños", "Se pierde al usar luces"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica se utiliza cuando el mago realiza un movimiento falso para cubrir otro?",
+                options = listOf("Cambio de baraja", "Misdirection inverso", "Movimiento de cobertura", "Forcing emocional"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el mentalismo?",
+                options = listOf("Una forma de hipnosis clínica", "La ilusión de habilidades mentales como lectura de pensamientos o predicciones", "Una técnica de meditación", "Un tipo de música"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué distingue al ilusionismo televisado del presencial?",
+                options = listOf("No requiere ensayos", "Depende de cámaras y edición para ciertos efectos", "Siempre es mejor", "No se usa misdirection"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un gimmick en el ilusionismo?",
+                options = listOf("Un elemento secreto diseñado para facilitar un truco", "Una aplicación digital", "Un error común", "Una historia inventada"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué actitud debería evitar un ilusionista frente al público?",
+                options = listOf("Confianza escénica", "Actitud desafiante o de superioridad", "Empatía", "Manejo del silencio"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Pilates" to listOf(
+            QuizQuestion(
+                question = "¿Quién fue el creador del método Pilates?",
+                options = listOf("Joseph Pilates", "Marie Kondo", "B.K.S. Iyengar", "David Belle"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es uno de los principios fundamentales del Pilates?",
+                options = listOf("Velocidad", "Fuerza máxima", "Control", "Competencia"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del cuerpo se considera el 'centro de poder' en Pilates?",
+                options = listOf("Las piernas", "El cuello", "El core (zona abdominal y lumbar)", "Los brazos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca mejorar principalmente con Pilates?",
+                options = listOf("Masa muscular bruta", "Fuerza explosiva", "Postura, flexibilidad y control del cuerpo", "Velocidad de reacción"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de respiración se usa en Pilates?",
+                options = listOf("Respiración torácica lateral", "Respiración bucal rápida", "Respiración clavicular", "Respiración nasal cerrada"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué accesorio es común en Pilates para intensificar ejercicios?",
+                options = listOf("Pelota suiza", "Pesas rusas", "Cuerda de saltar", "Tubo de oxígeno"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia al Pilates del yoga tradicional?",
+                options = listOf("Pilates tiene enfoque más en el movimiento consciente desde el centro corporal", "Yoga siempre se hace de pie", "Pilates se practica solo con máquinas", "Yoga busca el estrés físico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un beneficio mental del Pilates?",
+                options = listOf("Incremento del estrés", "Reducción de la concentración", "Mayor conexión mente-cuerpo", "Ansiedad prolongada"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué aparato fue diseñado por el creador de Pilates?",
+                options = listOf("El Reformer", "La cinta de correr", "El bosu", "La bicicleta estática"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué aspecto técnico se trabaja mucho en Pilates?",
+                options = listOf("El impacto contra el piso", "La movilidad sin control", "El alineamiento corporal y la respiración consciente", "La resistencia al dolor"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué población puede beneficiarse del Pilates?",
+                options = listOf("Solo atletas jóvenes", "Personas mayores, embarazadas y en rehabilitación también", "Solo culturistas", "Niños exclusivamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca evitar durante la práctica de Pilates?",
+                options = listOf("El enfoque en la respiración", "La tensión innecesaria y movimientos bruscos", "El control del cuerpo", "La alineación postural"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de movimientos predominan en Pilates?",
+                options = listOf("Explosivos y rápidos", "Descontrolados", "Controlados, fluidos y precisos", "Irracionales y de impacto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento se enfatiza para prevenir lesiones en Pilates?",
+                options = listOf("Saltos constantes", "Desafíos físicos extremos", "Alineación y control", "Carga excesiva de peso"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo influye Pilates en la respiración diaria?",
+                options = listOf("No influye", "Empeora la capacidad respiratoria", "Mejora la conciencia y el control respiratorio", "Reduce la capacidad pulmonar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué rol tiene la concentración en Pilates?",
+                options = listOf("Ninguno", "Sirve solo al principio", "Es uno de los principios clave para ejecutar correctamente", "Solo ayuda a los profesores"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa la precisión en el contexto del método Pilates?",
+                options = listOf("Hacer ejercicios lo más rápido posible", "Copiar al instructor sin pensar", "Realizar cada movimiento con atención y técnica", "Usar cronómetros"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué impacto tiene Pilates sobre el estrés?",
+                options = listOf("Lo incrementa por la exigencia", "Ayuda a reducirlo mediante control respiratorio y atención plena", "Lo mantiene igual", "No tiene efectos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cómo se adapta Pilates a personas con lesiones?",
+                options = listOf("No es recomendable", "Puede adaptarse con ejercicios suaves y supervisión", "Solo para atletas", "Requiere máquinas costosas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia al Reformer del mat (colchoneta)?",
+                options = listOf("El Reformer agrega resistencia mediante resortes y poleas", "El mat es más avanzado", "Solo el mat fortalece el core", "Ambos son lo mismo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo final de la práctica constante de Pilates?",
+                options = listOf("Competir profesionalmente", "Alcanzar fuerza bruta", "Aumentar la conciencia corporal y el control físico-mental", "Desarrollar velocidad atlética"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué principio del Pilates implica moverse con intención y exactitud?",
+                options = listOf("Relajación", "Velocidad", "Precisión", "Potencia"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas afirmaciones es verdadera respecto al Pilates?",
+                options = listOf("Solo se puede practicar en gimnasios", "Es una práctica exclusivamente para mujeres", "Mejora la coordinación y equilibrio", "No tiene impacto en la vida diaria"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca al controlar la respiración en cada movimiento de Pilates?",
+                options = listOf("Aumentar la presión arterial", "Distraer la mente", "Favorecer el control muscular y mental", "Hacer más difícil el ejercicio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una señal de que el ejercicio está mal ejecutado?",
+                options = listOf("No se suda", "Hay tensión en cuello o espalda", "Se escucha la respiración", "Se siente el abdomen activado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia a Pilates de otros entrenamientos como el HIIT?",
+                options = listOf("Se basa en movimientos explosivos", "Enfatiza la técnica por encima de la cantidad de repeticiones", "No fortalece el cuerpo", "Solo se realiza acostado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el 'Powerhouse' en Pilates?",
+                options = listOf("Una máquina especial", "Nombre de una clase avanzada", "El centro de energía del cuerpo: abdomen, lumbares y glúteos", "Un tipo de respiración"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca evitar al hacer ejercicios de Pilates?",
+                options = listOf("Tensión innecesaria en hombros y cuello", "Activar el abdomen", "Controlar la respiración", "Trabajar con accesorios"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra con una práctica regular de Pilates?",
+                options = listOf("Postura encorvada", "Menor movilidad", "Mayor control corporal y postura erguida", "Fatiga crónica"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante concentrarse en el cuerpo durante Pilates?",
+                options = listOf("Para compararse con otros", "Para evitar el aburrimiento", "Para lograr un entrenamiento consciente y seguro", "Para entrenar sin respirar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué grupo muscular se activa constantemente en Pilates?",
+                options = listOf("Trapecios", "Bíceps", "Core (zona abdominal y lumbar)", "Cuádriceps"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es un beneficio funcional del Pilates en la vida cotidiana?",
+                options = listOf("Mayor capacidad para levantar peso sin técnica", "Mejor equilibrio y coordinación al caminar o agacharse", "Capacidad de correr maratones", "Facilitar movimientos explosivos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué accesorio se usa en Pilates para intensificar la estabilidad?",
+                options = listOf("Balón medicinal", "Cinturón de lastre", "Círculo mágico (magic circle)", "Sandbag"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede indicar que un ejercicio de Pilates está siendo mal realizado?",
+                options = listOf("Sensación de estabilidad", "Dolor agudo en articulaciones", "Activación del core", "Buena alineación postural"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la importancia de realizar el movimiento con fluidez?",
+                options = listOf("Se ve estético solamente", "Evita impactos y favorece la coordinación muscular", "Permite distraerse", "No tiene relevancia"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cómo ayuda Pilates a personas con estrés o ansiedad?",
+                options = listOf("Aumentando la presión psicológica", "Favoreciendo la conexión cuerpo-mente mediante respiración y control", "Obligándolas a competir", "Eliminando el descanso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Por qué Pilates es útil para prevenir lesiones deportivas?",
+                options = listOf("Porque no se mueve mucho", "Porque fortalece la musculatura estabilizadora y mejora el control postural", "Porque reemplaza a la fisioterapia", "Porque solo se usan máquinas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la postura base más común para comenzar en Pilates?",
+                options = listOf("De pie", "Tendido boca arriba", "En cuclillas", "Sentado en el suelo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el rol del instructor en una clase de Pilates?",
+                options = listOf("Solo contar repeticiones", "Controlar que cada alumno mantenga buena forma y respiración", "Ejercitar más que los alumnos", "Criticar posturas ajenas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'alineación corporal' en Pilates?",
+                options = listOf("La forma de sentarse derecho", "La alineación de las extremidades respecto al eje del cuerpo", "Ejercicios de rotación", "Caminar en línea recta"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de personas pueden comenzar con Pilates?",
+                options = listOf("Solo personas en forma", "Cualquiera, con adaptaciones si es necesario", "Solo deportistas", "Solo jóvenes"),
+                correctIndex = 1
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Tarot" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el tarot?",
+                options = listOf("Un juego de mesa", "Un método de adivinación simbólica con cartas", "Una técnica de hipnosis", "Un libro antiguo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántas cartas tiene una baraja de tarot tradicional?",
+                options = listOf("52", "64", "78", "88"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo se dividen las cartas del tarot?",
+                options = listOf("Palos y figuras", "Arcanos mayores y menores", "Cartas de poder y suerte", "Cartas activas y pasivas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántos Arcanos Mayores hay en el tarot?",
+                options = listOf("12", "22", "36", "44"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa la carta del Loco en el tarot?",
+                options = listOf("Inmadurez y fracaso", "Comienzos, libertad y espontaneidad", "Traición", "Estabilidad emocional"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas cartas simboliza transformación y renacimiento?",
+                options = listOf("El Sol", "La Rueda de la Fortuna", "La Muerte", "El Diablo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué carta representa equilibrio y armonía?",
+                options = listOf("La Templanza", "El Diablo", "El Juicio", "La Torre"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué palo está presente en los Arcanos Menores?",
+                options = listOf("Bastos", "Flores", "Rocas", "Árboles"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento se asocia con el palo de Copas?",
+                options = listOf("Fuego", "Tierra", "Aire", "Agua"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué carta suele asociarse con cambios inesperados?",
+                options = listOf("La Estrella", "La Torre", "El Mago", "La Emperatriz"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el palo de Espadas?",
+                options = listOf("Emociones y sentimientos", "Pensamiento, conflicto y decisión", "Abundancia material", "Alegría y celebración"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la finalidad principal de una lectura de tarot?",
+                options = listOf("Predecir el futuro exacto", "Conocer el pasado", "Guiar a través de símbolos y reflexión personal", "Adivinar números ganadores"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué carta puede simbolizar el ego o las ataduras internas?",
+                options = listOf("El Diablo", "El Sol", "La Justicia", "El Carro"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué carta puede indicar iluminación y éxito?",
+                options = listOf("La Luna", "La Estrella", "El Sol", "El Colgado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una práctica común antes de leer las cartas?",
+                options = listOf("Encender una vela", "Gritar fuerte", "Escribir el horóscopo", "Jugar con dados"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el Juicio en el tarot?",
+                options = listOf("Fracaso inevitable", "Culpa emocional", "Renacimiento, reflexión y cambio de rumbo", "Pasividad"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué carta representa el dominio y liderazgo?",
+                options = listOf("La Sacerdotisa", "El Loco", "El Emperador", "La Templanza"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el número de la carta de La Rueda de la Fortuna?",
+                options = listOf("VI", "X", "XIV", "IX"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa la carta de La Luna?",
+                options = listOf("Claridad total", "Falsedad, intuición y confusión", "Control y acción", "Inmadurez emocional"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una tirada de tarot de tres cartas?",
+                options = listOf("Pasado, presente y futuro", "Una carta por día", "Tres cartas de un solo palo", "Tres cartas del tarot egipcio"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que una carta salga invertida en una tirada de tarot?",
+                options = listOf("Que no debe interpretarse", "Que se anula su efecto", "Puede representar bloqueos o aspectos internos", "Es una carta inválida"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué carta representa intuición y sabiduría interior?",
+                options = listOf("La Torre", "El Emperador", "La Sacerdotisa", "El Juicio"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué representa la carta del Colgado?",
+                options = listOf("Fracaso", "Castigo", "Pausa, reflexión y cambio de perspectiva", "Éxito inmediato"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué carta simboliza poder, manifestación y acción?",
+                options = listOf("El Mago", "El Loco", "La Luna", "La Justicia"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué palo del tarot representa emociones y relaciones?",
+                options = listOf("Bastos", "Espadas", "Copas", "Oros"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué carta suele representar celebración y éxito social?",
+                options = listOf("El Diablo", "Cuatro de Copas", "Tres de Copas", "Cinco de Espadas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede indicar la carta del Ermitaño?",
+                options = listOf("Soledad voluntaria, introspección y búsqueda espiritual", "Felicidad pública", "Viaje inmediato", "Inmadurez"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento se asocia con el palo de Bastos?",
+                options = listOf("Agua", "Fuego", "Aire", "Tierra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el palo de Oros?",
+                options = listOf("Relaciones personales", "Trabajo y emociones", "Aspectos materiales y financieros", "Incertidumbre espiritual"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué carta está asociada con liberación y revelación?",
+                options = listOf("El Sol", "La Luna", "La Sacerdotisa", "El Juicio"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas cartas simboliza justicia, verdad y equilibrio?",
+                options = listOf("El Colgado", "La Justicia", "El Emperador", "La Rueda de la Fortuna"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede simbolizar la carta de la Estrella?",
+                options = listOf("Esperanza, guía e inspiración", "Engaño y temor", "Soledad profunda", "Furia reprimida"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué carta representa control y determinación?",
+                options = listOf("La Fuerza", "El Carro", "La Muerte", "El Loco"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué carta representa dominio interno y compasión?",
+                options = listOf("La Fuerza", "El Emperador", "El Diablo", "El Mago"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de tirada utiliza una carta por cada aspecto de una situación (mente, cuerpo, espíritu)?",
+                options = listOf("Tirada de la cruz celta", "Tirada de tres cartas", "Tirada del triángulo", "Tirada lunar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué actitud se recomienda tener al consultar el tarot?",
+                options = listOf("Escepticismo absoluto", "Dependencia emocional", "Reflexión y apertura simbólica", "Obsesión con el resultado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el significado de la carta de La Emperatriz?",
+                options = listOf("Destrucción y pérdida", "Creatividad, fertilidad y abundancia", "Silencio", "Inmadurez emocional"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué carta puede reflejar un momento de crisis profunda pero necesaria?",
+                options = listOf("El Sol", "La Luna", "La Torre", "El Colgado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito del tarot en contextos terapéuticos?",
+                options = listOf("Reemplazar al psicólogo", "Brindar certeza exacta", "Facilitar la introspección y el autoconocimiento", "Dar órdenes específicas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué debe considerarse al interpretar las cartas del tarot?",
+                options = listOf("La posición en la tirada, la carta, y la pregunta formulada", "Solo el nombre de la carta", "El orden del mazo", "La hora del día"),
+                correctIndex = 0
+            )
+        ),
+
+
+
 
 
 
