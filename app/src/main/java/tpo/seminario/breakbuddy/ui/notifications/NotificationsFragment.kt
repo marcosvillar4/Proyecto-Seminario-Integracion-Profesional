@@ -3,19 +3,30 @@ package tpo.seminario.breakbuddy.ui.notifications
 import android.app.*
 import android.content.*
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentNotificationsBinding
 import java.util.*
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.LoadAdError
 
 
 class NotificationsFragment : Fragment() {
+
+    // AdMob
+    private lateinit var adView: AdView
+    private val retryDelayMs = 2000L
 
     private var _b: FragmentNotificationsBinding? = null
     private val b get() = _b!!
@@ -40,6 +51,23 @@ class NotificationsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        // === Banner AdMob ===
+        adView = view.findViewById(R.id.adViewNotifications)
+        adView.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                Log.d("AdMob", "Notifications banner loaded")
+            }
+            override fun onAdFailedToLoad(error: LoadAdError) {
+                Log.e("AdMob", "Notifications banner failed: ${error.message}")
+                Handler(Looper.getMainLooper()).postDelayed({
+                    adView.loadAd(AdRequest.Builder().build())
+                }, retryDelayMs)
+            }
+        }
+        adView.loadAd(AdRequest.Builder().build())
+
+
         prefs = requireContext().getSharedPreferences("notif_prefs", Context.MODE_PRIVATE)
         alarmMgr = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 

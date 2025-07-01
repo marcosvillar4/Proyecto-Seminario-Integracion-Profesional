@@ -10,18 +10,38 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.settings.AccountSettingsFragment">
 
+
+    <!-- Guideline al para el banner -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.00"
+        android:orientation="horizontal"/>
+
+    <!-- 👇 Banner AdMob -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewAccount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-7467173777372011/4567587890"
+        app:layout_constraintTop_toBottomOf="@id/guideline_banner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <!-- Bienvenida y Foto de perfil -->
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_default_avatar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/adViewAccount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:scaleType="centerCrop"
-        android:padding="4dp" />
+        android:padding="4dp"/>
 
     <TextView
         android:id="@+id/textGreeting"
