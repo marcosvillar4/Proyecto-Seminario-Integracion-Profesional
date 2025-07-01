@@ -8,18 +8,10 @@ Maquillaje profesional / Programar / Videojuegos / Juegos de mesa / Ajedrez / Mo
 Meditar / Astronomía / Avistamiento de aves / Adiestramiento de animales / Manicura / Diseño floral / Lepidopterologia / Escribir / Dibujo / Crochet /
 Dardos / Manualidades / Creación de contenido / Andar en bicicleta / Armar rompecabezas / Bloggear / Diseño gráfico / Correr / Voluntariado /
 Restaurar muebles / Golf / Bordado / Crucigramas / Origami / Poesía / Caligrafia / Vidrieria artistica / Coleccionismo / Ilusionismo / Pilates / Tarot /
+Hacer velas / Peluqueria / Decoracion de interiores / Damas / Bonsai / Sudoku / Sopa de letras / Bingo
 
-
+TERMINADO.
 */
-
-/*TODAVIA FALTAN:
-
-
-        ------------------------------------
-        ,,"Hacer velas"
-        "Peluqueria","Decoracion de interiores","Damas"
-        "Bonsai""Sudoku","Sopa de letras","Bingo"*/
-
 
 object HobbyQuestionsProvider{
     val hobbyQuizzes: Map<String, List<QuizQuestion>> = mapOf(
@@ -13242,17 +13234,1644 @@ object HobbyQuestionsProvider{
             )
         ),
 
+        //************************************************************************************************************************
 
+        "Hacer velas" to listOf(
+            QuizQuestion(
+                question = "¿Cuál es el ingrediente base más común para hacer velas caseras?",
+                options = listOf("Manteca", "Cera", "Aceite de oliva", "Glicerina"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de cera es más ecológica y de origen vegetal?",
+                options = listOf("Cera de abeja", "Cera de parafina", "Cera de soja", "Cera de palma"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se utiliza para perfumar una vela de forma natural?",
+                options = listOf("Colorante alimenticio", "Esencias artificiales", "Aceites esenciales", "Vinagre"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte de la vela es responsable de la combustión?",
+                options = listOf("La cera", "El colorante", "La mecha", "El molde"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una función del molde al hacer velas?",
+                options = listOf("Evaporar la cera", "Evitar que ardan", "Dar forma a la vela", "Agregar color"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede ocurrir si se agrega demasiado aceite esencial a la cera?",
+                options = listOf("La vela será más brillante", "La vela no se solidificará correctamente", "Arderá por más tiempo", "No afectará en nada"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una ventaja de la cera de soja sobre la de parafina?",
+                options = listOf("Es más barata", "Es natural y produce menos humo", "Se derrite más rápido", "No requiere mecha"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer antes de verter la cera en el molde?",
+                options = listOf("Congelarlo", "Lubricarlo con aceite", "Colocar la mecha centrada", "Agregar detergente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué material es común para hacer mechas caseras?",
+                options = listOf("Nylon", "Hilo de algodón", "Cobre", "Papel"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede causar que una vela se derrita de forma dispareja?",
+                options = listOf("Cera vegetal", "Mecha mal posicionada", "Colorante natural", "Molde de silicona"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de recipiente es seguro para velas en frascos?",
+                options = listOf("Frascos de plástico", "Vasos finos de vidrio", "Cerámica o vidrio resistente al calor", "Cartón encerado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede suceder si se sobrecalienta la cera?",
+                options = listOf("Se vuelve más aromática", "Mejora la textura", "Puede inflamarse", "Se vuelve más transparente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito de curar una vela después de hacerla?",
+                options = listOf("Hacerla más colorida", "Eliminar impurezas", "Mejorar la liberación del aroma y quemado", "Derretir la mecha"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento puede añadirse para decoración sin afectar la combustión?",
+                options = listOf("Purpurina metálica", "Flores secas en el exterior", "Papel aluminio", "Plástico picado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para mantener centrada la mecha mientras se solidifica la vela?",
+                options = listOf("Cinta adhesiva", "Palillo o soporte de mecha", "Imán", "Aguja de coser"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una forma efectiva de evitar burbujas en la cera al verterla?",
+                options = listOf("Verter muy rápido", "No derretir completamente", "Verter lentamente y en temperatura adecuada", "Usar agua fría en el molde"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda hacer si la vela tiene grietas al solidificarse?",
+                options = listOf("Romperla y comenzar de nuevo", "Agregar agua", "Volver a calentar la superficie suavemente", "Pintarla encima"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una temperatura aproximada segura para derretir cera de soja?",
+                options = listOf("40°C", "60–70°C", "100°C", "130°C"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una vela con túnel en el centro después de varios usos?",
+                options = listOf("Cera de mala calidad", "Mecha mal posicionada o muy delgada", "Cera demasiado caliente", "Fragancia muy intensa"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué precaución de seguridad es importante al hacer velas en casa?",
+                options = listOf("Hacerlo en un lugar bien ventilado y sin niños cerca", "Usar cera sin calentar", "Soplar la mecha mientras se seca", "Agregar agua para enfriar más rápido"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una vela aromática?",
+                options = listOf("Una vela que huele mal", "Una vela con perfume incorporado", "Una vela sin mecha", "Una vela con decoración externa"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué color de vela se asocia comúnmente con la relajación?",
+                options = listOf("Rojo", "Azul", "Negro", "Amarillo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué cera es más recomendable para personas alérgicas?",
+                options = listOf("Parafina", "Cera de soja sin fragancia", "Cera de abeja con perfume", "Cera reciclada"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un termómetro en el proceso de hacer velas?",
+                options = listOf("Medir el tamaño del molde", "Calcular el aroma", "Evitar sobrecalentar la cera", "Cortar la mecha"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre si no se cura adecuadamente una vela antes de usarla?",
+                options = listOf("No se enciende", "Arde de forma irregular y libera menos aroma", "Se quiebra", "Se derrite más rápido"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se puede usar para colorear velas de forma segura?",
+                options = listOf("Tinta de impresora", "Acuarela", "Colorante para velas o crayones sin tóxicos", "Esmalte de uñas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una característica de una vela bien hecha?",
+                options = listOf("Se derrite solo en el centro", "Genera humo negro", "Se quema uniformemente", "Se apaga sola en 5 minutos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué debe hacerse con los restos de cera sobrante?",
+                options = listOf("Desecharlos inmediatamente", "Reutilizarlos en nuevas velas", "Mezclarlos con jabón", "Usarlos como lubricante"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante derretir la cera a baño maría en lugar de fuego directo?",
+                options = listOf("Para acelerar el proceso", "Porque huele mejor", "Para evitar que la cera se inflame", "Para evitar grumos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué accesorio se puede añadir al recipiente para facilitar la limpieza después del uso?",
+                options = listOf("Papel aluminio", "Agua", "Cera de silicona", "Aceite desmoldante en el interior"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué mechas producen una llama más estable?",
+                options = listOf("De papel", "De algodón trenzado", "De metal", "De silicona"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué indica una llama que parpadea mucho?",
+                options = listOf("Buena calidad", "Exceso de oxígeno", "Mecha mal cortada o corriente de aire", "Aroma fuerte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede generar humo excesivo al quemar una vela?",
+                options = listOf("Cera de soja", "Colorante natural", "Mecha demasiado larga", "Esencia suave"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede causar que una vela se consuma muy rápido?",
+                options = listOf("Mecha muy gruesa", "Color claro", "Cera natural", "Uso de moldes metálicos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una forma de hacer velas en capas de diferentes colores?",
+                options = listOf("Congelar entre capas", "Verter toda la cera junta", "Usar doble mecha", "Evitar usar moldes"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si la mecha es muy fina para el diámetro de la vela?",
+                options = listOf("Generará una llama muy grande", "Se apagará rápidamente", "Quemará muy rápido", "Derretirá toda la cera de golpe"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una medida de seguridad al encender una vela aromática?",
+                options = listOf("Colocarla cerca de cortinas", "No dejarla desatendida", "Ponerla sobre madera", "Encenderla con fósforos mojados"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'velas ecológicas'?",
+                options = listOf("Se reciclan al usarlas", "Están hechas con materiales renovables y menos contaminantes", "No se derriten", "No tienen aroma"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un uso alternativo para restos de cera de velas aromáticas?",
+                options = listOf("Hacer crayones", "Aromatizar cajones o closets", "Enfriar alimentos", "Usar como pegamento"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia a una vela decorativa de una funcional?",
+                options = listOf("La decorativa no se puede encender", "La decorativa tiene más aroma", "La decorativa prioriza la estética sobre la duración o funcionalidad", "La decorativa dura más"),
+                correctIndex = 2
+            )
+        ),
 
+        //************************************************************************************************************************
 
+        "Peluquería" to listOf(
+            QuizQuestion(
+                question = "¿Cuál es la herramienta principal para cortar el cabello?",
+                options = listOf("Peine", "Tijeras", "Cepillo", "Secador"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple el peine en el corte de cabello?",
+                options = listOf("Medir temperatura", "Separar y ordenar el cabello", "Cortar capas", "Teñir el cabello"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de tijera se usa para adelgazar o desmechar el cabello?",
+                options = listOf("Tijera de entresacar", "Tijera curva", "Tijera de punta roma", "Tijera de costura"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué producto se utiliza para fijar peinados de forma temporal?",
+                options = listOf("Acondicionador", "Laca o spray", "Shampoo", "Tintura"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer antes de teñir el cabello?",
+                options = listOf("Aplicar calor", "Lavar con shampoo", "Realizar una prueba de alergia", "Cortar las puntas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de corte se caracteriza por tener el mismo largo en toda la cabeza?",
+                options = listOf("Corte en capas", "Bob", "Corte recto", "Degradado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué aparato se usa para alisar el cabello aplicando calor?",
+                options = listOf("Secador", "Rizador", "Cepillo térmico", "Plancha de pelo"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué producto se usa para proteger el cabello del calor antes de usar plancha o secador?",
+                options = listOf("Acondicionador sin enjuague", "Gel fijador", "Protector térmico", "Tinta capilar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda hacer para evitar puntas abiertas?",
+                options = listOf("Cortar las puntas regularmente", "Usar agua muy caliente", "Aplicar laca diariamente", "Teñir con frecuencia"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se utiliza para ondular el cabello sin calor?",
+                options = listOf("Cepillo redondo", "Bigudíes o ruleros", "Peine de dientes finos", "Secador de aire frío"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo del shampoo en el lavado del cabello?",
+                options = listOf("Dar brillo", "Fijar el color", "Eliminar la suciedad y grasa", "Deshidratar el cuero cabelludo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué corte favorece a rostros redondos al alargar visualmente la cara?",
+                options = listOf("Flequillo recto", "Corte pixie", "Corte en capas largas", "Corte carré"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué instrumento se utiliza para cortar el cabello en zonas como la nuca o patillas?",
+                options = listOf("Tijera común", "Cepillo", "Navaja de afeitar", "Máquina de cortar cabello"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de peine es mejor para desenredar el cabello mojado?",
+                options = listOf("Peine de dientes finos", "Peine metálico", "Peine de dientes anchos", "Peine con púas calientes"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe tener en cuenta al realizar un corte en cabello rizado?",
+                options = listOf("Cortar en seco y considerar el encogimiento", "Cortar solo en mojado", "Usar navaja", "Cepillarlo con fuerza"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué corte de cabello es conocido por su estilo corto en la nuca y largo hacia adelante?",
+                options = listOf("Corte bob invertido", "Corte recto", "Degradado clásico", "Corte militar"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué producto se utiliza para hidratar el cabello después de lavarlo?",
+                options = listOf("Gel", "Acondicionador", "Fijador", "Shampoo seco"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se considera una buena práctica al atender a un cliente en peluquería?",
+                options = listOf("Apurar el corte", "No usar capa", "Consultar sus preferencias y explicar el proceso", "Evitar el espejo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de cepillo es ideal para dar volumen al secar el cabello?",
+                options = listOf("Cepillo plano", "Cepillo redondo", "Cepillo de púas metálicas", "Cepillo doble"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica de coloración implica teñir solo las puntas del cabello?",
+                options = listOf("Mechas californianas", "Reflejos", "Balayage", "Decoloración total"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué indica un cuero cabelludo con picazón y descamación constante?",
+                options = listOf("Cabello saludable", "Piojos", "Caspa u otra afección dérmica", "Uso de shampoo caro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo de corte se caracteriza por transiciones suaves entre largos?",
+                options = listOf("Degradado", "Carré", "Corte recto", "Rapado completo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la mejor forma de mantener las herramientas de peluquería limpias?",
+                options = listOf("Enjuagarlas con agua caliente", "Pasarles alcohol o desinfectante", "Guardarlas sin limpiar", "Limpiarlas con perfume"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio tiene el masaje capilar durante el lavado?",
+                options = listOf("Estimula la circulación sanguínea", "Corta el cabello", "Aumenta la grasa", "Hace crecer las uñas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de cabello suele necesitar más hidratación?",
+                options = listOf("Lacio", "Graso", "Rizado o afro", "Corto"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre si se usa un shampoo no adecuado al tipo de cabello?",
+                options = listOf("No se nota ninguna diferencia", "Se cae más el cabello", "Puede causar sequedad o grasa excesiva", "Vuelve el cabello blanco"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el balayage?",
+                options = listOf("Un corte militar", "Una técnica de coloración gradual desde la raíz", "Un shampoo especial", "Una forma de peinar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la principal diferencia entre un alisado y una permanente?",
+                options = listOf("El alisado da volumen", "El alisado estira el cabello y la permanente lo riza", "La permanente es para cabello corto", "Ambas hacen lo mismo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos productos es ideal para controlar el frizz?",
+                options = listOf("Laca", "Acondicionador", "Aceite capilar o serum", "Shampoo sólido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué corte suele usarse para hombres con poco cabello en la coronilla?",
+                options = listOf("Corte militar", "Degradado bajo", "Rapado total", "Pompadour"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer si un cliente tiene una reacción alérgica al tinte?",
+                options = listOf("Enjuagar y aplicar crema hidratante", "Ignorarlo", "Cubrir con laca", "Lavar con shampoo con sal"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es el flequillo tipo 'curtain bangs'?",
+                options = listOf("Un flequillo recto", "Un flequillo que se abre a los costados como cortinas", "Flequillo invisible", "Flequillo con trenzas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué hábito ayuda a mantener el cabello saludable?",
+                options = listOf("Lavarlo todos los días con agua caliente", "Dormir con el pelo mojado", "Cepillarlo con suavidad y usar productos adecuados", "Usar laca a diario"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de corte es ideal para cabellos con mucho volumen?",
+                options = listOf("Corte en capas", "Corte recto", "Corte pixie", "Carré corto"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el riesgo de aplicar decoloración sin conocimiento?",
+                options = listOf("Cabello más brillante", "Aroma fuerte", "Daño severo al cabello y cuero cabelludo", "Color perfecto garantizado"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una línea de corte en peluquería?",
+                options = listOf("Una raya dibujada con lápiz", "Una referencia visual para guiar el corte", "Una mecha sin cortar", "Una técnica para peinar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de peine se recomienda para aplicar tintura?",
+                options = listOf("Peine de dientes anchos", "Peine con punta fina", "Peine redondo", "Peine metálico grueso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué corte suele resaltar los rasgos de un rostro alargado?",
+                options = listOf("Corte largo recto", "Capas cortas y flequillo", "Rapado lateral", "Corte militar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué instrumento es ideal para perfilar la barba o nuca con precisión?",
+                options = listOf("Tijera", "Cepillo", "Máquina con peine largo", "Navaja o trimmer fino"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué aspecto influye al elegir un corte de cabello?",
+                options = listOf("Forma del rostro y tipo de cabello", "Precio del shampoo", "Cantidad de toallas", "Color del secador"),
+                correctIndex = 0
+            )
+        ),
 
+        //************************************************************************************************************************
 
+        "Decoración de interiores" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el estilo minimalista en decoración?",
+                options = listOf("Uso excesivo de colores", "Ambientes con pocos elementos, funcionales y ordenados", "Decoración con muchos adornos", "Diseños rústicos con madera natural"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué color se considera neutro en decoración?",
+                options = listOf("Verde lima", "Rojo", "Gris", "Violeta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una función principal de la iluminación en el diseño interior?",
+                options = listOf("Reducir el consumo de agua", "Cambiar el color de los muebles", "Crear ambientes y resaltar espacios", "Evitar que se ensucie la casa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca con el feng shui en decoración?",
+                options = listOf("Maximizar el espacio físico", "Mejorar el flujo de energía y armonía", "Agregar plantas artificiales", "Evitar usar madera"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de muebles son ideales para espacios pequeños?",
+                options = listOf("Muebles grandes y oscuros", "Muebles multifuncionales y claros", "Muebles ornamentados", "Muebles fijos y pesados"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el término 'paleta de colores' en decoración?",
+                options = listOf("La pintura usada para un cuadro", "El menú de un restaurante", "Conjunto de colores seleccionados para un ambiente", "La gama de perfumes del hogar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento suele dar sensación de amplitud en un ambiente?",
+                options = listOf("Alfombras pequeñas", "Espejos", "Cortinas gruesas", "Cuadros grandes"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca al aplicar texturas diferentes en un mismo ambiente?",
+                options = listOf("Uniformidad", "Disminuir la luz", "Agregar profundidad y riqueza visual", "Reducir la temperatura"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo combina elementos antiguos con modernos?",
+                options = listOf("Estilo escandinavo", "Vintage", "Contemporáneo", "Industrial"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de iluminación es más recomendable para una sala de estar?",
+                options = listOf("Fría y directa", "Natural y cálida", "Oscura e indirecta", "Azul y puntual"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe tener en cuenta al colgar cuadros en una pared?",
+                options = listOf("El color del techo", "La dirección del sol", "La proporción y altura respecto al mobiliario", "El peso de los muebles cercanos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una ventaja de usar plantas naturales en el interior?",
+                options = listOf("Aumentan el polvo", "Reducen oxígeno", "Mejoran el aire y aportan vida al ambiente", "Dificultan la limpieza"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo es conocido por usar madera, cuero y hierro en ambientes rústicos?",
+                options = listOf("Minimalista", "Bohemio", "Industrial", "Colonial"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué característica tiene el estilo escandinavo?",
+                options = listOf("Colores vibrantes y pesados", "Espacios recargados", "Simplicidad, colores claros y funcionalidad", "Decoración barroca"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de piso es más cálido para una habitación?",
+                options = listOf("Cerámico", "Porcelanato", "Madera o flotante", "Piedra natural"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple una alfombra en decoración?",
+                options = listOf("Evitar que se mojen los muebles", "Reducir la electricidad", "Delimitar espacios y dar confort", "Aumentar el ruido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué ventaja tiene pintar las paredes de blanco?",
+                options = listOf("Se ensucian menos", "Reduce el calor", "Amplía visualmente los espacios", "Absorbe humedad"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda al decorar una habitación infantil?",
+                options = listOf("Evitar colores", "Colocar muebles pesados", "Usar colores vivos y materiales seguros", "Colocar adornos frágiles"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué objeto puede funcionar como punto focal en una habitación?",
+                options = listOf("Una silla común", "Una lámpara llamativa o un cuadro central", "Un enchufe", "Una puerta interior"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el mobiliario modular?",
+                options = listOf("Muebles fijos", "Muebles que se adaptan y combinan en distintas configuraciones", "Muebles de metal", "Muebles usados para exteriores"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda para lograr un ambiente acogedor?",
+                options = listOf("Usar luces frías", "Evitar textiles", "Incluir iluminación cálida y texturas suaves", "Pintar todo de negro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos elementos ayuda a mejorar la acústica de una habitación?",
+                options = listOf("Pisos cerámicos", "Cortinas gruesas y alfombras", "Ventanas abiertas", "Lámparas de techo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa el concepto de 'open concept'?",
+                options = listOf("Separar espacios con muros", "Usar colores oscuros", "Ambientes integrados sin divisiones físicas", "Ambientes sin ventanas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué material es ideal para dar un toque natural a un espacio?",
+                options = listOf("Plástico", "Vidrio esmerilado", "Madera", "Acrílico brillante"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una tendencia actual en decoración?",
+                options = listOf("Recargar espacios", "Colores chillones", "Uso de materiales reciclados y sostenibles", "Ignorar la iluminación"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra con una buena distribución del mobiliario?",
+                options = listOf("Mayor desorden", "Espacios incómodos", "Mejor circulación y funcionalidad", "Reducción del espacio visual"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de lámpara es ideal para generar una atmósfera relajada?",
+                options = listOf("Lámpara LED fría", "Lámpara colgante intensa", "Luz cálida tenue como lámpara de mesa", "Foco blanco directo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué textura se asocia con sensación de calidez?",
+                options = listOf("Metal", "Vidrio", "Madera o lana", "Azulejo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un error común al decorar un ambiente pequeño?",
+                options = listOf("Usar espejos", "Colores claros", "Saturarlo de muebles y objetos", "Muebles multifunción"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda para dar mayor altura visual a una habitación?",
+                options = listOf("Pintar el techo de color oscuro", "Usar cortinas desde el techo hasta el suelo", "Poner muebles bajos", "Colgar cuadros en el piso"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una mesa auxiliar?",
+                options = listOf("Mesa principal del comedor", "Mesa de jardín", "Mesa pequeña usada como soporte decorativo o funcional", "Mesa fija de madera maciza"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una función de los cojines en decoración?",
+                options = listOf("Molestar visualmente", "Agregar textura, color y confort", "Sostener cuadros", "Reflejar la luz"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de decoración se caracteriza por su libertad y mezcla de colores y estilos?",
+                options = listOf("Minimalismo", "Estilo clásico", "Estilo bohemio", "Estilo escandinavo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué elemento se usa comúnmente para dividir ambientes sin construir muros?",
+                options = listOf("Papel tapiz", "Biombos, estanterías abiertas o plantas grandes", "Cuadros", "Cortinas pesadas de terciopelo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe evitar al elegir una lámpara para lectura?",
+                options = listOf("Que sea ajustable", "Luz cálida", "Ubicación lateral", "Luz tenue o insuficiente"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo se caracteriza por líneas rectas, tonos neutros y funcionalidad?",
+                options = listOf("Barroco", "Contemporáneo", "Art déco", "Bohemio"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un cabecero tapizado?",
+                options = listOf("Una alfombra", "Una mesa antigua", "El respaldo acolchado y decorativo de una cama", "Una lámpara de pie"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple un espejo grande en una pared?",
+                options = listOf("Disminuir la luz", "Cargar el ambiente", "Multiplicar visualmente el espacio", "Hacer ruido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe considerar al decorar una oficina en casa?",
+                options = listOf("Colores oscuros y muchos adornos", "Buena iluminación, ergonomía y orden", "Muebles fijos y pesados", "Estilo gótico"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se busca al crear un punto focal en una habitación?",
+                options = listOf("Un objeto que capte la atención y dé identidad al espacio", "Evitar el color", "Distraer la vista del mobiliario", "Eliminar la iluminación"),
+                correctIndex = 0
+            )
+        ),
 
+        //************************************************************************************************************************
 
+        "Damas" to listOf(
+            QuizQuestion(
+                question = "¿Cuántas piezas tiene cada jugador al comenzar una partida de damas?",
+                options = listOf("12", "16", "10", "8"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué color comienza primero en una partida tradicional de damas?",
+                options = listOf("Negro", "Rojo", "Blanco", "El que elija el árbitro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué movimiento básico puede hacer una pieza en damas?",
+                options = listOf("Vertical y horizontal", "En L como el caballo", "Diagonal hacia adelante", "Salto largo en línea recta"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo se captura una pieza en damas?",
+                options = listOf("Saltando sobre ella en diagonal", "Empujándola fuera del tablero", "Colocándola encima", "Tocándola con otra pieza"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre cuando una pieza llega a la última fila del tablero del oponente?",
+                options = listOf("Se retira del juego", "Se convierte en reina o dama", "Pierde un turno", "Puede retroceder automáticamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántas casillas tiene un tablero de damas?",
+                options = listOf("64", "100", "49", "81"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué casillas se utilizan en el juego de damas?",
+                options = listOf("Solo las blancas", "Solo las negras", "Ambas", "Depende del jugador"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el tamaño típico de un tablero de damas estándar?",
+                options = listOf("8x8", "10x10", "6x6", "12x12"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede hacer una dama (pieza coronada) que una pieza normal no puede?",
+                options = listOf("Moverse en línea recta", "Saltar dos piezas a la vez", "Moverse en diagonal hacia atrás también", "Moverse como una torre"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Es obligatorio capturar una pieza si se presenta la oportunidad?",
+                options = listOf("Sí", "No", "Solo si se está ganando", "Depende del reglamento local"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Se puede capturar varias piezas en una sola jugada?",
+                options = listOf("No", "Sí, en cadena de saltos", "Solo si son piezas normales", "Solo si son damas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si un jugador omite una captura obligatoria?",
+                options = listOf("No pasa nada", "Pierde la partida", "Se le retira la pieza que debía capturar", "Gana el turno siguiente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo termina una partida de damas?",
+                options = listOf("Cuando se corona una dama", "Cuando un jugador no tiene piezas o movimientos", "Al capturar 5 piezas", "Después de 20 movimientos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué estrategia básica se recomienda en damas?",
+                options = listOf("Aislar piezas", "Proteger el centro y formar cadenas", "No mover ninguna pieza", "Avanzar todas a la vez"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'formar una cadena' en damas?",
+                options = listOf("Hacer varias damas seguidas", "Colocar piezas en diagonal unidas entre sí", "Alinear piezas en una fila recta", "Mover varias piezas al mismo tiempo"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la función de las piezas 'damas' coronadas en defensa?",
+                options = listOf("Nada", "Permitir retroceder y cubrir más espacio", "Se convierten en peones", "Sirven para eliminar piezas aliadas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué ventaja tiene dejar piezas en la fila de atrás?",
+                options = listOf("Evitar coronaciones del rival", "Facilitar movimientos", "No sirve para nada", "Confundir al oponente"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda al inicio del juego?",
+                options = listOf("Jugar sin pensar", "Avanzar piezas centrales y mantener la defensa", "Matar sin estrategia", "No mover las piezas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si ambas jugadoras solo tienen damas y no logran avanzar?",
+                options = listOf("Se continúa eternamente", "Se declara empate", "Gana quien tenga más piezas", "Se lanza una moneda"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuándo se considera una partida de damas tablas o empate?",
+                options = listOf("Cuando se mueven todas las piezas", "Cuando ninguna pieza ha sido coronada", "Cuando no hay progresos posibles por muchos turnos", "Cuando el tablero queda vacío"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué debe hacer un jugador antes de mover una pieza?",
+                options = listOf("Preguntar al rival", "Pensar la jugada y verificar posibles capturas", "Lanzar un dado", "Mover al azar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza tiene más movilidad en el tablero?",
+                options = listOf("Pieza normal", "Dama", "Pieza bloqueada", "La primera que se mueve"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cómo se puede evitar que el rival corone una dama?",
+                options = listOf("Avanzando las piezas rápidamente", "Abandonando la partida", "Manteniendo piezas en la última fila", "Sacando las piezas del tablero"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una desventaja de mover siempre las mismas piezas?",
+                options = listOf("Ninguna", "Se desgastan", "Se dejan espacios desprotegidos", "Se gana automáticamente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué acción puede llevar a una desventaja táctica?",
+                options = listOf("Proteger piezas", "Formar cadenas", "Abandonar el centro", "Coronar damas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué ventaja tiene controlar el centro del tablero?",
+                options = listOf("Ninguna", "Mayor movilidad y control de juego", "Bloquear al oponente", "Ganar más piezas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué permite una captura en cadena?",
+                options = listOf("Avanzar más piezas", "Capturar varias piezas en un turno", "Mover a cualquier lado", "Reiniciar la partida"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuándo se puede mover una dama recién coronada?",
+                options = listOf("En el mismo turno si aún no se movió", "Nunca", "Al siguiente turno", "Cuando el árbitro lo indique"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si un jugador no puede moverse?",
+                options = listOf("Pasa su turno", "Pierde la partida", "Gana automáticamente", "Se le da una jugada extra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la mejor forma de aprender damas?",
+                options = listOf("Memorizar todas las jugadas", "Jugar, practicar y analizar partidas", "Mirar solamente", "Leer sin practicar"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cómo se le llama a una partida en la que nadie gana?",
+                options = listOf("Reinicio", "Tablas o empate", "Coronación", "Abandono"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué acción NO está permitida en damas?",
+                options = listOf("Mover en diagonal", "Capturar al oponente", "Mover hacia atrás con piezas normales", "Formar cadenas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe observar al planear un salto?",
+                options = listOf("Color de la pieza", "Casillas vacías y posibilidades de cadena", "Altura del tablero", "Color del oponente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es una doble captura?",
+                options = listOf("Cuando se pierde una pieza", "Cuando se mueven dos damas", "Cuando se capturan dos piezas en un mismo turno", "Cuando el rival no juega"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante anticipar los movimientos del rival?",
+                options = listOf("Para confundirlo", "Para hacer trampa", "Para evitar perder piezas o quedar en desventaja", "Para ganar más turnos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pieza debe protegerse más al final del juego?",
+                options = listOf("Cualquiera", "La primera que se mueve", "La dama", "Las que están atrás"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué puede provocar una mala distribución de piezas?",
+                options = listOf("Mayor defensa", "Desorganización y vulnerabilidad", "Más coronaciones", "Ganancias inmediatas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué actitud favorece el progreso en damas?",
+                options = listOf("Impulsividad", "Practicar, pensar y ser paciente", "Mover sin pensar", "Evitar estudiar partidas"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de jugadas son más efectivas?",
+                options = listOf("Las predecibles", "Las que siguen un patrón defensivo sin pensar", "Las planificadas estratégicamente", "Las que se repiten siempre"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué aporta el estudio de partidas anteriores?",
+                options = listOf("Nada", "Ayuda a mejorar la estrategia y aprender errores", "Solo sirve para los expertos", "Hace el juego aburrido"),
+                correctIndex = 1
+            )
+        ),
 
+        //************************************************************************************************************************
 
+        "Bonsái" to listOf(
+            QuizQuestion(
+                question = "¿Qué es un bonsái?",
+                options = listOf("Una planta tropical", "Un árbol en miniatura cultivado en maceta", "Un tipo de cactus", "Un estilo de pintura japonesa"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿De qué país proviene la tradición del bonsái?",
+                options = listOf("China", "Corea", "Japón", "Vietnam"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es uno de los objetivos del bonsái?",
+                options = listOf("Que dé frutos grandes", "Imitar la forma de un árbol maduro en la naturaleza", "Lograr flores coloridas", "Que crezca lo más alto posible"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta es común en el cuidado de bonsáis?",
+                options = listOf("Tijeras de podar pequeñas", "Martillo", "Paleta de albañil", "Pico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple el alambrado en el bonsái?",
+                options = listOf("Fijar el árbol a la maceta", "Guiar el crecimiento de ramas y tronco", "Evitar que florezca", "Medir la humedad"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de tierra se usa frecuentemente en bonsáis?",
+                options = listOf("Tierra negra común", "Tierra con fertilizante universal", "Sustrato drenante como akadama", "Arena gruesa de construcción"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Por qué es importante el drenaje en una maceta de bonsái?",
+                options = listOf("Evita que la planta florezca", "Facilita el alambrado", "Previene el encharcamiento y la pudrición de raíces", "Hace crecer más rápido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cada cuánto se debe podar un bonsái en promedio?",
+                options = listOf("Cada semana", "Una vez al año", "Depende de la especie y la estación", "Nunca se poda"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué indica que un bonsái está saludable?",
+                options = listOf("Hojas secas y amarillas", "Crecimiento vigoroso, hojas verdes y raíces fuertes", "Pérdida de hojas", "Tronco blando"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del bonsái se poda para mantener la forma?",
+                options = listOf("Raíces solamente", "Ramas y hojas", "Flores", "Sólo el tronco"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es un bonsái estilo 'chokkan'?",
+                options = listOf("De copa plana", "De ramas colgantes", "De tronco recto y vertical", "En forma de cascada"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa la palabra japonesa 'bonsái'?",
+                options = listOf("Árbol pequeño", "Naturaleza viva", "Árbol plantado en bandeja", "Hoja decorativa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué debe hacerse antes de trasplantar un bonsái?",
+                options = listOf("Pintar la maceta", "Quitarle todas las hojas", "Reducir el riego y preparar el nuevo sustrato", "Dejarlo al sol directo varios días"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un error común al comenzar con bonsáis?",
+                options = listOf("Usar poca agua", "No podar nunca", "Colocarlo en sombra total o regarlo en exceso", "Cambiar de maceta seguido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si no se poda un bonsái regularmente?",
+                options = listOf("Crece más sano", "Mantiene su forma", "Pierde su estética y se descontrola el crecimiento", "Se convierte en una flor"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos árboles es común en bonsáis?",
+                options = listOf("Roble", "Manzano", "Pino", "Álamo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de luz necesita la mayoría de los bonsáis?",
+                options = listOf("Luz fluorescente", "Sombra total", "Luz natural indirecta o sol directo según especie", "Oscuridad continua"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una maceta adecuada para bonsái?",
+                options = listOf("Profunda y ancha", "Alta y cerrada", "Plana y con buen drenaje", "De plástico sin agujeros"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué hace el pinzado en un bonsái?",
+                options = listOf("Fortalece el tronco", "Estimula la brotación y controla el tamaño", "Limpia las raíces", "Elimina la corteza"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué aspecto del bonsái se busca imitar con su diseño?",
+                options = listOf("Un arbusto sin forma", "Un árbol anciano y equilibrado en la naturaleza", "Una planta de interior", "Un adorno moderno"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es la mejor época para trasplantar la mayoría de los bonsáis?",
+                options = listOf("Verano", "Invierno", "Primavera", "Otoño"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre si el sustrato no drena bien?",
+                options = listOf("Las raíces se fortalecen", "La planta florece más", "Puede producirse pudrición de raíces", "El bonsái crece más rápido"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se utiliza para modelar las ramas en bonsái?",
+                options = listOf("Alambres de cobre o aluminio", "Hilos de lana", "Cintas adhesivas", "Clips metálicos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de corte se hace al podar una rama gruesa?",
+                options = listOf("En espiral", "En diagonal limpia y con sellado", "Corte en cruz", "Corte horizontal irregular"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué es el jin en bonsái?",
+                options = listOf("Una técnica de injerto", "Una parte del riego", "Un estilo de rama muerta decorativa", "Una enfermedad"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué función cumple el musgo en la base del bonsái?",
+                options = listOf("Solo estética", "Conserva la humedad y embellece", "Evita que crezca", "Sirve como fertilizante"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para recortar raíces?",
+                options = listOf("Tijera de raíces", "Pala de jardín", "Cuchillo de cocina", "Pinza de depilar"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si se alambran mal las ramas?",
+                options = listOf("Nada", "Se fortalecen", "Pueden dañarse o dejar marcas permanentes", "Pierden hojas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una señal de que el bonsái necesita trasplante?",
+                options = listOf("Crecimiento excesivo", "Falta de brotes nuevos", "Raíces sobresaliendo de la maceta", "Ramas largas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de riego es más adecuado para bonsái?",
+                options = listOf("Riego por inmersión ocasional", "Riego constante por goteo", "Rociado superficial", "Dejarlo secar por semanas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un error común en principiantes al alambrar?",
+                options = listOf("Usar alambre de aluminio", "Quitar el alambre después de una semana", "Apretar demasiado el alambre", "Usar alambre en invierno"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuánto tiempo puede tomar darle forma a un bonsái?",
+                options = listOf("Unos días", "Semanas", "Meses o incluso años", "Unas pocas horas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es el nebari en el bonsái?",
+                options = listOf("Una técnica de poda", "La base visible de las raíces en la superficie", "Una plaga común", "El nombre japonés de una maceta"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué árbol es ideal para principiantes en bonsái?",
+                options = listOf("Ficus", "Olivo", "Cerezo", "Secuoya"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer si el bonsái pierde muchas hojas?",
+                options = listOf("Regarlo menos", "Exponerlo al sol directo fuerte", "Revisar riego, luz y raíces", "Pintar las hojas con spray"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el propósito del defoliado en algunos bonsáis?",
+                options = listOf("Eliminar plagas", "Favorecer brotes nuevos más pequeños", "Cambiar el color de las hojas", "Acelerar la floración"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué debe tener una maceta adecuada para bonsái?",
+                options = listOf("Brillo estético", "Profundidad extra", "Agujeros de drenaje", "Color oscuro"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de agua es preferible para regar un bonsái?",
+                options = listOf("Agua con cloro", "Agua dura de canilla", "Agua de lluvia o declorada", "Agua gaseosa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un beneficio emocional de cuidar bonsáis?",
+                options = listOf("Ayuda a competir", "Reduce el estrés y fomenta la paciencia", "Genera adrenalina", "Desarrolla fuerza física"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede indicar que el bonsái está recibiendo demasiada agua?",
+                options = listOf("Hojas secas", "Tierra extremadamente seca", "Hojas amarillentas y blandas", "Raíces largas por fuera"),
+                correctIndex = 2
+            )
+        ),
 
+        //************************************************************************************************************************
 
+        "Sudoku" to listOf(
+            QuizQuestion(
+                question = "¿Qué es un Sudoku?",
+                options = listOf("Un tipo de rompecabezas numérico", "Un juego de cartas", "Un videojuego japonés", "Un tablero de ajedrez"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo principal del Sudoku?",
+                options = listOf("Colocar colores distintos", "Ordenar los números en orden ascendente", "Llenar la cuadrícula sin repetir números en filas, columnas y regiones", "Formar palabras ocultas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿De cuántas casillas consta un Sudoku clásico?",
+                options = listOf("36", "81", "64", "100"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tamaño tiene normalmente un Sudoku estándar?",
+                options = listOf("8x8", "9x9", "10x10", "6x6"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuántos números hay que colocar en cada fila de un Sudoku 9x9?",
+                options = listOf("8", "10", "9", "6"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo se llaman los bloques más pequeños dentro del Sudoku?",
+                options = listOf("Subtableros", "Mini-cuadrículas", "Regiones o subcuadrantes", "Núcleos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué número no puede faltar en una cuadrícula de Sudoku?",
+                options = listOf("El 0", "El 1", "El 5", "Todos del 1 al 9 deben estar presentes"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Está permitido repetir números en la misma región?",
+                options = listOf("Sí", "No", "Solo los pares", "Depende del nivel"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos es un buen consejo al comenzar un Sudoku?",
+                options = listOf("Llenar números al azar", "Rellenar solo los bordes", "Comenzar con las filas o columnas que tienen más números", "Empezar por las esquinas"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'casilla dada' en Sudoku?",
+                options = listOf("Una casilla ya completada en el tablero inicial", "Una casilla decorativa", "Una pista opcional", "Una casilla sin uso"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Se puede resolver un Sudoku sin adivinar?",
+                options = listOf("No, siempre hay que adivinar", "Sí, usando lógica", "Solo si es fácil", "Depende del software"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué habilidad desarrolla el Sudoku?",
+                options = listOf("Velocidad motora", "Memoria a corto plazo", "Razonamiento lógico y concentración", "Conocimiento histórico"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es un error común al resolver un Sudoku?",
+                options = listOf("Tomarse su tiempo", "Empezar por lo fácil", "Colocar un número sin verificar filas, columnas y región", "Verificar cada movimiento"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que un Sudoku tenga 'una única solución'?",
+                options = listOf("Que sólo hay una casilla correcta", "Que no se puede resolver", "Que sólo existe una forma válida de completarlo", "Que se puede jugar una vez"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué número va al centro de una cuadrícula 9x9?",
+                options = listOf("No hay un número fijo", "Siempre es 5", "Depende del diseñador", "Debe ser par"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si se repite un número en una fila?",
+                options = listOf("Se rompe la regla y la solución es inválida", "No importa", "Se suma como penalidad", "Es parte del juego"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica básica se usa para eliminar posibilidades en una celda?",
+                options = listOf("Regla de tres", "Análisis de exclusión", "Adivinación", "Coloración"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué caracteriza un Sudoku 'difícil'?",
+                options = listOf("Tiene más números dados", "Tiene menos pistas y requiere técnicas avanzadas", "Tiene colores", "Es en 3D"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué debe hacerse si te atascás en un Sudoku?",
+                options = listOf("Borrar todo", "Adivinar al azar", "Volver atrás y revisar jugadas anteriores", "Dejarlo sin terminar"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una variante del Sudoku tradicional?",
+                options = listOf("Sudoku diagonal", "Sudoku rápido", "Sudoku parlante", "Sudoku oculto"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta mental es clave para resolver Sudoku?",
+                options = listOf("Memoria a largo plazo", "Velocidad de cálculo", "Pensamiento lógico", "Imaginación creativa"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica implica buscar números posibles por eliminación?",
+                options = listOf("Descarte", "Adivinación", "Sudokus cruzados", "Agrupamiento aleatorio"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué es una 'celda solitaria'?",
+                options = listOf("Una celda que contiene un único número posible", "Una casilla vacía", "Una celda decorativa", "Una casilla con número tachado"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué indica que un Sudoku fue mal resuelto?",
+                options = listOf("Tiene todas las casillas llenas", "Tiene números repetidos en una fila o columna", "Tiene más de una solución", "Termina en menos de 5 minutos"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué técnica avanzada busca pares ocultos o triples?",
+                options = listOf("Técnica XY-Wing", "Sudoku inverso", "Reducción lógica simple", "Búsqueda de estructuras diagonales"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si colocás un número incorrecto?",
+                options = listOf("Nada", "Puede afectar la solución total del Sudoku", "Es irrelevante", "El juego se reinicia"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una señal de que estás progresando bien en un Sudoku?",
+                options = listOf("Completás varias casillas seguidas correctamente", "Te atascás en todas las filas", "Adivinás y acertás", "El tablero queda vacío"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué estilo de Sudoku incluye reglas diagonales adicionales?",
+                options = listOf("Sudoku Samurai", "Sudoku con letras", "Sudoku diagonal", "Sudoku extremo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si dos celdas en una misma región tienen el mismo número?",
+                options = listOf("Es un error que invalida el Sudoku", "Se suman", "Se ignoran", "Se colorean de azul"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué aplicación puede ayudarte a practicar Sudoku?",
+                options = listOf("Microsoft Paint", "Excel", "Sudoku.com", "Spotify"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué estrategia ayuda cuando no hay celdas obvias?",
+                options = listOf("Tomar un descanso y volver más tarde", "Borrar todo y comenzar de nuevo", "Adivinar cada número", "Pedirle a alguien más que lo resuelva"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se puede usar para llevar registro de posibles números?",
+                options = listOf("Notas o lápiz", "Marcadores de texto", "Colores de fondo", "Cinta adhesiva"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que una celda tenga 'una sola opción posible'?",
+                options = listOf("Debe dejarse vacía", "Se puede colocar ese número con certeza", "Es una pista falsa", "Debe eliminarse"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿En qué país se popularizó el Sudoku moderno?",
+                options = listOf("Estados Unidos", "Japón", "China", "Alemania"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'nivel experto' en Sudoku?",
+                options = listOf("Tiene muchos números dados", "Solo usa números impares", "Requiere técnicas complejas y lógica avanzada", "Se resuelve en 2 minutos"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si duplicás un número en una columna?",
+                options = listOf("No afecta nada", "Invalida toda la solución", "Se marca en rojo", "Es parte del reto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se logra al practicar Sudoku con frecuencia?",
+                options = listOf("Mejorar la rapidez y precisión lógica", "Memorizar los números", "Ganar premios", "Dominar el álgebra"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una variante de Sudoku que usa letras en lugar de números?",
+                options = listOf("Wordoku", "Letrodoku", "Alfadoku", "Lexidoku"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué representa una cuadrícula vacía al comenzar un Sudoku?",
+                options = listOf("Un error", "El desafío puro sin pistas", "Un modo fácil", "Una versión para niños"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué característica tiene un Sudoku 'imposible'?",
+                options = listOf("Tiene errores o múltiples soluciones", "Tiene colores", "Es solo para expertos", "Se juega al revés"),
+                correctIndex = 0
+            )
+        ),
 
+        //************************************************************************************************************************
+
+        "Sopa de letras" to listOf(
+            QuizQuestion(
+                question = "¿Qué es una sopa de letras?",
+                options = listOf("Un juego donde se forman palabras con letras al azar", "Un crucigrama complicado", "Una receta con letras", "Un sudoku con letras"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el objetivo principal de la sopa de letras?",
+                options = listOf("Tachar todas las letras", "Formar frases", "Encontrar palabras ocultas en una cuadrícula", "Rellenar con nuevas letras"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿En qué direcciones pueden aparecer las palabras?",
+                options = listOf("Solo de arriba hacia abajo", "Solo de izquierda a derecha", "En múltiples direcciones: horizontal, vertical y diagonal", "En sentido horario únicamente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué habilidad estimula jugar sopa de letras?",
+                options = listOf("Memoria a largo plazo", "Coordinación motora fina", "Atención visual y concentración", "Pensamiento abstracto matemático"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una buena estrategia para comenzar una sopa de letras?",
+                options = listOf("Tachar letras al azar", "Buscar palabras largas primero", "Tapar la cuadrícula", "Empezar por las esquinas solamente"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si una palabra se encuentra en diagonal invertida?",
+                options = listOf("No se puede marcar", "Está mal colocada", "Es válida si está en la lista", "Debe ignorarse"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos es un error común al resolver una sopa de letras?",
+                options = listOf("Marcar una palabra que no está en la lista", "Buscar palabras con calma", "Tachar con lápiz", "Usar colores distintos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio cognitivo aporta jugar regularmente a sopas de letras?",
+                options = listOf("Aumenta la creatividad", "Mejora la orientación espacial", "Desarrolla el reconocimiento visual y vocabulario", "Enseña gramática avanzada"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Es posible crear sopas de letras temáticas?",
+                options = listOf("No, siempre son aleatorias", "Solo en aplicaciones premium", "Sí, con palabras de un tema específico", "Solo con números"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué hace más desafiante una sopa de letras?",
+                options = listOf("Tener muchas palabras repetidas", "Tener letras con colores", "Tener palabras ocultas en muchas direcciones", "Tener una cuadrícula vacía"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del cerebro se activa especialmente con este juego?",
+                options = listOf("Corteza auditiva", "Hipotálamo", "Lóbulo parietal y occipital (asociados a lo visual)", "Cerebelo"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo puede aumentar la dificultad de una sopa de letras?",
+                options = listOf("Usando letras mayúsculas solamente", "Usando palabras más largas o con letras similares", "Quitando el reloj", "Dejando espacios en blanco"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué se debe hacer cuando se encuentra una palabra?",
+                options = listOf("Borrarla del tablero", "Subrayarla o encerrarla", "Cambiarla por otra", "Tacharla con tinta roja"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué característica tiene una buena sopa de letras educativa?",
+                options = listOf("Palabras sin relación", "Temática clara y palabras útiles", "Solo palabras en desorden", "Números mezclados con letras"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de letra se suele usar en las sopas de letras?",
+                options = listOf("Cursiva decorativa", "Gótica", "Mayúscula legible y uniforme", "Tipografía manuscrita"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cómo suelen marcarse las palabras encontradas en formato impreso?",
+                options = listOf("Tachándolas con una X", "Encerrándolas en un círculo o línea", "Pegando un sticker", "Subrayándolas con corrector"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué ocurre si la misma palabra aparece más de una vez?",
+                options = listOf("Debe marcarse solo una vez", "Es un error del creador", "Puede marcarse todas las veces que aparece", "No cuenta si se repite"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué variante se puede usar para aumentar la diversión?",
+                options = listOf("Sopa de letras musical", "Sopa de letras con pistas en lugar de palabras", "Sopa de letras sin letras", "Sudoku combinado"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué rol cumple la lista de palabras al costado del juego?",
+                options = listOf("Decora el tablero", "Sirve como referencia para buscar las palabras", "Marca el puntaje", "Indica el orden del alfabeto"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede mejorar el rendimiento en sopas de letras?",
+                options = listOf("Mirar una sola vez la cuadrícula", "Leer en voz alta", "Practicar con frecuencia", "Resolverlas con música fuerte"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda hacer si no encontrás una palabra?",
+                options = listOf("Pasar a otra y volver después", "Borrar todo", "Cerrar el juego", "Tachar cualquier palabra similar"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué mejora la capacidad para encontrar palabras rápidamente?",
+                options = listOf("Ver series", "Practicar sopas de letras regularmente", "Hacer ejercicio físico", "Resolver ecuaciones"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué suele suceder con palabras cortas en una sopa de letras?",
+                options = listOf("Son más difíciles de encontrar", "Están en negrita", "No se incluyen", "Están repetidas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué formato suelen tener las sopas de letras digitales?",
+                options = listOf("Interactivo y con opción de resaltar", "Papel cuadriculado escaneado", "Texto plano", "Aplicación de cocina"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué variante incluye tiempo límite para resolver?",
+                options = listOf("Sopa competitiva", "Sopa exprés o cronometrada", "Sopa extendida", "Sopa de desafío"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué puede hacer más fácil resolver una sopa de letras compleja?",
+                options = listOf("Conocer bien las palabras del tema", "Tener una calculadora", "Rotar el tablero", "Eliminar letras sobrantes"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué diferencia a una sopa de letras en inglés de una en español?",
+                options = listOf("Nada", "Número de letras del alfabeto", "Dirección de lectura y estructura gramatical", "Cantidad de vocales solamente"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una buena práctica al final del juego?",
+                options = listOf("Contar las palabras marcadas y revisar si falta alguna", "Romper el papel", "Guardar el lápiz", "Cortar la hoja en tiras"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué alternativa tecnológica permite crear sopas personalizadas?",
+                options = listOf("Google Maps", "Editores en línea como PuzzleMaker", "Spotify", "Photoshop"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si te concentrás demasiado tiempo sin descanso?",
+                options = listOf("Ves mejor", "Podés perder eficacia visual y cansarte", "Resolvés más rápido", "Ganas puntos extra"),
+                correctIndex = 1
+            ),
+            QuizQuestion(
+                question = "¿Qué podés hacer para entrenar el reconocimiento de patrones visuales?",
+                options = listOf("Hacer sopas de letras", "Escuchar música", "Leer en voz alta", "Hacer flexiones"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué forma tienen usualmente las cuadrículas de sopa de letras?",
+                options = listOf("Rectangular o cuadrada", "Triangular", "Circular", "Aleatoria"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué podés hacer si no entendés el significado de una palabra en la lista?",
+                options = listOf("Buscarla en un diccionario", "Ignorarla", "Tacharla de la lista", "Inventar otra"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué ventaja tiene una sopa temática educativa?",
+                options = listOf("Aprendés vocabulario específico mientras jugás", "Tiene más letras", "Dura menos tiempo", "No se puede resolver"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué permite desarrollar la práctica frecuente de sopas de letras en niños?",
+                options = listOf("Ortografía, atención y vocabulario", "Habilidades culinarias", "Conocimiento musical", "Técnicas de dibujo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué variante permite incluir imágenes en lugar de palabras escritas?",
+                options = listOf("Sopa pictográfica", "Sopa con íconos", "Sopa visual", "Sopa ilustrada"),
+                correctIndex = 3
+            ),
+            QuizQuestion(
+                question = "¿Qué acción no debe hacerse en una sopa de letras?",
+                options = listOf("Tachar palabras que no están en la lista", "Marcar solo con lápiz", "Revisar la lista", "Leer palabra por palabra"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué parte del proceso es clave para mantener la concentración?",
+                options = listOf("Evitar distracciones y trabajar en silencio", "Leer en voz alta", "Tener hambre", "Hacer otra cosa al mismo tiempo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que una sopa esté 'cargada'?",
+                options = listOf("Tiene muchas palabras y letras similares", "Está en una app", "Tiene trucos ocultos", "Requiere energía para abrirse"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una variante cooperativa de sopa de letras?",
+                options = listOf("Resolución en equipo donde cada uno busca palabras distintas", "Juego solitario", "Doble sopa espejo", "Desafío oculto"),
+                correctIndex = 0
+            )
+        ),
+
+        //************************************************************************************************************************
+
+        "Bingo" to listOf(
+            QuizQuestion(
+                question = "¿Qué es el Bingo?",
+                options = listOf("Un juego de azar donde se marcan números en un cartón", "Un deporte de precisión", "Una ruleta de colores", "Un juego de cartas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cómo se eligen los números en el Bingo tradicional?",
+                options = listOf("Al azar, mediante un bolillero", "Por turnos entre los jugadores", "Por votación", "Mediante dados"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué objetivo tiene el jugador en el Bingo?",
+                options = listOf("Cantar Bingo antes que los demás", "Acumular más puntos", "Evitar bolillas repetidas", "Llenar la tabla sin errores"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se grita cuando un jugador gana?",
+                options = listOf("¡Gol!", "¡Victoria!", "¡Bingo!", "¡Acierto!"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué herramienta se usa para extraer los números?",
+                options = listOf("Bolillero", "Cronómetro", "Tablero digital", "Dado especial"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si se canta Bingo erróneamente?",
+                options = listOf("Se revisa el cartón y puede ser descalificado", "Se repite la ronda", "Gana automáticamente", "Debe volver a empezar"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cómo suelen estar organizados los cartones de Bingo?",
+                options = listOf("En filas y columnas con números", "Con letras y emojis", "Solo números impares", "En forma de rompecabezas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué variante es común en el Bingo?",
+                options = listOf("Línea, dos líneas y cartón lleno", "Tablero invertido", "Formación en zigzag", "Cantar de a dos bolillas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué letras acompañan a los números en el Bingo americano?",
+                options = listOf("B-I-N-G-O", "A-E-I-O-U", "L-O-T-E-R", "S-U-E-R-T"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué emoción suele generar el Bingo?",
+                options = listOf("Suspenso y diversión", "Enojo", "Tristeza", "Frustración matemática"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se puede usar para marcar los números en el cartón?",
+                options = listOf("Tinta, fichas o lapicera", "Tijeras", "Dados", "Cinta adhesiva"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si dos personas cantan Bingo al mismo tiempo?",
+                options = listOf("Ganan ambas si tienen razón", "Se anula el juego", "Gana el que gritó más fuerte", "Se repite la partida"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es el número tradicionalmente asociado con 'La edad de Cristo'?",
+                options = listOf("33", "21", "40", "12"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué representa el número 90 en la lotería tradicional?",
+                options = listOf("El abuelo", "El miedo", "La vejez", "La fortuna"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué significa que un cartón esté 'lleno'?",
+                options = listOf("Que se marcaron todos los números", "Que está mal impreso", "Que no se puede jugar más", "Que contiene errores"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué variante del juego se juega mucho en eventos benéficos?",
+                options = listOf("Bingo solidario", "Bingo por tiempo", "Bingo en silencio", "Bingo escondido"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿En qué país se originó el Bingo moderno?",
+                options = listOf("Italia", "Estados Unidos", "Francia", "España"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede usarse como premio en una partida de Bingo informal?",
+                options = listOf("Comida, juguetes o dinero", "Títulos académicos", "Vacaciones", "Puntajes digitales"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué suele decir el locutor al sacar cada bolilla?",
+                options = listOf("El número y su letra correspondiente", "Solo la letra", "Solo la cifra", "La suma de varias bolillas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estos juegos se parece más al Bingo?",
+                options = listOf("Lotería", "Poker", "Dominó", "Dados"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué aspecto genera mayor emoción en una partida de Bingo?",
+                options = listOf("La cercanía a completar el cartón", "El número inicial", "La duración del juego", "El color de las fichas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa tener 'una línea' en Bingo?",
+                options = listOf("Completar una fila horizontal", "Completar el cartón entero", "Tener cinco números iguales", "Cantar dos veces"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si nadie gana en varias rondas?",
+                options = listOf("Se sigue hasta que alguien lo haga", "Se anula la partida", "Se suman los cartones", "Se sortea el premio"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué letra corresponde al número 75 en el Bingo americano?",
+                options = listOf("O", "G", "B", "N"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una estrategia común al jugar Bingo?",
+                options = listOf("Prestar atención constante a los números llamados", "Pedir ayuda a otro jugador", "Marcar todos los números posibles", "Usar un solo cartón siempre"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué se recomienda hacer si se juega con varios cartones?",
+                options = listOf("Organizarlos para no confundirse", "Tenerlos desordenados", "Marcar con dos colores diferentes", "Cantar antes de tiempo"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué sucede si no se marca un número llamado?",
+                options = listOf("Se puede perder la oportunidad de ganar", "Se repite automáticamente", "No importa", "Se suma al puntaje"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué rol cumple el locutor en el Bingo?",
+                options = listOf("Canta los números y mantiene el ritmo del juego", "Entrega los cartones", "Cuenta los puntos", "Arma las reglas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cómo se llama el recipiente donde giran las bolillas?",
+                options = listOf("Bolillero", "Tambor musical", "Contenedor de puntos", "Cilindro lógico"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué beneficio social tiene el Bingo?",
+                options = listOf("Fomenta la interacción y el entretenimiento grupal", "Mejora la fuerza física", "Desarrolla habilidades de dibujo", "Fomenta el aislamiento"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué puede dificultar una partida de Bingo digital?",
+                options = listOf("Conexión lenta o errores en la app", "Tener buena vista", "Usar muchos cartones", "Falta de fichas físicas"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de premios pueden encontrarse en Bingos grandes?",
+                options = listOf("Dinero en efectivo, electrodomésticos o autos", "Libros usados", "Certificados de nacimiento", "Fichas de ajedrez"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál de estas no es una variante del Bingo?",
+                options = listOf("Bingo inverso", "Bingo en forma de X", "Bingo japonés zen", "Bingo blackout"),
+                correctIndex = 2
+            ),
+            QuizQuestion(
+                question = "¿Qué se hace si hay un error al cantar el número?",
+                options = listOf("Se corrige inmediatamente", "Se reinicia la partida", "Se ignora", "Se cancela el cartón ganador"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Cuál es una razón común para que personas mayores jueguen Bingo?",
+                options = listOf("Socializar y ejercitar la mente", "Prepararse para concursos", "Ganar mucho dinero", "Practicar números romanos"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué significa 'Bingo blackout'?",
+                options = listOf("Cartón completo, se deben marcar todos los números", "Solo se marcan los pares", "Juego sin bolillero", "Cartón con una sola línea"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué emoción puede provocar estar a un número del Bingo?",
+                options = listOf("Ansiedad y emoción intensa", "Desinterés", "Olvido", "Confusión matemática"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué tipo de concentración requiere el Bingo?",
+                options = listOf("Visual y auditiva", "Física", "Mecánica", "Olfativa"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué pasa si te distraés durante una partida?",
+                options = listOf("Podés perder números importantes", "Te dan otro cartón", "Ganás por sorpresa", "Nada cambia"),
+                correctIndex = 0
+            ),
+            QuizQuestion(
+                question = "¿Qué otro nombre se le da al 'Bingo' en algunos países?",
+                options = listOf("Lotería", "Tómbola", "Banca", "Dominó numérico"),
+                correctIndex = 1
+            )
+        ),
         )
 }
