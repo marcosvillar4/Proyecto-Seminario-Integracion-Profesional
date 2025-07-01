@@ -1380,7 +1380,7 @@ object HobbyQuestionsProvider{
             ),
             QuizQuestion(
                 question = "¿Qué factor es más importante al elegir el grosor de la línea?",
-                options = listOf("Color del agua", "Tamaño del carrete", , "Hora del día","Tamaño del pez objetivo"),
+                options = listOf("Color del agua", "Tamaño del carrete", "Hora del día","Tamaño del pez objetivo"),
                 correctIndex = 3
             ),
             QuizQuestion(
@@ -7933,7 +7933,6 @@ object HobbyQuestionsProvider{
             QuizQuestion(
                 question = "¿Cuál de estas especies es más difícil de adiestrar?",
                 options = listOf("Caballo", "Perro", "Gato", "Delfín"),
-                options = listOf("Caballo", "Perro", "Delfín"),
                 correctIndex = 2
             ),
             QuizQuestion(
