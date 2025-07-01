@@ -1,6 +1,7 @@
 package tpo.seminario.breakbuddy.ui.ranking
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -40,6 +41,10 @@ class RankingAdapter : ListAdapter<RankingItem, RankingAdapter.VH>(DIFF) {
                 vb.tvPoints.setTextColor(
                     ContextCompat.getColor(vb.root.context, R.color.white)
                 )
+                vb.tvMotivation.apply {
+                    text = "¡Felicidades ${item.email}! Como primer puesto, te mereces una invitación por parte de tus colegas para la próxima actividad grupal 🎉"
+                    visibility = View.VISIBLE
+                }
             } else {
                 vb.root.setCardBackgroundColor(
                     ContextCompat.getColor(vb.root.context, android.R.color.white)

@@ -1,26 +1,61 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollViewMisiones"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootMissions"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="35dp"
+    android:paddingBottom="16dp"
     android:background="@color/neutro_intermedio">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <!-- Barra de progreso diaria -->
+<TextView
+android:id="@+id/tvDailyProgress"
+style="@style/TextAppearance.App.Body"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Progreso diario: 0/0"
+android:layout_marginBottom="8dp"/>
 
-        <!-- Espacio arriba de todo -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="32dp" />
+<ProgressBar
+android:id="@+id/progressDaily"
+style="?android:attr/progressBarStyleHorizontal"
+android:layout_width="match_parent"
+android:layout_height="12dp"
+android:indeterminate="false"
+android:progressDrawable="@drawable/progress_drawable"
+android:layout_marginBottom="24dp"/>
 
-        <!-- Contenedor dinámico de misiones -->
-        <LinearLayout
-            android:id="@+id/layoutMisiones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </LinearLayout>
+    <!-- Barra de progreso semanal -->
+<TextView
+android:id="@+id/tvWeeklyProgress"
+style="@style/TextAppearance.App.Body"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Progreso semanal: 0/0"
+android:layout_marginBottom="8dp"/>
+
+<ProgressBar
+android:id="@+id/progressWeekly"
+style="?android:attr/progressBarStyleHorizontal"
+android:layout_width="match_parent"
+android:layout_height="12dp"
+android:indeterminate="false"
+android:progressDrawable="@drawable/progress_drawable"
+android:layout_marginBottom="24dp"/>
+
+<ScrollView
+android:layout_width="match_parent"
+android:layout_height="0dp"
+android:layout_weight="1">
+
+<LinearLayout
+    android:id="@+id/layoutMisiones"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
 </ScrollView>
+    </LinearLayout>

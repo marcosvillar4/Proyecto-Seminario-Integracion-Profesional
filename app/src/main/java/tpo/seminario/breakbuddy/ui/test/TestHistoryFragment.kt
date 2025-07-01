@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,7 @@ import tpo.seminario.breakbuddy.databinding.FragmentTestHistoryBinding
 import tpo.seminario.breakbuddy.databinding.ItemTestHistoryBinding
 import java.text.SimpleDateFormat
 import java.util.*
+import tpo.seminario.breakbuddy.R
 
 class TestHistoryFragment : Fragment() {
 
@@ -41,6 +44,11 @@ class TestHistoryFragment : Fragment() {
         binding.recyclerTests.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@TestHistoryFragment.adapter
+
+            val decor = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            ContextCompat.getDrawable(requireContext(), R.drawable.divider_horizontal)
+                ?.let { decor.setDrawable(it) }
+            addItemDecoration(decor)
         }
         loadTestHistory()
     }

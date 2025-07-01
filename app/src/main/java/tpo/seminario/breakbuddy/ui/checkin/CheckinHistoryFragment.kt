@@ -3,12 +3,15 @@ package tpo.seminario.breakbuddy.ui.checkin
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import tpo.seminario.breakbuddy.databinding.FragmentCheckinHistoryBinding
+import tpo.seminario.breakbuddy.R
 
 class CheckinHistoryFragment : Fragment() {
 
@@ -34,6 +37,11 @@ class CheckinHistoryFragment : Fragment() {
         binding.recyclerHistory.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@CheckinHistoryFragment.adapter
+
+            val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            ContextCompat.getDrawable(requireContext(), R.drawable.divider_horizontal)
+                ?.let { divider.setDrawable(it) }
+            addItemDecoration(divider)
         }
 
         loadHistory()

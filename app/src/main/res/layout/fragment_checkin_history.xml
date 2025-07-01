@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/neutro_intermedio"
     tools:context=".ui.checkin.CheckinHistoryFragment">
 
-    <!-- Toolbar integrada por HostActivity, omitida -->
+<!-- Guideline -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.05"
+        android:orientation="horizontal" />
 
     <TextView
         android:id="@+id/tvEmptyHistory"
@@ -14,7 +22,9 @@
         android:layout_height="wrap_content"
         android:text="No hay check‑ins aún"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
+        style="@style/TextAppearance.App.Body"
+        android:textColor="@color/gray_300"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -23,8 +33,10 @@
         android:id="@+id/recyclerHistory"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="8dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
