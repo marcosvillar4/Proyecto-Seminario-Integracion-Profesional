@@ -26,7 +26,7 @@ style="?android:attr/progressBarStyleHorizontal"
 android:layout_width="match_parent"
 android:layout_height="12dp"
 android:indeterminate="false"
-android:progressDrawable="@drawable/progress_drawable"
+android:progressDrawable="@drawable/progress_gradient"
 android:layout_marginBottom="24dp"/>
 
     <!-- Barra de progreso semanal -->
@@ -44,7 +44,7 @@ style="?android:attr/progressBarStyleHorizontal"
 android:layout_width="match_parent"
 android:layout_height="12dp"
 android:indeterminate="false"
-android:progressDrawable="@drawable/progress_drawable"
+android:progressDrawable="@drawable/progress_gradient"
 android:layout_marginBottom="24dp"/>
 
 <ScrollView
