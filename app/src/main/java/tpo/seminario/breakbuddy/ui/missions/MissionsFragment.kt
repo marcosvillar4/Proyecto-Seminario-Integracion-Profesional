@@ -114,14 +114,25 @@ class MissionsFragment : Fragment() {
             card.findViewById<TextView>(R.id.tvDescripcion).text = m.descripcion
             val btn = card.findViewById<Button>(R.id.btnCompletar)
 
+
+
             val done = completedMap[m.id] == true
+            val titulo = card.findViewById<TextView>(R.id.tvTitulo)
+            val descripcion = card.findViewById<TextView>(R.id.tvDescripcion)
             if (done) {
                 btn.text = "Completada"
                 btn.isEnabled = false
+                titulo.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+                descripcion.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
                 card.setBackgroundResource(R.drawable.bg_card_completada)
-                btn.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.gray_300))
+                card.animate().alpha(1f).scaleX(1.02f).scaleY(1.03f).setDuration(300).withEndAction {
+                    card.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+                }.start()
+                btn.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.green_200))
             } else {
                 btn.text = "Completar"
+                titulo.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                descripcion.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 btn.isEnabled = true
                 btn.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.green_500))
                 btn.setOnClickListener {
