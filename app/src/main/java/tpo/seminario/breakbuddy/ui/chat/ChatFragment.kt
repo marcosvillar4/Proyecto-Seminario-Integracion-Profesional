@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
+import com.google.firebase.functions.FirebaseFunctions                                  // ← CAMBIO
+import com.google.firebase.functions.FirebaseFunctionsException                         // ← CAMBIO
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentChatBinding
 import tpo.seminario.breakbuddy.util.HobbyActivities
@@ -24,6 +26,8 @@ class ChatFragment : Fragment() {
 
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
+    private val functions = FirebaseFunctions.getInstance()                              // ← CAMBIO
+
     private lateinit var groupId: String
     private var groupHobby: String? = null
     private var groupSize: Int = 0
@@ -69,7 +73,7 @@ class ChatFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.toolbarChat.menu.clear()            // asegurar que no haya nada previo
+        binding.toolbarChat.menu.clear()
         binding.toolbarChat.inflateMenu(R.menu.chat_toolbar_menu)
         binding.toolbarChat.setOnMenuItemClickListener { item ->
             if (item.itemId == R.id.action_suggest) {
@@ -88,7 +92,7 @@ class ChatFragment : Fragment() {
     }
 
     private fun setupInput() {
-        binding.buttonSend.setOnClickListener { sendMessage() }
+        binding.buttonSend.setOnClickListener { attemptSendMessage() }                     // ← CAMBIO
         binding.editTextMessage.addTextChangedListener {
             binding.buttonSend.isEnabled = it.toString().trim().isNotEmpty()
         }
@@ -131,18 +135,47 @@ class ChatFragment : Fragment() {
         msgRef.set(msg)
     }
 
-    private fun sendMessage() {
+    /**
+     * 1) Primero validamos el contenido vía Cloud Function `moderateMessage`.
+     * 2) Si está OK lo enviamos, si no mostramos el error al usuario.
+     */
+    private fun attemptSendMessage() {
         val text = binding.editTextMessage.text.toString().trim()
         if (text.isEmpty()) return
         val currentUser = auth.currentUser ?: return
+
+        binding.buttonSend.isEnabled = false
+        functions
+            .getHttpsCallable("moderateMessage")                                        // ← CAMBIO
+            .call(mapOf("text" to text))
+            .addOnSuccessListener {
+                // Allowed → publicamos en Firestore
+                performSend(text, currentUser.uid, currentUser.displayName ?: currentUser.email.orEmpty())
+            }
+            .addOnFailureListener { e ->
+                binding.buttonSend.isEnabled = true
+                val msg = if (e is FirebaseFunctionsException && e.code == FirebaseFunctionsException.Code.PERMISSION_DENIED) {
+                    // Nuestra función lanza permission-denied si hay toxicidad
+                    e.message ?: "Contenido no permitido"
+                } else {
+                    "Error de moderación: ${e.message}"
+                }
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+            }
+    }
+
+    /**
+     * Envía realmente el mensaje ya validado.
+     */
+    private fun performSend(text: String, uid: String, displayName: String) {
         val newRef = db.collection("groups")
             .document(groupId)
             .collection("messages")
             .document()
         val message = ChatMessage(
             id                = newRef.id,
-            senderUid         = currentUser.uid,
-            senderDisplayName = currentUser.displayName ?: currentUser.email.orEmpty(),
+            senderUid         = uid,
+            senderDisplayName = displayName,
             text              = text,
             timestamp         = Timestamp.now(),
             isSystemMessage   = false
@@ -156,6 +189,9 @@ class ChatFragment : Fragment() {
                 Toast.makeText(requireContext(),
                     "Error enviando: ${e.message}",
                     Toast.LENGTH_SHORT).show()
+            }
+            .addOnCompleteListener {
+                binding.buttonSend.isEnabled = true
             }
     }
 

@@ -1,12 +1,28 @@
 import * as functions from "firebase-functions/v1";
 import * as admin from "firebase-admin";
 
+import fetch from "node-fetch";
+
 
 import {Mision} from "./types";
 import {MisionProvider} from "./missionProvider";
 
 admin.initializeApp();
 const db = admin.firestore();
+
+
+// --- Parámetros de moderación ---
+const PERSPECTIVE_URL = "https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze";
+const TOXICITY_THRESHOLD = 0.7;
+const PROFANITY_THRESHOLD = 0.7;
+
+// Recupera la clave de config
+const API_KEY = functions.config().perspective?.key;
+if (!API_KEY) {
+  console.error("⚠️ La perspective.key NO está configurada. Ejecuta:");
+  console.error("   firebase functions:config:set perspective.key=\"TU_API_KEY\"");
+}
+
 
 // Función solo para validar el spin diario
 export const spinDaily = functions.https.onCall(async (data, context) => {
@@ -243,3 +259,94 @@ export const completeDailyMission = functions.https.onCall(async (data, context)
     throw new functions.https.HttpsError("internal", "Error completando micro‑misión");
   }
 });
+
+// Interfaz parcial de la respuesta de Perspective.
+interface PerspectiveResponse {
+  attributeScores: {
+    TOXICITY: { summaryScore: { value: number } };
+    PROFANITY: { summaryScore: { value: number } };
+  };
+}
+
+/**
+ * Llama a la API de Perspective para analizar el texto.
+ */
+async function analyzeText(text: string) {
+  if (!API_KEY) {
+    throw new Error("API_KEY para Perspective no configurada");
+  }
+
+  const body = {
+    comment: {text},
+    languages: ["es", "en"],
+    requestedAttributes: {TOXICITY: {}, PROFANITY: {}},
+  };
+
+  functions.logger.log("🔍 Perspective request:", {text});
+  const res = await fetch(`${PERSPECTIVE_URL}?key=${API_KEY}`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const txt = await res.text();
+    functions.logger.error("❌ Perspective API error response:", res.status, txt);
+    throw new Error(`Perspective API error ${res.status}`);
+  }
+
+  const payload = (await res.json()) as PerspectiveResponse;
+  functions.logger.log("✅ Perspective result:", payload.attributeScores);
+  return payload.attributeScores;
+}
+
+/**
+ * Cloud Function onCall: recibe { text }, analiza y decide si permitirlo.
+ */
+export const moderateMessage = functions.https.onCall(
+  async (data, context) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError("unauthenticated", "Usuario no autenticado");
+    }
+    const text = (data.text as string || "").trim();
+    if (!text) {
+      throw new functions.https.HttpsError("invalid-argument", "El texto está vacío");
+    }
+
+    try {
+      const scores = await analyzeText(text);
+      const tox = scores.TOXICITY.summaryScore.value;
+      const prof = scores.PROFANITY.summaryScore.value;
+
+      if (tox >= TOXICITY_THRESHOLD) {
+        throw new functions.https.HttpsError(
+          "permission-denied",
+          "Ese mensaje parece tóxico, modifícalo para enviarlo."
+        );
+      }
+      if (prof >= PROFANITY_THRESHOLD) {
+        throw new functions.https.HttpsError(
+          "permission-denied",
+          "Ese mensaje contiene lenguaje inapropiado."
+        );
+      }
+
+      return {allowed: true};
+    } catch (e: any) {
+      // 1) Si ya es HttpsError, lo reenviamos tal cual:
+      if (e instanceof functions.https.HttpsError) {
+        functions.logger.warn("moderateMessage rejeta con HttpsError:", e.code, e.message);
+        throw e;
+      }
+
+      // 2) Si no, mostramos el stack/message en los logs:
+      functions.logger.error("‼ moderateMessage ONCALL threw non-HttpsError:", e.stack || e.message);
+
+      // 3) Ahora re-lanzamos un HttpsError permitiendo ver el detalle:
+      throw new functions.https.HttpsError(
+        "internal",
+        `Error interno moderación: ${e.message}`
+      );
+    }
+  }
+);
