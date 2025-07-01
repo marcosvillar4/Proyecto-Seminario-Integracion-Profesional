@@ -4,7 +4,7 @@
     <color name="green_200">#358B79</color>
     <!--Fondos secundarios, navbars, hover de botones-->
     <color name="green_500">#145A58</color>
-    <color name="light_green">#BA9EFFE1</color>
+    <color name="light_green">#2EE086</color>
     <!--Elementos contrastantes, llamados a la accion especiales-->
     <color name="contrast">#0051FF</color>
     <!--Neutro claro y oscuro-->

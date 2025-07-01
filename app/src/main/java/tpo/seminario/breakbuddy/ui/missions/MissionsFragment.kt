@@ -118,7 +118,7 @@ class MissionsFragment : Fragment() {
             if (done) {
                 btn.text = "Completada"
                 btn.isEnabled = false
-                card.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_green))
+                card.setBackgroundResource(R.drawable.bg_card_completada)
                 btn.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.gray_300))
             } else {
                 btn.text = "Completar"
@@ -129,6 +129,7 @@ class MissionsFragment : Fragment() {
                         completeTodayMission(m.id)
                     }.show(childFragmentManager, "MissionDialog")
                 }
+                card.setBackgroundResource(R.drawable.bg_mision_card)
             }
 
             binding.layoutMisiones.addView(card)
