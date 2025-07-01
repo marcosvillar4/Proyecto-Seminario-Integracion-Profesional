@@ -22,14 +22,10 @@ import androidx.navigation.fragment.findNavController
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
-    // 1) Declara AdView
     private lateinit var adView: AdView
-    private val retryDelayMs = 2000L  // 2 segundos
+    private val retryDelayMs = 2000L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,21 +36,18 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    // 2) Carga el banner en onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         adView = view.findViewById(R.id.adViewBanner)
 
-        // Listener con retry
         adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                // Banner cargó bien
                 Log.d("AdMob", "Banner loaded")
             }
 
             override fun onAdFailedToLoad(error: LoadAdError) {
                 Log.e("AdMob", "Failed to load banner: ${error.message}")
-                // Reintentar tras delay
                 Handler(Looper.getMainLooper()).postDelayed({
                     adView.loadAd(AdRequest.Builder().build())
                 }, retryDelayMs)
@@ -65,13 +58,38 @@ class HomeFragment : Fragment() {
         btnTestMBI.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_testMBIFragment)
         }
+
         binding.btnIrAMisiones.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_missionsFragment)
         }
 
+        setupFaqAccordion(view)
 
-        // Primera carga
         adView.loadAd(AdRequest.Builder().build())
+    }
+
+    private fun setupFaqAccordion(view: View) {
+        val faqs = listOf(
+            R.id.tvPregunta1 to R.id.tvRespuesta1,
+            R.id.tvPregunta2 to R.id.tvRespuesta2,
+            R.id.tvPregunta3 to R.id.tvRespuesta3,
+            R.id.tvPregunta4 to R.id.tvRespuesta4,
+            R.id.tvPregunta5 to R.id.tvRespuesta5,
+            R.id.tvPregunta6 to R.id.tvRespuesta6,
+            R.id.tvPregunta7 to R.id.tvRespuesta7
+        )
+
+        val respuestas = faqs.map { view.findViewById<TextView>(it.second) }
+
+        faqs.forEach { (idPregunta, idRespuesta) ->
+            val preguntaView = view.findViewById<TextView>(idPregunta)
+            val respuestaView = view.findViewById<TextView>(idRespuesta)
+
+            preguntaView.setOnClickListener {
+                respuestas.forEach { it.visibility = View.GONE }
+                respuestaView.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onDestroyView() {

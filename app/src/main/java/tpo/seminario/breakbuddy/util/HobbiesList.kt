@@ -12,7 +12,7 @@ object HobbiesList {
         "Andar en bicicleta", "Escalada", "Skate", "Armar rompecabezas", "Modelismo",
         "Escribir", "Bloggear", "Canto", "Programar", "Diseño gráfico",
         "Correr", "Natación", "Trekking", "Ajedrez", "Astronomía",
-        "Voluntariado", "Restaurar muebles", "Tejer", "Cerámica", "Basket", "Volley", "Golf"
+        "Voluntariado", "Restaurar muebles", "Tejer", "Cerámica", "Basket", "Volley", "Golf",
 
         // nuevos hobbies - intereses
         "Corte y confección","Bordado","Repostería","Crucigramas","Avistamiento de aves","Origami",
