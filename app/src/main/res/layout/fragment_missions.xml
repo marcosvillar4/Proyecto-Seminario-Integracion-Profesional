@@ -12,13 +12,21 @@
     android:background="@color/neutro_intermedio">
 
     <!-- Barra de progreso diaria -->
-<TextView
-android:id="@+id/tvDailyProgress"
-style="@style/TextAppearance.App.Body"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Progreso diario: 0/0"
-android:layout_marginBottom="8dp"/>
+    <TextView
+        android:id="@+id/Racha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Racha: 0 dias"
+        android:textAppearance="@style/TextAppearance.App.TitleMedium" />
+
+    <TextView
+        android:id="@+id/tvDailyProgress"
+        style="@style/TextAppearance.App.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Progreso diario: 0/0" />
 
 <ProgressBar
 android:id="@+id/progressDaily"

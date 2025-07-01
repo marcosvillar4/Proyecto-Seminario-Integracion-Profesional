@@ -1,5 +1,6 @@
 package tpo.seminario.breakbuddy.ui.missions
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +19,10 @@ import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentMissionsBinding
 import tpo.seminario.breakbuddy.util.missions.Mision
 import tpo.seminario.breakbuddy.util.missions.TipoMision
+import java.time.Instant
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalUnit
+import java.util.Date
 
 class MissionsFragment : Fragment() {
     private var _binding: FragmentMissionsBinding? = null
@@ -28,15 +34,21 @@ class MissionsFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private val functions = FirebaseFunctions.getInstance()
     private val uid get() = FirebaseAuth.getInstance().currentUser?.uid.orEmpty()
+    private var streak = Long
+    private var lastCompleted = String
+
 
     override fun onCreateView(inflater: LayoutInflater, c: ViewGroup?, s: Bundle?) =
         FragmentMissionsBinding.inflate(inflater, c, false).also { _binding = it }.root
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchDailyMissions()
+
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun fetchDailyMissions() {
         functions.getHttpsCallable("generateDailyMissions")
             .call()
@@ -77,6 +89,7 @@ class MissionsFragment : Fragment() {
             }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun mostrarMisiones() {
         binding.layoutMisiones.removeAllViews()
 
@@ -164,7 +177,9 @@ class MissionsFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun completeTodayMission(missionId: String) {
+        db.collection("userProfiles").document(uid).update("lastMissionDate", Instant.now().toString())
         functions.getHttpsCallable("completeDailyMission")
             .call(mapOf("missionId" to missionId))
             .addOnSuccessListener {
@@ -176,6 +191,24 @@ class MissionsFragment : Fragment() {
                 val msg = (e as? FirebaseFunctionsException)?.details?.toString() ?: e.message
                 Toast.makeText(requireContext(), "Error: $msg", Toast.LENGTH_LONG).show()
             }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun streakCheckAndUpdate(){
+
+        db.collection("userProfile").document(uid).get().addOnSuccessListener {
+            document ->
+            lastCompleted = document.data?.get("lastMissionDate") as String.Companion
+            streak = document.data?.get("streak") as Long.Companion
+        }
+
+        binding.Racha.text = "Racha: " + streak
+
+        if ((Instant.parse(lastCompleted.toString()).until(Instant.now(), ChronoUnit.DAYS)) > 1){
+            db.collection("userProfiles").document(uid).update("streak", 0L)
+        }
+
+
     }
 
     override fun onDestroyView() {

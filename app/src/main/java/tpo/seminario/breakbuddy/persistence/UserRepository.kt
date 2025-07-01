@@ -35,7 +35,9 @@ data class UserProfile(
     val accumulatedPoints: Long? = 0L,
     val lastSpinAt: Long? = 0L,
     val missionsGeneratedAt: Long? = 0L,
-    val dailyMissions: List<Mision> = emptyList()
+    val dailyMissions: List<Mision> = emptyList(),
+    val lastMissionDate: String = "",
+    val missionStreak: Long? = 0L
 )
 
 class UserTokenRepository {
@@ -121,7 +123,9 @@ class UserRepository {
             "accumulatedPoints" to 0L,
             "lastSpinAt" to null,
             "missionsGeneratedAt" to null,
-            "dailyMissions" to emptyList<Mision>()
+            "dailyMissions" to emptyList<Mision>(),
+            "lastMissionDate" to String,
+            "missionStreak" to 0L
         )
         db.collection("userProfiles")
             .document(uid)
