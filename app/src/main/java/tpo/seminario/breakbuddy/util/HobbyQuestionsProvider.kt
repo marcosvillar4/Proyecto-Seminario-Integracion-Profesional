@@ -14872,6 +14872,6 @@ object HobbyQuestionsProvider{
                 options = listOf("Lotería", "Tómbola", "Banca", "Dominó numérico"),
                 correctIndex = 1
             )
-        ),
         )
+    )
 }
