@@ -7,116 +7,491 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.home.HomeFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardMisiones"
+    <!-- Guideline para el banner -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.03"
+        android:orientation="horizontal"/>
+
+    <!-- Banner fijo arriba -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewBanner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginHorizontal="24dp"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cardTestMBI"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-7467173777372011/4567587890"
+        app:layout_constraintTop_toBottomOf="@id/guideline_banner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
-
-            <TextView
-                android:id="@+id/titleMisiones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Micro-misiones diarias"
-                style="@style/TextAppearance.App.SubtitleMedium"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/descMisiones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Elegí entre desafíos breves y conscientes para cortar el día con propósito."
-                android:textSize="14sp"
-                style="@style/TextAppearance.App.Body"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginBottom="16dp" />
-
-            <Button
-                android:id="@+id/btnIrAMisiones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ver misiones"
-                android:backgroundTint="@color/green_500"
-                android:textColor="@android:color/white"
-                style="@style/TextAppearance.App.SubtitleMedium"
-                app:cornerRadius="8dp"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardTestMBI"
+    <!-- ScrollView con contenido deslizable -->
+    <ScrollView
+        android:id="@+id/scrollViewContent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginHorizontal="24dp"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="16dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="72dp"
         app:layout_constraintTop_toBottomOf="@id/adViewBanner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/titleTestMBI"
-                android:layout_width="wrap_content"
+            <!-- Card Test MBI -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTestMBI"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="¿Qué es el Test MBI?"
-                style="@style/TextAppearance.App.SubtitleMedium"
-                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginHorizontal="24dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/titleTestMBI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="¿Cómo está tu bienestar mental hoy?"
+                        style="@style/TextAppearance.App.SubtitleMedium"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/descTestMBI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Descubrí en solo 2 minutos si estás en riesgo de burnout. Respondé algunas preguntas rápidas y recibí recomendaciones personalizadas para sentirte mejor."
+                        android:textSize="14sp"
+                        style="@style/TextAppearance.App.Body"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginBottom="16dp" />
+
+                    <Button
+                        android:id="@+id/btnRealizarTestMBI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Descubrilo ahora"
+                        android:backgroundTint="@color/green_500"
+                        android:textColor="@android:color/white"
+                        style="@style/TextAppearance.App.SubtitleMedium"
+                        app:cornerRadius="8dp"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card Misiones -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardMisiones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginHorizontal="24dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/titleMisiones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Micro-misiones diarias"
+                        style="@style/TextAppearance.App.SubtitleMedium"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/descMisiones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Elegí entre desafíos breves y conscientes para cortar el día con propósito."
+                        android:textSize="14sp"
+                        style="@style/TextAppearance.App.Body"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginBottom="16dp" />
+
+                    <Button
+                        android:id="@+id/btnIrAMisiones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver misiones"
+                        android:backgroundTint="@color/green_500"
+                        android:textColor="@android:color/white"
+                        style="@style/TextAppearance.App.SubtitleMedium"
+                        app:cornerRadius="8dp"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Título de sección FAQ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Preguntas Frecuentes"
+                android:gravity="center"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp" />
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp" />
 
-            <TextView
-                android:id="@+id/descTestMBI"
-                android:layout_width="wrap_content"
+            <!-- Card FAQ -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardFAQ"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Es una herramienta validada que mide tu nivel actual de burnout en 3 dimensiones: agotamiento, despersonalización y realización personal."
-                android:textSize="14sp"
-                style="@style/TextAppearance.App.Body"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="32dp"
+                android:layout_marginHorizontal="24dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="16dp">
 
-            <Button
-                android:id="@+id/btnRealizarTestMBI"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Realizar TEST"
-                android:backgroundTint="@color/green_500"
-                android:textColor="@android:color/white"
-                style="@style/TextAppearance.App.SubtitleMedium"
-                app:cornerRadius="8dp"
-                android:layout_gravity="center_horizontal" />
+                <LinearLayout
+                    android:id="@+id/layoutFaqContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:animateLayoutChanges="true">
+
+                    <!-- FAQ 1 -->
+                    <LinearLayout
+                        android:id="@+id/faq1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/tvPregunta1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="¿Qué es BreakBuddy?"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black" />
+
+                            <ImageView
+                                android:id="@+id/ivArrow1"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_arrow_down"
+                                android:rotation="0" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvRespuesta1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="BreakBuddy es una app gratuita que te ayuda a prevenir el burnout con desafíos, pausas activas, seguimiento de bienestar y conexión con recursos de ayuda."
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:visibility="gone"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+
+                    <!-- FAQ 2 -->
+                    <LinearLayout
+                        android:id="@+id/faq2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/tvPregunta2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="¿Cómo me ayuda la app a combatir el burnout?"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black" />
+
+                            <ImageView
+                                android:id="@+id/ivArrow2"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_arrow_down"
+                                android:rotation="0" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvRespuesta2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Ofrece test de diagnóstico, recomendaciones personalizadas, pausas activas, registro Pomodoro, desafíos diarios y acceso a profesionales."
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:visibility="gone"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+
+                    <!-- FAQ 3 -->
+                    <LinearLayout
+                        android:id="@+id/faq3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/tvPregunta3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="¿Necesito pagar para usar BreakBuddy?"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black" />
+
+                            <ImageView
+                                android:id="@+id/ivArrow3"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_arrow_down"
+                                android:rotation="0" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvRespuesta3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No. Es totalmente gratuita y no requiere suscripción."
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:visibility="gone"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+                    <!-- FAQ 4 -->
+                    <LinearLayout
+                        android:id="@+id/faq4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/tvPregunta4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="¿Qué tan confiable es el test de burnout?"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black" />
+
+                            <ImageView
+                                android:id="@+id/ivArrow4"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_arrow_down"
+                                android:rotation="0" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvRespuesta4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Está basado en el Maslach Burnout Inventory, una herramienta validada a nivel internacional."
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:visibility="gone"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+
+                    <!-- FAQ 5 -->
+                    <LinearLayout
+                        android:id="@+id/faq5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/tvPregunta5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="¿Qué hago si necesito ayuda profesional urgente?"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black" />
+
+                            <ImageView
+                                android:id="@+id/ivArrow5"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_arrow_down"
+                                android:rotation="0" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvRespuesta5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Podés acceder desde la app a un mapa de ayuda con contactos de psicólogos y centros de salud mental en Argentina."
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:visibility="gone"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+                    <!-- FAQ 6 -->
+                    <LinearLayout
+                        android:id="@+id/faq6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/tvPregunta6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="¿La app usa Inteligencia Artificial?"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black" />
+
+                            <ImageView
+                                android:id="@+id/ivArrow6"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_arrow_down"
+                                android:rotation="0" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvRespuesta6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sí. En versiones futuras incorporará análisis predictivo para detectar señales tempranas de burnout."
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:visibility="gone"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+                    <!-- FAQ 7 -->
+                    <LinearLayout
+                        android:id="@+id/faq7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/tvPregunta7"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="¿Puedo usarla si trabajo presencial/remoto/mixto?"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black" />
+
+                            <ImageView
+                                android:id="@+id/ivArrow7"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_arrow_down"
+                                android:rotation="0" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvRespuesta7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sí. La app se adapta a cualquier modalidad de trabajo y personaliza las recomendaciones."
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:visibility="gone"
+                            android:padding="8dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
         </LinearLayout>
+    </ScrollView>
 
-    </com.google.android.material.card.MaterialCardView>
-
-
+    <!-- Floating Buttons al frente -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabHistory"
         android:layout_width="wrap_content"
@@ -126,7 +501,7 @@
         app:tint="@color/green_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabHistoryTests"
@@ -137,24 +512,7 @@
         app:tint="@color/green_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp" />
 
-    <!-- Guideline para el banner -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03"/>
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewBanner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-7467173777372011/4567587890"
-        app:layout_constraintTop_toBottomOf="@id/guidelineBottom"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

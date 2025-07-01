@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.caneryilmaz.apps.luckywheel.constant.TextOrientation
 import com.caneryilmaz.apps.luckywheel.data.WheelData
 import com.caneryilmaz.apps.luckywheel.ui.LuckyWheelView
+import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -30,10 +31,26 @@ import tpo.seminario.breakbuddy.util.HobbyQuestionsProvider
 import tpo.seminario.breakbuddy.util.PhysicalChallengesProvider
 import kotlin.random.Random
 
+
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.LoadAdError
+import android.os.Handler
+import android.os.Looper
+
+
 class WheelFragment : Fragment() {
 
     private var _binding: FragmentWheelBinding? = null
     private val binding get() = _binding!!
+
+
+
+    // 1) AdMob banner
+    private lateinit var adView: AdView
+    private val retryDelayMs = 2000L
+
+
 
     private var currentChallengesList: List<DesafioGamificado> = emptyList()
     // Al inicio de la clase:
@@ -150,6 +167,24 @@ class WheelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // === Banner AdMob ===
+        adView = view.findViewById(R.id.adViewWheel)
+        adView.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                Log.d("AdMob", "Wheel banner loaded")
+            }
+            override fun onAdFailedToLoad(error: LoadAdError) {
+                Log.e("AdMob", "Wheel banner failed: ${error.message}")
+                Handler(Looper.getMainLooper()).postDelayed({
+                    adView.loadAd(AdRequest.Builder().build())
+                }, retryDelayMs)
+            }
+        }
+        adView.loadAd(AdRequest.Builder().build())
+
+
+
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
         firestoreListener = FirebaseFirestore.getInstance()

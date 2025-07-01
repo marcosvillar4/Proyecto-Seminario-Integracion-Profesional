@@ -10,18 +10,38 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.settings.AccountSettingsFragment">
 
+
+    <!-- Guideline al para el banner -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.00"
+        android:orientation="horizontal"/>
+
+    <!-- 👇 Banner AdMob -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewAccount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-7467173777372011/4567587890"
+        app:layout_constraintTop_toBottomOf="@id/guideline_banner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <!-- Bienvenida y Foto de perfil -->
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_default_avatar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/adViewAccount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:scaleType="centerCrop"
-        android:padding="4dp" />
+        android:padding="4dp"/>
 
     <TextView
         android:id="@+id/textGreeting"
@@ -127,7 +147,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toTopOf="@id/cardModoDescanso"
+        app:layout_constraintBottom_toTopOf="@id/btnLogout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -162,52 +182,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Modo descanso -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardModoDescanso"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/border_gray"
-        app:cardElevation="3dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toTopOf="@id/btnLogout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:padding="12dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Modo descanso"
-                style="@style/TextAppearance.App.Auxiliary"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/switchModoDescanso"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switchModoDescanso"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                app:thumbTint="@color/white"
-                app:trackTint="@color/switch_track_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
     <!-- Botón cerrar sesión -->
     <Button
         android:id="@+id/btnLogout"
@@ -219,8 +193,49 @@
         style="@style/TextAppearance.App.SubtitleMedium"
         app:cornerRadius="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="96dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cardSupport"
+        android:layout_marginBottom="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardSupport"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="12dp"
+        android:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textSupportTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Dudas o sugerencias?"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/textSupportEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ayuda.breakbuddy@gmail.com"
+                android:textColor="@color/green_200"
+                android:textSize="14sp"
+                android:autoLink="email"
+                android:linksClickable="true"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -79,9 +79,51 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_home_to_testHistory)
         }
 
+
+        setupFaqAccordion(view)
+
         // Primera carga
         adView.loadAd(AdRequest.Builder().build())
     }
+
+
+    private fun setupFaqAccordion(view: View) {
+        val faqs = listOf(
+            Triple(R.id.tvPregunta1, R.id.tvRespuesta1, R.id.ivArrow1),
+            Triple(R.id.tvPregunta2, R.id.tvRespuesta2, R.id.ivArrow2),
+            Triple(R.id.tvPregunta3, R.id.tvRespuesta3, R.id.ivArrow3),
+            Triple(R.id.tvPregunta4, R.id.tvRespuesta4, R.id.ivArrow4),
+            Triple(R.id.tvPregunta5, R.id.tvRespuesta5, R.id.ivArrow5),
+            Triple(R.id.tvPregunta6, R.id.tvRespuesta6, R.id.ivArrow6),
+            Triple(R.id.tvPregunta7, R.id.tvRespuesta7, R.id.ivArrow7),
+        )
+
+        val respuestas = faqs.map { view.findViewById<TextView>(it.second) }
+
+        faqs.forEach { (idPregunta, idRespuesta, idFlecha) ->
+            val preguntaView = view.findViewById<TextView>(idPregunta)
+            val respuestaView = view.findViewById<TextView>(idRespuesta)
+            val flechaView = view.findViewById<View>(idFlecha)
+
+            preguntaView.setOnClickListener {
+                val visible = respuestaView.visibility == View.VISIBLE
+
+                // Cierra todos
+                respuestas.forEach { it.visibility = View.GONE }
+                faqs.forEach { (_, _, arrowId) ->
+                    val arrow = view.findViewById<View>(arrowId)
+                    arrow.animate().rotation(0f).setDuration(200).start()
+                }
+
+                if (!visible) {
+                    respuestaView.visibility = View.VISIBLE
+                    flechaView.animate().rotation(180f).setDuration(200).start()
+                }
+            }
+        }
+    }
+
+
 
     override fun onDestroyView() {
         adView.destroy()

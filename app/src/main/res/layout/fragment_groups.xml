@@ -7,41 +7,44 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.groups.GroupsFragment">
 
+    <!-- Guideline para el banner -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.03"
+        android:orientation="horizontal"/>
+
+    <!-- Banner AdMob arriba -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewGroups"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-7467173777372011/4567587890"
+        app:layout_constraintTop_toBottomOf="@id/guideline_banner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <!-- Botón Crear Grupo -->
 
     <Button
-        android:id="@+id/btnJoinGroup"
-        style="@style/TextAppearance.App.SubtitleMedium"
-        android:layout_width="185dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/green_500"
-        android:padding="12dp"
-        android:text="UNIRSE A GRUPO"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        app:cornerRadius="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnViewAllGroups" />
-
-    <Button
         android:id="@+id/btnCreateGroup"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:layout_width="185dp"
         android:layout_height="61dp"
-        android:text="CREAR GRUPO"
-        style="@style/TextAppearance.App.SubtitleMedium"
-        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/green_500"
         android:padding="12dp"
-        app:cornerRadius="16dp"
+        android:text="CREAR GRUPO"
         android:textAllCaps="true"
-        android:layout_marginTop="40dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/white"
+        app:cornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/adViewGroups"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Ver Todos los Grupos -->
+    <!-- “Ver Grupos” debajo de Crear -->
     <Button
         android:id="@+id/btnViewAllGroups"
         style="@style/TextAppearance.App.SubtitleMedium"
@@ -50,22 +53,30 @@
         android:layout_marginTop="20dp"
         android:text="VER GRUPOS"
         android:textAllCaps="true"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/green_500"
         app:cornerRadius="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCreateGroup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnCreateGroup" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Banner de anuncios fijo abajo -->
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewBanner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-7467173777372011/4567587890"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <!-- “Unirse a Grupo” debajo de Ver -->
+    <Button
+        android:id="@+id/btnJoinGroup"
+        style="@style/TextAppearance.App.SubtitleMedium"
+        android:layout_width="185dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="20dp"
+        android:text="UNIRSE A GRUPO"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/green_500"
+        android:padding="12dp"
+        app:cornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnViewAllGroups"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

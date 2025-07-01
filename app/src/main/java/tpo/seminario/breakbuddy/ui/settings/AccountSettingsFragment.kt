@@ -17,9 +17,25 @@ import tpo.seminario.breakbuddy.databinding.FragmentAccountSettingsBinding
 import tpo.seminario.breakbuddy.persistence.User
 import tpo.seminario.breakbuddy.persistence.UserRepository
 
+
+
+
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.LoadAdError
+import android.os.Handler
+import android.os.Looper
+import com.google.android.gms.ads.AdView
+
+
 class AccountSettingsFragment : Fragment() {
     private var _binding: FragmentAccountSettingsBinding? = null
     private val binding get() = _binding!!
+
+
+    // 1) AdMob banner
+    private lateinit var adView: AdView
+    private val retryDelayMs = 2000L
 
     private val auth = FirebaseAuth.getInstance()
     private val userRepo = UserRepository()
@@ -33,6 +49,26 @@ class AccountSettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+        // === Inicializar banner AdMob ===
+        adView = view.findViewById(R.id.adViewAccount)
+        adView.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                Log.d("AdMob", "Account banner loaded")
+            }
+            override fun onAdFailedToLoad(error: LoadAdError) {
+                Log.e("AdMob", "Account banner failed: ${error.message}")
+                Handler(Looper.getMainLooper()).postDelayed({
+                    adView.loadAd(AdRequest.Builder().build())
+                }, retryDelayMs)
+            }
+        }
+        adView.loadAd(AdRequest.Builder().build())
+
+
+
         Log.d("AccountSettings", "ViewCreated: setting up UI and fetching user name")
 
         Glide.with(this)
