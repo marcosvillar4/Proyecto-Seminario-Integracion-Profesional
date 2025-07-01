@@ -1,7 +1,10 @@
 package tpo.seminario.breakbuddy
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.pm.ApplicationInfo
+import android.os.Build
 import android.util.Log
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,6 +24,19 @@ class BreakBuddyApp : Application() {
         MobileAds.initialize(this) { Log.d("BreakBuddyApp", "AdMob initialized") }
         FirebaseApp.initializeApp(this)
         Log.d("BreakBuddyApp", "FirebaseApp initialized")
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "reminder_channel",
+                "Recordatorios BreakBuddy",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "Aquí llegan tus recordatorios programados"
+            }
+            getSystemService(NotificationManager::class.java)
+                .createNotificationChannel(channel)
+            Log.d("BreakBuddyApp", "Notification channel created")
+        }
 
         // 2) Detectar debug / emulador
         val isDebuggable = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0

@@ -1,47 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_notifications"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:padding="16dp"
+    android:background="@color/neutro_intermedio">
 
-
-    <TextView
-        android:id="@+id/text_notifications"
+    <!-- Modo descanso -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDoNotDisturb"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Modo descanso (silenciar todos)"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_do_not_disturb"
+        app:iconTint="@color/red_500"
+        app:strokeColor="@color/red_500"
+        app:strokeWidth="2dp"
+        app:cornerRadius="8dp"
+        android:textColor="@color/red_500"/>
 
+    <!-- Espacio pequeño -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
 
-    <!-- 2) Guideline para el banner -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03"/>
+    <!-- Scroll con las filas -->
+    <ScrollView
+        android:id="@+id/scrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewBanner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-7467173777372011/9609588632"
-        app:layout_constraintTop_toBottomOf="@id/guidelineBottom"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/llRows"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+</LinearLayout>

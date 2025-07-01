@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- estado checked = ON → barra verde clara -->
+    <item android:color="@color/green_200" android:state_checked="true"/>
+    <!-- estado default = OFF → barra gris -->
+    <item android:color="@color/gray"/>
+</selector>

@@ -8,6 +8,10 @@
 
     </style>
 
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- colores, tipografías, etc. -->
+    </style>
+
     <!-- 1) Título Principal Grande (Bold 700 / 24sp) -->
     <style name="TextAppearance.App.TitleLarge">
         <!-- Apunta directamente al TTF de Poppins-Bold (peso 700) -->

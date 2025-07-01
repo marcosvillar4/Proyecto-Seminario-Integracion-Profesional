@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- thumb ON = verde intenso -->
+    <item android:color="@color/green_500" android:state_checked="true"/>
+    <!-- thumb OFF = blanco o gris claro -->
+    <item android:color="@android:color/darker_gray"/>
+</selector>
