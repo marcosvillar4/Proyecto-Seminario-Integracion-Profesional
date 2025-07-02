@@ -20,7 +20,7 @@ class BreakBuddyApp : Application() {
         super.onCreate()
         Log.d("BreakBuddyApp", "🛠️ Application.onCreate start")
 
-        // 1) Inicializa FirebaseApp y AdMob
+        //Inicializa FirebaseApp y AdMob
         MobileAds.initialize(this) { Log.d("BreakBuddyApp", "AdMob initialized") }
         FirebaseApp.initializeApp(this)
         Log.d("BreakBuddyApp", "FirebaseApp initialized")
@@ -38,7 +38,7 @@ class BreakBuddyApp : Application() {
             Log.d("BreakBuddyApp", "Notification channel created")
         }
 
-        // 2) Detectar debug / emulador
+        //Detectar debug / emulador
         val isDebuggable = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
         if (!isDebuggable) {
             Log.d("BreakBuddyApp", "🔌 DEBUG mode: conectando a Emuladores")
@@ -50,7 +50,7 @@ class BreakBuddyApp : Application() {
             Log.d("BreakBuddyApp", "⚠️ RELEASE mode: usando producción")
         }
 
-        // 3) Ahora sí configuramos Firestore settings
+        //Ahora sí configuramos Firestore settings
         val settings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
             .build()

@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:background="@color/neutro_intermedio">
 
-    <!-- 1) Guideline para dejar espacio en top -->
+    <!-- Guideline para dejar espacio en top -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
         android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="0dp"/>
 
-    <!-- 2) AdMob Banner -->
+    <!-- AdMob Banner -->
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewNotifications"
         android:layout_width="0dp"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- 3) Botón Modo descanso -->
+    <!-- Botón Modo descanso -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDoNotDisturb"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
 
-    <!-- 4) Scroll con las filas -->
+    <!-- Scroll con las filas -->
     <ScrollView
         android:id="@+id/scrollContainer"
         android:layout_width="0dp"

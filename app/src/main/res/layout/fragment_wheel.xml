@@ -16,7 +16,6 @@
         app:layout_constraintGuide_percent="0.03"
         android:orientation="horizontal"/>
 
-    <!-- 👇 Banner AdMob -->
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewWheel"
         android:layout_width="0dp"
@@ -27,8 +26,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
 
-
-    <!-- Guideline inferior al 60% -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
         android:layout_width="wrap_content"
@@ -62,7 +59,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="2dp" />
 
-    <!-- El resto igual -->
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"

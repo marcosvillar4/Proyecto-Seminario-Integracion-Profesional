@@ -39,29 +39,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /* YA AGREGADO EN BreakBuddyApp
-        // === Configuración offline ===
-        // No hace falta .setPersistenceEnabled(true)??????? — puede que ya esté activo por defecto en Android.
-        // Se puede ajustar el tamaño de la caché local:
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true)
-            // límite de caché local (por defecto 100 MB):
-            // .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
-            .build()
-
-        /*
-        * Todavía hace falta diseñar y escribir el código en la parte de app (en Fragments, Activities, ViewModels, etc.)
-        * para que funcione fluidamente, mostrando datos de la caché cuando sea necesario y manejando las operaciones
-        * de escritura offline de una manera que tenga sentido para el usuario, es decir, hace falta poder implementar
-        * el funcionamiento de la app de manera que pueda escribir tambien en la caché local.
-        */
-
-        FirebaseFirestore.getInstance().firestoreSettings = settings
-        // =============================
-
-        */
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -72,8 +49,6 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_home, R.id.accountSettingsFragment,

@@ -67,7 +67,7 @@
         app:chipMinHeight="24dp"
         tools:visibility="visible" />
 
-    <!-- Botón de eliminar (solo visible para el owner) -->
+    <!-- Botón de eliminar -->
     <ImageButton
         android:id="@+id/btnRemove"
         android:layout_width="32dp"

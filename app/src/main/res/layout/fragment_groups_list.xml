@@ -129,7 +129,6 @@
         android:layout_gravity="center"
         android:visibility="gone" />
 
-    <!-- FAB para crear grupo - Corregido: removí app:tint problemático -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCreateGroup"
         android:layout_width="wrap_content"

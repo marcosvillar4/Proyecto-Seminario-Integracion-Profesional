@@ -7,8 +7,6 @@
     android:background="@color/neutro_claro"
     android:padding="16dp">
 
-    <!-- Título -->
-
     <!-- Campo Nombre del Grupo -->
     <TextView
         android:id="@+id/titleText"
@@ -200,11 +198,6 @@
             android:textColor="@color/neutro_oscuro"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo Emails -->
-
-    <!-- Campo Hobby - CAMBIADO A ExposedDropdownMenu -->
-
-    <!-- Información adicional -->
 
     <!-- Progress Bar -->
     <ProgressBar
@@ -218,9 +211,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"
         tools:visibility="visible" />
-
-    <!-- Botón Crear Grupo -->
-
-    <!-- Campos obligatorios -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

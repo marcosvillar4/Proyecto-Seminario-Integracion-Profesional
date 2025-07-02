@@ -11,8 +11,7 @@ data class Mision(
     val pasosGuiados: List<String>? = null,
     var completada: Boolean = false
 ) {
-    // Este constructor vacío es el que Firestore usará para instanciar antes de poblar campos
-    @Suppress("unused") // para silenciar warning de parámetro no usado
+    @Suppress("unused")
     constructor() : this(
         id             = "",
         titulo         = "",

@@ -47,6 +47,5 @@ object PhysicalChallengesProvider {
             recompensa = 8,
             iconoResId = R.drawable.pulmonology_24dp_
         )
-        // Puedes agregar más si deseas.
     )
 }

@@ -7,7 +7,6 @@
         </shape>
     </item>
 
-    <!-- Progreso con degradé -->
     <item android:id="@android:id/progress">
         <clip>
             <shape android:shape="rectangle">

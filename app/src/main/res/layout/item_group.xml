@@ -11,7 +11,7 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
-    app:rippleColor="#DDDDDD"> <!-- color de ripple genérico -->
+    app:rippleColor="#DDDDDD">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- ====== HEADER: nombre y número de miembros ====== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +76,7 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <!-- ====== Código del grupo ====== -->
+        <!-- Código del grupo -->
         <TextView
             android:id="@+id/textGroupCode"
             android:layout_width="wrap_content"
@@ -91,7 +90,7 @@
         android:textStyle="bold"
         tools:text="Código: ABC123" />
 
-        <!-- ====== Tipo y Organización ====== -->
+        <!-- Tipo y Organización -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -145,7 +144,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ====== Hobby (icon + texto), inicialmente oculto ====== -->
+        <!-- Hobby (icon + texto), inicialmente oculto -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -171,7 +170,7 @@
                 tools:text="Fútbol" />
         </LinearLayout>
 
-        <!-- ====== Estado pendiente (inicialmente oculto) ====== -->
+        <!-- Estado pendiente (inicialmente oculto) -->
         <TextView
             android:id="@+id/textPendingStatus"
             android:layout_width="wrap_content"
@@ -186,7 +185,7 @@
         android:visibility="gone"
         tools:text="Solicitud pendiente" />
 
-        <!-- ====== Fecha de creación ====== -->
+        <!--Fecha de creación-->
         <TextView
             android:id="@+id/textCreatedDate"
             android:layout_width="wrap_content"
@@ -197,7 +196,7 @@
             style="@style/TextAppearance.App.Auxiliary"
             tools:text="Creado: 15/03/2024" />
 
-        <!-- ====== Botones de acción: Unirse / Salir ====== -->
+        <!--Botones de acción: Unirse / Salir-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -241,7 +240,7 @@
                 android:textSize="14sp"
                 android:visibility="gone" />
 
-            <!-- NUEVO: Botón Chat -->
+            <!-- Botón Chat -->
             <ImageButton
                 android:id="@+id/btnChat"
                 android:layout_width="36dp"
@@ -252,7 +251,7 @@
                 android:src="@drawable/ic_chat"
                 app:tint="@color/green_500" />
 
-            <!-- NUEVO: botón Ranking -->
+            <!-- botón Ranking -->
             <ImageButton
                 android:id="@+id/btnRanking"
                 android:layout_width="36dp"

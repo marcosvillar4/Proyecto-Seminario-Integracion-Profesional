@@ -2,54 +2,48 @@
 <resources>
 
 
-    <!-- 0) Defino el estilo “base” TextAppearance.App (puede heredar de AppCompat o Material) -->
     <style name="TextAppearance.App" parent="TextAppearance.AppCompat.Body1">
-        <!-- aquí podrías fijar, por ejemplo, el textColor común -->
 
     </style>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- colores, tipografías, etc. -->
     </style>
 
-    <!-- 1) Título Principal Grande (Bold 700 / 24sp) -->
     <style name="TextAppearance.App.TitleLarge">
-        <!-- Apunta directamente al TTF de Poppins-Bold (peso 700) -->
         <item name="android:fontFamily">@font/poppins_bold</item>
-        <!-- Tamaño 24sp -->
         <item name="android:textSize">@dimen/text_size_title_large</item>
 
     </style>
 
-    <!-- 2) Título Principal Mediano (SemiBold 600 / 22sp) -->
+    <!-- Título Principal Mediano (SemiBold 600 / 22sp) -->
     <style name="TextAppearance.App.TitleMedium">
         <item name="android:fontFamily">@font/poppins_semibold</item>
         <item name="android:textSize">@dimen/text_size_title_medium</item>
 
     </style>
 
-    <!-- 3) Subtítulo / Label Importante Grande (Medium 500 / 18sp) -->
+    <!-- Subtítulo / Label Importante Grande (Medium 500 / 18sp) -->
     <style name="TextAppearance.App.SubtitleLarge">
         <item name="android:fontFamily">@font/poppins_medium</item>
         <item name="android:textSize">@dimen/text_size_subtitle_large</item>
 
     </style>
 
-    <!-- 4) Subtítulo / Label Importante Mediano (Medium 500 / 16sp) -->
+    <!-- Subtítulo / Label Importante Mediano (Medium 500 / 16sp) -->
     <style name="TextAppearance.App.SubtitleMedium">
         <item name="android:fontFamily">@font/poppins_medium</item>
         <item name="android:textSize">@dimen/text_size_subtitle_medium</item>
 
     </style>
 
-    <!-- 5) Texto de Párrafo / Cuerpo (Regular 400 / 14sp) -->
+    <!-- Texto de Párrafo / Cuerpo (Regular 400 / 14sp) -->
     <style name="TextAppearance.App.Body">
         <item name="android:fontFamily">@font/poppins_regular</item>
         <item name="android:textSize">@dimen/text_size_body</item>
 
     </style>
 
-    <!-- 6) Texto Auxiliar / Notas (Light 300 / 12sp) -->
+    <!-- Texto Auxiliar / Notas (Light 300 / 12sp) -->
     <style name="TextAppearance.App.Auxiliary">
         <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:textSize">@dimen/text_size_auxiliary</item>
