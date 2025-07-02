@@ -16,7 +16,6 @@ class GroupRepository {
     private val userRepo = UserRepository()
     private val orgRepo = OrganizationRepository()
 
-    // REEMPLAZAR la función createGroup con esta versión mejorada:
     fun createGroup(
         name: String,
         emails: List<String>,
@@ -33,7 +32,7 @@ class GroupRepository {
             return
         }
         if (type == "organization") {
-            // Crear organización en /organizations
+            //Crea organización en /organizations
             orgRepo.createOrganization(
                 name = name,
                 emails = emails,
