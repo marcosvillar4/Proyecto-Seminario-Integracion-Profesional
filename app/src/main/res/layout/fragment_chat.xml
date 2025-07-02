@@ -8,8 +8,7 @@
     android:fitsSystemWindows="true">
 
 
-
-
+    <!-- AppBar con Toolbar (solo muestra “Chat”) -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="0dp"
@@ -19,16 +18,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarChat"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="¡Sugerencias de actividades!"
-            app:titleTextColor="@color/white" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- RecyclerView ocupa todo el espacio entre la AppBar y el panel de input -->
+    <!-- Botón de sugerencia -->
+    <Button
+        android:id="@+id/buttonSugerencia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="¡Sugerencias de actividades!"
+        android:drawableEnd="@drawable/ic_lightbulb"
+        android:backgroundTint="@color/green_500"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp" />
+
+    <!-- RecyclerView de mensajes -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
         android:layout_width="0dp"
@@ -36,7 +43,7 @@
         android:clipToPadding="false"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintTop_toBottomOf="@id/buttonSugerencia"
         app:layout_constraintBottom_toTopOf="@+id/layoutInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
