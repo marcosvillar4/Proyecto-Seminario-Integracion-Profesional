@@ -67,6 +67,12 @@ class WheelFragment : Fragment() {
     ): View {
         _binding = FragmentWheelBinding.inflate(inflater, container, false)
 
+        // ── esquema de colores alternos ─────────────────────────────
+        val colorClaro  = intArrayOf(resources.getColor(R.color.green_200, null))
+        val colorOscuro = intArrayOf(resources.getColor(R.color.green_500, null))
+        // Inicialización estática: alterna manual
+        val cols = listOf(colorClaro, colorOscuro)
+
         // 1) Armo la lista de WheelData
         wheelItems = arrayListOf(
             WheelData(
@@ -335,13 +341,16 @@ class WheelFragment : Fragment() {
         challengeViewModel.setCurrentChallenges(all.associateBy { it.nombre })
 
         // 5) WheelData
-        wheelItems = ArrayList(all.map { d ->
+        // alterna colores según índice
+        val colorClaro  = intArrayOf(resources.getColor(R.color.green_200, null))
+        val colorOscuro = intArrayOf(resources.getColor(R.color.green_500, null))
+        wheelItems = ArrayList(all.mapIndexed { idx, d ->
             val bmp = loadBitmapFromResource(d.iconoResId) ?: createPlaceholderBitmap()
             WheelData(
                 icon = bmp,
                 text = d.nombre,
                 textColor = intArrayOf(resources.getColor(R.color.white, null)),
-                backgroundColor = intArrayOf(resources.getColor(R.color.green_500, null))
+                backgroundColor = if (idx % 2 == 0) colorClaro else colorOscuro
             )
         })
         binding.lwv.setWheelData(wheelItems)
