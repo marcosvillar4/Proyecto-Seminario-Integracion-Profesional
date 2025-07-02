@@ -46,6 +46,10 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.buttonSugerencia.setOnClickListener {
+            suggestActivity()
+        }
+
         // Recuperar ID del grupo
         groupId = arguments?.getString("groupId").orEmpty()
         if (groupId.isBlank()) {
@@ -54,7 +58,7 @@ class ChatFragment : Fragment() {
             return
         }
 
-        setupToolbar()
+
         setupRecyclerView()
         setupInput()
 
@@ -72,16 +76,7 @@ class ChatFragment : Fragment() {
         attachMessagesListener()
     }
 
-    private fun setupToolbar() {
-        binding.toolbarChat.menu.clear()
-        binding.toolbarChat.inflateMenu(R.menu.chat_toolbar_menu)
-        binding.toolbarChat.setOnMenuItemClickListener { item ->
-            if (item.itemId == R.id.action_suggest) {
-                suggestActivity()
-                true
-            } else false
-        }
-    }
+
 
     private fun setupRecyclerView() {
         chatAdapter = ChatAdapter(currentUserUid = auth.currentUser?.uid.orEmpty())
