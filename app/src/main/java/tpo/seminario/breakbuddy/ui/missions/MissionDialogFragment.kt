@@ -36,13 +36,12 @@ class MissionDialogFragment(
         savedInstanceState: Bundle?
     ): View {
         _binding = DialogMissionBinding.inflate(inflater, container, false)
-        dialog?.setCanceledOnTouchOutside(false) // bloquea toque fuera
+        dialog?.setCanceledOnTouchOutside(false) //bloquea toque afuera
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Configurar UI inicial
         binding.tvTitulo.text = mision.titulo
         binding.tvDescripcion.text = mision.descripcion
         binding.btnListo.isEnabled = false
@@ -76,7 +75,6 @@ class MissionDialogFragment(
                 }
                 val segundos = millisUntilFinished / 1000
                 b.tvTemporizador.text = "Completando... ${segundos}s"
-                // Animación segura: dentro de lambda volver a verificar binding
                 b.tvTemporizador.animate().scaleX(1.1f).scaleY(1.1f).setDuration(100).withEndAction {
                     val b2 = _binding ?: return@withEndAction
                     b2.tvTemporizador.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
@@ -94,7 +92,6 @@ class MissionDialogFragment(
     private fun iniciarGuiaPasos() {
         val pasos = mision.pasosGuiados
         if (pasos.isNullOrEmpty()) {
-            // Si no hay pasos, habilitar botón inmediatamente
             val b0 = _binding ?: return
             b0.tvTemporizador.text = "¡Bien hecho!"
             b0.btnListo.isEnabled = true

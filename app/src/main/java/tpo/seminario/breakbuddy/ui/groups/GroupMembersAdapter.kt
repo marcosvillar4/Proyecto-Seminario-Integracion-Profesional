@@ -32,22 +32,19 @@ class GroupMembersAdapter(
 
         fun bind(member: GroupMember) {
             binding.apply {
-                // Nombre y email
+                //Nombre y email
                 textMemberName.text = member.name.ifBlank { member.email } // si no hay nombre, mostramos email
                 textMemberEmail.text = member.email
 
-                // Chip “Admin” visible solo si isOwner == true
+                //Chip “Admin” visible solo si isOwner == true
                 chipOwner.visibility = if (member.isOwner) View.VISIBLE else View.GONE
 
-                // Botón eliminar (btnRemove) visible solo si quien ve (currentUserUid) es el dueño
-                // y no se está mostrando a sí mismo:
                 if (currentUserUid == groupOwnerUid && member.id != currentUserUid) {
                     btnRemove.visibility = View.VISIBLE
                 } else {
                     btnRemove.visibility = View.GONE
                 }
 
-                // Listener para “eliminar”
                 btnRemove.setOnClickListener {
                     onRemoveClick(member)
                 }
@@ -55,12 +52,10 @@ class GroupMembersAdapter(
         }
     }
 
-    /** Permite actualizar dinámicamente quién es el viewer (para ocultar su propio botón) */
     fun setCurrentUserUid(uid: String) {
         this.currentUserUid = uid
     }
 
-    /** Permite actualizar dinámicamente quién es el owner del grupo */
     fun setGroupOwnerUid(uid: String) {
         this.groupOwnerUid = uid
     }

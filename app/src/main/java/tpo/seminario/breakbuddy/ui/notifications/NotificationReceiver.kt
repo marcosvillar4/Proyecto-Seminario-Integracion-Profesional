@@ -10,7 +10,7 @@ import tpo.seminario.breakbuddy.R
 class NotificationReceiver : BroadcastReceiver() {
     override fun onReceive(ctx: Context, intent: Intent) {
         val type = intent.getStringExtra("type") ?: return
-        // Mapa de etiquetas:
+        //Mapa de etiquetas:
         val labels = mapOf(
             "hidratacion"  to "hidratarse",
             "alimentacion" to "alimentarse",

@@ -56,7 +56,6 @@ class MissionsFragment : Fragment() {
             .addOnSuccessListener { hr ->
                 val data = hr.data as? Map<*,*> ?: return@addOnSuccessListener
 
-                // 1) extraer misiones
                 @Suppress("UNCHECKED_CAST")
                 misionesHoy = (data["missions"] as? List<Map<String,Any>>)
                     ?.map { m ->
@@ -70,11 +69,11 @@ class MissionsFragment : Fragment() {
                         )
                     }.orEmpty()
 
-                // 2) extraer completadas de hoy
+                //extraer completadas de hoy
                 @Suppress("UNCHECKED_CAST")
                 completedMap = (data["completed"] as? Map<String,Boolean>) ?: emptyMap()
 
-                // 3) leer historial semanal para barra semanal
+                // leer historial semanal para barra semanal
                 db.collection("userProfiles").document(uid)
                     .get()
                     .addOnSuccessListener { snap ->
@@ -94,7 +93,7 @@ class MissionsFragment : Fragment() {
     private fun mostrarMisiones() {
         binding.layoutMisiones.removeAllViews()
 
-        // 4) calcular progreso diario
+        //calcular progreso diario
         val doneToday = misionesHoy.count { completedMap[it.id] == true }
         val totalToday = misionesHoy.size
         binding.tvDailyProgress.text = "Progreso diario: $doneToday/$totalToday"
@@ -103,7 +102,7 @@ class MissionsFragment : Fragment() {
             progress = doneToday
         }
 
-        // 5) calcular progreso semanal
+        //calcular progreso semanal
         var totalWeek = 0
         var doneWeek = 0
         for (rec in weeklyRecords) {
@@ -121,7 +120,7 @@ class MissionsFragment : Fragment() {
             actualizarBarrasProgreso()
         }
 
-        // 6) mostrar cada misión
+        //mostrar cada misión
         misionesHoy.forEach { m ->
             val card = layoutInflater.inflate(R.layout.item_mision, binding.layoutMisiones, false)
             card.findViewById<TextView>(R.id.tvTitulo).text = m.titulo
@@ -163,14 +162,14 @@ class MissionsFragment : Fragment() {
 
 
     private fun actualizarBarrasProgreso() {
-        // Diario
+        //Diario
         val dailyTotal = misionesHoy.size
         val dailyDone  = completedMap.count { it.value }
         binding.progressDaily.max      = dailyTotal
         binding.progressDaily.progress = dailyDone
         binding.tvDailyProgress.text   = "Progreso diario: $dailyDone/$dailyTotal"
 
-        // Semanal
+        //Semanal
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
         FirebaseFirestore.getInstance()
             .collection("userProfiles")
@@ -198,10 +197,8 @@ class MissionsFragment : Fragment() {
 
         db.collection("userProfiles").document(uid).get().addOnSuccessListener {
             document -> if (document != null && document.exists()){
-                val lastCompleted = document.getString("lastMissionDate").toString()//data?.getValue("lastMissionDate").toString()
+                val lastCompleted = document.getString("lastMissionDate").toString()
                 val streak = document.getLong("missionStreak")!!
-
-                //Toast.makeText(context, lastCompleted, Toast.LENGTH_LONG).show()
 
                 if (!lastCompleted.equals("")) {
                     val datediff = Instant.parse(lastCompleted).until(Instant.now(), ChronoUnit.DAYS)
@@ -210,7 +207,7 @@ class MissionsFragment : Fragment() {
                         db.collection("userProfiles").document(uid).update("lastMissionDate", Instant.now().toString())
                     }
                 } else {
-                    // Primer subida de racha
+                    //Primer subida de racha
                     db.collection("userProfiles").document(uid).update("missionStreak", streak+1L)
                     db.collection("userProfiles").document(uid).update("lastMissionDate", Instant.now().toString())
                 }
@@ -239,7 +236,7 @@ class MissionsFragment : Fragment() {
     private fun streakCheckAndUpdate(){
         db.collection("userProfiles").document(uid).get().addOnSuccessListener {
             document -> if (document.exists() && document != null){
-                val lastCompleted = document.getString("lastMissionDate")!!//data?.getValue("lastMissionDate").toString()
+                val lastCompleted = document.getString("lastMissionDate")!!
                 val streak = document.getLong("missionStreak")!!
 
 

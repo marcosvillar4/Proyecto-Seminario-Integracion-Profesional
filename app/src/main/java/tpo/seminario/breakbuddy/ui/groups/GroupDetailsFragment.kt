@@ -126,7 +126,6 @@ class GroupDetailsFragment : Fragment() {
                 Toast.makeText(requireContext(), "El grupo ya no existe.", Toast.LENGTH_LONG).show()
                 findNavController().popBackStack()
             } else {
-                // Si mi membershipStatus cambió a NOT_MEMBER → cierro
                 if (group.membershipStatus == MembershipStatus.NOT_MEMBER) {
                     Toast.makeText(requireContext(), "Ya no eres parte de este grupo.", Toast.LENGTH_LONG).show()
                     findNavController().popBackStack()
@@ -149,7 +148,6 @@ class GroupDetailsFragment : Fragment() {
             if (success == true) {
                 Toast.makeText(requireContext(), "Miembro eliminado", Toast.LENGTH_SHORT).show()
                 viewModel.clearRemoveMemberSuccess()
-                // Actualizo sólo este grupo
                 viewModel.loadEntityById(entityId, entityType)
             }
         }
@@ -291,7 +289,7 @@ class GroupDetailsFragment : Fragment() {
 
     private fun formatDate(ts: com.google.firebase.Timestamp?): String {
         if (ts == null) return ""
-        val date = ts.toDate() // convierte a java.util.Date
+        val date = ts.toDate() // convierte a Date
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         return formatter.format(date)
     }

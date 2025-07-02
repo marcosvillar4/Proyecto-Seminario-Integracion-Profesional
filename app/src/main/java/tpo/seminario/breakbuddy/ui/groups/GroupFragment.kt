@@ -25,7 +25,7 @@ class GroupsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_groups, container, false)
 
-        // === Inicializar banner AdMob ===
+        //banner AdMob
         adView = view.findViewById(R.id.adViewGroups)
         adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
@@ -40,7 +40,6 @@ class GroupsFragment : Fragment() {
         }
         adView.loadAd(AdRequest.Builder().build())
 
-        // Botones
         view.findViewById<Button>(R.id.btnCreateGroup).setOnClickListener {
             findNavController().navigate(R.id.action_navigation_groups_to_createGroupFragment)
         }

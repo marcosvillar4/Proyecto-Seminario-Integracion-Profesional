@@ -35,7 +35,6 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         auth = Firebase.auth
 
-        // NOTA: no iniciamos listeners aquí que dependen de la UI; la lógica principal va en onViewCreated
         return binding.root
     }
 
@@ -73,14 +72,12 @@ class LoginFragment : Fragment() {
                                 return@addOnCompleteListener
                             }
 
-                            // Asegura/actualiza lastLogin en Firestore
+                            //Asegura/actualiza lastLogin en Firestore
                             userRepo.ensureUserDocumentExists(
                                 user,
                                 onSuccess = {
                                     if (!isAdded) return@ensureUserDocumentExists
-                                    // Asegurar perfil ligero:
                                     userRepo.ensureUserProfileExists(user.uid)
-                                    // Leer perfil ligero:
                                     userRepo.getUserProfileLight(
                                         user.uid,
                                         onSuccess = { profileLight ->
@@ -105,7 +102,7 @@ class LoginFragment : Fragment() {
                                         onFailure = { e ->
                                             if (!isAdded)
                                             Log.w(TAG, "Error leyendo perfil ligero: ${e.message}")
-                                            // Fallback: forzar a Hobbies
+                                            // forzar a Hobbies
                                             findNavController().navigate(
                                                 R.id.action_loginFragment_to_hobbiesFragment,
                                                 null,

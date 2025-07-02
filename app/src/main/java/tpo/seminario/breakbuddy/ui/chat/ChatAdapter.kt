@@ -54,26 +54,25 @@ class ChatAdapter(
                     .format(message.timestamp?.toDate() ?: Date())
                 return
             } else if (message.senderUid == currentUserUid) {
-                // Mensaje propio → alinear a la derecha y fondo verde
+                // Mensaje propio
                 container.setBackgroundResource(R.drawable.bg_message_user)
                 params.startToStart = ConstraintLayout.LayoutParams.UNSET
                 params.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
                 textSender.visibility = View.GONE
             } else {
-                // Mensaje de otro usuario → alinear a la izquierda y fondo blanco
+                //Mensaje de otro usuario
                 container.setBackgroundResource(R.drawable.bg_message_other)
                 params.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 params.endToEnd = ConstraintLayout.LayoutParams.UNSET
-                // Mostrar nombre del remitente
+                //nombre del remitente
                 textSender.visibility = View.VISIBLE
                 textSender.text = message.senderDisplayName
             }
             container.layoutParams = params
 
-            // 2) Texto del mensaje
             textBody.text = message.text
 
-            // 3) Formatear y mostrar timestamp (hora: minutos)
+            //Formato y hora
             val ts = message.timestamp
             if (ts != null) {
                 val date = ts.toDate()

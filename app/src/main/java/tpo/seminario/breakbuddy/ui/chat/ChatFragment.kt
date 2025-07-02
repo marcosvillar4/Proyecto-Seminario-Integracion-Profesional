@@ -50,7 +50,7 @@ class ChatFragment : Fragment() {
             suggestActivity()
         }
 
-        // Recuperar ID del grupo
+        //ID del grupo
         groupId = arguments?.getString("groupId").orEmpty()
         if (groupId.isBlank()) {
             Toast.makeText(requireContext(), "Grupo inválido", Toast.LENGTH_SHORT).show()
@@ -62,7 +62,7 @@ class ChatFragment : Fragment() {
         setupRecyclerView()
         setupInput()
 
-        // Cargar hobby y tamaño del grupo
+        //Cargar hobby y tamaño del grupo
         db.collection("groups").document(groupId)
             .get()
             .addOnSuccessListener { snap ->
@@ -87,7 +87,7 @@ class ChatFragment : Fragment() {
     }
 
     private fun setupInput() {
-        binding.buttonSend.setOnClickListener { attemptSendMessage() }                     // ← CAMBIO
+        binding.buttonSend.setOnClickListener { attemptSendMessage() }
         binding.editTextMessage.addTextChangedListener {
             binding.buttonSend.isEnabled = it.toString().trim().isNotEmpty()
         }
@@ -130,10 +130,6 @@ class ChatFragment : Fragment() {
         msgRef.set(msg)
     }
 
-    /**
-     * 1) Primero validamos el contenido vía Cloud Function `moderateMessage`.
-     * 2) Si está OK lo enviamos, si no mostramos el error al usuario.
-     */
     private fun attemptSendMessage() {
         val text = binding.editTextMessage.text.toString().trim()
         if (text.isEmpty()) return
@@ -141,16 +137,15 @@ class ChatFragment : Fragment() {
 
         binding.buttonSend.isEnabled = false
         functions
-            .getHttpsCallable("moderateMessage")                                        // ← CAMBIO
+            .getHttpsCallable("moderateMessage")
             .call(mapOf("text" to text))
             .addOnSuccessListener {
-                // Allowed → publicamos en Firestore
+                //Allowed
                 performSend(text, currentUser.uid, currentUser.displayName ?: currentUser.email.orEmpty())
             }
             .addOnFailureListener { e ->
                 binding.buttonSend.isEnabled = true
                 val msg = if (e is FirebaseFunctionsException && e.code == FirebaseFunctionsException.Code.PERMISSION_DENIED) {
-                    // Nuestra función lanza permission-denied si hay toxicidad
                     e.message ?: "Contenido no permitido"
                 } else {
                     "Error de moderación: ${e.message}"
@@ -159,9 +154,6 @@ class ChatFragment : Fragment() {
             }
     }
 
-    /**
-     * Envía realmente el mensaje ya validado.
-     */
     private fun performSend(text: String, uid: String, displayName: String) {
         val newRef = db.collection("groups")
             .document(groupId)

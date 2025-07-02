@@ -56,7 +56,6 @@ class CreateGroupFragment : Fragment() {
     }
 
     private fun setupViews() {
-        // Configurar listeners para validación en tiempo real
         binding.inputGroupName.addTextChangedListener {
             clearFieldError(binding.layoutGroupName)
         }
@@ -65,7 +64,6 @@ class CreateGroupFragment : Fragment() {
             clearFieldError(binding.layoutEmails)
         }
 
-        // Configurar AutoCompleteTextView para hobbies
         setupHobbyDropdown()
 
         binding.btnCreateGroup.setOnClickListener {
@@ -77,14 +75,12 @@ class CreateGroupFragment : Fragment() {
         rbOrganization = binding.rbOrganization
         layoutOrg = binding.layoutOrg
 
-        // Mostrar/ocultar selector de org
         radioType.setOnCheckedChangeListener { _, checkedId ->
             layoutOrg.visibility = if (checkedId == R.id.rbOrganization) View.VISIBLE else View.GONE
         }
     }
 
     private fun setupHobbyDropdown() {
-        // Crear lista con opción vacía al inicio
         val hobbiesWithEmpty = listOf("") + HobbiesList.DEFAULT
 
         val adapter = ArrayAdapter(
@@ -94,14 +90,12 @@ class CreateGroupFragment : Fragment() {
         )
 
         binding.inputHobby.setAdapter(adapter)
-        binding.inputHobby.threshold = 1 // Mostrar dropdown después de 1 carácter
+        binding.inputHobby.threshold = 1
 
-        // Listener para limpiar error cuando se selecciona algo
         binding.inputHobby.setOnItemClickListener { _, _, _, _ ->
             clearFieldError(binding.layoutHobby)
         }
 
-        // También limpiar error cuando se escribe
         binding.inputHobby.addTextChangedListener {
             clearFieldError(binding.layoutHobby)
         }
@@ -109,7 +103,7 @@ class CreateGroupFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            if (state == null) return@observe   // Si acaso, ignoramos null
+            if (state == null) return@observe
             updateUI(state)
         }
     }
@@ -119,7 +113,7 @@ class CreateGroupFragment : Fragment() {
         val emailsText = binding.inputEmails.text.toString().trim()
         val hobbyText  = binding.inputHobby.text.toString().trim()
 
-        // 1) Validar hobby… (igual que antes)
+        //Validar hobby
         val hobby = if (hobbyText.isBlank()) {
             null
         } else if (HobbiesList.DEFAULT.contains(hobbyText)) {
@@ -129,17 +123,17 @@ class CreateGroupFragment : Fragment() {
             return
         }
 
-        // 2) Validar inputs básicos (nombre y que haya algún texto en emailsText)
+        //Validar inputs básicos (nombre y que haya algún texto en emailsText)
         if (!validateInputs(name, emailsText)) return
 
-        // 3) Procesar lista de correos
+        //Procesar lista de correos
         val allEmails = processEmails(emailsText)
         if (allEmails.isEmpty()) {
             showFieldError(binding.layoutEmails, "Debe ingresar al menos un email válido")
             return
         }
 
-        // 4) Determinar tipo y capturar orgName
+        //Determinar tipo y capturar orgName
         val type    = if (binding.rbOrganization.isChecked) "organization" else "personal"
         val orgName = binding.inputOrg.text.toString().trim()
 
@@ -148,7 +142,7 @@ class CreateGroupFragment : Fragment() {
             return
         }
 
-        // 5) Verificar que TODOS los correos existen en /users
+        //Verificar que todos los correos existen en /users
         userRepo.validateEmailsExist(
             emails   = allEmails,
             onComplete = { existents, notExistents ->
@@ -156,11 +150,10 @@ class CreateGroupFragment : Fragment() {
                     showErrorToast("Los siguientes emails NO están registrados: ${notExistents.joinToString(", ")}")
                     return@validateEmailsExist
                 }
-                // Si todos existen, ahora buscamos o creamos org (si aplica)
+                // Si todos existen, buscamos o creamos org
                 if (type == "organization") {
                     viewModel.createOrganization(orgName, allEmails, hobby)
                 } else {
-                    // 5.c) Tipo "personal": no hay orgId ni orgName
                     actuallyCreateGroup(name, allEmails, hobby, type, null, null)
                 }
             },
@@ -224,7 +217,7 @@ class CreateGroupFragment : Fragment() {
 
     private fun processEmails(emailsText: String): List<String> {
         return emailsText
-            .split(',', ';', ' ', '\n') // Permitir múltiples separadores
+            .split(',', ';', ' ', '\n')
             .map { it.trim() }
             .filter { it.isNotEmpty() }
             .distinct() // Eliminar duplicados
@@ -232,23 +225,19 @@ class CreateGroupFragment : Fragment() {
                 if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     true
                 } else {
-                    // Mostrar toast para emails inválidos específicos
                     showErrorToast("Email inválido: $email")
                     false
                 }
             }
-            .take(20) // Limitar a 20 emails máximo
+            .take(20) //20 MAILS MAX
     }
 
     private fun updateUI(state: GroupCreationState) {
-        // Mostrar/ocultar loading
         binding.progressBar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
-        // Habilitar/deshabilitar botón
         binding.btnCreateGroup.isEnabled = !state.isLoading
         binding.btnCreateGroup.text = if (state.isLoading) "Creando..." else "Crear Grupo"
 
-        // Cambiar color del botón según estado
         binding.btnCreateGroup.backgroundTintList = ColorStateList.valueOf(
             ContextCompat.getColor(
                 requireContext(),
@@ -256,7 +245,6 @@ class CreateGroupFragment : Fragment() {
             )
         )
 
-        // Habilitar/deshabilitar inputs
         binding.inputGroupName.isEnabled = !state.isLoading
         binding.inputEmails.isEnabled = !state.isLoading
         binding.inputHobby.isEnabled = !state.isLoading
@@ -268,13 +256,13 @@ class CreateGroupFragment : Fragment() {
             }
             state.errorMessage != null -> {
                 showErrorMessage(state.errorMessage)
-                viewModel.clearError() // Limpiar el error después de mostrarlo
+                viewModel.clearError()
             }
         }
     }
 
     private fun showSuccessDialog(groupCode: String) {
-        // 1) Capturamos context y navController antes de mostrar el diálogo
+        //Capturamos context y navController antes de mostrar el diálogo
         val ctx = requireContext()
         val nav = findNavController()
         val clipboard = ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -283,7 +271,7 @@ class CreateGroupFragment : Fragment() {
             .setTitle("¡Grupo Creado!")
             .setMessage("Tu grupo ha sido creado exitosamente.\nCódigo: $groupCode")
             .setPositiveButton("Copiar Código") { _, _ ->
-                // 2) Usa las referencias capturadas
+                //Usa las referencias capturadas
                 val clip = ClipData.newPlainText("Código de Grupo", groupCode)
                 clipboard.setPrimaryClip(clip)
                 Toast.makeText(ctx, "Código copiado al portapapeles", Toast.LENGTH_SHORT).show()

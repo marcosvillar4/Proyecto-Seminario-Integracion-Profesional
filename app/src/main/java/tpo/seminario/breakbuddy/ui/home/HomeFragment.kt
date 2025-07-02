@@ -23,11 +23,8 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
-    // 1) Declara AdView
     private lateinit var adView: AdView
     private val retryDelayMs = 2000L  // 2 segundos
 
@@ -40,21 +37,17 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    // 2) Carga el banner en onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adView = view.findViewById(R.id.adViewBanner)
 
-        // Listener con retry
         adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                // Banner cargó bien
                 Log.d("AdMob", "Banner loaded")
             }
 
             override fun onAdFailedToLoad(error: LoadAdError) {
                 Log.e("AdMob", "Failed to load banner: ${error.message}")
-                // Reintentar tras delay
                 Handler(Looper.getMainLooper()).postDelayed({
                     adView.loadAd(AdRequest.Builder().build())
                 }, retryDelayMs)
@@ -69,12 +62,10 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_missionsFragment)
         }
 
-        // --- FAB Historial check-ins ---
         binding.fabHistory.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_checkinHistory)
         }
 
-        // FAB historial tests MBI
         binding.fabHistoryTests.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_testHistory)
         }
@@ -82,7 +73,6 @@ class HomeFragment : Fragment() {
 
         setupFaqAccordion(view)
 
-        // Primera carga
         adView.loadAd(AdRequest.Builder().build())
     }
 

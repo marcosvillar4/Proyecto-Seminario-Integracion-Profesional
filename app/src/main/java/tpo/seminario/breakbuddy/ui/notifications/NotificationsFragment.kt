@@ -52,7 +52,7 @@ class NotificationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        // === Banner AdMob ===
+        // banner AdMob
         adView = view.findViewById(R.id.adViewNotifications)
         adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
@@ -71,7 +71,7 @@ class NotificationsFragment : Fragment() {
         prefs = requireContext().getSharedPreferences("notif_prefs", Context.MODE_PRIVATE)
         alarmMgr = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        // “Modo descanso”
+        //Modo descanso
         b.btnDoNotDisturb.setOnClickListener { disableAll() }
 
         // Inflar filas dinámicamente

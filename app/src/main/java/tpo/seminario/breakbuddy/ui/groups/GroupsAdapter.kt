@@ -45,7 +45,6 @@ class GroupsAdapter(
         holder.bind(getItem(position))
     }
 
-    // Cambié el nombre del método para evitar conflicto con ListAdapter.submitList()
     fun updateGroups(groups: List<Group>) {
         allGroups = groups
         applyCurrentFilters()
@@ -82,7 +81,6 @@ class GroupsAdapter(
         }
 
         filteredGroups = filtered
-        // Usar el método heredado de ListAdapter
         submitList(filtered)
     }
 
@@ -97,16 +95,15 @@ class GroupsAdapter(
                 textMemberCount.text = "${group.memberCount} miembros"
                 textGroupCode.text = "Código: ${group.code}"
 
-                // Chat: sólo para grupos personales
-                // Chat button
+
                 btnChat.visibility = if (group.type == "personal") View.VISIBLE else View.GONE
                 btnChat.setOnClickListener { onChatClick(group) }
 
-                // Ranking button (solo personal)
+                //Ranking button
                 btnRanking.visibility = if (group.type == "personal") View.VISIBLE else View.GONE
                 btnRanking.setOnClickListener { onRankingClick(group) }
 
-                // Hobby (opcional)
+                //Hobby
                 if (group.hobby != null) {
                     textHobby.text = group.hobby
                     textHobby.visibility = View.VISIBLE
@@ -116,14 +113,14 @@ class GroupsAdapter(
                     iconHobby.visibility = View.GONE
                 }
 
-                // Tipo de grupo
+                //Tipo de grupo
                 chipGroupType.text = when (group.type) {
                     "personal" -> "Personal"
                     "organization" -> "Organización"
                     else -> "Desconocido"
                 }
 
-                // Color del chip según tipo
+                //Color del chip según tipo
                 chipGroupType.backgroundTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(
                         root.context,
@@ -131,7 +128,7 @@ class GroupsAdapter(
                     )
                 )
 
-                // Mostrar organización si aplica
+                //Mostrar organización si aplica
                 if (group.organizationName != null) {
                     textOrganization.text = group.organizationName
                     textOrganization.visibility = View.VISIBLE
@@ -190,7 +187,6 @@ class GroupsAdapter(
                     onLeaveClick(group)
                 }
 
-                // NUEVO: Listener para abrir el chat
                 btnChat.setOnClickListener {
                     onChatClick(group)
                 }
@@ -204,7 +200,7 @@ class GroupsAdapter(
 
         private fun formatDate(ts: com.google.firebase.Timestamp?): String {
             if (ts == null) return ""
-            val date = ts.toDate() // convierte a java.util.Date
+            val date = ts.toDate()
             val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             return formatter.format(date)
         }
