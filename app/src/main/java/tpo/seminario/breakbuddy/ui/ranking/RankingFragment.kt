@@ -41,8 +41,6 @@ class RankingFragment : Fragment() {
             return
         }
 
-
-        // Recycler + Adapter
         adapter = RankingAdapter()
         binding.recyclerRanking.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -53,7 +51,6 @@ class RankingFragment : Fragment() {
     }
 
     private fun loadRanking(groupId: String) {
-        // Paso 1: leer miembros del grupo
         db.collection("groups").document(groupId)
             .get()
             .addOnSuccessListener { snap ->
@@ -64,7 +61,7 @@ class RankingFragment : Fragment() {
                     return@addOnSuccessListener
                 }
 
-                // Paso 2: leer perfiles para obtener puntos
+                // leer perfiles para obtener puntos
                 db.collection("userProfiles")
                     .whereIn(FieldPath.documentId(), memberIds)
                     .get()
@@ -73,12 +70,10 @@ class RankingFragment : Fragment() {
                             doc.id to ((doc.getLong("accumulatedPoints") ?: 0L).toInt())
                         }
 
-                        // Paso 3: leer users para obtener email/displayName
                         db.collection("users")
                             .whereIn(FieldPath.documentId(), memberIds)
                             .get()
                             .addOnSuccessListener { userSnap ->
-                                // Combina ambos mapas
                                 val items = userSnap.documents.mapNotNull { doc ->
                                     val uid = doc.id
                                     val email = doc.getString("username")

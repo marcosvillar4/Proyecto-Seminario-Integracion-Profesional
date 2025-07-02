@@ -9,7 +9,7 @@ data class TestResult(
     val realizacion: Int = 0,
     val impacto: Int = 0,
 
-    // Campos opcionales para guardar directamente las etiquetas:
+
     val nivelAgotamiento: String? = null,
     val nivelDespersonalizacion: String? = null,
     val nivelRealizacion: String? = null,

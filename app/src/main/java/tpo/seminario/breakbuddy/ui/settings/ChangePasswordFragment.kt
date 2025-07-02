@@ -52,7 +52,7 @@ class ChangePasswordFragment : Fragment() {
 
         binding.btnConfirmPasswordChange.setOnClickListener {
 
-            // 0) Obtiene la instancia de Auth y el usuario
+            //Obtiene la instancia de Auth y el usuario
             val auth = FirebaseAuth.getInstance()
             val user = auth.currentUser
             if (user == null) {
@@ -98,20 +98,20 @@ class ChangePasswordFragment : Fragment() {
             Toast.makeText(requireContext(), "Cambiando contraseña...", Toast.LENGTH_SHORT).show()
 
 
-            // 1) Crea las credenciales con el email y la contraseña actual
+            //Crea las credenciales con el email y la contraseña actual
             val credential = EmailAuthProvider
                 .getCredential(user.email!!, currentPassword)
 
-            // 2) Re‐autentica al usuario
+            // Re‐autentica al usuario
             user.reauthenticate(credential)
                 .addOnSuccessListener {
-                    // 3) Una vez re‐autenticado, actualiza la contraseña
+                    // Una vez re‐autenticado, actualiza la contraseña
                     user.updatePassword(newPassword)
                         .addOnSuccessListener {
                             Toast.makeText(requireContext(),
                                 "Contraseña cambiada con éxito",
                                 Toast.LENGTH_LONG).show()
-                            // 4) Navega o cierra este fragment
+                            // Navega o cierra este fragment
                             findNavController().popBackStack()
                         }
                         .addOnFailureListener { e ->
@@ -129,7 +129,7 @@ class ChangePasswordFragment : Fragment() {
         }
     }
 
-    //VISUAL >> Animación requerimientos
+    // Animación requerimientos
     private fun checkPasswordRequirements(password: String) {
         val colorOK = ContextCompat.getColor(requireContext(), android.R.color.holo_green_dark)
         val colorNO = ContextCompat.getColor(requireContext(), android.R.color.darker_gray)

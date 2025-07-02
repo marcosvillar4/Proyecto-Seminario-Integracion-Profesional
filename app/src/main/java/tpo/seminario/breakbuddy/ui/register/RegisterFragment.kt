@@ -42,7 +42,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Mostrar requisitos solo cuando el campo de contrasenia tiene foco
+        //Mostrar requisitos solo cuando el campo de contrasenia tiene foco
         binding.inputPassword.setOnFocusChangeListener { _, hasFocus ->
             val visibility = if (hasFocus) View.VISIBLE else View.GONE
             binding.requirementLength.visibility = visibility
@@ -50,7 +50,6 @@ class RegisterFragment : Fragment() {
             binding.requirementDigit.visibility = visibility
         }
 
-        // Escuchar cambios en el texto de la contraseña
         binding.inputPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -100,7 +99,7 @@ class RegisterFragment : Fragment() {
                         Toast.makeText(ctx, "Creando cuenta...", Toast.LENGTH_SHORT).show()
                     }
 
-                    // Firebase: create user
+                    //create user
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (!isAdded) return@addOnCompleteListener
@@ -190,7 +189,6 @@ class RegisterFragment : Fragment() {
                                                         Toast.LENGTH_LONG
                                                     ).show()
                                                 }
-                                                // Opcional: podrías borrar el usuario de Auth si lo deseas
                                             }
                                         )
                                     }

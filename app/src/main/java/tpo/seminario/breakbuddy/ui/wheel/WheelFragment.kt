@@ -46,14 +46,13 @@ class WheelFragment : Fragment() {
 
 
 
-    // 1) AdMob banner
+    //AdMob banner
     private lateinit var adView: AdView
     private val retryDelayMs = 2000L
 
 
 
     private var currentChallengesList: List<DesafioGamificado> = emptyList()
-    // Al inicio de la clase:
     private val challengeViewModel: ChallengeViewModel by activityViewModels()
 
     private lateinit var wheelItems: ArrayList<WheelData>
@@ -67,13 +66,11 @@ class WheelFragment : Fragment() {
     ): View {
         _binding = FragmentWheelBinding.inflate(inflater, container, false)
 
-        // ── esquema de colores alternos ─────────────────────────────
         val colorClaro  = intArrayOf(resources.getColor(R.color.green_200, null))
         val colorOscuro = intArrayOf(resources.getColor(R.color.green_500, null))
-        // Inicialización estática: alterna manual
         val cols = listOf(colorClaro, colorOscuro)
 
-        // 1) Armo la lista de WheelData
+        //Armo la lista de WheelData
         wheelItems = arrayListOf(
             WheelData(
                 icon = loadBitmapFromResource(R.drawable.weekend_24dp_),
@@ -113,10 +110,10 @@ class WheelFragment : Fragment() {
             )
         )
 
-        // 2) Cargo los datos en la ruleta
+        //Cargo los datos en la ruleta
         binding.lwv.setWheelData(wheelItems)
 
-        // 3) Personalizo tamaño y padding del texto
+        //Personalizo tamaño y padding del texto
         val textSizePx = resources.getDimension(R.dimen.luckywheel_text_size)
         (binding.lwv as LuckyWheelView).setTextSize(textSizePx.toInt())
         val paddingPx = resources.getDimension(R.dimen.luckywheel_padding)
@@ -174,7 +171,7 @@ class WheelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // === Banner AdMob ===
+        //Banner AdMob
         adView = view.findViewById(R.id.adViewWheel)
         adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
@@ -208,7 +205,7 @@ class WheelFragment : Fragment() {
                 }
             }
 
-        // Botón "Girar"
+        //Botón "Girar"
         binding.btnSpin.setOnClickListener {
             binding.btnSpin.isEnabled = false
             hasUsedRespin = false
@@ -217,12 +214,12 @@ class WheelFragment : Fragment() {
             binding.btnAceptar.visibility = View.GONE
             binding.btnRespin.visibility = View.GONE
 
-            // Primero validar el spin diario
+            //Primero validar el spin diario
             FirebaseFunctions.getInstance()
                 .getHttpsCallable("spinDaily")
                 .call(emptyMap<String, Any>())
                 .addOnSuccessListener {
-                    // Si la validación es exitosa, girar la ruleta
+                    //Si la validación es exitosa, girar la ruleta
                     val idx = Random.nextInt(wheelItems.size)
                     lastTargetIndex = idx
                     binding.lwv.setTarget(idx)
@@ -236,7 +233,7 @@ class WheelFragment : Fragment() {
                 }
         }
 
-        // Listener de fin de rotación
+        //Listener de fin de rotación
         binding.lwv.setRotationCompleteListener { data ->
             val b = _binding ?: return@setRotationCompleteListener
             chosenText = data.text
@@ -245,7 +242,7 @@ class WheelFragment : Fragment() {
             if (!hasUsedRespin) b.btnRespin.visibility = View.VISIBLE
         }
 
-        // Botón "Aceptar" - Solo navega al desafío, NO otorga puntos
+        //Botón "Aceptar" - Solo navega al desafío, NO otorga puntos
         binding.btnAceptar.setOnClickListener {
             val texto = chosenText ?: return@setOnClickListener
             val instrucciones = mapOf(
@@ -258,7 +255,7 @@ class WheelFragment : Fragment() {
             )
             val detalle = instrucciones[texto] ?: "Realizá el desafío."
 
-            // Solo navegar al desafío
+            //Solo navegar al desafío
             if (_binding != null) {
                 findNavController().navigate(
                     R.id.challengeFragment,
@@ -312,10 +309,10 @@ class WheelFragment : Fragment() {
         }
     }
     private fun generateWheelChallenges(hobbies: List<String>) {
-        // 1) Físicos
+        //Físicos
         val phys = PhysicalChallengesProvider.physicalChallenges.shuffled().take(3)
 
-        // 2) Quizzes de hobby
+        // Quizzes de hobby
         val hobbyMap = HobbyQuestionsProvider.hobbyQuizzes
         val quizzes = hobbies
             .filter { hobbyMap.containsKey(it) }
@@ -332,15 +329,15 @@ class WheelFragment : Fragment() {
                 )
             }
 
-        // 3) Extra físicos si faltan
+        // Extra físicos si faltan
         val faltan = 6 - (phys.size + quizzes.size)
         val extra = if (faltan > 0) PhysicalChallengesProvider.physicalChallenges.shuffled().drop(3).take(faltan) else emptyList()
 
-        // 4) Mezclar y guardar
+        // Mezclar y guardar
         val all = (phys + quizzes + extra).shuffled()
         challengeViewModel.setCurrentChallenges(all.associateBy { it.nombre })
 
-        // 5) WheelData
+        // WheelData
         // alterna colores según índice
         val colorClaro  = intArrayOf(resources.getColor(R.color.green_200, null))
         val colorOscuro = intArrayOf(resources.getColor(R.color.green_500, null))
@@ -369,7 +366,6 @@ class WheelFragment : Fragment() {
         }
     }
     private fun createPlaceholderBitmap(): Bitmap {
-        // Un cuadrado sencillo
         val size = 48.dpToPx()
         val bmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bmp)

@@ -3,7 +3,6 @@ package tpo.seminario.breakbuddy.ui.ranking
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
@@ -42,7 +41,7 @@ class RankingDialogFragment : DialogFragment() {
             adapter = this@RankingDialogFragment.adapter
         }
 
-        // Cargar datos:
+        // Cargar datos
         loadRanking()
 
         return AlertDialog.Builder(requireContext())
@@ -53,13 +52,13 @@ class RankingDialogFragment : DialogFragment() {
     }
 
     private fun loadRanking() {
-        // Leer miembros del grupo:
+        // Leer miembros del grupo
         db.collection("groups").document(groupId)
             .get().addOnSuccessListener { snap ->
                 val memberIds = (snap.get("memberIds") as? List<*>)?.filterIsInstance<String>().orEmpty()
                 if (memberIds.isEmpty()) return@addOnSuccessListener
 
-                // Para cada uid, leer acumulado:
+                // Para cada uid, leer acumulado
                 db.collection("userProfiles")
                     .whereIn(FieldPath.documentId(), memberIds)
                     .get()

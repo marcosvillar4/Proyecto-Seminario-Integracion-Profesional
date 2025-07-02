@@ -33,7 +33,7 @@ class AccountSettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    // 1) AdMob banner
+    //AdMob banner
     private lateinit var adView: AdView
     private val retryDelayMs = 2000L
 
@@ -52,7 +52,7 @@ class AccountSettingsFragment : Fragment() {
 
 
 
-        // === Inicializar banner AdMob ===
+        // banner AdMob
         adView = view.findViewById(R.id.adViewAccount)
         adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
@@ -126,7 +126,6 @@ class AccountSettingsFragment : Fragment() {
         userRepo.getUser(
             currentUser.uid,
             onSuccess = { profile: User ->
-                // Evitar NPE si vista ya destruida
                 if (!isAdded || _binding == null) return@getUser
                 val nombre = profile.displayName.takeIf { it.isNotBlank() } ?: "usuario"
                 Log.d("AccountSettings", "Profile loaded: displayName=$nombre")

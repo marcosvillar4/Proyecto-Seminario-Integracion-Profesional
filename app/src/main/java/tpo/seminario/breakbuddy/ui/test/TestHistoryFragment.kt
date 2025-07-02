@@ -87,7 +87,6 @@ class TestHistoryFragment : Fragment() {
         _binding = null
     }
 
-    // ----- Adapter interno -----
     private class TestHistoryAdapter :
         ListAdapter<TestResult, TestHistoryAdapter.VH>(DIFF) {
 

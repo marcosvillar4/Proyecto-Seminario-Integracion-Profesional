@@ -130,9 +130,6 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
         }
     }
 
-    /**
-     * Llama al backend, actualiza puntos y luego disemina el logro
-     */
     private fun completeChallenge(
         respin: Boolean,
         name: String,
@@ -174,18 +171,13 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
             }
     }
 
-    /**
-     * Para cada grupo personal del usuario, publica un mensaje de sistema
-     * incluyendo quién lo completó (email o displayName).
-     */
     private fun diseminarLogroEnGrupos(uid: String, pts: Int, name: String) {
         val currentUser = auth.currentUser
-        // Aquí sacamos el identificador legible: preferimos displayName, si no email
         val who = currentUser?.displayName
             ?: currentUser?.email
             ?: "Alguien"
 
-        // 1) Leer userProfile.groupIds
+        //Leer userProfile.groupIds
         db.collection("userProfiles").document(uid)
             .get()
             .addOnSuccessListener { profSnap ->
@@ -193,7 +185,7 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
                     .orEmpty()
                 if (groupIds.isEmpty()) return@addOnSuccessListener
 
-                // 2) Filtrar solo los grupos personales
+                // Filtrar solo los grupos personales
                 db.collection("groups")
                     .whereIn(FieldPath.documentId(), groupIds)
                     .whereEqualTo("type", "personal")

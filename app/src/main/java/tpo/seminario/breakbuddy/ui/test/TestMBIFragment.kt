@@ -45,7 +45,7 @@ class TestMBIFragment : Fragment() {
     private lateinit var cardResultado: MaterialCardView
     private lateinit var txtRecomendaciones: TextView
 
-    private val viewModel: TestMBIViewModel by viewModels()  // ← Nuevo ViewModel
+    private val viewModel: TestMBIViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +69,6 @@ class TestMBIFragment : Fragment() {
         cardResultado = view.findViewById(R.id.cardResultado)
         txtRecomendaciones = view.findViewById(R.id.txtRecomendaciones)
 
-
         // Mostrar la primera pregunta
         mostrarPregunta()
 
@@ -88,7 +87,7 @@ class TestMBIFragment : Fragment() {
                 if (indiceActual < preguntas.size) {
                     mostrarPregunta()
                 } else {
-                    mostrarResultado()  // Cuando terminan todas las preguntas
+                    mostrarResultado()
                 }
             } else {
                 Toast.makeText(requireContext(), "Selecciona una opción antes de continuar", Toast.LENGTH_SHORT).show()
@@ -100,10 +99,7 @@ class TestMBIFragment : Fragment() {
         txtPregunta.text = preguntas[indiceActual]
     }
 
-    /**
-     * Se llama cuando ya se contestaron todas las preguntas.
-     * Calcula puntajes, muestra en pantalla y luego guarda en Firestore.
-     */
+
     private fun mostrarResultado() {
         // Ocultamos preguntas / opciones / botón
         txtPregunta.visibility = View.GONE
@@ -116,7 +112,7 @@ class TestMBIFragment : Fragment() {
         val realizacion       = respuestas.slice(4..5).sum()
         val impacto           = respuestas[6]
 
-        // Calcular niveles (etiquetas)
+        // Calcular niveles
         val nivelAgotamiento       = categorizar(agotamiento, listOf(4, 8))
         val nivelDespersonalizacion= categorizar(despersonalizacion, listOf(3, 6))
         val nivelRealizacion       = categorizarInvertido(realizacion, listOf(3, 6))
@@ -131,7 +127,6 @@ class TestMBIFragment : Fragment() {
         txtRecomendaciones.text = recomendaciones
         txtRecomendaciones.visibility = View.VISIBLE
 
-        // Mostrar en los TextView del layout
         txtAgotamiento.text        = "Agotamiento emocional: $nivelAgotamiento"
         txtDespersonalizacion.text = "Despersonalización: $nivelDespersonalizacion"
         txtRealizacion.text        = "Realización personal: $nivelRealizacion"
@@ -139,9 +134,7 @@ class TestMBIFragment : Fragment() {
 
         cardResultado.visibility = View.VISIBLE
 
-        // 1) Crear un objeto TestResult
         val resultadoAGuardar = TestResult(
-            // id se genera en el repositorio
             timestamp = System.currentTimeMillis(),
             agotamiento = agotamiento,
             despersonalizacion = despersonalizacion,
@@ -152,19 +145,14 @@ class TestMBIFragment : Fragment() {
             nivelRealizacion = nivelRealizacion,
             nivelImpacto = nivelImpacto
         )
-        // 2) Llamar al ViewModel para guardarlo en Firestore
+        // Llamar al ViewModel para guardarlo en Firestore
         viewModel.saveResult(resultadoAGuardar)
     }
 
-    /**
-     * Observa los LiveData saveSuccess / saveError del ViewModel.
-     * Muestra Toasts según corresponda.
-     */
     private fun observeSaveState() {
         viewModel.saveSuccess.observe(viewLifecycleOwner) { testId ->
             testId?.let {
                 Toast.makeText(requireContext(), "Resultado guardado (ID: $it)", Toast.LENGTH_LONG).show()
-                // Opcional: aquí podrías navegar a otra pantalla o dejar todo inactivo
                 viewModel.clearSaveStates()
             }
         }

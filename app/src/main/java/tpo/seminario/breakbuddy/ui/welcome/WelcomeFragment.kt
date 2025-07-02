@@ -71,7 +71,6 @@ class WelcomeFragment : Fragment() {
             setupButtonClickListeners()
         }
 
-        // ViewPager Setup
         val slides = listOf(
             R.layout.item_onboarding_slide_1,
             R.layout.item_onboarding_slide_2,
@@ -110,12 +109,12 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun setupButtonClickListeners() {
-        // Botón para ir a Login
+        //Botón para ir a Login
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
         }
 
-        // Botón para ir a Register
+        //Botón para ir a Register
         binding.textRegister.setOnClickListener {
             findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
         }
@@ -123,7 +122,6 @@ class WelcomeFragment : Fragment() {
 
 
     @androidx.annotation.OptIn(UnstableApi::class)
-    @OptIn(UnstableApi::class)
     private fun firebaseAuthWithGoogle(idToken: String) {
         Log.d("WelcomeFragment", "Entré a firebaseAuthWithGoogle con token: $idToken")
         val credential = GoogleAuthProvider.getCredential(idToken, null)
@@ -131,12 +129,9 @@ class WelcomeFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser!!
-                    // Antes: userRepo.ensureUserDocumentExistsOrCreate(...)
                     userRepo.ensureUserDocumentExistsOrCreate(
                         user,
                         onSuccess = {
-                            // Acá antes llamamabamos a userRepo.getUser(...)
-                            // Ahora: asegurar perfil ligero y leerlo:
                             userRepo.ensureUserProfileExists(user.uid)
                             userRepo.getUserProfileLight(
                                 user.uid,
@@ -144,15 +139,11 @@ class WelcomeFragment : Fragment() {
                                     if (!profileLight.hobbiesCompletados) {
                                         findNavController().navigate(R.id.action_welcomeFragment_to_hobbiesFragment)
                                     } else {
-                                        // Ajusta destino: tal vez navigation_home o similar
                                         findNavController().navigate(R.id.action_welcomeFragment_to_navigation_home)
                                     }
                                 },
                                 onFailure = { e ->
-                                    // Si no existe o error leyendo perfil ligero,
-                                    // podemos forzar a completar hobbies:
                                     Log.w("WelcomeFragment", "Error leyendo perfil ligero: ${e.message}")
-                                    // Como fallback, navegamos a Hobbies:
                                     findNavController().navigate(R.id.action_welcomeFragment_to_hobbiesFragment)
                                 }
                             )
@@ -190,7 +181,6 @@ class WelcomeFragment : Fragment() {
         override fun getItemCount(): Int = layouts.size
 
         override fun onBindViewHolder(holder: OnboardingViewHolder, position: Int) {
-            // Los layouts ya están diseñados individualmente
         }
 
         override fun getItemViewType(position: Int): Int = position

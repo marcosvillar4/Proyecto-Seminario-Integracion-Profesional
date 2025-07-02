@@ -19,10 +19,10 @@ class EditProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    // 1) Instancia de FirebaseAuth para saber quién es el usuario actual
+    //Instancia de FirebaseAuth para saber quién es el usuario actual
     private val auth = FirebaseAuth.getInstance()
 
-    // 2) Repositorio de usuario (lo creamos en el paso anterior)
+    // Repositorio de usuario (lo creamos en el paso anterior)
     private val userRepo = UserRepository()
 
     override fun onCreateView(
@@ -40,17 +40,14 @@ class EditProfileFragment : Fragment() {
         val currentUser = auth.currentUser
         if (currentUser == null) {
             Toast.makeText(requireContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show()
-            // Podrías redirigir al login, por ejemplo:
             return
         }
 
         userRepo.getUser(
             currentUser.uid,
             onSuccess = { profile: User ->
-                // Cuando lleguen los datos, rellenamos los campos
                 binding.editTextName.setText(profile.displayName)
                 binding.editTextDescription.setText(profile.description ?: "")
-                // (Opcional) Si quieres mostrar foto, etc.
             },
             onFailure = { e ->
                 Toast.makeText(requireContext(), "Error cargando perfil: ${e.message}", Toast.LENGTH_LONG).show()
@@ -74,20 +71,16 @@ class EditProfileFragment : Fragment() {
                 newName = name,
                 newDescription = description,
                 onSuccess = {
-                    // (A) Actualizar también el perfil de FirebaseAuth, opcional:
                     val request = UserProfileChangeRequest.Builder()
                         .setDisplayName(name)
                         .build()
                     currentUser.updateProfile(request)
                         .addOnSuccessListener {
-                            // Toast opcional: “Perfil de FirebaseAuth también actualizado”
                         }
                         .addOnFailureListener { e ->
-                            // Si falla, no es crítico: el displayName se guardó en Firestore.
                         }
 
                     Toast.makeText(requireContext(), "Cambios guardados", Toast.LENGTH_SHORT).show()
-                    // Opcional: vuelve al fragmento anterior
                     findNavController().popBackStack()
                 },
                 onFailure = { exception ->
