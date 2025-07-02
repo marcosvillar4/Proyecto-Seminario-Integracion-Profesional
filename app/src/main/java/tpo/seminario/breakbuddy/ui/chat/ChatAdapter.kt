@@ -31,14 +31,13 @@ class ChatAdapter(
     }
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Cambiamos ConstraintLayout → LinearLayout
         private val container: LinearLayout = itemView.findViewById(R.id.containerMessage)
         private val textSender: TextView    = itemView.findViewById(R.id.textSenderName)
         private val textBody: TextView      = itemView.findViewById(R.id.textMessage)
         private val textTime: TextView      = itemView.findViewById(R.id.textTimestamp)
 
         fun bind(message: ChatMessage, currentUserUid: String) {
-            // 1) Determinar el fondo y alineación:
+            //fondo y alineación
             val params = container.layoutParams as ConstraintLayout.LayoutParams
 
             if (message.isSystemMessage) {

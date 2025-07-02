@@ -29,7 +29,7 @@ class PasswordResetFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            // 1) Llamada a Firebase para enviar el email de recuperación
+            //Llamada a Firebase para enviar el email de recuperación
             FirebaseAuth.getInstance()
                 .sendPasswordResetEmail(email)
                 .addOnSuccessListener {
@@ -39,7 +39,6 @@ class PasswordResetFragment : Fragment() {
                     findNavController().popBackStack()
                 }
                 .addOnFailureListener { e ->
-                    // Por ejemplo: user-not-found
                     Toast.makeText(requireContext(),
                         "Error enviando correo: ${e.message}",
                         Toast.LENGTH_LONG).show()
