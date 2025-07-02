@@ -54,6 +54,7 @@ object HobbyQuestionsProvider{
         "Escuchar Música" to EscuchaMusicaQuestions.questions,
         "Escultura" to EsculturaQuestions.questions,
         "Fotografía" to FotografiaQuestions.questions,
+        "Fútbol" to FutbolQuestions.questions,
         "Golf" to GolfQuestions.questions,
         "Idiomas" to IdiomasQuestions.questions,
         "Ilusionismo" to IlusionismoQuestions.questions,

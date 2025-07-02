@@ -31,6 +31,31 @@ object HobbyActivities {
             ActivitySuggestion("Salida en familia en bicis", 2, 6)
         ),
 
+
+        "Fútbol" to listOf(
+            ActivitySuggestion("Partido informal 5 vs 5", 10, 10),
+            ActivitySuggestion("Entrenamiento de penales", 2, 10),
+            ActivitySuggestion("Partido de precisión (toques de balón)", 1, 4),
+            ActivitySuggestion("Torneo relámpago 3 vs 3", 6, 12),
+            ActivitySuggestion("Sesión de técnica de regate", 1, 1),
+            ActivitySuggestion("Práctica de tiro a portería", 1, 4),
+            ActivitySuggestion("Juego de posesión reducida", 4, 8),
+            ActivitySuggestion("Partido de exhibición para principiantes", 4, 10),
+            ActivitySuggestion("Circuito de habilidades (cono y escalera)", 1, 3),
+            ActivitySuggestion("Entrenamiento táctico en campo reducido", 6, 12),
+            ActivitySuggestion("Partido mixto (hombres y mujeres)", 8, 14),
+            ActivitySuggestion("Competencia de control y pase largo", 2, 6),
+            ActivitySuggestion("Jornada de fútbol playa", 6, 10),
+            ActivitySuggestion("Partido nocturno con iluminación", 10, 14),
+            ActivitySuggestion("Clínica de porteros", 1, 5),
+            ActivitySuggestion("Partido benéfico amateur", 14, 22),
+            ActivitySuggestion("Sesión de videoanálisis de jugadas", 1, 6),
+            ActivitySuggestion("Entrenamiento de resistencia con balón", 1, 2),
+            ActivitySuggestion("Mini-torneo de fútbol sala", 8, 16),
+            ActivitySuggestion("Fútbol tenis (pista y red)", 2, 4)
+        ),
+
+
         "Juegos de mesa" to listOf(
             ActivitySuggestion("Partida de Catan", 3, 4),
             ActivitySuggestion("Torneo de ajedrez rápido", 2, 16),
