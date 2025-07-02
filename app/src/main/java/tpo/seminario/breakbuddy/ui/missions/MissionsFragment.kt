@@ -242,7 +242,7 @@ class MissionsFragment : Fragment() {
                 val lastCompleted = document.getString("lastMissionDate")!!//data?.getValue("lastMissionDate").toString()
                 val streak = document.getLong("missionStreak")!!
 
-                Toast.makeText(context, lastCompleted, Toast.LENGTH_LONG).show()
+
                 if (streak >= 3){
                     binding.Racha.text = "Racha: " + streak + " \uD83D\uDD25"
                 } else {
