@@ -1,3 +1,4 @@
+// tpo/seminario/breakbuddy/ui/ranking/RankingAdapter.kt
 package tpo.seminario.breakbuddy.ui.ranking
 
 import android.view.LayoutInflater
@@ -10,19 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.ItemRankingBinding
 
-data class RankingItem(
-    val email: String,
-    val points: Int,
-    val rank: Int = 0
-)
-
 class RankingAdapter : ListAdapter<RankingItem, RankingAdapter.VH>(DIFF) {
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<RankingItem>() {
-            override fun areItemsTheSame(a: RankingItem, b: RankingItem) = a.email == b.email
+            override fun areItemsTheSame(a: RankingItem, b: RankingItem) = a.name == b.name
             override fun areContentsTheSame(a: RankingItem, b: RankingItem) = a == b
         }
     }
+
     inner class VH(private val vb: ItemRankingBinding)
         : RecyclerView.ViewHolder(vb.root) {
 
@@ -42,20 +38,22 @@ class RankingAdapter : ListAdapter<RankingItem, RankingAdapter.VH>(DIFF) {
                     ContextCompat.getColor(vb.root.context, R.color.white)
                 )
                 vb.tvMotivation.apply {
-                    text = "¡Felicidades ${item.email}! Como primer puesto, te mereces una invitación por parte de tus colegas para la próxima actividad grupal 🎉"
+                    text = "¡Felicidades ${item.name}! Como primer puesto, te mereces una invitación por parte de tus colegas para la próxima actividad grupal 🎉"
                     visibility = View.VISIBLE
                 }
             } else {
                 vb.root.setCardBackgroundColor(
                     ContextCompat.getColor(vb.root.context, android.R.color.white)
                 )
+                vb.tvMotivation.visibility = View.GONE
             }
 
             vb.tvRank.text   = "${item.rank}."
-            vb.tvName.text   = item.email
+            vb.tvName.text   = item.name
             vb.tvPoints.text = "${item.points} pts"
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = VH(
         ItemRankingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )

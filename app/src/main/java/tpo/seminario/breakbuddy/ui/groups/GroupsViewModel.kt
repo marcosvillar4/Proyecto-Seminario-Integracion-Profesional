@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.functions.FirebaseFunctions
 import tpo.seminario.breakbuddy.persistence.GroupRepository
 import tpo.seminario.breakbuddy.persistence.OrganizationRepository
 import tpo.seminario.breakbuddy.util.Organization
@@ -73,8 +74,7 @@ class GroupsViewModel : ViewModel() {
             createdAt = this.createdAt,
             updatedAt = this.updatedAt,
             isOwner = this.isOwner,
-            membershipStatus = this.membershipStatus,
-            memberHobbies = emptyMap()
+            membershipStatus = this.membershipStatus
         )
     }
 
@@ -264,18 +264,21 @@ class GroupsViewModel : ViewModel() {
     // ---------------------------------------------------
     fun joinByCode(code: String) {
         if (code.isBlank()) {
-            _groupsUiState.value = _groupsUiState.value?.copy(errorMessage = "El código no puede estar vacío")
+            _groupsUiState.value = _groupsUiState.value
+                ?.copy(errorMessage = "El código no puede estar vacío")
             return
         }
-        // Llamar método unificado
+
         groupRepo.joinGroupByCode(
             code = code.trim().uppercase(),
-            onSuccess = {
-                // Al unirse, recargar lista
+            onSuccess = { entityType, entityId ->
+                // Puedes usar entityType/ entityId si quieres navegar a detalle,
+                // o simplemente recargar la lista:
                 loadUserGroupsAndOrgs()
             },
             onFailure = { errMsg ->
-                _groupsUiState.value = _groupsUiState.value?.copy(errorMessage = errMsg)
+                _groupsUiState.value = _groupsUiState.value
+                    ?.copy(errorMessage = errMsg)
             }
         )
     }
@@ -346,14 +349,13 @@ class GroupsViewModel : ViewModel() {
             } else {
                 // Owner removiendo a otro miembro
                 orgRepo.removeMemberFromOrganization(
-                    orgId = entityId,
-                    memberUidToRemove = memberUidToRemove,
-                    memberEmailToRemove = memberEmailToRemove,
-                    onSuccess = {
+                    orgId              = entityId,
+                    memberUidToRemove  = memberUidToRemove,
+                    onSuccess          = {
                         _removeMemberSuccess.value = true
                         loadUserGroupsAndOrgs()
                     },
-                    onFailure = { errMsg ->
+                    onFailure          = { errMsg ->
                         _removeMemberError.value = errMsg
                     }
                 )
@@ -413,19 +415,48 @@ class GroupsViewModel : ViewModel() {
     fun loadEntityById(entityId: String, type: String) {
         val currentUserId = auth.currentUser?.uid ?: return
         if (type == "organization") {
-            // Cargar organización y mapear a Group-like
-            orgRepo.getOrganizationById(
-                orgId = entityId,
-                onSuccess = { org ->
+            // Llamada al Callable Function
+            FirebaseFunctions.getInstance()
+                .getHttpsCallable("getOrganizationDetails")
+                .call(mapOf("orgId" to entityId))
+                .addOnSuccessListener { result ->
+                    @Suppress("UNCHECKED_CAST")
+                    val p = result.data as Map<String, Any>
+
+                    // Extraemos listas
+                    val memberIds = (p["memberIds"] as? List<*>)?.filterIsInstance<String>().orEmpty()
+                    val emails    = (p["emails"]    as? List<*>)?.filterIsInstance<String>().orEmpty()
+
+                    // Construimos la Organization con named args
+                    val org = Organization(
+                        id              = p["id"] as String,
+                        name            = p["name"] as String,
+                        code            = p["code"] as String,
+                        type            = p["type"] as String,
+                        ownerUid        = p["ownerUid"] as String,
+                        memberIds       = memberIds,
+                        memberCount     = (p["memberCount"] as Number).toInt(),
+                        createdAt       = null, // si guardas ISO date, parsea aquí
+                        updatedAt       = null,
+                        // ahora los flags del constructor
+                        isOwner         = (p["ownerUid"] as String) == currentUserId,
+                        membershipStatus= MembershipStatus.MEMBER,
+                        emails          = emails,
+                        // y finalmente los arrays de la org
+                        hobbiesUnicos   = emptyList(),  // si tu JSON los trae, deserialízalos aquí
+                        gruposDerivados = emptyList()
+                    )
+
+                    // Lo convertimos a Group y lo publicamos
                     _singleGroup.value = org.asGroupLike()
-                },
-                onFailure = { errMsg ->
-                    // Puede emitir null si no existe o no es miembro
-                    _singleGroup.value = null
-                    _groupsUiState.value = _groupsUiState.value?.copy(errorMessage = errMsg)
                 }
-            )
-        } else {
+                .addOnFailureListener { e ->
+                    _singleGroup.value = null
+                    _groupsUiState.value = _groupsUiState.value?.copy(
+                        errorMessage = e.message ?: "Error leyendo organización"
+                    )
+                }
+                } else {
             // Cargar grupo personal
             firestore.collection("groups")
                 .document(entityId)

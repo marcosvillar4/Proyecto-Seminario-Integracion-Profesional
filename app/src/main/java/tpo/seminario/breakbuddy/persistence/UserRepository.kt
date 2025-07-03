@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.functions.FirebaseFunctions
 import tpo.seminario.breakbuddy.util.missions.Mision
 import java.util.Date
 
@@ -40,17 +41,6 @@ data class UserProfile(
     val missionStreak: Long? = 0L
 )
 
-class UserTokenRepository {
-    private val db = Firebase.firestore
-    fun updateFcmToken(userId: String?, token: String) {
-        userId ?: return
-        db.collection("users")
-            .document(userId)
-            .set(mapOf("fcmToken" to token), SetOptions.merge())
-            .addOnSuccessListener { Log.d("TokenRepo", "Token guardado") }
-            .addOnFailureListener { e -> Log.w("TokenRepo", "Error guardando token", e) }
-    }
-}
 
 class UserRepository {
     private val db = Firebase.firestore
@@ -158,133 +148,23 @@ class UserRepository {
     // 3) Guardar hobbies en userProfiles
     fun saveUserHobbiesProfile(
         uid: String,
-        hobbies: List<String>,
-        onSuccess: () -> Unit,
-        onFailure: (Exception) -> Unit
-    ) {
-        val docRef = profilesCollection.document(uid)
-        // 1) Actualizar hobbies en perfil ligero
-        docRef.update(
-            mapOf(
-                "hobbies" to hobbies,
-                "hobbiesCompletados" to true,
-                "updatedAt" to FieldValue.serverTimestamp()
-            )
-        )
-            .addOnSuccessListener {
-                // 2) Leer groupIds actuales
-                docRef.get()
-                    .addOnSuccessListener { snap ->
-                        val groupIds = (snap.get("groupIds") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
-                        if (groupIds.isEmpty()) {
-                            // No pertenece a grupos, ya terminamos
-                            onSuccess()
-                            return@addOnSuccessListener
-                        }
-                        // 3) Batch para actualizar memberHobbies en cada grupo
-                        val batch = Firebase.firestore.batch()
-                        for (gId in groupIds) {
-                            val gRef = Firebase.firestore.collection("groups").document(gId)
-                            batch.set(
-                                gRef,
-                                mapOf(
-                                    "memberHobbies" to mapOf(uid to hobbies),
-                                    "updatedAt" to FieldValue.serverTimestamp()
-                                ),
-                                SetOptions.merge()
-                            )
-                        }
-                        batch.commit()
-                            .addOnSuccessListener { onSuccess() }
-                            .addOnFailureListener { e ->
-                                onFailure(e)
-                            }
-                    }
-                    .addOnFailureListener { e ->
-                        onFailure(e)
-                    }
-            }
-            .addOnFailureListener { e ->
-                onFailure(e)
-            }
-    }
-
-    /**
-     * Envuelve saveUserHobbiesProfile para:
-     * 1) Leer los hobbies anteriores.
-     * 2) Guardar los nuevos.
-     * 3) Sincronizar cambios con las organizaciones.
-     */
-    /**
-     * Guarda los nuevos hobbies y luego sincroniza cambios en organizaciones.
-     */
-    fun saveUserHobbiesProfileWithSync(
-        uid: String,
         newHobbies: List<String>,
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     ) {
-        // 1) Leer hobbies actuales
-        getUserHobbiesProfile(uid,
-            onSuccess = { oldHobbies ->
-                // 2) Guardar nuevos
-                saveUserHobbiesProfile(
-                    uid = uid,
-                    hobbies = newHobbies,
-                    onSuccess = {
-                        // 3) Sincronizar cambios de hobbies con organizaciones
-                        OrganizationRepository().syncUserHobbyChanges(
-                            uid = uid,
-                            oldHobbies = oldHobbies,
-                            newHobbies = newHobbies
-                        )
-                        onSuccess()
-                    },
-                    onFailure = { e -> onFailure(e) }
-                )
-            },
-            onFailure = { err -> onFailure(Exception(err)) }
+        val docRef = FirebaseFirestore.getInstance().collection("userProfiles").document(uid)
+        docRef.update(
+            mapOf(
+                "hobbies" to newHobbies,
+                "updatedAt" to FieldValue.serverTimestamp(),
+                "hobbiesCompletados" to true
+            )
         )
-    }
-
-
-    /** 5) Obtener solo groupIds */
-    fun getUserGroupIds(
-        uid: String,
-        onSuccess: (List<String>) -> Unit,
-        onFailure: (Exception) -> Unit
-    ) {
-        profilesCollection.document(uid)
-            .get()
-            .addOnSuccessListener { doc ->
-                if (doc.exists()) {
-                    val list = (doc.get("groupIds") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
-                    onSuccess(list)
-                } else {
-                    onFailure(IllegalStateException("Perfil ligero no encontrado"))
-                }
-            }
+            .addOnSuccessListener { onSuccess() }
             .addOnFailureListener { e -> onFailure(e) }
     }
 
-    /** 6) Obtener solo organizationIds */
-    fun getUserOrganizationIds(
-        uid: String,
-        onSuccess: (List<String>) -> Unit,
-        onFailure: (Exception) -> Unit
-    ) {
-        profilesCollection.document(uid)
-            .get()
-            .addOnSuccessListener { doc ->
-                if (doc.exists()) {
-                    val list = (doc.get("organizationIds") as? List<*>)?.filterIsInstance<String>() ?: emptyList()
-                    onSuccess(list)
-                } else {
-                    onFailure(IllegalStateException("Perfil ligero no encontrado"))
-                }
-            }
-            .addOnFailureListener { e -> onFailure(e) }
-    }
+
 
     /**
      *  Asegura que exista el documento de usuario.
@@ -467,152 +347,37 @@ class UserRepository {
             .addOnFailureListener { e -> onFailure(e) }
     }
 
+
     fun validateEmailsExist(
         emails: List<String>,
         onComplete: (existents: List<String>, notExistents: List<String>) -> Unit,
         onError: (Exception) -> Unit
     ) {
         if (emails.isEmpty()) {
-            // Si la lista está vacía, devolvemos listas vacías inmediatamente
             onComplete(emptyList(), emptyList())
             return
         }
-
-        // Firestore limit: dondeIn máximo 10 valores. Si emails.size > 10, hay que particionar.
-        val partitions: List<List<String>> = if (emails.size <= 10) {
-            listOf(emails)
-        } else {
-            // Dividir en grupos de 10
-            emails.chunked(10)
-        }
-
-        val existentsMutable = mutableSetOf<String>()   // para recolectar emails encontrados
-        val notExistentsMutable = mutableSetOf<String>()// para recolectar emails no encontrados
-
-        // Llenamos inicialmente notExistentsMutable = todos los emails; luego eliminamos los que encontremos:
-        notExistentsMutable.addAll(emails)
-
-        // Contador de “peticiones pendientes” para saber cuándo finalizamos todas las sub-queries
-        var pendingQueries = partitions.size
-
-        for (batch in partitions) {
-            usersCollection
-                .whereIn("email", batch)
-                .get()
-                .addOnSuccessListener { snapshot: QuerySnapshot ->
-                    // 1) Por cada documento => extraer el campo email
-                    for (doc in snapshot.documents) {
-                        val foundEmail = doc.getString("email")
-                        if (foundEmail != null) {
-                            existentsMutable.add(foundEmail)
-                            notExistentsMutable.remove(foundEmail)
-                        }
-                    }
-                    pendingQueries -= 1
-                    if (pendingQueries == 0) {
-                        // Todas las sub-queries han finalizado => devolvemos resultado
-                        onComplete(existentsMutable.toList(), notExistentsMutable.toList())
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    // Si alguna falla, podemos abortar todo
-                    onError(exception)
-                }
-        }
+        // Invocar Cloud Function
+        val data = mapOf("emails" to emails)
+        FirebaseFunctions.getInstance()
+            .getHttpsCallable("validateEmailsExist")
+            .call(data)
+            .addOnSuccessListener { res ->
+                @Suppress("UNCHECKED_CAST")
+                val map = res.data as Map<String, Any>
+                val existents    = (map["existents"]    as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                val notExistents = (map["notExistents"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+                onComplete(existents, notExistents)
+            }
+            .addOnFailureListener { e ->
+                onError(e as? Exception ?: Exception(e.message))
+            }
     }
-    /**
-     * Devuelve un Map<email, uid> y la lista de emails no encontrados.
-     */
-    fun fetchUidsForEmails(
-        emails: List<String>,
-        onComplete: (Map<String,String>, List<String>) -> Unit,
-        onError: (Exception) -> Unit
-    ) {
-        if (emails.isEmpty()) {
-            onComplete(emptyMap(), emptyList())
-            return
-        }
 
-        val chunks = emails.chunked(10)
-        val result = mutableMapOf<String,String>()
-        val notFound = mutableListOf<String>()
-        var done = 0
-
-        chunks.forEach { chunk ->
-            db.collection("users")
-                .whereIn("email", chunk)
-                .get()
-                .addOnSuccessListener { snap ->
-                    // Recolectar UIDs encontrados:
-                    snap.documents.forEach { doc ->
-                        val emailFound = doc.getString("email") ?: ""
-                        val uidFound   = doc.id
-                        if (emailFound.isNotEmpty()) {
-                            result[emailFound] = uidFound
-                        }
-                    }
-                    // Detectar correos del chunk que no aparecieron en `result`:
-                    chunk.forEach { em ->
-                        if (!result.containsKey(em)) {
-                            notFound.add(em)
-                        }
-                    }
-                    done++
-                    if (done == chunks.size) {
-                        onComplete(result, notFound)
-                    }
-                }
-                .addOnFailureListener { e ->
-                    onError(e)
-                }
-        }
-    }
-    /**
-     * Dado un listado de UIDs, lee de /users/{uid} el campo "email"
-     * y devuelve en onComplete un map uid→email y la lista de UIDs faltantes.
-     */
-    fun fetchEmailsForUids(
-        uids: List<String>,
-        onComplete: (Map<String, String>, List<String>) -> Unit
-    ) {
-        if (uids.isEmpty()) {
-            onComplete(emptyMap(), emptyList())
-            return
-        }
-
-        val db = FirebaseFirestore.getInstance()
-        val uidToEmail = mutableMapOf<String, String>()
-        val missing = mutableListOf<String>()
-        var remaining = uids.size
-
-        for (uid in uids) {
-            db.collection("users").document(uid)
-                .get()
-                .addOnSuccessListener { snap ->
-                    val email = snap.getString("email")
-                    if (email != null && email.isNotBlank()) {
-                        uidToEmail[uid] = email
-                    } else {
-                        missing += uid
-                    }
-                    if (--remaining == 0) {
-                        onComplete(uidToEmail, missing)
-                    }
-                }
-                .addOnFailureListener {
-                    // Si falla la lectura, lo tratamos como faltante
-                    missing += uid
-                    if (--remaining == 0) {
-                        onComplete(uidToEmail, missing)
-                    }
-
-
-                }
-        }
 
 
     }
 
 
 
-}
+

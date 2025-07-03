@@ -40,7 +40,7 @@ class EditHobbiesFragment : Fragment() {
         hobbiesContainer = view.findViewById(R.id.hobbiesContainer)
         btnGuardar = view.findViewById(R.id.btnGuardarHobbies)
 
-        // Ajuste dinámico del padding inferior
+
         ViewCompat.setOnApplyWindowInsetsListener(scrollView) { v, insets ->
             val navBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
             v.updatePadding(bottom = navBarHeight + (40 * resources.displayMetrics.density).toInt())
@@ -51,7 +51,7 @@ class EditHobbiesFragment : Fragment() {
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return view
 
-        // Precargar hobbies seleccionados
+
         userRepo.getUserHobbiesProfile(uid,
             onSuccess = { savedList ->
                 chipList.forEach { chip ->
@@ -69,7 +69,7 @@ class EditHobbiesFragment : Fragment() {
                 .filter { it.isChecked }
                 .map { it.text.toString() }
 
-            userRepo.saveUserHobbiesProfileWithSync(
+            userRepo.saveUserHobbiesProfile(
                 uid        = uid,
                 newHobbies = seleccionados,
                 onSuccess = {

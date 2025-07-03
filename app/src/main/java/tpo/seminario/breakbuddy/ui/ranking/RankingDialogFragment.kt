@@ -1,3 +1,5 @@
+// tpo/seminario/breakbuddy/ui/ranking/RankingDialogFragment.kt
+
 package tpo.seminario.breakbuddy.ui.ranking
 
 import android.app.Dialog
@@ -8,10 +10,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.FieldPath
-import com.google.firebase.firestore.FirebaseFirestore
 import tpo.seminario.breakbuddy.R
+import tpo.seminario.breakbuddy.databinding.DialogRankingBinding
+
 class RankingDialogFragment : DialogFragment() {
 
     companion object {
@@ -22,59 +23,43 @@ class RankingDialogFragment : DialogFragment() {
     }
 
     private lateinit var groupId: String
-    private val db = FirebaseFirestore.getInstance()
+    private var _binding: DialogRankingBinding? = null
+    private val binding get() = _binding!!
     private lateinit var adapter: RankingAdapter
+    private val repo = RankingRepository()
 
     override fun onCreate(saved: Bundle?) {
         super.onCreate(saved)
         groupId = requireArguments().getString(ARG_GROUP_ID)!!
-        setStyle(STYLE_NORMAL, R.style.Theme_BreakBuddy) //TODO, REVISAR ESTO
+        setStyle(STYLE_NORMAL, R.style.Theme_BreakBuddy)
     }
 
     override fun onCreateDialog(saved: Bundle?): Dialog {
-        val binding = LayoutInflater.from(context)
-            .inflate(R.layout.dialog_ranking, null) as ViewGroup
-
+        _binding = DialogRankingBinding.inflate(LayoutInflater.from(context))
         adapter = RankingAdapter()
-        val rv = binding.findViewById<RecyclerView>(R.id.recyclerRanking).apply {
+        binding.recyclerRanking.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@RankingDialogFragment.adapter
         }
 
-        // Cargar datos
-        loadRanking()
+        repo.getGroupRanking(groupId,
+            onSuccess = { list ->
+                adapter.submitList(list)
+            },
+            onFailure = {
+                // Silencioso
+            }
+        )
 
         return AlertDialog.Builder(requireContext())
             .setTitle("Ranking del grupo")
-            .setView(binding)
+            .setView(binding.root)
             .setPositiveButton("Cerrar", null)
             .create()
     }
 
-    private fun loadRanking() {
-        // Leer miembros del grupo
-        db.collection("groups").document(groupId)
-            .get().addOnSuccessListener { snap ->
-                val memberIds = (snap.get("memberIds") as? List<*>)?.filterIsInstance<String>().orEmpty()
-                if (memberIds.isEmpty()) return@addOnSuccessListener
-
-                // Para cada uid, leer acumulado
-                db.collection("userProfiles")
-                    .whereIn(FieldPath.documentId(), memberIds)
-                    .get()
-                    .addOnSuccessListener { usersSnap ->
-                        val list = usersSnap.documents
-                            .mapNotNull { doc ->
-                                val uid = doc.id
-                                val name = doc.getString("displayName") ?: doc.getString("email") ?: uid
-                                val points = (doc.getLong("accumulatedPoints") ?: 0L).toInt()
-                                RankingItem(name, points)
-                            }
-                            .sortedByDescending { it.points }
-                            .mapIndexed { idx, item -> item.copy(rank = idx + 1) }
-
-                        adapter.submitList(list)
-                    }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

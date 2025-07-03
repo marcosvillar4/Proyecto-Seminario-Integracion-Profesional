@@ -19,9 +19,7 @@ data class Group(
     val createdAt: Timestamp? = null,
     val updatedAt: Timestamp? = null,
     val ownerUid: String = "",
-    // Campos auxiliares en UI (no se guardan directamente en Firestore):
     val isOwner: Boolean = false,
     val membershipStatus: MembershipStatus = MembershipStatus.NOT_MEMBER,
-    val emails: List<String> = emptyList(),
-    val memberHobbies: Map<String, List<String>> = emptyMap()
+    val emails: List<String> = emptyList()
 )
