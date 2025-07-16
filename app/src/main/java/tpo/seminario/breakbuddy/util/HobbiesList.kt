@@ -2,24 +2,21 @@ package tpo.seminario.breakbuddy.util
 
 object HobbiesList {
     val DEFAULT = listOf(
-        "Leer", "Hacer ejercicio", "Cocinar", "Escuchar música",
-        "Pintar", "Jardinería", "Videojuegos", "Meditar", "Bailar", "Ver películas" ,
-        "Tocar un instrumento musical" , "Fotografía", "Viajar", "Aprender idiomas" ,
-        "Manualidades", "Juegos de mesa", "Actuar", "Camping", "Creación de contenido",
-        "Pescar", "Fútbol",
-
-        // Nuevos hobbies añadidos
-        "Andar en bicicleta", "Escalada", "Skate", "Armar rompecabezas", "Modelismo",
-        "Escribir", "Bloggear", "Canto", "Programar", "Diseño gráfico",
-        "Correr", "Natación", "Trekking", "Ajedrez", "Astronomía",
-        "Voluntariado", "Restaurar muebles", "Tejer", "Cerámica", "Basket", "Volley", "Golf",
-
-        // nuevos hobbies - intereses
-        "Corte y confección","Bordado","Repostería","Crucigramas","Avistamiento de aves","Origami",
-        "Marroquinería", "Dibujo","Bisutería","Coleccionismo","Adiestramiento de animales","Carpintería",
-        "Maquillaje profesional","Ilusionismo","Crochet","Pilates","Dardos","Tarot","Escultura",
-        "Caligrafía","Vidriería artística","Hacer velas","Poesía","Diseño floral","Manicura",
-        "Peluqueria","Decoracion de interiores","Damas",
-        "Bonsai","Lepidopterología","Sudoku","Sopa de letras","Bingo"
+        "Actuar", "Adiestramiento de animales", "Ajedrez", "Andar en bicicleta", "Aprender idiomas",
+        "Armar rompecabezas", "Astronomía", "Avistamiento de aves", "Bailar", "Basket",
+        "Bingo", "Bisutería", "Bloggear", "Bonsái", "Bordado",
+        "Caligrafía", "Camping", "Canto", "Carpintería", "Cerámica",
+        "Cocinar", "Coleccionismo", "Correr", "Corte y confección", "Creación de contenido",
+        "Crochet", "Crucigramas", "Damas", "Dardos", "Decoración de interiores",
+        "Dibujo", "Diseño floral", "Diseño gráfico", "Escribir", "Escalada",
+        "Escultura", "Escuchar música", "Fútbol", "Fotografía", "Golf",
+        "Hacer ejercicio", "Hacer velas", "Ilusionismo", "Jardinería", "Juegos de mesa",
+        "Leer", "Lepidopterología", "Maquillaje profesional", "Manicura", "Manualidades",
+        "Marroquinería", "Meditar", "Modelismo", "Natación", "Origami",
+        "Peluquería", "Pescar", "Pilates", "Pintar", "Poesía",
+        "Programar", "Repostería", "Restaurar muebles", "Skate", "Sopa de letras",
+        "Sudoku", "Tarot", "Tejer", "Tocar un instrumento musical", "Trekking",
+        "Ver películas", "Viajar", "Videojuegos", "Vidriería artística", "Volley",
+        "Voluntariado"
     )
 }
