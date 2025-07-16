@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -26,6 +27,8 @@ class EditHobbiesFragment : Fragment() {
     private lateinit var hobbiesContainer: FlexboxLayout
     private lateinit var btnGuardar: Button
 
+    private lateinit var progressLoading: ProgressBar
+
     private val hobbiesList = HobbiesList.DEFAULT
     private val chipList = mutableListOf<Chip>()
     private val userRepo = UserRepository()
@@ -39,7 +42,7 @@ class EditHobbiesFragment : Fragment() {
         scrollView = view.findViewById(R.id.scrollViewHobbies)
         hobbiesContainer = view.findViewById(R.id.hobbiesContainer)
         btnGuardar = view.findViewById(R.id.btnGuardarHobbies)
-
+        progressLoading = view.findViewById(R.id.progressLoadingHobbies)
 
         ViewCompat.setOnApplyWindowInsetsListener(scrollView) { v, insets ->
             val navBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
@@ -69,10 +72,13 @@ class EditHobbiesFragment : Fragment() {
                 .filter { it.isChecked }
                 .map { it.text.toString() }
 
+            progressLoading.visibility = View.VISIBLE
+
             userRepo.saveUserHobbiesProfile(
                 uid        = uid,
                 newHobbies = seleccionados,
                 onSuccess = {
+                    progressLoading.visibility = View.GONE
                     Toast.makeText(requireContext(),
                         "Hobbies actualizados", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(
@@ -80,6 +86,7 @@ class EditHobbiesFragment : Fragment() {
                     )
                 },
                 onFailure = { e ->
+                    progressLoading.visibility = View.GONE
                     Toast.makeText(requireContext(),
                         "Error guardando hobbies: ${e.message}", Toast.LENGTH_LONG).show()
                 }

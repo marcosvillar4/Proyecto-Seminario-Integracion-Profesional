@@ -129,6 +129,17 @@
         android:layout_gravity="center"
         android:visibility="gone" />
 
+    <ProgressBar
+        android:id="@+id/progressLoading"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/green_500"
+        android:visibility="gone"/>
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCreateGroup"
         android:layout_width="wrap_content"

@@ -6,15 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentRankingBinding
 
 class RankingFragment : Fragment() {
 
+    private lateinit var progressLoading: ProgressBar
     private val args: RankingFragmentArgs by navArgs()
     private var _binding: FragmentRankingBinding? = null
     private val binding get() = _binding!!
@@ -31,6 +34,7 @@ class RankingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val groupId = args.groupId
+        progressLoading = view.findViewById(R.id.progressLoading)
         if (groupId.isBlank()) {
             requireActivity().onBackPressed()
             return
@@ -46,9 +50,11 @@ class RankingFragment : Fragment() {
     }
 
     private fun loadRanking(groupId: String) {
+        binding.progressLoading.isVisible = true
         showEmpty(true)
         repo.getGroupRanking(groupId,
             onSuccess = { list ->
+                binding.progressLoading.isVisible = false
                 if (list.isEmpty()) {
                     showEmpty(true)
                 } else {
@@ -57,6 +63,7 @@ class RankingFragment : Fragment() {
                 }
             },
             onFailure = { err ->
+                binding.progressLoading.isVisible = false
                 Toast.makeText(requireContext(), "Error: $err", Toast.LENGTH_LONG).show()
                 showEmpty(true)
             }

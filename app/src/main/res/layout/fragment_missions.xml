@@ -1,69 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rootMissions"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="35dp"
-    android:paddingBottom="16dp"
     android:background="@color/neutro_intermedio">
 
-    <!-- Barra de progreso diaria -->
-    <TextView
-        android:id="@+id/Racha"
+    <!-- CONTENIDO ORIGINAL -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Racha: 0 dias"
-        android:textAppearance="@style/TextAppearance.App.TitleMedium" />
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="35dp"
+        android:paddingBottom="16dp">
 
-    <TextView
-        android:id="@+id/tvDailyProgress"
-        style="@style/TextAppearance.App.Body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Progreso diario: 0/0" />
+        <TextView
+            android:id="@+id/Racha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Racha: 0 días"
+            android:textAppearance="@style/TextAppearance.App.TitleMedium" />
 
-<ProgressBar
-android:id="@+id/progressDaily"
-style="?android:attr/progressBarStyleHorizontal"
-android:layout_width="match_parent"
-android:layout_height="12dp"
-android:indeterminate="false"
-android:progressDrawable="@drawable/progress_gradient"
-android:layout_marginBottom="24dp"/>
+        <TextView
+            android:id="@+id/tvDailyProgress"
+            style="@style/TextAppearance.App.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Progreso diario: 0/0" />
 
-    <!-- Barra de progreso semanal -->
-<TextView
-android:id="@+id/tvWeeklyProgress"
-style="@style/TextAppearance.App.Body"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Progreso semanal: 0/0"
-android:layout_marginBottom="8dp"/>
+        <ProgressBar
+            android:id="@+id/progressDaily"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/progress_gradient"
+            android:layout_marginBottom="24dp"/>
 
-<ProgressBar
-android:id="@+id/progressWeekly"
-style="?android:attr/progressBarStyleHorizontal"
-android:layout_width="match_parent"
-android:layout_height="12dp"
-android:indeterminate="false"
-android:progressDrawable="@drawable/progress_gradient"
-android:layout_marginBottom="24dp"/>
+        <TextView
+            android:id="@+id/tvWeeklyProgress"
+            style="@style/TextAppearance.App.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Progreso semanal: 0/0"
+            android:layout_marginBottom="8dp"/>
 
-<ScrollView
-android:layout_width="match_parent"
-android:layout_height="0dp"
-android:layout_weight="1">
+        <ProgressBar
+            android:id="@+id/progressWeekly"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/progress_gradient"
+            android:layout_marginBottom="24dp"/>
 
-<LinearLayout
-    android:id="@+id/layoutMisiones"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
-</ScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/layoutMisiones"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </ScrollView>
+
     </LinearLayout>
+
+    <!-- SPINNER SUPERPUESTO -->
+    <ProgressBar
+        android:id="@+id/progressLoadingMissions"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/green_500"
+        android:visibility="gone"/>
+</FrameLayout>

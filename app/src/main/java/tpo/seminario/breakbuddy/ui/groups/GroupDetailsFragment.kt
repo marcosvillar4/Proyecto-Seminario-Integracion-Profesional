@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -47,6 +48,7 @@ class GroupDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentGroupDetailsBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
         entityId = args.entityId
         entityType = args.entityType
@@ -59,6 +61,7 @@ class GroupDetailsFragment : Fragment() {
         setupStaticUI()
         observeGroupDetails()
         observeOperationResults()
+        binding.progressBar.isVisible = true
         viewModel.loadEntityById(entityId, entityType)
     }
 
@@ -71,6 +74,7 @@ class GroupDetailsFragment : Fragment() {
                     .setTitle("Eliminar miembro")
                     .setMessage("¿Deseas eliminar a ${member.email} del grupo?")
                     .setPositiveButton("Eliminar") { _, _ ->
+                        binding.progressBar.isVisible = true
                         viewModel.removeMemberFromEntity(
                             entityId            = entityId,
                             type                = entityType,
@@ -90,6 +94,7 @@ class GroupDetailsFragment : Fragment() {
 
         binding.buttonJoinGroup.setOnClickListener {
             currentGroup?.let { grp ->
+                binding.progressBar.isVisible = true
                 viewModel.joinByCode(grp.id)
                 binding.buttonJoinGroup.isEnabled = false
             }
@@ -98,6 +103,7 @@ class GroupDetailsFragment : Fragment() {
         binding.buttonLeaveGroup.setOnClickListener {
             val currentUid   = auth.currentUser?.uid ?: return@setOnClickListener
             val currentEmail = auth.currentUser?.email ?: ""
+            binding.progressBar.isVisible = true
             currentGroup?.let { grp ->
                 viewModel.removeMemberFromEntity(
                     entityId            = grp.id,
@@ -122,6 +128,7 @@ class GroupDetailsFragment : Fragment() {
 
     private fun observeGroupDetails() {
         viewModel.singleGroup.observe(viewLifecycleOwner) { group ->
+            binding.progressBar.isVisible = false
             if (group == null) {
                 Toast.makeText(requireContext(), "El grupo ya no existe.", Toast.LENGTH_LONG).show()
                 findNavController().popBackStack()
@@ -140,29 +147,35 @@ class GroupDetailsFragment : Fragment() {
     private fun observeOperationResults() {
         viewModel.removeMemberError.observe(viewLifecycleOwner) { err ->
             err?.let {
+                binding.progressBar.isVisible = false
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
                 viewModel.clearRemoveMemberError()
             }
         }
         viewModel.removeMemberSuccess.observe(viewLifecycleOwner) { success ->
             if (success == true) {
+                binding.progressBar.isVisible = false
                 Toast.makeText(requireContext(), "Miembro eliminado", Toast.LENGTH_SHORT).show()
                 viewModel.clearRemoveMemberSuccess()
                 viewModel.loadEntityById(entityId, entityType)
+                binding.progressBar.isVisible = true
             }
         }
 
         viewModel.addMemberError.observe(viewLifecycleOwner) { err ->
             err?.let {
+                binding.progressBar.isVisible = false
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
                 viewModel.clearAddMemberError()
             }
         }
         viewModel.addMemberSuccess.observe(viewLifecycleOwner) { success ->
             if (success == true) {
+                binding.progressBar.isVisible = false
                 Toast.makeText(requireContext(), "Miembro agregado con éxito", Toast.LENGTH_SHORT).show()
                 viewModel.clearAddMemberSuccess()
                 viewModel.loadEntityById(entityId, entityType)
+                binding.progressBar.isVisible = true
             }
         }
     }
@@ -271,6 +284,7 @@ class GroupDetailsFragment : Fragment() {
             if (email.isBlank()) {
                 Toast.makeText(requireContext(), "Debes ingresar un email", Toast.LENGTH_SHORT).show()
             } else {
+                binding.progressBar.isVisible = true
                 viewModel.addMemberToEntity(entityId, entityType, email)
             }
             dialog.dismiss()

@@ -1,61 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/scrollViewHobbies"
+    android:id="@+id/root_hobbies"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:clipToPadding="false"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
-
-
-    <LinearLayout
+    <!-- El contenido desplazable -->
+    <ScrollView
+        android:id="@+id/scrollViewHobbies"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="40dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true">
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/logo"
-            android:contentDescription="Logo de la app" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Seleccioná hasta 5 hobbies"
-            style="@style/TextAppearance.App.Body"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/hobbiesContainer"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:alignItems="flex_start"
-            style="@style/TextAppearance.App.Auxiliary"
-            app:flexWrap="wrap"
-            app:justifyContent="flex_start"
-            android:layout_marginBottom="16dp"/>
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="40dp">
 
-        <Button
-            android:id="@+id/btnGuardarHobbies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar hobbies"
-            style="@style/TextAppearance.App.SubtitleMedium"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@color/green_500"
-            android:padding="12dp"
-            app:cornerRadius="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="55dp"/>
-    </LinearLayout>
-</ScrollView>
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/logo"
+                android:contentDescription="Logo de la app" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccioná hasta 5 hobbies"
+                style="@style/TextAppearance.App.Body"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/hobbiesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:alignItems="flex_start"
+                style="@style/TextAppearance.App.Auxiliary"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/btnGuardarHobbies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar hobbies"
+                style="@style/TextAppearance.App.SubtitleMedium"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/green_500"
+                android:padding="12dp"
+                app:cornerRadius="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="55dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Spinner superpuesto, siempre centrado -->
+    <ProgressBar
+        android:id="@+id/progressLoadingHobbies"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/green_500"
+        android:visibility="gone"/>
+
+</FrameLayout>

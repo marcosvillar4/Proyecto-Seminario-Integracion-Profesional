@@ -34,7 +34,7 @@ class GroupMembersAdapter(
             binding.apply {
                 //Nombre y email
                 textMemberName.text = member.name.ifBlank { member.email } // si no hay nombre, mostramos email
-                textMemberEmail.text = member.email
+
 
                 //Chip “Admin” visible solo si isOwner == true
                 chipOwner.visibility = if (member.isOwner) View.VISIBLE else View.GONE

@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,6 +32,8 @@ class GroupsListFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: GroupsViewModel by viewModels()
 
+    private lateinit var progressLoading: ProgressBar
+
     private lateinit var groupsAdapter: GroupsAdapter
     private var currentFilter = GroupFilter.ALL
 
@@ -38,6 +42,7 @@ class GroupsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGroupsListBinding.inflate(inflater, container, false)
+        progressLoading = binding.root.findViewById(R.id.progressLoading)
         setupViews()
         setupRecyclerView()
         observeViewModel()
@@ -95,9 +100,11 @@ class GroupsListFragment : Fragment() {
                     .setTitle("Salir")
                     .setMessage("¿Deseas salir de '${group.name}'?")
                     .setPositiveButton("Salir") { _, _ ->
+                        binding.progressLoading.isVisible = true
                         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@setPositiveButton
                         val email = FirebaseAuth.getInstance().currentUser?.email.orEmpty()
                         viewModel.removeMemberFromEntity(group.id, group.type, uid, email)
+
                     }
                     .setNegativeButton("Cancelar", null)
                     .show()
@@ -160,6 +167,8 @@ class GroupsListFragment : Fragment() {
         binding.swipeRefreshLayout.isRefreshing = state.isLoading
         binding.progressBar.visibility =
             if (state.isLoading && state.groups.isEmpty()) View.VISIBLE else View.GONE
+
+        progressLoading.isVisible = state.isLoading
 
         if (state.groups.isEmpty() && !state.isLoading) {
             binding.layoutEmpty.visibility = View.VISIBLE

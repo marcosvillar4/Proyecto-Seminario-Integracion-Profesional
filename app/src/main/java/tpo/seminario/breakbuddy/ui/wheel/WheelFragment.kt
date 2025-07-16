@@ -37,14 +37,43 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.LoadAdError
 import android.os.Handler
 import android.os.Looper
+import android.widget.ProgressBar
 
 
 class WheelFragment : Fragment() {
 
+
+
+    private val countdownHandler = Handler(Looper.getMainLooper())
+    private var nextSpinAt: Long? = null
+    private val countdownRunnable = object : Runnable {
+        override fun run() {
+            val now = System.currentTimeMillis()
+            val target = nextSpinAt ?: return
+            val rem = target - now
+            if (rem > 0) {
+                val hours = rem / (1000 * 60 * 60)
+                val minutes = (rem % (1000 * 60 * 60)) / (1000 * 60)
+                val seconds = (rem % (60 * 1000)) / 1000
+                binding.tvStatus.text = "Próximo spin en ${hours}h ${minutes}m ${seconds}s"
+                countdownHandler.postDelayed(this, 1000L)
+            } else {
+                // ¡Ya llegó el momento!
+                binding.btnSpin.isEnabled = true
+                binding.tvStatus.text = "¡Gira la ruleta para obtener un desafío!"
+            }
+        }
+    }
+
+    private lateinit var uid: String
+
+
+
+
     private var _binding: FragmentWheelBinding? = null
     private val binding get() = _binding!!
 
-
+    private lateinit var progressWheel: ProgressBar
 
     //AdMob banner
     private lateinit var adView: AdView
@@ -65,6 +94,8 @@ class WheelFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWheelBinding.inflate(inflater, container, false)
+
+        progressWheel = binding.root.findViewById(R.id.progressWheel)
 
         val colorClaro  = intArrayOf(resources.getColor(R.color.green_200, null))
         val colorOscuro = intArrayOf(resources.getColor(R.color.green_500, null))
@@ -124,7 +155,7 @@ class WheelFragment : Fragment() {
             setWheelCenterImageSize(70.toFloat(), 70.toFloat())
             drawCenterPoint(true)
             setCenterPointColor(resources.getColor(R.color.white, null))
-            setCenterPointRadius(120.toFloat())
+            setCenterPointRadius(127.toFloat())
             drawWheelStroke(true)
             var array = intArrayOf(resources.getColor(R.color.green_500, null))
             setWheelStrokeColor(array)
@@ -171,6 +202,22 @@ class WheelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        uid = FirebaseAuth.getInstance().currentUser?.uid
+            ?: return
+
+        firestoreListener = FirebaseFirestore.getInstance()
+            .collection("userProfiles")
+            .document(uid)
+            .addSnapshotListener { snap, e ->
+                if (e != null) return@addSnapshotListener
+                if (snap != null && snap.exists()) {
+                    val profile = snap.toObject(UserProfile::class.java)!!
+                    actualizarEstadoSpin(profile)
+                    generateWheelChallenges(profile.hobbies)
+                }
+            }
+
+
         //Banner AdMob
         adView = view.findViewById(R.id.adViewWheel)
         adView.adListener = object : AdListener() {
@@ -188,26 +235,15 @@ class WheelFragment : Fragment() {
 
 
 
-        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
-        firestoreListener = FirebaseFirestore.getInstance()
-            .collection("userProfiles").document(uid)
-            .addSnapshotListener { snap, e ->
-                if (e != null) {
-                    Log.e("WheelFragment","Error leyendo perfil: ${e.message}")
-                    return@addSnapshotListener
-                }
-                if (snap != null && snap.exists()) {
-                    val profile = snap.toObject(UserProfile::class.java)!!
-                    actualizarEstadoSpin(profile)
-                    generateWheelChallenges(profile.hobbies)
-
-                }
-            }
 
         //Botón "Girar"
         binding.btnSpin.setOnClickListener {
             binding.btnSpin.isEnabled = false
+
+            progressWheel.visibility = View.VISIBLE
+
+
             hasUsedRespin = false
             chosenText = null
             binding.tvStatus.text = "Girando..."
@@ -220,12 +256,14 @@ class WheelFragment : Fragment() {
                 .call(emptyMap<String, Any>())
                 .addOnSuccessListener {
                     //Si la validación es exitosa, girar la ruleta
+                    progressWheel.visibility = View.GONE
                     val idx = Random.nextInt(wheelItems.size)
                     lastTargetIndex = idx
                     binding.lwv.setTarget(idx)
                     binding.lwv.rotateWheel()
                 }
                 .addOnFailureListener { e ->
+                    progressWheel.visibility = View.GONE
                     Log.e("WheelFragment","Error validando spin: ${e.message}")
                     Toast.makeText(requireContext(), e.message ?: "Error al validar spin", Toast.LENGTH_LONG).show()
                     binding.btnSpin.isEnabled = true
@@ -237,7 +275,7 @@ class WheelFragment : Fragment() {
         binding.lwv.setRotationCompleteListener { data ->
             val b = _binding ?: return@setRotationCompleteListener
             chosenText = data.text
-            b.tvStatus.text = "¡Desafío: ${data.text}!"
+            b.tvChallenge.text = "¡Desafío: ${data.text}!"
             b.btnAceptar.visibility = View.VISIBLE
             if (!hasUsedRespin) b.btnRespin.visibility = View.VISIBLE
         }
@@ -272,6 +310,7 @@ class WheelFragment : Fragment() {
         // Botón "Re-spin"
         binding.btnRespin.setOnClickListener {
             if (!hasUsedRespin) {
+                binding.tvChallenge.text = ""
                 hasUsedRespin = true
                 binding.btnRespin.visibility  = View.GONE
                 binding.btnAceptar.visibility = View.GONE
@@ -289,25 +328,46 @@ class WheelFragment : Fragment() {
     }
 
     private fun actualizarEstadoSpin(profile: UserProfile) {
-        val currentBinding = _binding ?: return
+        countdownHandler.removeCallbacks(countdownRunnable) // limpia cualquier cuenta anterior
 
         val now = System.currentTimeMillis()
         val last = profile.lastSpinAt ?: 0L
-        val dayMillis = 60 * 60 * 24 * 1000
+        val dayMillis = 20000 //Cambiar a 60 * 60 * 24 * 1000 para producción, para 24 horas (TODO)
+        val availableAt = last + dayMillis
 
-        if (now - last >= dayMillis) {
-            currentBinding.btnSpin.isEnabled = true
-            currentBinding.tvStatus.text = "¡Gira la ruleta para obtener un desafío!"
-            hasUsedRespin = false
+        if (now >= availableAt) {
+            // ya pasó
+            binding.btnSpin.isEnabled = true
+            binding.tvStatus.text = "¡Gira la ruleta para obtener un desafío!"
+            nextSpinAt = null
         } else {
-            currentBinding.btnSpin.isEnabled = false
-            val millisLeft = dayMillis - (now - last)
-            val hours = millisLeft / (1000 * 60 * 60)
-            val minutes = (millisLeft % (1000 * 60 * 60)) / (1000 * 60)
-            val seconds = (millisLeft % (1000 * 60)) / 1000
-            currentBinding.tvStatus.text = "Próximo spin disponible en ${hours}h ${minutes}m ${seconds}s"
+            // falta tiempo
+            binding.btnSpin.isEnabled = false
+            nextSpinAt = availableAt
+            countdownHandler.post(countdownRunnable) // arranca la cuenta atrás
         }
     }
+
+//    private fun actualizarEstadoSpin(profile: UserProfile) {
+//        val currentBinding = _binding ?: return
+//
+//        val now = System.currentTimeMillis()
+//        val last = profile.lastSpinAt ?: 0L
+//        val dayMillis = 20000 //Cambiar a 60 * 60 * 24 * 1000 para producción, para 24 horas (TODO)
+//
+//        if (now - last >= dayMillis) {
+//            currentBinding.btnSpin.isEnabled = true
+//            currentBinding.tvStatus.text = "¡Gira la ruleta para obtener un desafío!"
+//            hasUsedRespin = false
+//        } else {
+//            currentBinding.btnSpin.isEnabled = false
+//            val millisLeft = dayMillis - (now - last)
+//            val hours = millisLeft / (1000 * 60 * 60)
+//            val minutes = (millisLeft % (1000 * 60 * 60)) / (1000 * 60)
+//            val seconds = (millisLeft % (1000 * 60)) / 1000
+//            currentBinding.tvStatus.text = "Próximo spin disponible en ${hours}h ${minutes}m ${seconds}s"
+//        }
+//    }
     private fun generateWheelChallenges(hobbies: List<String>) {
         //Físicos
         val phys = PhysicalChallengesProvider.physicalChallenges.shuffled().take(3)
@@ -316,16 +376,18 @@ class WheelFragment : Fragment() {
         val hobbyMap = HobbyQuestionsProvider.hobbyQuizzes
         val quizzes = hobbies
             .filter { hobbyMap.containsKey(it) }
-            .flatMap { hobbyMap[it]!! }
+            .flatMap { hob ->
+                hobbyMap[hob]!!.map { qq -> hob to qq }
+            }
             .shuffled()
             .take(3)
-            .map { qq ->
+            .map { (hob, qq) ->
                 DesafioGamificado(
-                    nombre = qq.question,
-                    instruccion = qq.question,
-                    recompensa = 10,
-                    iconoResId = getIconForHobbyQuiz(),
-                    quiz = qq
+                    nombre       = "Pregunta de $hob",
+                    instruccion  = qq.question,
+                    recompensa   = 10,
+                    iconoResId   = getIconForHobbyQuiz(),
+                    quiz         = qq
                 )
             }
 
@@ -376,6 +438,7 @@ class WheelFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        countdownHandler.removeCallbacks(countdownRunnable)
         firestoreListener?.remove()
         firestoreListener = null
         _binding = null

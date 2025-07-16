@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -35,6 +36,8 @@ class ChatFragment : Fragment() {
     private lateinit var chatAdapter: ChatAdapter
     private var messagesListener: ListenerRegistration? = null
 
+    private lateinit var progressSending: ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +48,8 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        progressSending = view.findViewById(R.id.progressSending)
 
         binding.buttonSugerencia.setOnClickListener {
             suggestActivity()
@@ -136,6 +141,9 @@ class ChatFragment : Fragment() {
         val currentUser = auth.currentUser ?: return
 
         binding.buttonSend.isEnabled = false
+
+
+        progressSending.visibility = View.VISIBLE
         functions
             .getHttpsCallable("moderateMessage")
             .call(mapOf("text" to text))
@@ -144,6 +152,7 @@ class ChatFragment : Fragment() {
                 performSend(text, currentUser.uid, currentUser.displayName ?: currentUser.email.orEmpty())
             }
             .addOnFailureListener { e ->
+                progressSending.visibility = View.GONE
                 binding.buttonSend.isEnabled = true
                 val msg = if (e is FirebaseFunctionsException && e.code == FirebaseFunctionsException.Code.PERMISSION_DENIED) {
                     e.message ?: "Contenido no permitido"
@@ -178,6 +187,7 @@ class ChatFragment : Fragment() {
                     Toast.LENGTH_SHORT).show()
             }
             .addOnCompleteListener {
+                progressSending.visibility = View.GONE
                 binding.buttonSend.isEnabled = true
             }
     }

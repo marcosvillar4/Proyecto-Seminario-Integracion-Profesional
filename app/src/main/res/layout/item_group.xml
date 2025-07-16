@@ -257,6 +257,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_trophy"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Ver ranking"
                 app:tint="@color/green_500"
                 app:layout_constraintEnd_toStartOf="@id/btnChat"

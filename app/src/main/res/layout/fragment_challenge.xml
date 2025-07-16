@@ -105,4 +105,18 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- ProgressBar overlay -->
+    <ProgressBar
+        android:id="@+id/progressFunction"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:elevation="16dp"
+        app:layout_constraintTop_toTopOf="@id/cartaDesafio"
+        app:layout_constraintBottom_toBottomOf="@id/cartaDesafio"
+        app:layout_constraintStart_toStartOf="@id/cartaDesafio"
+        app:layout_constraintEnd_toEndOf="@id/cartaDesafio"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -152,7 +152,7 @@ class TestMBIFragment : Fragment() {
     private fun observeSaveState() {
         viewModel.saveSuccess.observe(viewLifecycleOwner) { testId ->
             testId?.let {
-                Toast.makeText(requireContext(), "Resultado guardado (ID: $it)", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Resultado guardado con éxito", Toast.LENGTH_LONG).show()
                 viewModel.clearSaveStates()
             }
         }

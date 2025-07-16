@@ -95,5 +95,19 @@
             android:contentDescription="Enviar"
             app:tint="@color/green_500"
             android:enabled="false" />
+
+        <ProgressBar
+            android:id="@+id/progressSending"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/green_500"
+            android:visibility="gone"/>
     </LinearLayout>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

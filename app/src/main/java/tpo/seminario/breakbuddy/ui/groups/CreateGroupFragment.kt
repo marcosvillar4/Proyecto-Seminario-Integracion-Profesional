@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -37,6 +38,8 @@ class CreateGroupFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: GroupsViewModel by viewModels()
 
+    private lateinit var progressLoading: ProgressBar
+
     private lateinit var radioType: RadioGroup
     private lateinit var rbPersonal: RadioButton
     private lateinit var rbOrganization: RadioButton
@@ -49,6 +52,8 @@ class CreateGroupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCreateGroupBinding.inflate(inflater, container, false)
+
+        progressLoading = binding.root.findViewById(R.id.progressBar)
         setupViews()
         observeViewModel()
 
@@ -142,10 +147,13 @@ class CreateGroupFragment : Fragment() {
             return
         }
 
+        progressLoading.visibility = View.VISIBLE
+
         //Verificar que todos los correos existen en /users
         userRepo.validateEmailsExist(
             emails   = allEmails,
             onComplete = { existents, notExistents ->
+                progressLoading.visibility = View.GONE
                 if (notExistents.isNotEmpty()) {
                     showErrorToast("Los siguientes emails NO están registrados: ${notExistents.joinToString(", ")}")
                     return@validateEmailsExist
@@ -158,6 +166,7 @@ class CreateGroupFragment : Fragment() {
                 }
             },
             onError = { e ->
+                progressLoading.visibility = View.GONE
                 showErrorToast("Error validando emails: ${e.message}")
             }
         )

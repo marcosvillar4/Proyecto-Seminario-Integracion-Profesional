@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,6 +21,8 @@ class HobbiesFragment : Fragment() {
     private lateinit var hobbiesContainer: FlexboxLayout
     private lateinit var btnGuardar: Button
 
+    private lateinit var progressLoading: ProgressBar
+
     private val userRepo = UserRepository()
     private val hobbiesList = HobbiesList.DEFAULT
     private val chipList = mutableListOf<Chip>()
@@ -31,6 +34,7 @@ class HobbiesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_hobbies, container, false)
         hobbiesContainer = view.findViewById(R.id.hobbiesContainer)
         btnGuardar = view.findViewById(R.id.btnGuardarHobbies)
+        progressLoading = view.findViewById(R.id.progressLoadingHobbies)
 
         agregarChips()
 
@@ -85,10 +89,13 @@ class HobbiesFragment : Fragment() {
             return
         }
 
+        progressLoading.visibility = View.VISIBLE
+
         userRepo.saveUserHobbiesProfile(
             uid = uid,
             newHobbies = seleccionados,
             onSuccess = {
+                progressLoading.visibility = View.GONE
                 Toast.makeText(requireContext(),
                     "Hobbies guardados correctamente",
                     Toast.LENGTH_SHORT).show()
@@ -97,6 +104,7 @@ class HobbiesFragment : Fragment() {
                 )
             },
             onFailure = { e ->
+                progressLoading.visibility = View.GONE
                 Toast.makeText(requireContext(),
                     "Error guardando hobbies: ${e.message}",
                     Toast.LENGTH_LONG).show()

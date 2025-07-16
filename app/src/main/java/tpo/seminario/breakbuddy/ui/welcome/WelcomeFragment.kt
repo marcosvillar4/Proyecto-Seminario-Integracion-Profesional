@@ -139,7 +139,7 @@ class WelcomeFragment : Fragment() {
                                     if (!profileLight.hobbiesCompletados) {
                                         findNavController().navigate(R.id.action_welcomeFragment_to_hobbiesFragment)
                                     } else {
-                                        findNavController().navigate(R.id.action_welcomeFragment_to_navigation_home)
+                                        findNavController().navigate(R.id.action_welcomeFragment_to_wheelFragment)
                                     }
                                 },
                                 onFailure = { e ->

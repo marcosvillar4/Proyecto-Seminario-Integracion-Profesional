@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -29,6 +30,8 @@ class MissionsFragment : Fragment() {
     private var _binding: FragmentMissionsBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var progressLoadingMissions: ProgressBar
+
     private var misionesHoy = listOf<Mision>()
     private var completedMap = mapOf<String, Boolean>()
     private var weeklyRecords = listOf<Map<String, Any>>()  // raw semanal
@@ -39,7 +42,9 @@ class MissionsFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, c: ViewGroup?, s: Bundle?) =
-        FragmentMissionsBinding.inflate(inflater, c, false).also { _binding = it }.root
+        FragmentMissionsBinding.inflate(inflater, c, false).also {
+            _binding = it
+            progressLoadingMissions = it.root.findViewById(R.id.progressLoadingMissions)}.root
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,9 +56,12 @@ class MissionsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun fetchDailyMissions() {
+        progressLoadingMissions.visibility = View.VISIBLE
+
         functions.getHttpsCallable("generateDailyMissions")
             .call()
             .addOnSuccessListener { hr ->
+                progressLoadingMissions.visibility = View.GONE
                 val data = hr.data as? Map<*,*> ?: return@addOnSuccessListener
 
                 @Suppress("UNCHECKED_CAST")
@@ -85,6 +93,7 @@ class MissionsFragment : Fragment() {
                     }
             }
             .addOnFailureListener { e ->
+                progressLoadingMissions.visibility = View.GONE
                 Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
@@ -217,16 +226,21 @@ class MissionsFragment : Fragment() {
 
         }
 
+        progressLoadingMissions.visibility = View.VISIBLE
 
 
         functions.getHttpsCallable("completeDailyMission")
             .call(mapOf("missionId" to missionId))
             .addOnSuccessListener {
+                progressLoadingMissions.visibility = View.GONE
                 // actualizar local y redibujar
                 completedMap = completedMap.toMutableMap().also { it[missionId] = true }
                 mostrarMisiones()
+
+                streakCheckAndUpdate()
             }
             .addOnFailureListener { e ->
+                progressLoadingMissions.visibility = View.GONE
                 val msg = (e as? FirebaseFunctionsException)?.details?.toString() ?: e.message
                 Toast.makeText(requireContext(), "Error: $msg", Toast.LENGTH_LONG).show()
             }

@@ -3,6 +3,7 @@ package tpo.seminario.breakbuddy.ui.challenge
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,6 +23,8 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
 
     private var _binding: FragmentChallengeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var progressFunction: ProgressBar
     private var temporizador: CountDownTimer? = null
     private val challengeViewModel: ChallengeViewModel by activityViewModels()
 
@@ -32,6 +35,8 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentChallengeBinding.bind(view)
+
+        progressFunction = view.findViewById(R.id.progressFunction)
 
         val respin = arguments?.getBoolean("respin") ?: false
         val nombre = arguments?.getString("nombre") ?: return
@@ -141,12 +146,14 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
             Toast.makeText(requireContext(), "Debes iniciar sesión", Toast.LENGTH_LONG).show()
             return
         }
+        progressFunction.visibility = View.VISIBLE
         binding.btnCompletar.isEnabled = false
 
         functions
             .getHttpsCallable("completeChallenge")
             .call(mapOf("isRespin" to respin, "challengeName" to name))
             .addOnSuccessListener { snap ->
+                progressFunction.visibility = View.GONE
                 val data = snap.data as Map<*, *>
                 val earned = (data["earnedPoints"] as Number).toInt()
                 val total  = (data["totalPoints"] as Number).toInt()
@@ -162,6 +169,7 @@ class ChallengeFragment : Fragment(R.layout.fragment_challenge) {
                 findNavController().navigateUp()
             }
             .addOnFailureListener { e ->
+                progressFunction.visibility = View.GONE
                 binding.btnCompletar.isEnabled = true
                 Toast.makeText(
                     requireContext(),
