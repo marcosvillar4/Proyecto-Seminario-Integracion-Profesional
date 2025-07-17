@@ -33,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tipo"
+                style="@style/TextAppearance.App.SubtitleMedium"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
         </LinearLayout>
 
@@ -49,12 +50,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Desde"
+                android:fontFamily="@font/poppins_medium"
                 android:textAllCaps="false"
                 app:cornerRadius="8dp"/>
             <View android:layout_width="8dp" android:layout_height="wrap_content"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTo"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:fontFamily="@font/poppins_medium"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

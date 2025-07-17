@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¿Cómo te sentiste hoy?"
+            style="@style/TextAppearance.App.SubtitleMedium"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
@@ -41,6 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enviar"
+            style="@style/TextAppearance.App.SubtitleMedium"
+            android:textColor="@android:color/white"
             android:layout_marginTop="24dp" />
     </LinearLayout>
 

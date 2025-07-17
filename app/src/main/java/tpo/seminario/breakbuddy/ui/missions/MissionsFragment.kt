@@ -100,6 +100,8 @@ class MissionsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun mostrarMisiones() {
+        val binding = _binding ?: return
+
         binding.layoutMisiones.removeAllViews()
 
         //calcular progreso diario

@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_home, R.id.accountSettingsFragment,
+                R.id.navigation_home, R.id.accountSettingsFragment, R.id.navigation_group,
                 R.id.navigation_wheel, R.id.navigation_notifications,
             )
         )
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.welcomeFragment || destination.id == R.id.loginFragment
                 || destination.id == R.id.registerFragment || destination.id == R.id.hobbiesFragment
                 || destination.id == R.id.challengeFragment || destination.id == R.id.passwordResetFragment
-                || destination.id == R.id.testMBIFragment) {
+                ) {
                 // Oculta action bar y menú inferior en pantalla de bienvenida
                 supportActionBar?.hide()
                 navView.visibility = android.view.View.GONE

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/green_500"
         android:title="BreakBuddy"
+        style="@style/TextAppearance.App.SubtitleMedium"
         android:titleTextColor="@android:color/white"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:titleCentered="true"
