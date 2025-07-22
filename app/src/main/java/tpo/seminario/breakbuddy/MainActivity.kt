@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import tpo.seminario.breakbuddy.databinding.ActivityMainBinding
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -52,37 +53,45 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.accountSettingsFragment, R.id.navigation_group,
-                R.id.navigation_wheel, R.id.navigation_notifications,
+                R.id.navigation_wheel, R.id.navigation_notifications, R.id.checkinFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        // Comprobar si debe mostrar el Check-in
-        lifecycleScope.launch {
-            if (shouldNavigateToCheckin()) {
-                findNavController(R.id.nav_host_fragment_activity_main)
-                    .navigate(R.id.action_global_checkinFragment)
-            }
-        }
+
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.welcomeFragment || destination.id == R.id.loginFragment
-                || destination.id == R.id.registerFragment || destination.id == R.id.hobbiesFragment
-                || destination.id == R.id.challengeFragment || destination.id == R.id.passwordResetFragment
-                ) {
-                // Oculta action bar y menú inferior en pantalla de bienvenida
-                supportActionBar?.hide()
-                navView.visibility = android.view.View.GONE
-            } else {
-                // Muestra todo en el resto de las pantallas
-                supportActionBar?.show()
-                navView.visibility = android.view.View.VISIBLE
+            when (destination.id) {
+
+                R.id.navigation_wheel -> {
+                    // Lanza el chequeo de check‑in
+                    lifecycleScope.launch {
+                        if (shouldNavigateToCheckin()) {
+                            navController.navigate(R.id.action_global_checkinFragment)
+                        }
+                    }
+                    // Y mostramos actionBar + bottomNav
+                    supportActionBar?.show()
+                    navView.visibility = View.VISIBLE
+                }
+
+                R.id.welcomeFragment,
+                R.id.loginFragment,
+                R.id.registerFragment,
+                R.id.hobbiesFragment,
+                R.id.challengeFragment,
+                R.id.passwordResetFragment -> {
+                    supportActionBar?.hide()
+                    navView.visibility = View.GONE
+                }
+
+                else -> {
+                    supportActionBar?.show()
+                    navView.visibility = View.VISIBLE
+                }
             }
         }
-
-
-
     }
 
 
@@ -142,4 +151,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-}
+    }
