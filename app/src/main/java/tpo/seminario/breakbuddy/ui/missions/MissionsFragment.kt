@@ -21,6 +21,7 @@ import tpo.seminario.breakbuddy.R
 import tpo.seminario.breakbuddy.databinding.FragmentMissionsBinding
 import tpo.seminario.breakbuddy.util.missions.Mision
 import tpo.seminario.breakbuddy.util.missions.TipoMision
+import java.time.Duration
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import java.time.temporal.TemporalUnit
@@ -204,16 +205,17 @@ class MissionsFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun completeTodayMission(missionId: String) {
 
-
-
         db.collection("userProfiles").document(uid).get().addOnSuccessListener {
             document -> if (document != null && document.exists()){
                 val lastCompleted = document.getString("lastMissionDate").toString()
                 val streak = document.getLong("missionStreak")!!
 
                 if (!lastCompleted.equals("")) {
-                    val datediff = Instant.parse(lastCompleted).until(Instant.now(), ChronoUnit.DAYS)
-                    if ((datediff > 1) and (datediff < 2L)){
+
+                    val duration     = Duration.between(Instant.parse(lastCompleted), Instant.now())
+                    val daysDecimal  = duration.toMillis().toDouble() / (1000 * 60 * 60 * 24)
+
+                    if (daysDecimal > 1.0 && daysDecimal < 2.0) {
                         db.collection("userProfiles").document(uid).update("missionStreak", streak+1L)
                         db.collection("userProfiles").document(uid).update("lastMissionDate", Instant.now().toString())
                     }
@@ -266,17 +268,15 @@ class MissionsFragment : Fragment() {
                 if (!lastCompleted.equals("")){
                     if ((Instant.parse(lastCompleted.toString()).until(Instant.now(), ChronoUnit.DAYS)) > 1){
                         db.collection("userProfiles").document(uid).update("missionStreak", 0L)
+                        val duracion = Duration.ofDays(1).plusSeconds(2)
+                        val yesterday = (Instant.now().minus(duracion)).toString()
+                        db.collection("userProfiles").document(uid).update("lastMissionDate", yesterday)
+                        binding.Racha.text = "Racha: 0"
                     }
                 }
         }
 
         }
-
-
-
-
-
-
     }
 
     override fun onDestroyView() {
