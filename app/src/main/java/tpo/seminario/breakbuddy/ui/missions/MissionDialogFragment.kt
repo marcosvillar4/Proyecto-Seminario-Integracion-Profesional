@@ -50,7 +50,7 @@ class MissionDialogFragment(
             TipoMision.TEMPORIZADOR -> iniciarTemporizador()
             TipoMision.GUIADA -> iniciarGuiaPasos()
             TipoMision.SIMPLE -> {
-                binding.tvTemporizador.text = "Toca para continuar"
+                binding.tvTemporizador.text = "Presiona ¡LO LOGRÉ! una vez completada la misión."
                 binding.btnListo.isEnabled = true
             }
         }
