@@ -50,7 +50,7 @@ class ChatAdapter(
                 textSender.visibility = View.GONE
 
                 textBody.text = message.text
-                textTime.text = SimpleDateFormat("HH:mm", Locale.getDefault())
+                textTime.text = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                     .format(message.timestamp?.toDate() ?: Date())
                 return
             } else if (message.senderUid == currentUserUid) {
@@ -76,8 +76,8 @@ class ChatAdapter(
             val ts = message.timestamp
             if (ts != null) {
                 val date = ts.toDate()
-                val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
-                textTime.text = sdf.format(date)
+                textTime.text = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                    .format(date)
             } else {
                 textTime.text = ""
             }
